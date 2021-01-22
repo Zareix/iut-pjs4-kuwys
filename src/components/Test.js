@@ -19,6 +19,7 @@ const Test = (props) => {
   // Se lance au rendu du composant et lance le return quand le composant disparait
   // [x, y, z] la liste des variables dont useEffect dépend
   // ATTENTION AUX BOUCLES : si useEffect appelle un setter du state !
+  // Ici le return se lance pas
   useEffect(() => {
     console.log("rendu de test : " + props.num)
     return () => {
@@ -28,7 +29,7 @@ const Test = (props) => {
 
   // > Return = le rendu (sous forme de JSX)
   // > props = des paramètres qu'on peut envoyer à chaque composants
-  // ici on envoye num={x} dans l'App donc props.num = x
+  //    ici on envoye num={x} dans le composant App donc props.num = x
   // > {visible && <div></div>} signifie que si visible == true (et != null implicitement) on retourne la <div></div> après le &&
         // -> on peut enchainer plusieurs &&
         // -> on peut return une seul <div> (penser à foutre tout dans une si on doit afficher un gros truc)
