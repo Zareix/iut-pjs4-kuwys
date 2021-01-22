@@ -1,13 +1,7 @@
 {
-  "database": {
-    "rules": "database.rules.json"
-  },
-  "firestore": {
-    "rules": "firestore.rules",
-    "indexes": "firestore.indexes.json"
-  },
   "hosting": {
-    "public": "public",
+    "site": "pjs4-iut-ts",
+    "public": "build",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -20,7 +14,12 @@
       }
     ]
   },
-  "storage": {
-    "rules": "storage.rules"
+  "emulators": {
+    "hosting": {
+      "port": 5000
+    },
+    "ui": {
+      "enabled": true
+    }
   }
 }
