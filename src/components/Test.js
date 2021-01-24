@@ -17,8 +17,8 @@ const Test = (props) => {
 
   // Equivalent de componentDidMount, etc. d'une classe React
   // Se lance au rendu du composant et lance le return quand le composant disparait
-  // [x, y, z] la liste des variables dont useEffect dépend
-  // ATTENTION AUX BOUCLES : si useEffect appelle un setter du state !
+  // [x, y, z] la liste des variables/fonctions dont useEffect dépend
+  // ATTENTION AUX BOUCLES : si useEffect appelle un setter du state ca peut faire du caca !
   // Ici le return se lance pas
   useEffect(() => {
     console.log("rendu de test : " + props.num)
