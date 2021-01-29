@@ -4,33 +4,26 @@ import { Link } from "react-router-dom"
 var firebaseui = require("firebaseui")
 
 const Login = (props) => {
-	var firebase = props.firebase
-	
+  var firebase = props.firebase
 
   useEffect(() => {
-    // Initialize the FirebaseUI Widget using Firebase.
     var ui = new firebaseui.auth.AuthUI(firebase.auth())
 
     var uiConfig = {
       callbacks: {
         signInSuccessWithAuthResult: function (authResult, redirectUrl) {
-					console.log(authResult.user.uid)
+          console.log(authResult.user.uid)
           document.getElementById("backButton").style.display = "block"
           return false
         },
         uiShown: function () {
-          // The widget is rendered.
-          // Hide the loader.
           document.getElementById("loader").style.display = "none"
         },
       },
       // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
       signInFlow: "popup",
       signInSuccessUrl: "#",
-      signInOptions: [
-        // Leave the lines as is for the providers you want to offer your users.
-        firebase.auth.EmailAuthProvider.PROVIDER_ID,
-      ],
+      signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_ID],
       // Terms of service url.
       tosUrl: "<your-tos-url>",
       // Privacy policy url.

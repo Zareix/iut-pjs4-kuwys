@@ -3,15 +3,12 @@ import React from "react"
 import Test from "./Test"
 import logo from "../logo.svg"
 
-import { useParams } from "react-router-dom"
-
 const styles = {
   backgroundColor: "white",
   color: "black",
 }
 
 const Home = (props) => {
-  let { id } = useParams()
   console.log(props.firebase.auth().currentUser)
 
   return (
