@@ -32,7 +32,7 @@ const Login = (props) => {
 
     ui.start("#firebaseui-auth-container", uiConfig)
     return () => {}
-  }, [])
+  }, [firebase])
 
   return (
     <div>
