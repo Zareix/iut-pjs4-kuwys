@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom"
 import "./App.css"
 import Login from "./components/Login.js"
 import Home from "./components/Home.js"
+import Accueil from "./components/Accueil.js"
 
 import firebase from "firebase/app"
 
@@ -28,13 +29,19 @@ firebase.initializeApp(firebaseConfig)
 function App() {
   return (
     <Router>
+    {/*}
       <Link to="/login">Login</Link>
+      <Link to="/accueil">Accueil</Link>
+  */}
       <Switch>
         <Route path="/login">
           <Login firebase={firebase} />
         </Route>
         <Route path="/home">
           <Home firebase={firebase} />
+        </Route>
+        <Route path="/accueil">
+          <Accueil firebase={firebase} />
         </Route>
       </Switch>
     </Router>

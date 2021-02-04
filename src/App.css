@@ -36,3 +36,40 @@
     transform: rotate(360deg);
   }
 }
+
+/* ACCUEIL CSS*/
+
+.wave-container {
+  box-sizing: border-box;
+  position: relative;
+  background-image: url(./components/Graduation.jpg);
+  background-position: center;
+  background-size: cover;
+  color: #ffffff;
+  text-align: center;
+  overflow: hidden;
+}
+
+.wave-container::before, .wave-container::after {
+  box-sizing: inherit;
+}
+
+.wave-container > svg {
+  display: block;
+}
+
+.mainButton {
+  background-color: #F7B91C;
+  font-size: x-large;
+}
+
+.mainButton > a {
+  text-shadow: 0px 3px 8px #666666;
+}
+
+
+/* COLORS */
+
+.ourYellow {
+  color: #F7B91C;
+}
