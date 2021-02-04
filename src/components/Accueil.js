@@ -1,9 +1,18 @@
-import React from "react"
+import React, {useState} from "react"
 import "../App.css"
 
 import imgHeader from "../pictures/Graduation.jpg"
+import imgQuestionsReponsesDefault from "../pictures/ajaccio.jpg"
 
 const Accueil = (props) => {
+
+  const [presentationImageUrl, setPresentationImageUrl] = useState(imgHeader)
+
+
+  const switchImage = (newPresentationImage) => {
+    setPresentationImageUrl(newPresentationImage)
+    console.log("Daccodacc")
+  }
   
     return (
       <div>
@@ -25,8 +34,16 @@ const Accueil = (props) => {
 
       <div id="onHoverPresentation">
         <div class="grid gap-9 md:grid-cols-10 md:grid-rows-5">
+          <div onMouseOver={() => switchImage(imgQuestionsReponsesDefault)} class="col-start-2 col-span-2 md:col-span-2 md:col-start-2 md:row-start-2">
+            <div href="#" class="w-full flex items-center justify-center shadow-xl px-8 py-3 font-bold rounded-lg text-white mainButton md:py-4 md:text-lg md:px-10">
+              <a>S'inscrire</a>
+            </div>
+          </div>
+          <div class="col-start-4 col-span-4 md:col-span-4 md:col-start-4 md:row-start-1 md:row-end-5">
+            <img id="presentationImage" src={presentationImageUrl}/>
+          </div>
           <div class="col-start-2 col-span-2 md:col-span-2 md:col-start-2 md:row-start-2">
-          <div href="#" class="w-full flex items-center justify-center shadow-xl px-8 py-3 font-bold rounded-lg text-white mainButton md:py-4 md:text-lg md:px-10">
+            <div href="#" class="w-full flex items-center justify-center shadow-xl px-8 py-3 font-bold rounded-lg text-white mainButton md:py-4 md:text-lg md:px-10">
               <a>S'inscrire</a>
             </div>
           </div>
