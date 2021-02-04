@@ -79,9 +79,6 @@ typings/
 # rollup-plugin-typescript2 cache
 .rpt2_cache/
 
-# NPM Lockfiles
-package-lock.json
-
 # temp folder used by api-extractor
 temp
 packages-exp/**/temp
