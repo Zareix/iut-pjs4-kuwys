@@ -6,6 +6,7 @@ import "./App.css"
 import Login from "./components/Login.js"
 import Home from "./components/Home.js"
 import Accueil from "./components/Accueil.js"
+import Register from "./components/Register.js"
 
 import firebase from "firebase/app"
 
@@ -29,13 +30,15 @@ firebase.initializeApp(firebaseConfig)
 function App() {
   return (
     <Router>
-    {/*}
-      <Link to="/login">Login</Link>
-      <Link to="/accueil">Accueil</Link>
-  */}
+      <div className="m-4 p-4 flex divide-x-2 gap-x-2 border-b-2">
+        <Link to="/login">Login</Link><Link to="/register">Register</Link>
+      </div>
       <Switch>
         <Route path="/login">
           <Login firebase={firebase} />
+        </Route>
+        <Route path="/register">
+          <Register firebase={firebase} />
         </Route>
         <Route path="/home">
           <Home firebase={firebase} />

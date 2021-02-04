@@ -9,11 +9,19 @@ const styles = {
 }
 
 const Home = (props) => {
-  console.log(props.firebase.auth().currentUser)
+  const user = props.firebase.auth().currentUser
+  console.log(user)
 
   return (
     <div className="App">
       <header className="App-header">
+        {user && (
+          <div>
+            <p>Connecté en tant que :</p>
+            <p>Email : {user.email}</p>
+            <p>displayName : {user.displayName}</p>
+          </div>
+        )}
         <img src={logo} className="App-logo" alt="logo" />
         <h1 className="font-bold">KUWYS</h1>
         <h2>Keeping Up With Your Studies</h2>
