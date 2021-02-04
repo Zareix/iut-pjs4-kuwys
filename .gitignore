@@ -100,3 +100,7 @@ tsdoc-metadata.json
 **/*.bak
 .idea
 .firebaserc
+
+build/
+
+*.cache
