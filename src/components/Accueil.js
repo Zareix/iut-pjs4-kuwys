@@ -3,6 +3,7 @@ import "../App.css"
 
 import imgHeader from "../pictures/Graduation.jpg"
 import imgQuestionsReponsesDefault from "../pictures/ajaccio.jpg"
+import PresentationButton from "./PresentationButton"
 
 const Accueil = (props) => {
 
@@ -35,12 +36,10 @@ const Accueil = (props) => {
       <div id="onHoverPresentation">
         <div class="grid gap-9 md:grid-cols-10 md:grid-rows-5">
           <div onMouseOver={() => switchImage(imgQuestionsReponsesDefault)} class="col-start-2 col-span-2 md:col-span-2 md:col-start-2 md:row-start-2">
-            <div href="#" class="w-full flex items-center justify-center shadow-xl px-8 py-3 font-bold rounded-lg text-white md:py-4 md:text-lg md:px-10">
-              <a>Hola</a>
-            </div>
+            <PresentationButton text={"ESPACE QUESTIONS-REPONSES"}></PresentationButton>
           </div>
           <div class="col-start-4 col-span-4 md:col-span-4 md:col-start-4 md:row-start-1 md:row-end-5">
-            <img id="presentationImage" src={presentationImageUrl}/>
+            <img id="presentationImage" className="object-fit:cover, width:100%, height:100%" src={presentationImageUrl}/>
           </div>
         </div>
 
