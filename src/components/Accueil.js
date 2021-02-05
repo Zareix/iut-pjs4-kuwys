@@ -1,19 +1,30 @@
-import React, {useState} from "react"
+import React, {useState, useEffect, useRef} from "react"
 import "../App.css"
 
 import imgHeader from "../pictures/Graduation.jpg"
 import imgQuestionsReponsesDefault from "../pictures/ajaccio.jpg"
 import PresentationButton from "./PresentationButton"
 
+
 const Accueil = (props) => {
+  var tailleDivImage = null
 
   const [presentationImageUrl, setPresentationImageUrl] = useState(imgHeader)
-
 
   const switchImage = (newPresentationImage) => {
     setPresentationImageUrl(newPresentationImage)
     console.log("Daccodacc")
   }
+
+  const onLoadFunction = () => {
+    tailleDivImage = document.getElementById("divPresentationImage").clientHeight
+    console.log(tailleDivImage)
+  }
+  
+
+
+  
+
   
     return (
       <div>
@@ -34,12 +45,37 @@ const Accueil = (props) => {
       </div>
 
       <div id="onHoverPresentation">
-        <div class="grid gap-9 md:grid-cols-10 md:grid-rows-5">
-          <div onMouseOver={() => switchImage(imgQuestionsReponsesDefault)} class="col-start-2 col-span-2 md:col-span-2 md:col-start-2 md:row-start-2">
+        <div class="grid gap-9 md:grid-cols-10 md:grid-rows-7">
+          <div className="md:col-start-4 md:col-span-4 w-full flex items-center justify-center">
+            <span className="md:mt-12 text-5xl font-black ourYellow">Etudiez solidaire</span>
+          </div>
+          <div className="md:col-start-3 md:col-span-6 w-full items-center justify-center text-center">
+            <p className="text-base font-bold">KUWYS regroupe tous les outils partagés dont vous pourriez avoir besoin en un seul et même endroit.</p>
+            <span className="text-base">Découvrez sans plus tarder le fonctionnement de la 1ère plateforme d'entraide étudiante.</span>
+          </div>
+
+          {/** BOUTONS AUTOUR DE L'IMAGE DE PRESENTATION */}
+      
+          <div onMouseOver={() => switchImage(imgQuestionsReponsesDefault)} className="col-start-2 col-span-2 md:col-span-2 md:col-start-2 md:row-start-4">
             <PresentationButton text={"ESPACE QUESTIONS-REPONSES"}></PresentationButton>
           </div>
-          <div class="col-start-4 col-span-4 md:col-span-4 md:col-start-4 md:row-start-1 md:row-end-5">
-            <img id="presentationImage" className="object-fit:cover, width:100%, height:100%" src={presentationImageUrl}/>
+          <div id="divPresentationImage" onLoad={() => onLoadFunction()} className="rounded-lg col-start-4 col-span-4 md:col-span-4 md:col-start-4 md:row-start-3 md:row-span-5 bg-black">
+            <img id="presentationImage" className="object-cover rounded-lg" style={{width:"100%"},{height:"100%"}} src={presentationImageUrl}/>
+          </div>
+          <div onMouseOver={() => switchImage(imgQuestionsReponsesDefault)} class="col-start-2 col-span-2 md:col-span-2 md:col-start-8 md:row-start-4">
+            <PresentationButton text={"PARTAGE DE FICHES"}></PresentationButton>
+          </div>
+          <div onMouseOver={() => switchImage(imgHeader)} class="col-start-2 col-span-2 md:col-span-2 md:col-start-2 md:row-start-5">
+            <PresentationButton text={"MESSAGES PRIVES AVEC TUTEUR"}></PresentationButton>
+          </div>
+          <div onMouseOver={() => switchImage(imgHeader)} class="col-start-2 col-span-2 md:col-span-2 md:col-start-8 md:row-start-5">
+            <PresentationButton text={"COURS PERSONNELS"}></PresentationButton>
+          </div>
+          <div onMouseOver={() => switchImage(imgQuestionsReponsesDefault)} class="col-start-2 col-span-2 md:col-span-2 md:col-start-2 md:row-start-6">
+            <PresentationButton text={"ESPACE ECOLE"}></PresentationButton>
+          </div>
+          <div onMouseOver={() => switchImage(imgHeader)} class="col-start-2 col-span-2 md:col-span-2 md:col-start-8 md:row-start-6">
+            <PresentationButton text={"GROUPES DE TRAVAIL"}></PresentationButton>
           </div>
         </div>
 
