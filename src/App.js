@@ -13,6 +13,8 @@ import firebase from "firebase/app"
 import "firebase/auth"
 import "firebase/firestore"
 
+const DbContext = React.createContext()
+
 const firebaseConfig = {
   apiKey: "AIzaSyCgFeqJUZHVMB--gTaaahweCQIbADUnNkg",
   authDomain: "pjs4-iut-ts.firebaseapp.com",
@@ -29,26 +31,31 @@ firebase.initializeApp(firebaseConfig)
 
 function App() {
   return (
-    <Router>
-      <div className="m-4 p-4 flex divide-x-2 gap-x-2 border-b-2">
-        <Link to="/login">Login</Link><Link to="/register">Register</Link>
-      </div>
-      <Switch>
-        <Route path="/login">
-          <Login firebase={firebase} />
-        </Route>
-        <Route path="/register">
-          <Register firebase={firebase} />
-        </Route>
-        <Route path="/home">
-          <Home firebase={firebase} />
-        </Route>
-        <Route path="/accueil">
-          <Accueil firebase={firebase} />
-        </Route>
-      </Switch>
-    </Router>
+    <DbContext.Provider value={firebase}>
+      <Router>
+        <div className="m-4 p-4 flex divide-x-2 gap-x-2 border-b-2">
+          <Link to="/accueil">Accueil</Link>
+          <Link to="/login">Login</Link>
+          <Link to="/register">Register</Link>
+        </div>
+        <Switch>
+          <Route path="/accueil">
+            <Accueil />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/register">
+            <Register />
+          </Route>
+          <Route path="/home">
+            <Home />
+          </Route>
+        </Switch>
+      </Router>
+    </DbContext.Provider>
   )
 }
 
+export { DbContext }
 export default App

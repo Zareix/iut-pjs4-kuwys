@@ -1,10 +1,13 @@
-import React, { useEffect } from "react"
+import React, { useContext, useEffect } from "react"
+
 import { Link } from "react-router-dom"
+
+import { DbContext } from "../App"
 
 var firebaseui = require("firebaseui")
 
 const Login = (props) => {
-  var firebase = props.firebase
+  var firebase = useContext(DbContext)
 
   useEffect(() => {
     var ui = new firebaseui.auth.AuthUI(firebase.auth())

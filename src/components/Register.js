@@ -1,6 +1,8 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 
 import { Link } from "react-router-dom"
+
+import { DbContext } from "../App"
 
 const Register = (props) => {
   const [email, setEmail] = useState("")
@@ -11,7 +13,7 @@ const Register = (props) => {
   const [errorMessage, setErrorMessage] = useState("")
   const [logged, setLogged] = useState(false)
 
-  var firebase = props.firebase
+  const firebase = useContext(DbContext)
 
   const verifAll = () => {
     if (nom === "") {
