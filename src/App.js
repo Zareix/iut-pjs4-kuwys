@@ -1,6 +1,9 @@
-import React from "react"
+import React, { useEffect } from "react"
+import ReactDOM from 'react-dom';
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+//import { Document } from "react-pdf"
+import { Document,Page, pdfjs } from "react-pdf";
 
 import "./App.css"
 import Login from "./components/Login.js"
@@ -12,6 +15,7 @@ import firebase from "firebase/app"
 
 import "firebase/auth"
 import "firebase/firestore"
+import "firebase/storage"
 
 const DbContext = React.createContext()
 
@@ -30,9 +34,31 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 
 function App() {
+  //pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+  
+  async function getImage() {
+    //setimgsrc(await )
+    await firebase
+      .storage()
+      .ref()
+      .child("FichePartiels.pdf")
+      .getDownloadURL()
+      .then((url) => {
+        console.log(url)
+        ReactDOM.render(<Document file={url} onLoadError={console.error}><Page pageNumber={4}></Page></Document>, document.getElementById('pdf'));
+        //document.getElementById('img').setAttribute(url)
+      })
+  }
+
+  useEffect(() => {
+    getImage()
+    return () => {}
+  }, [])
+
   return (
     <DbContext.Provider value={firebase}>
       <Router>
+        <div id="pdf"></div>
         <Switch>
           <Route path="/login">
             <Login />
