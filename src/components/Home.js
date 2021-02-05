@@ -1,4 +1,6 @@
-import React from "react"
+import React, { useContext } from "react"
+
+import { DbContext } from "../App"
 
 import Test from "./Test"
 import logo from "../logo.svg"
@@ -9,7 +11,8 @@ const styles = {
 }
 
 const Home = (props) => {
-  const user = props.firebase.auth().currentUser
+  const firebase = useContext(DbContext)
+  const user = firebase.auth().currentUser
   console.log(user)
 
   return (
