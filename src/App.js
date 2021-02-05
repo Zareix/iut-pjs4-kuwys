@@ -1,6 +1,6 @@
 import React from "react"
 
-import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 
 import "./App.css"
 import Login from "./components/Login.js"
@@ -33,15 +33,7 @@ function App() {
   return (
     <DbContext.Provider value={firebase}>
       <Router>
-        <div className="m-4 p-4 flex divide-x-2 gap-x-2 border-b-2">
-          <Link to="/accueil">Accueil</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
-        </div>
         <Switch>
-          <Route path="/accueil">
-            <Accueil />
-          </Route>
           <Route path="/login">
             <Login />
           </Route>
@@ -50,6 +42,9 @@ function App() {
           </Route>
           <Route path="/home">
             <Home />
+          </Route>
+          <Route path="/">
+            <Accueil />
           </Route>
         </Switch>
       </Router>
