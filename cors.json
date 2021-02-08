@@ -1,0 +1,12 @@
+[
+    {
+      "origin": ["http://localhost:3000"],
+      "method": ["GET"],
+      "maxAgeSeconds": 3600
+    },
+    {
+        "origin": ["https://pjs4-iut-ts.web.app/"],
+        "method": ["GET"],
+        "maxAgeSeconds": 3600
+      }
+  ]
