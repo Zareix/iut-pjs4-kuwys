@@ -2,6 +2,8 @@ import React, { useContext } from "react"
 
 import { DbContext } from "../App"
 
+import Pdf from "./Pdf"
+
 import Test from "./Test"
 import logo from "../logo.svg"
 
@@ -17,6 +19,9 @@ const Home = (props) => {
 
   return (
     <div className="App">
+      <div className="m-2">
+        <Pdf pdfPath="Présentation.pdf"></Pdf>
+      </div>
       <header className="App-header">
         {user && (
           <div>
