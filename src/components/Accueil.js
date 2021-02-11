@@ -81,19 +81,13 @@ const Accueil = (props) => {
                 text={"ESPACE QUESTIONS-REPONSES"}
               ></PresentationButton>
             </div>
-            <div
-              id="divPresentationImage"
-              onLoad={() => onLoadFunction()}
-              className="rounded-lg col-start-4 col-span-4 md:col-span-4 md:col-start-4 md:row-start-3 md:row-span-5 bg-black"
-            >
-              <img
-                id="presentationImage"
-                className="object-cover rounded-lg"
-                style={({ width: "100%" }, { height: "100%" })}
-                src={presentationImageUrl}
-                alt="presentation"
-              />
-            </div>
+            <img
+              id="presentationImage"
+              className="rounded-lg self-center object-cover col-start-4 col-span-4 md:col-span-4 md:col-start-4 md:row-start-3 md:row-span-5 bg-black"
+              src={presentationImageUrl}
+              style={{width: "100%", height : "25rem"}}
+              alt="presentation"
+            />
             <div
               onMouseOver={() => switchImage(imgQuestionsReponsesDefault)}
               className="col-start-2 col-span-2 md:col-span-2 md:col-start-8 md:row-start-4"
