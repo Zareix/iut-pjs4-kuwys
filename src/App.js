@@ -13,6 +13,7 @@ import firebase from "firebase/app"
 import "firebase/auth"
 import "firebase/firestore"
 import "firebase/storage"
+import FichesCours from "./components/fichesCours/FichesCours"
 
 const DbContext = React.createContext()
 
@@ -35,6 +36,9 @@ function App() {
     <DbContext.Provider value={firebase}>
       <Router>
         <Switch>
+          <Route path="/fiches">
+            <FichesCours/>
+          </Route>
           <Route path="/login">
             <Login />
           </Route>

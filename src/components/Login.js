@@ -7,10 +7,10 @@ import { DbContext } from "../App"
 var firebaseui = require("firebaseui")
 
 const Login = (props) => {
-  var firebase = useContext(DbContext)
+  const firebase = useContext(DbContext)
 
   useEffect(() => {
-    var ui = new firebaseui.auth.AuthUI(firebase.auth())
+    const ui = new firebaseui.auth.AuthUI(firebase.auth())
 
     var uiConfig = {
       callbacks: {
@@ -34,7 +34,9 @@ const Login = (props) => {
     }
 
     ui.start("#firebaseui-auth-container", uiConfig)
-    return () => {}
+    return () => {
+      ui.delete()
+    }
   }, [firebase])
 
   return (
