@@ -11,8 +11,10 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 const Pdf = (props) => {
   const [numPages, setNumPages] = useState(null)
   const [pageNumber, setPageNumber] = useState(1)
-
+  
   const firebase = useContext(DbContext)
+
+  const type = props.type ? props.type : "svg"
 
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages)
@@ -36,22 +38,12 @@ const Pdf = (props) => {
               <Page
                 pageNumber={pageNumber}
                 width={350}
-                renderMode="svg"
+                renderMode={type}
                 loading="Chargement du PDF..."
               ></Page>
             </Document>,
             document.getElementById("pdf")
           )
-          console.log(url)
-          /*ReactDOM.render(
-          <iframe
-            title="file"
-            style={{ width: "100%", height: "100%" }}
-            src={url}
-          />,
-          document.getElementById("pdf")
-        )*/
-          //document.getElementById('img').setAttribute(url)
         })
     }
     getPdf()
