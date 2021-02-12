@@ -1,7 +1,11 @@
 import React from "react"
 
 const Fiche = () => {
-  return <div>une fiche</div>
+    return (
+        <div>
+            
+        </div>
+    )
 }
 
 export default Fiche

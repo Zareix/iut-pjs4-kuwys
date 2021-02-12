@@ -9,25 +9,63 @@ const Register = (props) => {
   const [password, setPassword] = useState("")
   const [nom, setNom] = useState("")
   const [prenom, setPrenom] = useState("")
+  const [pseudo, setPseudo] = useState("")
+  const defaultAvatar =
+    "https://firebasestorage.googleapis.com/v0/b/pjs4-iut-ts.appspot.com/o/pp_anonymous.svg?alt=media&token=55f0ac31-baff-42ac-8b0d-7c52b1b43aad"
 
   const [errorMessage, setErrorMessage] = useState("")
   const [logged, setLogged] = useState(false)
 
-  const firebase = useContext(DbContext)
+  const { db, auth, firebase } = useContext(DbContext)
 
-  const verifAll = () => {
+  const checkUniquePseudo = async (pseudo) => {
+    console.log(pseudo)
+    const snapshot = await db
+      .collection("users")
+      .where("pseudo", "==", pseudo)
+      .get()
+    if (snapshot.empty) {
+      return true
+    }
+    console.log(snapshot, "faux")
+    return false
+  }
+
+  const verifAll = async () => {
     if (nom === "") {
       setErrorMessage("Merci d'entrer un nom valide.")
       return false
     } else if (prenom === "") {
       setErrorMessage("Merci d'entrer un prenom valide.")
       return false
+    } else if (!(await checkUniquePseudo(pseudo))) {
+      setErrorMessage("Pseudo deja pris.")
+      return false
     }
+    console.log("form valid")
     return true
   }
 
   const formatNom = (nom) => {
-    return nom.charAt(0).toUpperCase() + nom.substr(1)
+    return nom.charAt(0).toUpperCase() + nom.substr(1).toLowerCase()
+  }
+
+  const createUser = async (id) => {
+    const user = await db
+      .collection("users")
+      .doc(id)
+      .set({
+        age: null,
+        avatar: defaultAvatar,
+        codePostal: null,
+        email: email,
+        formations: [],
+        likes: [],
+        nom: formatNom(nom),
+        prenom: formatNom(prenom),
+        pseudo: pseudo,
+      })
+    return user
   }
 
   const handleSubmit = (e) => {
@@ -35,20 +73,15 @@ const Register = (props) => {
     setErrorMessage("")
 
     if (verifAll()) {
-      firebase
-        .auth()
+      console.log("adding user")
+      auth
         .createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
-          var user = userCredential.user
-          firebase
-            .firestore()
-            .collection("users")
-            .add({
-              email: email,
-              nom: formatNom(nom),
-              prenom: formatNom(prenom),
-            })
-          user.updateProfile({
+          let session = userCredential.user
+          const user = createUser(session.uid)
+
+          console.log(session.uid)
+          session.updateProfile({
             displayName: formatNom(prenom) + " " + formatNom(nom),
           })
           setLogged(true)
@@ -92,6 +125,7 @@ const Register = (props) => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="border-2 ml-2"
+                required
               />
             </div>
             <div>
@@ -102,6 +136,18 @@ const Register = (props) => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="border-2 ml-2"
+                required
+              />
+            </div>
+            <div>
+              <label>Pseudo</label>
+              <input
+                type="text"
+                id="pseudo"
+                value={pseudo}
+                onChange={(e) => setPseudo(e.target.value)}
+                className="border-2 ml-2"
+                required
               />
             </div>
             <div>
@@ -112,6 +158,7 @@ const Register = (props) => {
                 value={nom}
                 onChange={(e) => setNom(e.target.value)}
                 className="border-2 ml-2"
+                required
               />
             </div>
             <div>
@@ -122,6 +169,7 @@ const Register = (props) => {
                 value={prenom}
                 onChange={(e) => setPrenom(e.target.value)}
                 className="border-2 ml-2"
+                required
               />
             </div>
             <div>
