@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react"
 
 const Fiche = () => {
-    return (
-        <div>
-            
-        </div>
-    )
+  return <div>une fiche</div>
 }
 
 export default Fiche

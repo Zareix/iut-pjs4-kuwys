@@ -37,7 +37,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/fiches">
-            <FichesCours/>
+            <FichesCours />
           </Route>
           <Route path="/login">
             <Login />
