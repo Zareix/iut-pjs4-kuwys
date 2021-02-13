@@ -3,10 +3,10 @@ import React from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 
 import "./App.css"
-import Login from "./components/Login.js"
+import Login from "./components/connexion/Login.js"
 import Home from "./components/Home.js"
 import Accueil from "./components/Accueil.js"
-import Register from "./components/Register.js"
+import Register from "./components/inscription/Register.js"
 import Rien from "./components/Rien"
 
 import firebase from "firebase/app"

@@ -7,8 +7,8 @@ import TopBar from "./TopBar"
 import Footer from "./Footer"
 
 const Gui = (props) => {
-  const firebase = useContext(DbContext)
-  const user = firebase.auth().currentUser
+  const { auth } = useContext(DbContext)
+  const user = auth.currentUser
 
   /*
     if(!user)
@@ -38,7 +38,7 @@ const Gui = (props) => {
         </div>
         <div className="col-span-3">{props.children}</div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   )
 }

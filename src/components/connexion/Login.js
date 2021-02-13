@@ -2,15 +2,15 @@ import React, { useContext, useEffect } from "react"
 
 import { Link } from "react-router-dom"
 
-import { DbContext } from "../App"
+import { DbContext } from "../../App"
 
 var firebaseui = require("firebaseui")
 
 const Login = (props) => {
-  const firebase = useContext(DbContext)
+  const { firebase, auth } = useContext(DbContext)
 
   useEffect(() => {
-    const ui = new firebaseui.auth.AuthUI(firebase.auth())
+    const ui = new firebaseui.auth.AuthUI(auth)
 
     var uiConfig = {
       callbacks: {
@@ -37,7 +37,7 @@ const Login = (props) => {
     return () => {
       ui.delete()
     }
-  }, [firebase])
+  }, [auth, firebase])
 
   return (
     <div>
