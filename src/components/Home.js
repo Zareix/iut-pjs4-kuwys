@@ -21,9 +21,6 @@ const Home = (props) => {
   return (
     <Gui>
       <div className="App">
-        <div className="m-2">
-          <Pdf pdfPath="Présentation.pdf"></Pdf>
-        </div>
         <header className="App-header">
           {user && (
             <div>
