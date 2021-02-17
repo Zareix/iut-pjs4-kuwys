@@ -15,6 +15,7 @@ import "firebase/auth"
 import "firebase/firestore"
 import "firebase/storage"
 import FichesCours from "./components/fichesCours/FichesCours"
+import GroupesTravail from "./components/groupesTravail/GroupesTravail"
 
 const DbContext = React.createContext()
 
@@ -43,6 +44,9 @@ function App() {
         <Switch>
           <Route path="/fiches">
             <FichesCours />
+          </Route>
+          <Route path="/groupestravail">
+            <GroupesTravail />
           </Route>
           <Route path="/login">
             <Login />

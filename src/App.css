@@ -74,6 +74,27 @@
   box-shadow: #f1d792 0px 0px 40px;
 }
 
+/* GROUPE TRAVAIL CSS*/
+
+.buttonAddNewGrWork {
+  background-color: #60C39F;
+  font-size: x-large;
+}
+
+.buttonAddNewGrWork:hover {
+  background-color: #27c088;
+}
+
+.grButton {
+  transition: all .2s ease-in-out;
+  box-shadow: #f1d792 0px 0px 40px;
+
+}
+.grButton:hover {
+  transform: scale(1.1);
+  box-shadow: #f0c756 0px 0px 40px;
+}
+
 
 /* COLORS */
 

@@ -24,7 +24,7 @@ const Gui = (props) => {
       <TopBar />
       <div style={{ minHeight: "100vh" }} className="grid grid-cols-6">
         <div className="col-span-1 w-1/6 fixed top-12 h-full" style={{backgroundColor : "#ECECEC"}}>
-          {/*user && (
+          {/**user && (
             <div>
               <img src={user.photoURL} />
               <p>{user.displayName}</p>
@@ -44,7 +44,7 @@ const Gui = (props) => {
             <p>Groupes de travail</p>
           </div>
         </div>
-        <div className="col-start-2 col-span-6">{props.children}</div>
+        <div className="col-start-2 col-span-6 mt-12">{props.children}</div>
         <div className="col-start-2 col-span-6" >
           <Footer />
         </div>
