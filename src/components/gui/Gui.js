@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import { Redirect } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 import { DbContext } from "../../App"
 
@@ -24,7 +24,7 @@ const Gui = (props) => {
       <TopBar />
       <div style={{ minHeight: "100vh" }} className="grid grid-cols-6">
         <div className="col-span-1 w-1/6 fixed top-12 h-full" style={{backgroundColor : "#ECECEC"}}>
-          {/*user && (
+          {/**user && (
             <div>
               <img src={user.photoURL} />
               <p>{user.displayName}</p>
@@ -36,15 +36,15 @@ const Gui = (props) => {
           </div>
           <div className="grid grid-cols-2">{/* icons */}</div>
           <div className="grid gap-4 ml-4 text-xs">
-            <p>Accueil</p>
+            <Link to="/">Accueil</Link>
             <p>Mon profil</p>
             <p>Espace Ecole</p>
-            <p>Fiches & Cours</p>
+            <Link to="/fichescours">Fiches & Cours</Link>
             <p>Forum Q&R</p>
             <p>Groupes de travail</p>
           </div>
         </div>
-        <div className="col-start-2 col-span-6">{props.children}</div>
+        <div className="col-start-2 col-span-6 mt-12">{props.children}</div>
         <div className="col-start-2 col-span-6" >
           <Footer />
         </div>
