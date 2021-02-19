@@ -2,11 +2,13 @@
     {
       "origin": ["http://localhost:3000"],
       "method": ["GET"],
+      "responseHeader": ["HEADER"],
       "maxAgeSeconds": 3600
     },
     {
         "origin": ["https://pjs4-iut-ts.web.app/"],
         "method": ["GET"],
+        "responseHeader": ["HEADER"],
         "maxAgeSeconds": 3600
       }
   ]
