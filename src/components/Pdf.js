@@ -11,8 +11,8 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 const Pdf = (props) => {
   const [numPages, setNumPages] = useState(null)
   const [pageNumber, setPageNumber] = useState(1)
-  
-  const firebase = useContext(DbContext)
+
+  const { storage } = useContext(DbContext)
 
   const type = props.type ? props.type : "svg"
 
@@ -22,8 +22,7 @@ const Pdf = (props) => {
 
   useEffect(() => {
     async function getPdf() {
-      await firebase
-        .storage()
+      await storage
         .ref()
         .child(props.pdfPath)
         .getDownloadURL()
@@ -47,8 +46,8 @@ const Pdf = (props) => {
         })
     }
     getPdf()
-    return () => {}
-  }, [firebase, pageNumber, props.pdfPath])
+    return () => { }
+  }, [storage, pageNumber, props.pdfPath])
 
   return (
     <div className="grid grid-cols-1 justify-items-center w-1/3 bg-gray-100 p-2 rounded-2xl">

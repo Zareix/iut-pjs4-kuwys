@@ -11,11 +11,11 @@ const FichesCours = () => {
   const [snapshotFiche, setSnapshotFiche] = useState([])
   const [snapshotCours, setSnapshotCours] = useState([])
 
-  const firebase = useContext(DbContext)
+  const { db } = useContext(DbContext)
 
   useEffect(() => {
     const getSnapshot = async () => {
-      const listeFicheRef = firebase.firestore().collection("posts")
+      const listeFicheRef = db.collection("posts")
       const dataFiche = await listeFicheRef
         .where("typeDoc", "==", "fiche")
         .get()
