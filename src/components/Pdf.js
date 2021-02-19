@@ -1,7 +1,8 @@
 import React, { useState, useContext, useEffect } from "react"
 import ReactDOM from "react-dom"
 
-import { Document, Page, pdfjs } from "react-pdf"
+import { Document, Page, pdfjs } from 'react-pdf/dist/esm/entry.webpack';
+
 import "react-pdf/dist/esm/Page/AnnotationLayer.css"
 
 import { DbContext } from "../App"
@@ -15,6 +16,8 @@ const Pdf = (props) => {
   const { storage } = useContext(DbContext)
 
   const type = props.type ? props.type : "svg"
+  const width = props.width ? props.width : 350
+  const firstPage = props.firstPage ? props.firstPage : false
 
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages)
@@ -30,28 +33,30 @@ const Pdf = (props) => {
           ReactDOM.render(
             <Document
               file={url}
+              options={{ workerSrc: pdfjs.GlobalWorkerOptions.workerSrc }}
               onLoadSuccess={onDocumentLoadSuccess}
               onLoadError={console.error}
               loading="Chargement du PDF..."
             >
               <Page
                 pageNumber={pageNumber}
-                width={350}
+                width={width}
                 renderMode={type}
                 loading="Chargement du PDF..."
               ></Page>
             </Document>,
-            document.getElementById("pdf")
+            document.getElementById(props.pdfPath)
           )
         })
     }
     getPdf()
     return () => { }
   }, [storage, pageNumber, props.pdfPath])
-
+  
   return (
     <div className="grid grid-cols-1 justify-items-center w-1/3 bg-gray-100 p-2 rounded-2xl">
-      <div id="pdf"></div>
+      <div id={props.pdfPath}></div>
+      {!firstPage && 
       <p>
         <span
           onClick={() =>
@@ -68,7 +73,7 @@ const Pdf = (props) => {
         >
           {" ->"}
         </span>
-      </p>
+      </p>}
     </div>
   )
 }

@@ -47,5 +47,4 @@
     ]
   },
   "proxy": "https://europe-west1-pjs4-iut-ts.cloudfunctions.net/api"
-
 }
