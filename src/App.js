@@ -59,7 +59,7 @@ function App() {
           <Route exact path="/home">
             <Home />
           </Route>
-          <Route>
+          <Route exact path="/profil">
             <Profil/>
           </Route>
           <Route exact path="/">
