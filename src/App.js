@@ -9,6 +9,7 @@ import Accueil from "./components/Accueil.js"
 import Register from "./components/inscription/Register.js"
 import Rien from "./components/Rien"
 import Page404 from "./components/Page404"
+import Profil from "./components/profil/Profil"
 
 import firebase from "firebase/app"
 
@@ -57,6 +58,9 @@ function App() {
           </Route>
           <Route exact path="/home">
             <Home />
+          </Route>
+          <Route>
+            <Profil/>
           </Route>
           <Route exact path="/">
             <Accueil />
