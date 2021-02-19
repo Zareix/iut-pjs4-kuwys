@@ -20,7 +20,7 @@ const Profil = () => {
                         <h1 className="font-bold text-xl">Pseudo</h1>
                         <h2 className="mt-2 mb-1">Mini-Biographie</h2>
                         <textarea style={{ resize: "none" }} placeholder="Ecrivez ici" className="border w-4/5 h-20 shadow-inner"></textarea>
-                        <div className="grid justify-end w-4/5">
+                        <div className="grid justify-end w-4/5 mt-1">
                             <button className="border bg-yellow-300 text-white font-bold text-xs h-6 px-2 rounded-full">Modifier la biographie</button>
                         </div>
                     </div>
@@ -28,7 +28,7 @@ const Profil = () => {
 
                 {/* A propos */}
                 <div className="grid border w-11/12 h-50 shadow-lg p-4 gap-3 text-lg">
-                    <h1 className="font-bold text-2xl">A propos</h1>
+                    <h1 className="font-bold text-2xl ml-2">A propos</h1>
                     <div className="grid gap-4 mx-7">
                         <div className="flex gap-10">
                             <label >Prénom :<input placeholder="prénom" className="border ml-2 rounded-lg px-2 align-middle"></input></label>
@@ -37,7 +37,7 @@ const Profil = () => {
                         <label >Adresse e-mail :<input placeholder="email" className="border ml-2 rounded-lg px-2 align-middle"></input></label>
                         <label >Date de naissance :<input placeholder="date de naissance" className="border ml-2 rounded-lg px-2 align-middle"></input></label>
                         <fieldset className="border px-4 pb-3 pt-2 bg-gray-50">
-                            <legend className="ml-4 font-semibold">Mes études</legend>
+                            <legend className="ml-4 font-semibold px-2">Mes études</legend>
                             <div className="flex gap-10 mb-4">
                                 <label >Ecoles :<input placeholder="écoles" className="border ml-2 rounded-lg px-2 align-middle"></input></label>
                                 <label >Niveau d'études :<input placeholder="niveau d'études" className="border ml-2 rounded-lg px-2 align-middle"></input></label>
@@ -45,21 +45,21 @@ const Profil = () => {
                             <label >Formations :<input placeholder="formations" className="border ml-2 rounded-lg px-2 align-middle"></input></label>
                         </fieldset>
                         <div className="grid justify-end">
-                            <button className="border bg-yellow-300 text-white font-bold text-xs w-28 h-9 px-1 rounded-lg">Modifier ces informations</button>
+                            <button className="border bg-yellow-300 text-white font-bold text-sm w-28 h-11 px-1 rounded-lg">Confirmer ces informations</button>
                         </div>
                     </div>
                 </div>
 
                 {/* Paramètres */}
                 <div className="grid border w-11/12 h-50 shadow-lg p-4 gap-3 text-lg">
-                    <h1 className="font-bold text-2xl">Paramètres</h1>
-                    <fieldset className="grid gap-3 border px-8 pb-3 pt-2 mx-7 bg-gray-50">
-                        <legend className="ml-4 font-semibold">Mot de passe</legend>
+                    <h1 className="font-bold text-2xl ml-2">Paramètres</h1>
+                    <fieldset className="grid gap-3 border px-4 pb-3 pt-2 mx-7 bg-gray-50">
+                        <legend className="ml-4 font-semibold px-2">Mot de passe</legend>
                         <label >Anciens mot de passe :<input className="border ml-2 rounded-lg px-2 align-middle"></input></label>
                         <label >Nouveau mot de passe :<input className="border ml-2 rounded-lg px-2 align-middle"></input></label>
                         <label >Confirmer mot de passe :<input className="border ml-2 rounded-lg px-2 align-middle"></input></label>
                         <div className="grid justify-end">
-                            <button className="border bg-yellow-300 text-white font-bold text-xs w-20 h-8 px-1 rounded-lg">Confirmer</button>
+                            <button className="border bg-yellow-300 text-white font-bold text-xs w-20 h-6 px-1 rounded-full">Confirmer</button>
                         </div>
                     </fieldset>
                 </div>
