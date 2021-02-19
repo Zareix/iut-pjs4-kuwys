@@ -41,13 +41,13 @@ function App() {
     <DbContext.Provider value={{ firebase, db, auth, storage }}>
       <Router>
         <Switch>
-          <Route path="/fiches">
+          <Route path="/fichesCours">
             <FichesCours />
           </Route>
           <Route path="/login">
             <Login />
           </Route>
-          <Route path="/register">
+          <Route path="/register">s
             <Register />
           </Route>
           <Route path="/home">

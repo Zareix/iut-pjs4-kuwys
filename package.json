@@ -43,5 +43,7 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "https://europe-west1-pjs4-iut-ts.cloudfunctions.net/api"
+
 }
