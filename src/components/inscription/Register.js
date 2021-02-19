@@ -4,15 +4,14 @@ import { Link } from "react-router-dom"
 
 import { DbContext } from "../../App"
 
+const defaultAvatar = "../../svg/PPAnonymous.svg"
+
 const Register = (props) => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [nom, setNom] = useState("")
   const [prenom, setPrenom] = useState("")
   const [pseudo, setPseudo] = useState("")
-  const defaultAvatar =
-    "https://firebasestorage.googleapis.com/v0/b/pjs4-iut-ts.appspot.com/o/pp_anonymous.svg?alt=media&token=55f0ac31-baff-42ac-8b0d-7c52b1b43aad"
-
   const [errorMessage, setErrorMessage] = useState("")
   const [logged, setLogged] = useState(false)
 
@@ -73,7 +72,6 @@ const Register = (props) => {
     setErrorMessage("")
 
     if (verifAll()) {
-      console.log("adding user")
       auth
         .createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {

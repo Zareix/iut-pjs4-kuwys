@@ -3,6 +3,9 @@ import React, { useState, useEffect, useContext } from "react"
 import Fiche from "./Fiche"
 import { DbContext } from "../../App"
 import Pdf from "../Pdf"
+
+
+
 const FichesCours = () => {
   const [selectedFiche, setSelectedFiche] = useState()
   const [snapshotFiche, setSnapshotFiche] = useState([])

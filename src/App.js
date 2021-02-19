@@ -8,6 +8,7 @@ import Home from "./components/Home.js"
 import Accueil from "./components/Accueil.js"
 import Register from "./components/inscription/Register.js"
 import Rien from "./components/Rien"
+import Page404 from "./components/Page404"
 
 import firebase from "firebase/app"
 
@@ -42,26 +43,29 @@ function App() {
     <DbContext.Provider value={{ firebase, db, auth, storage }}>
       <Router>
         <Switch>
-          <Route path="/fiches">
+          <Route exact path="/fichesCours">
             <FichesCours />
           </Route>
-          <Route path="/groupestravail">
+          <Route exact path="/groupestravail">
             <GroupesTravail />
           </Route>
-          <Route path="/login">
+          <Route exact path="/login">
             <Login />
           </Route>
-          <Route path="/register">
+          <Route exact path="/register">
             <Register />
           </Route>
-          <Route path="/home">
+          <Route exact path="/home">
             <Home />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <Accueil />
           </Route>
-          <Route path="test">
+          <Route exact path="/test">
             <Rien />
+          </Route>
+          <Route>
+            <Page404/>
           </Route>
         </Switch>
       </Router>
