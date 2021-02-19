@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import { Redirect } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 import { DbContext } from "../../App"
 
@@ -36,10 +36,10 @@ const Gui = (props) => {
           </div>
           <div className="grid grid-cols-2">{/* icons */}</div>
           <div className="grid gap-4 ml-4 text-xs">
-            <p>Accueil</p>
+            <Link to="/">Accueil</Link>
             <p>Mon profil</p>
             <p>Espace Ecole</p>
-            <p>Fiches & Cours</p>
+            <Link to="/fichescours">Fiches & Cours</Link>
             <p>Forum Q&R</p>
             <p>Groupes de travail</p>
           </div>
