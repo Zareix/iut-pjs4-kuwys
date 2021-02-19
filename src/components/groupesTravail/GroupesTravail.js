@@ -39,27 +39,14 @@ const GroupesTravail = (props) => {
     </div>
 
     <div>
-      <div style={{boxShadow: '-1px 2px 10px 3px rgba(0, 0, 0, 0.3) inset', backgroundColor : 'rgba(196, 196, 196, 0.22)'}} className="grid grid-cols-1 w-5/12 rounded-lg md:m-auto md:mt-24 text-center">
+      <div className="grid grid-cols-1 w-6/12 md:m-auto md:mt-16 md:pb-4 greyBox">
         <div className="col-start-1 col-span-1">
-          <p>Bonjour</p>
             <ButtonGrTravail
-              text={"COUCOU LOLA"}
+              text={"Jeudi 18/03 - 14h"}
             ></ButtonGrTravail>
             <ButtonGrTravail
-              text={"PARTAGE DE FICHES"}
+              text={"LONGUE VIE ENIKOUMOUK"}
             ></ButtonGrTravail>
-            <p>Bonjour</p>
-            <p>Bonjour</p>
-            <p>Bonjour</p>
-            <p>Bonjour</p>
-            <p>Bonjour</p>
-            <p>Bonjour</p>
-            <p>Bonjour</p>
-            <p>Bonjour</p>
-            <p>Bonjour</p>
-            <p>Bonjour</p>
-            <p>Bonjour</p>
-
         </div>
         
       </div>
