@@ -5,6 +5,7 @@ import Gui from "../gui/Gui"
 import pp from "../../svg/PPAnonymous.svg"
 
 // TODO : gérer les inputs et appliquer les modifs à la DB
+// TODO : afficher les infos de l'user
 const Profil = () => {
     return (
         <Gui>
