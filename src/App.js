@@ -1,6 +1,6 @@
-import React from "react"
+import React, { useState } from "react";
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import "./App.css"
 import Login from "./components/connexion/Login.js"
@@ -11,15 +11,15 @@ import Rien from "./components/Rien"
 import Page404 from "./components/Page404"
 import Profil from "./components/profil/Profil"
 
-import firebase from "firebase/app"
+import firebase from "firebase/app";
 
-import "firebase/auth"
-import "firebase/firestore"
-import "firebase/storage"
-import FichesCours from "./components/fichesCours/FichesCours"
-import GroupesTravail from "./components/groupesTravail/GroupesTravail"
+import "firebase/auth";
+import "firebase/firestore";
+import "firebase/storage";
+import FichesCours from "./components/fichesCours/FichesCours";
+import GroupesTravail from "./components/groupesTravail/GroupesTravail";
 
-const DbContext = React.createContext()
+const DbContext = React.createContext();
 
 const firebaseConfig = {
   apiKey: "AIzaSyCgFeqJUZHVMB--gTaaahweCQIbADUnNkg",
@@ -31,18 +31,20 @@ const firebaseConfig = {
   messagingSenderId: "291848628623",
   appId: "1:291848628623:web:dac0799f99f6541b8d83fa",
   measurementId: "G-PDZVB2VGCW",
-}
+};
 
-firebase.initializeApp(firebaseConfig)
+firebase.initializeApp(firebaseConfig);
 
 function App() {
-  const db = firebase.firestore()
-  const auth = firebase.auth()
-  const storage = firebase.storage()
-  const [token, setToken] = useState("")
+  const db = firebase.firestore();
+  const auth = firebase.auth();
+  const storage = firebase.storage();
+  const [token, setToken] = useState("");
 
   return (
-    <DbContext.Provider value={{ firebase, db, auth, storage, token }}>
+    <DbContext.Provider
+      value={{ firebase, db, auth, storage, token, setToken }}
+    >
       <Router>
         <Switch>
           <Route exact path="/fichesCours">
@@ -75,8 +77,8 @@ function App() {
         </Switch>
       </Router>
     </DbContext.Provider>
-  )
+  );
 }
 
-export { DbContext }
-export default App
+export { DbContext };
+export default App;

@@ -1,26 +1,26 @@
-import React, { useState } from "react"
-import "../App.css"
+import React, { useState } from "react";
+import "../App.css";
 
-import imgHeader from "../pictures/Graduation.jpg"
-import imgQuestionsReponsesDefault from "../pictures/ajaccio.jpg"
-import PresentationButton from "./PresentationButton"
-import { Link } from "react-router-dom"
+import imgHeader from "../pictures/Graduation.jpg";
+import imgQuestionsReponsesDefault from "../pictures/ajaccio.jpg";
+import PresentationButton from "./PresentationButton";
+import { Link } from "react-router-dom";
 
 const Accueil = (props) => {
-  var tailleDivImage = null
+  var tailleDivImage = null;
 
-  const [presentationImageUrl, setPresentationImageUrl] = useState(imgHeader)
+  const [presentationImageUrl, setPresentationImageUrl] = useState(imgHeader);
 
   const switchImage = (newPresentationImage) => {
-    setPresentationImageUrl(newPresentationImage)
-    console.log("Daccodacc")
-  }
+    setPresentationImageUrl(newPresentationImage);
+    console.log("Daccodacc");
+  };
 
   const onLoadFunction = () => {
     tailleDivImage = document.getElementById("divPresentationImage")
-      .clientHeight
-    console.log(tailleDivImage)
-  }
+      .clientHeight;
+    console.log(tailleDivImage);
+  };
 
   return (
     <div>
@@ -46,7 +46,7 @@ const Accueil = (props) => {
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 260">
           <path
             fill="#ffffff"
-            fill-opacity="1"
+            fillOpacity="1"
             d="M0,256L80,240C160,224,320,192,480,192C640,192,800,224,960,218.7C1120,213,1280,171,1360,149.3L1440,128L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
           ></path>
         </svg>
@@ -85,7 +85,7 @@ const Accueil = (props) => {
               id="presentationImage"
               className="rounded-lg self-center object-cover col-start-4 col-span-4 md:col-span-4 md:col-start-4 md:row-start-3 md:row-span-5 bg-black"
               src={presentationImageUrl}
-              style={{width: "100%", height : "25rem"}}
+              style={{ width: "100%", height: "25rem" }}
               alt="presentation"
             />
             <div
@@ -149,7 +149,7 @@ const Accueil = (props) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Accueil
+export default Accueil;
