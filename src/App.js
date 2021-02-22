@@ -39,9 +39,10 @@ function App() {
   const db = firebase.firestore()
   const auth = firebase.auth()
   const storage = firebase.storage()
+  const [token, setToken] = useState("")
 
   return (
-    <DbContext.Provider value={{ firebase, db, auth, storage }}>
+    <DbContext.Provider value={{ firebase, db, auth, storage, token }}>
       <Router>
         <Switch>
           <Route exact path="/fichesCours">
@@ -60,7 +61,7 @@ function App() {
             <Home />
           </Route>
           <Route exact path="/profil">
-            <Profil/>
+            <Profil />
           </Route>
           <Route exact path="/">
             <Accueil />
@@ -69,7 +70,7 @@ function App() {
             <Rien />
           </Route>
           <Route>
-            <Page404/>
+            <Page404 />
           </Route>
         </Switch>
       </Router>
