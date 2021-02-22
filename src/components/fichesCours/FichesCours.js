@@ -13,12 +13,12 @@ const FichesCours = () => {
 
   useEffect(() => {
     const getSnapshot = async () => {
-      axios.get("/posts").then((data) => {
+      axios.get("https://europe-west1-pjs4-iut-ts.cloudfunctions.net/api/posts").then((data) => {
         if (data.error) {
           console.log(data.error)
         }
-        setSnapshotPosts(data.data)
         console.log(data.data)
+        setSnapshotPosts(data.data)
       })
     }
     getSnapshot()
