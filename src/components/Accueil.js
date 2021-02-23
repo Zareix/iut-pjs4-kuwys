@@ -1,26 +1,26 @@
-import React, { useState } from "react";
-import "../App.css";
+import React, { useState } from 'react'
+import '../App.css'
 
-import imgHeader from "../pictures/Graduation.jpg";
-import imgQuestionsReponsesDefault from "../pictures/ajaccio.jpg";
-import PresentationButton from "./PresentationButton";
-import { Link } from "react-router-dom";
+import imgHeader from '../pictures/Graduation.jpg'
+import imgQuestionsReponsesDefault from '../pictures/ajaccio.jpg'
+import PresentationButton from './PresentationButton'
+import { Link } from 'react-router-dom'
 
 const Accueil = (props) => {
-  var tailleDivImage = null;
+  var tailleDivImage = null
 
-  const [presentationImageUrl, setPresentationImageUrl] = useState(imgHeader);
+  const [presentationImageUrl, setPresentationImageUrl] = useState(imgHeader)
 
   const switchImage = (newPresentationImage) => {
-    setPresentationImageUrl(newPresentationImage);
-    console.log("Daccodacc");
-  };
+    setPresentationImageUrl(newPresentationImage)
+    console.log('Daccodacc')
+  }
 
   const onLoadFunction = () => {
-    tailleDivImage = document.getElementById("divPresentationImage")
-      .clientHeight;
-    console.log(tailleDivImage);
-  };
+    tailleDivImage = document.getElementById('divPresentationImage')
+      .clientHeight
+    console.log(tailleDivImage)
+  }
 
   return (
     <div>
@@ -78,14 +78,14 @@ const Accueil = (props) => {
               className="col-start-2 col-span-2 md:col-span-2 md:col-start-2 md:row-start-4"
             >
               <PresentationButton
-                text={"ESPACE QUESTIONS-REPONSES"}
+                text={'ESPACE QUESTIONS-REPONSES'}
               ></PresentationButton>
             </div>
             <img
               id="presentationImage"
               className="rounded-lg self-center object-cover col-start-4 col-span-4 md:col-span-4 md:col-start-4 md:row-start-3 md:row-span-5 bg-black"
               src={presentationImageUrl}
-              style={{ width: "100%", height: "25rem" }}
+              style={{ width: '100%', height: '25rem' }}
               alt="presentation"
             />
             <div
@@ -93,7 +93,7 @@ const Accueil = (props) => {
               className="col-start-2 col-span-2 md:col-span-2 md:col-start-8 md:row-start-4"
             >
               <PresentationButton
-                text={"PARTAGE DE FICHES"}
+                text={'PARTAGE DE FICHES'}
               ></PresentationButton>
             </div>
             <div
@@ -101,7 +101,7 @@ const Accueil = (props) => {
               className="col-start-2 col-span-2 md:col-span-2 md:col-start-2 md:row-start-5"
             >
               <PresentationButton
-                text={"MESSAGES PRIVES AVEC TUTEUR"}
+                text={'MESSAGES PRIVES AVEC TUTEUR'}
               ></PresentationButton>
             </div>
             <div
@@ -109,21 +109,21 @@ const Accueil = (props) => {
               className="col-start-2 col-span-2 md:col-span-2 md:col-start-8 md:row-start-5"
             >
               <PresentationButton
-                text={"COURS PERSONNELS"}
+                text={'COURS PERSONNELS'}
               ></PresentationButton>
             </div>
             <div
               onMouseOver={() => switchImage(imgQuestionsReponsesDefault)}
               className="col-start-2 col-span-2 md:col-span-2 md:col-start-2 md:row-start-6"
             >
-              <PresentationButton text={"ESPACE ECOLE"}></PresentationButton>
+              <PresentationButton text={'ESPACE ECOLE'}></PresentationButton>
             </div>
             <div
               onMouseOver={() => switchImage(imgHeader)}
               className="col-start-2 col-span-2 md:col-span-2 md:col-start-8 md:row-start-6"
             >
               <PresentationButton
-                text={"GROUPES DE TRAVAIL"}
+                text={'GROUPES DE TRAVAIL'}
               ></PresentationButton>
             </div>
           </div>
@@ -149,7 +149,7 @@ const Accueil = (props) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Accueil;
+export default Accueil

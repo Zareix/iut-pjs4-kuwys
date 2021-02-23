@@ -25,7 +25,6 @@ const ButtonGrTravail = (props) => {
       <div style={{color : "#585858"}} className="col-start-6 col-span-1 row-start-2 row-span-1 text-sm flex justify-end">
         <p style={{backgroundColor : "#5FCAD6", color:"white", borderRadius:'12px'}} className="md:px-2 mt-0.5 ml-1 font-semibold">ADMIN</p>
       </div>
-      
     </a>
   )
 }

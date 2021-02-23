@@ -1,43 +1,36 @@
-import React, { useState, useEffect, useContext } from "react"
+import React, { useState, useEffect, useContext } from 'react'
 
-import Fiche from "./Fiche"
-import { DbContext } from "../../App"
-import Pdf from "../Pdf"
-import axios from "axios"
+import Fiche from './Fiche'
+import { DbContext } from '../../App'
+import Pdf from '../Pdf'
+import API from '../../util/api'
 
 const FichesCours = () => {
-  const [selectedFiche, setSelectedFiche] = useState()
-  const [snapshotPosts, setSnapshotPosts] = useState()
-
-  const { db } = useContext(DbContext)
+  const [posts, setPosts] = useState()
 
   useEffect(() => {
-    const getSnapshot = async () => {
-      axios.get("https://europe-west1-pjs4-iut-ts.cloudfunctions.net/api/posts").then((data) => {
-        if (data.error) {
-          console.log(data.error)
-        }
-        console.log(data.data)
-        setSnapshotPosts(data.data)
+    API.get('/posts')
+      .then((res) => {
+        console.log(res.data)
+        setPosts(res.data)
       })
-    }
-    getSnapshot()
-    return () => {}
+      .catch((err) => {
+        console.log(err.response.data)
+      })
   }, [])
 
-  return selectedFiche ? (
-    <Fiche fiche={selectedFiche} />
-  ) : (
+  return (
     <div className="grid grid-flow-col grid-rows-2 grid-cols-3 gap-4">
-      {snapshotPosts &&
-        snapshotPosts.map((f, index) => (
+      {posts &&
+        posts.map((f, index) => (
           <div>
-            {f.postType === "fiche" ? (
+            {f.postType === 'fiche' ? (
+              // TODO mettre tout ca dans un composant Fiche
               <div className="fiches" key={index}>
                 <figure className="bg-gray-100 rounded-xl p-8">
                   <Pdf
                     pdfPath={
-                      !f.documents[0] ? "fiches/default.pdf" : f.documents[0]
+                      !f.documents[0] ? 'fiches/default.pdf' : f.documents[0]
                     }
                     type="canvas"
                     firstPage={false}
@@ -55,6 +48,7 @@ const FichesCours = () => {
                 </figure>
               </div>
             ) : (
+              // TODO mettre tout ca dans un composant Cours
               <div className="cours" key={index}>
                 <figure className="bg-gray-100 rounded-xl p-8">
                   <div className="pt-6 space-y-4">

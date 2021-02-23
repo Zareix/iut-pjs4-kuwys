@@ -1,8 +1,8 @@
 import React from 'react'
 
 // TODO
-const Fiche = () => {
+const Cours = () => {
   return <div></div>
 }
 
-export default Fiche
+export default Cours

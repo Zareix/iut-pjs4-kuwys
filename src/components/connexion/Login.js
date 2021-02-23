@@ -1,34 +1,32 @@
-import React, { useContext, useState } from "react";
-import axios from "axios";
+import React, { useContext, useState } from 'react'
+import API from '../../util/api'
 
-import { Redirect } from "react-router-dom";
+import { Redirect } from 'react-router-dom'
 
-import { DbContext } from "../../App";
-import { tokenToString } from "typescript";
+import { DbContext } from '../../App'
 
 const Login = (props) => {
-  const { setToken } = useContext(DbContext);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
-  const [redirect, setRedirect] = useState(false);
+  const { login } = useContext(DbContext)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [errors, setErrors] = useState({})
+  const [redirect, setRedirect] = useState(false)
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    setErrors({});
-    axios
-      .post("/login", { email, password })
+    e.preventDefault()
+    setErrors({})
+    API.post('/login', { email, password })
       .then((res) => {
-        console.log(res.data);
-        setToken(res.data.token);
-        setRedirect(true);
+        console.log(res.data)
+        login(res.data.token)
+        setRedirect(true)
       })
       .catch((err) => {
-        console.log(err.response.data);
-        setErrors({ ...err.response.data });
-      });
-  };
-  if (redirect) return <Redirect to="/" />;
+        console.log(err.response.data)
+        setErrors({ ...err.response.data })
+      })
+  }
+  if (redirect) return <Redirect to="/" />
 
   return (
     <div className="w-full max-w-xs">
@@ -50,7 +48,7 @@ const Login = (props) => {
             placeholder="user@email.com"
             value={email}
             onChange={(e) => {
-              setEmail(e.target.value);
+              setEmail(e.target.value)
             }}
           />
           {errors.email && (
@@ -71,7 +69,7 @@ const Login = (props) => {
             placeholder="******************"
             value={password}
             onChange={(e) => {
-              setPassword(e.target.value);
+              setPassword(e.target.value)
             }}
           />
           {errors.password && (
@@ -94,7 +92,7 @@ const Login = (props) => {
         &copy;2020 Acme Corp. All rights reserved.
       </p>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

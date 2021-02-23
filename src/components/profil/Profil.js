@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Gui from "../gui/Gui"
+import Gui from '../gui/Gui'
 
 import Parametres from './Parametres'
 import Bio from './Bio'
