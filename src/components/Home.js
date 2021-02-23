@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 
 import { DbContext } from '../App'
-import api from '../util/api'
 
 import Gui from './gui/Gui'
-import logo from '../logo.svg'
+import logo from '../svg/logo.svg'
+import { useGlobalContext } from '../util/context'
 
 const styles = {
   backgroundColor: 'white',
@@ -12,7 +12,7 @@ const styles = {
 }
 
 const Home = (props) => {
-  const { user } = useContext(DbContext)
+  const { user } = useGlobalContext()
 
   return (
     <Gui>

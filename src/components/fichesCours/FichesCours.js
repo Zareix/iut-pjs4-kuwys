@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import Fiche from './Fiche'
-import { DbContext } from '../../App'
 import Pdf from '../Pdf'
 import API from '../../util/api'
 
@@ -15,30 +14,35 @@ const FichesCours = () => {
         setPosts(res.data)
       })
       .catch((err) => {
+        console.log(err)
         console.log(err.response.data)
       })
   }, [])
 
+  
   return (
     <div className="grid grid-flow-col grid-rows-2 grid-cols-3 gap-4">
       {posts &&
-        posts.map((f, index) => (
-          <div>
-            {f.postType === 'fiche' ? (
+        posts.map((post, index) => (
+          <div key={post.postId}>
+            {post.postType === 'fiche' ? (
               // TODO mettre tout ca dans un composant Fiche
-              <div className="fiches" key={index}>
+              <div className="fiches">
                 <figure className="bg-gray-100 rounded-xl p-8">
                   <Pdf
-                    pdfPath={
-                      !f.documents[0] ? 'fiches/default.pdf' : f.documents[0]
+                    titre={post.title}
+                    pdfUrl={
+                      !post.documents[0]
+                        ? 'https://firebasestorage.googleapis.com/v0/b/pjs4-iut-ts.appspot.com/o/fiches%2Fdefault.pdf?alt=media'
+                        : post.documents[0]
                     }
                     type="canvas"
                     firstPage={false}
                     width={100}
-                  ></Pdf>
+                  />
                   <div className="pt-6 space-y-4">
                     <blockquote>
-                      <p className="text-lg font-semibold">{f.title}</p>
+                      <p className="text-lg font-semibold">{post.title}</p>
                     </blockquote>
                     <figcaption className="font-medium">
                       <div className="text-cyan-600"></div>
@@ -53,7 +57,7 @@ const FichesCours = () => {
                 <figure className="bg-gray-100 rounded-xl p-8">
                   <div className="pt-6 space-y-4">
                     <blockquote>
-                      <p className="text-lg font-semibold">{f.title}</p>
+                      <p className="text-lg font-semibold">{post.title}</p>
                     </blockquote>
                     <figcaption className="font-medium">
                       <div className="text-cyan-600"></div>

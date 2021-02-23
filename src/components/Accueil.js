@@ -1,15 +1,20 @@
 import React, { useState } from 'react'
-import '../App.css'
+import { Link, Redirect } from 'react-router-dom'
 
+import {useGlobalContext} from '../util/context'
 import imgHeader from '../pictures/Graduation.jpg'
 import imgQuestionsReponsesDefault from '../pictures/ajaccio.jpg'
 import PresentationButton from './PresentationButton'
-import { Link } from 'react-router-dom'
+import '../css/App.css'
 
-const Accueil = (props) => {
-  var tailleDivImage = null
+const Accueil = () => {
+  const { isLogin, user } = useGlobalContext()
+  console.log(isLogin, user);
 
   const [presentationImageUrl, setPresentationImageUrl] = useState(imgHeader)
+  var tailleDivImage = null
+
+  // if (isLogin) return <Redirect to="/home" />
 
   const switchImage = (newPresentationImage) => {
     setPresentationImageUrl(newPresentationImage)

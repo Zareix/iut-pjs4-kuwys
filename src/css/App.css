@@ -31,7 +31,7 @@
 .wave-container {
   box-sizing: border-box;
   position: relative;
-  background-image: url(./pictures/Graduation.jpg);
+  background-image: url(../pictures/Graduation.jpg);
   background-position: center;
   background-size: cover;
   color: #ffffff;

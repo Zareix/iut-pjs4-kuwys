@@ -1,9 +1,12 @@
 import React, { useState, useContext } from 'react'
 import API from '../../util/api'
-import { DbContext } from '../../App'
 import { Redirect } from 'react-router-dom'
+import { useGlobalContext } from '../../util/context'
 
-const Register = (props) => {
+const Register = () => {
+  const { login, isLogin } = useGlobalContext()
+  
+
   const [email, setEmail] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -12,8 +15,8 @@ const Register = (props) => {
   const [errors, setErrors] = useState({})
   const [logged, setLogged] = useState(false)
   const [loading, setLoading] = useState(false)
-  const { login } = useContext(DbContext)
-
+  
+  if (isLogin) return <Redirect to='/home'/>
   const handleSubmit = (e) => {
     e.preventDefault()
     setLoading(true)
@@ -27,11 +30,12 @@ const Register = (props) => {
       .then((res) => {
         console.log(res.data)
         const token = res.data.token
-        setLoading(false)
         login(token)
+        setLoading(false)
         setLogged(true)
       })
       .catch((err) => {
+        console.log(err);
         console.log(err.response.data)
         setErrors({ ...err.response.data })
         setLoading(false)

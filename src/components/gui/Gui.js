@@ -1,13 +1,12 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { DbContext } from '../../App'
-
+import {useGlobalContext} from '../../util/context'
 import TopBar from './TopBar'
 import Footer from './Footer'
 
 const Gui = (props) => {
-  const { user } = useContext(DbContext)
+  const { user } = useGlobalContext()
   return (
     <div>
       <TopBar />
