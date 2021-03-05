@@ -11,6 +11,8 @@ const Register = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [prenom, setPrenom] = useState('')
+  const [nom, setNom] = useState('')
 
   const [errors, setErrors] = useState({})
   const [logged, setLogged] = useState(false)
@@ -25,6 +27,8 @@ const Register = () => {
       email,
       password,
       confirmPassword,
+      prenom,
+      nom
     }
     API.post('/register', user)
       .then((res) => {
@@ -50,6 +54,48 @@ const Register = () => {
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
           onSubmit={handleSubmit}
         >
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="nom"
+            >
+              Nom
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="nom"
+              type="text"
+              placeholder="nom"
+              value={nom}
+              onChange={(e) => {
+                setNom(e.target.value)
+              }}
+            />
+            {errors.nom && (
+              <p className="text-red-500 text-xs italic">{errors.nom}</p>
+            )}
+          </div>
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="prenom"
+            >
+              Prenom
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="prenom"
+              type="text"
+              placeholder="prenom"
+              value={prenom}
+              onChange={(e) => {
+                setPrenom(e.target.value)
+              }}
+            />
+            {errors.prenom && (
+              <p className="text-red-500 text-xs italic">{errors.prenom}</p>
+            )}
+          </div>
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
