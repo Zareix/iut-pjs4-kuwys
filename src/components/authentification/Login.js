@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { Redirect, useLocation } from 'react-router-dom'
 
 import API from '../../util/api'
