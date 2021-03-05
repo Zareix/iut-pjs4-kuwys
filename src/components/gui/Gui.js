@@ -10,13 +10,13 @@ const Gui = (props) => {
   return (
     <div>
       <TopBar />
-      <div style={{ minHeight: '100vh' }} className="grid grid-cols-6">
+      <div style={{ minHeight: '100vh' }} className="grid grid-cols-6 z-50">
         <div
-          className="col-span-1 w-1/6 fixed top-12 h-full"
+          className="col-span-1 w-1/6 fixed top-12 h-full p-10"
           style={{ backgroundColor: '#ECECEC' }}
         >
           <div className="grid justify-items-center my-10 text-sm">
-            <img src={user.imageUrl} className="w-16 mb-2" />
+            <img src={user.imageUrl} className="w-16 mb-2" alt="profil pp"/>
             <p>{user.username}</p>
             {/* TODO A modif avec nom prenom mais pas dispo pour le moment */}
           </div>
