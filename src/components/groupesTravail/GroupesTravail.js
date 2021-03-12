@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet'
 import ButtonGrTravail from './ButtonGrTravail'
 import { RiArrowUpCircleFill } from 'react-icons/ri';
 import { RiArrowDownCircleFill } from 'react-icons/ri';
+import {BsSearch} from 'react-icons/bs';
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 
@@ -20,7 +21,7 @@ const GroupesTravail = (props) => {
   const [limiteDonnees, setlimiteDonnees] = useState(5)
 
   const settingUpLimiteDonnees = () => {
-    if(limiteDonnees < 50) {
+    if (limiteDonnees < 50) {
       var l = limiteDonnees + 1
       console.log(l);
       getBiblioNearCity(l);
@@ -29,7 +30,7 @@ const GroupesTravail = (props) => {
   }
 
   const settingDownLimiteDonnees = () => {
-    if(limiteDonnees > 1) {
+    if (limiteDonnees > 1) {
       var l = limiteDonnees - 1
       console.log(l);
       getBiblioNearCity(l);
@@ -77,28 +78,32 @@ const GroupesTravail = (props) => {
       </Helmet>
       <div id="LocationHeader">
         <div className="grid grid-cols-1 gap-14 md:grid-cols-2 md:mt-8 ourMainFontColor font-bold">
-          <div className="col-start-1 col-span-1 md:col-span-1 md:col-start-1 md:ml-8">
-            <p>Chercher dans un autre périmètre</p>
+          <div className="col-start-1 col-span-1 md:col-span-1 md:col-start-1 md:ml-20">
+            <p>Chercher dans un périmètre</p>
           </div>
           <div className="col-start-2 col-span-1 md:col-span-1 md:col-start-2">
             <p>Paramètre de recherche actuel</p>
           </div>
         </div>
         <div className="grid grid-cols-1 gap-14 md:grid-cols-2">
-          <div className="col-start-1 col-span-1 md:col-span-1 md:col-start-1 md:ml-8">
+          <div className="col-start-1 col-span-1 md:col-span-1 md:col-start-1 md:ml-20">
             <div className="relative">
-              <img src={imgBarreRecherche} />
+              <img className="m-auto" src={imgBarreRecherche} />
             </div>
             <div className="relative w-full text-center -top-2/4">
-              <input className="bg-yellow" name="firstName" onChange={e => setChosenCity(e.target.value)} />
+              <div className="flex justify-center">
+                <div style={{borderColor:"#f7b91c"}} className="w-3/6 rounded-full bg-white border-solid border md:py-3 md:px-3 text-center flex justify-center">
+                  <BsSearch className="text-2xl"/>
+                  <input className="md:ml-3" name="firstName" placeholder="Adresse / Lieu / Ville" onChange={e => setChosenCity(e.target.value)} />
+                </div>
+              </div>
               <div className="flex justify-center">
                 <div
                   id="ButtonAddNewGroup"
                   className="w-52 flex items-center justify-center shadow-xl px-8 py-3 font-bold rounded-full text-white md:py-3 md:px-3 md:mt-20 buttonAddNewGrWork cursor-pointer"
                   onClick={() => getBiblioNearCity(limiteDonnees)}
                 >
-                  <i className="fas fa-plus align-middle"></i>
-                  <span style={{ fontSize: '1rem' }} className="md:pl-2 align-middle" >
+                  <span className="md:pl-2 align-middle text-base" >
                     VALIDER
           </span>
                 </div>
@@ -107,22 +112,22 @@ const GroupesTravail = (props) => {
 
           </div>
           <div
-            className="col-start-2 col-span-1 md:col-span-1 md:col-start-2"
+            className="col-start-2 col-span-1 md:col-span-1 md:col-start-2 md:mr-20"
           >
             <div className="grid grid-cols-1 md:grid-cols-5 md:grid-rows-2 md:mt-3 md:mb-3">
               <div className="col-start-1 col-span-1 md:col-span-1 md:col-start-1 md:row-start-1 md:row-span-1 flex justify-end md:mr-4">
-                <RiArrowUpCircleFill className="text-4xl text-blue-400 items-center cursor-pointer" onClick={() => settingUpLimiteDonnees()}/>
+                <RiArrowUpCircleFill className="text-4xl text-blue-400 hover:text-blue-500 cursor-pointer" onClick={() => settingUpLimiteDonnees()} />
               </div>
               <div className="col-start-1 col-span-1 md:col-span-1 md:col-start-1 md:row-start-2 md:row-span-1 flex justify-end md:mr-4">
-                <RiArrowDownCircleFill className="text-4xl text-blue-400 cursor-pointer" onClick={() => settingDownLimiteDonnees()}/>
+                <RiArrowDownCircleFill className="text-4xl text-blue-400 hover:text-blue-500 cursor-pointer" onClick={() => settingDownLimiteDonnees()} />
               </div>
               <div className="col-start-1 col-span-1 md:col-span-4 md:col-start-2 md:row-start-1 md:row-span-2 align-middle flex items-center">
                 <p className="text-3xl font-bold text-blue-400 flex items-center">{limiteDonnees} <span className="text-base font-semibold md:ml-3 ourMainFontColor">bibliothèques les plus proches</span></p>
               </div>
             </div>
-            <div className="h-full">
+            <div className="h-2/3">
 
-              <MapContainer center={[48.84172, 2.26824]} zoom={13} scrollWheelZoom={false} className="h-full rounded-lg">
+              <MapContainer center={[48.84172, 2.26824]} zoom={13} scrollWheelZoom={true} className="h-full rounded-lg">
                 <TileLayer
                   attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -135,25 +140,17 @@ const GroupesTravail = (props) => {
                     </Popup>
                   </Marker>
                 )}
-
-
               </MapContainer>
             </div>
           </div>
         </div>
       </div>
 
-      <button
-        onClick={() => getBiblioNearCity(limiteDonnees)}>test fetch</button>
-      <div>
-        {donnees.map((d) => <div key={d.place_id}>{d.address.amenity}</div>)}
-      </div>
-
       {/* BOUTON ADD NEW GROUP*/}
       <div className="flex justify-center">
         <div
           id="ButtonAddNewGroup"
-          className="w-52 flex items-center justify-center shadow-xl px-8 py-3 font-bold rounded-full text-white md:py-3 md:px-3 md:mt-20 buttonAddNewGrWork"
+          className="w-52 flex items-center cursor-pointer justify-center shadow-xl px-8 py-3 font-bold rounded-full text-white md:py-3 md:px-3 buttonAddNewGrWork"
         >
           <i className="fas fa-plus align-middle"></i>
           <span style={{ fontSize: '1rem' }} className="md:pl-2 align-middle">
