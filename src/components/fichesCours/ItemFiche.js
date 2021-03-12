@@ -1,5 +1,6 @@
 import React from 'react'
 import Pdf from '../Pdf'
+import { Link } from 'react-router-dom'
 
 // TODO
 const ItemFiche = ({post}) => {
@@ -18,7 +19,10 @@ const ItemFiche = ({post}) => {
               />
               <div className="pt-6 space-y-4">
                 <blockquote>
-                  <p className="text-lg font-semibold">{post.title}</p>
+                <Link to={{
+                    pathname: `/fiche/${post.postId}`
+                }}>
+                    <p className="text-lg font-semibold">{post.title}</p></Link>
                 </blockquote>
                 <figcaption className="font-medium">
                   <div className="text-cyan-600"></div>

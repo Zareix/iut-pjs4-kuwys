@@ -12,7 +12,7 @@ const Pdf = (props) => {
   const [pageNumber, setPageNumber] = useState(1)
 
   const { type, width, firstPage, pdfUrl, titre } = props
-  console.log(titre);
+  //console.log(titre);
 
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages)
