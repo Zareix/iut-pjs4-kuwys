@@ -2,6 +2,9 @@ import React from 'react'
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+
 import './css/App.css'
 import Login from './components/authentification/Login.js'
 import Home from './components/Home.js'
@@ -46,6 +49,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
+      <ToastContainer/>
     </AppProvider>
   )
 }
