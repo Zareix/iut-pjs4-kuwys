@@ -10,7 +10,7 @@ const SearchBar = ({Tags,addfilter}) => {
     if (Tags.includes(searchValue)) setExist(true)
     else setExist (false)
     console.log(exist)
-  }, [searchValue])
+  }, [Tags,searchValue])
 
   
   return <div className="mb-3 pt-0">
