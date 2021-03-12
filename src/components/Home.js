@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
 
-import { DbContext } from '../App'
 
 import Gui from './gui/Gui'
 import logo from '../svg/logo.svg'
