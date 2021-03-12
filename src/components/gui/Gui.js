@@ -23,7 +23,7 @@ const Gui = (props) => {
           <div className="grid grid-cols-2">{/* icons */}</div>
           <div className="grid gap-4 ml-4 text-xs">
             <Link to="/">Accueil</Link>
-            <p>Mon profil</p>
+            <Link to="/profil">Profil</Link>
             <p>Espace Ecole</p>
             <Link to="/fichescours">Fiches & Cours</Link>
             <p>Forum Q&R</p>

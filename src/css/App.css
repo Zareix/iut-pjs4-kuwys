@@ -1,3 +1,8 @@
+:root {
+  --our-yellow: #f7b91c;
+  --our-main-font-color: #585858;
+}
+
 .App {
   text-align: center;
 }
@@ -49,7 +54,7 @@
 }
 
 .mainButton {
-  background-color: #f7b91c;
+  background-color: var(--our-yellow);
   font-size: x-large;
 }
 
@@ -103,9 +108,17 @@
 /* COLORS */
 
 .ourYellow {
-  color: #f7b91c;
+  color: var(--our-yellow);
+}
+
+.ourYellowBg {
+  background-color: var(--our-yellow);
 }
 
 .ourMainFontColor {
-  color: #585858;
+  color: var(--our-main-font-color);
+}
+
+input {
+  width: 30ch;
 }

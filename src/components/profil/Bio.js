@@ -1,27 +1,41 @@
 import React, { useState, useEffect } from 'react'
 
+import { toast } from 'react-toastify'
+
 import API from '../../util/api'
-import { useGlobalContext } from "../../util/context"
+import { useGlobalContext } from '../../util/context'
 
 import pp from '../../svg/PPAnonymous.svg'
 
 const Bio = () => {
   const { user } = useGlobalContext()
 
-  const [pseudo, setPseudo] = useState("Pseudo")
   const [bio, setBio] = useState()
 
+  useEffect(() => {
+    setBio(user.bio)
+  }, [user])
+
   const updateBio = () => {
-    API.post('/userUpdateBio',
-      {
-        user : user,
-        bio: bio
-      })
+    API.post('/userUpdateBio', {
+      user: user,
+      bio: bio,
+    })
       .then((res) => {
-        console.log(res.data)
+        toast('Biographie mise à jour !', {
+          className: 'ourYellowBg',
+          style: { color: 'white' },
+          progressStyle: { background: 'white' },
+          position: 'bottom-right',
+          autoClose: 3000,
+        })
       })
       .catch((err) => {
-        console.log(err);
+        toast.error('Une erreur est survenu, merci de réessayer.', {
+          position: 'bottom-right',
+          autoClose: 3000,
+        })
+        console.log(err)
         console.log(err.response.data)
       })
   }
@@ -35,16 +49,19 @@ const Bio = () => {
         </button>
       </div>
       <div className="py-4 col-span-2">
-        <h1 className="font-bold text-xl">{pseudo}</h1>
+        <h1 className="font-bold text-xl">{user.username}</h1>
         <h2 className="mt-2 mb-1">Mini-Biographie</h2>
         <textarea
           style={{ resize: 'none' }}
           className="border w-4/5 h-20 shadow-inner"
-          onChange={(e) => setBio(e.value)}
-        >{bio}</textarea>
+          onChange={(e) => setBio(e.target.value)}
+          value={bio}
+        ></textarea>
         <div className="grid justify-end w-4/5 mt-1">
-          <button className="border bg-yellow-300 text-white font-bold text-xs h-6 px-2 rounded-full"
-            onClick={updateBio}>
+          <button
+            className="border bg-yellow-300 text-white font-bold text-xs h-6 px-2 rounded-full"
+            onClick={updateBio}
+          >
             Modifier la biographie
           </button>
         </div>
