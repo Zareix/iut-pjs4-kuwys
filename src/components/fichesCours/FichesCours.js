@@ -7,34 +7,32 @@ import SearchBar from '../tools/SearchBar'
 
 const FichesCours = () => {
   const [posts, setPosts] = useState()
-  let Tags = []
+  const [Tags, setTags] = useState([])
 
 
   
-  console.log(Tags)
-  API.get('/tags')
-        .then((res)=>{
-          Tags = res.data
-          console.log(Tags)
-        })
-  console.log(Tags)
+  
 
   useEffect(() => {
+
+    API.get('/tags')
+    .then((res)=>{
+      setTags(res.data)
+    })
+
     API.get('/posts')
       .then((res) => {
-        console.log(res.data)
         setPosts(res.data)
       })
       .catch((err) => {
         console.log(err)
-        console.log(err.response.data)
       })
+      
   }, [])
-  
   
   return (
     <Gui>
-      <SearchBar Tags={Tags}></SearchBar>
+      <SearchBar tags={Tags}></SearchBar>
       <p className="md:mt-2 md:mb-2 text-3xl font-bold ourYellow">LES FICHES</p>
       <div className="grid grid-flow-col grid-cols-5 gap-4">
         {posts &&

@@ -12,6 +12,7 @@ import Profil from './components/profil/Profil'
 import PrivateRoute from './components/PrivateRoute'
 
 import FichesCours from './components/fichesCours/FichesCours'
+import Fiche from './components/fichesCours/Fiche'
 import GroupesTravail from './components/groupesTravail/GroupesTravail'
 import { AppProvider } from './util/context'
 
@@ -31,6 +32,8 @@ function App() {
           </Route>
           <PrivateRoute exact path="/home">
             <Home />
+          </PrivateRoute>
+          <PrivateRoute exact path="/fiche/:postId" component={Fiche}>
           </PrivateRoute>
           <PrivateRoute exact path="/profil">
             <Profil />
