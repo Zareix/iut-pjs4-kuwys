@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import Gui from '../gui/Gui'
 import { Helmet } from 'react-helmet'
 import ButtonGrTravail from './ButtonGrTravail'
+import { RiArrowUpCircleFill } from 'react-icons/ri';
+import { RiArrowDownCircleFill } from 'react-icons/ri';
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 
@@ -17,14 +19,50 @@ const GroupesTravail = (props) => {
   const [chosenCity, setChosenCity] = useState('')
   const [limiteDonnees, setlimiteDonnees] = useState(5)
 
-  const getBiblioNearCity = () => {
-    fetch(`https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&q=bibliothèques+près+de+${chosenCity}&limit=${limiteDonnees}`)
+  const settingUpLimiteDonnees = () => {
+    if(limiteDonnees < 50) {
+      var l = limiteDonnees + 1
+      console.log(l);
+      getBiblioNearCity(l);
+      setlimiteDonnees(l);
+    }
+  }
+
+  const settingDownLimiteDonnees = () => {
+    if(limiteDonnees > 1) {
+      var l = limiteDonnees - 1
+      console.log(l);
+      getBiblioNearCity(l);
+      setlimiteDonnees(l);
+    }
+  }
+
+  const cityToString = (address) => {
+    if (address.hamlet)
+      return address.hamlet
+
+    if (address.village)
+      return address.village
+
+    if (address.town)
+      return address.town
+
+    if (address.city)
+      return address.city
+
+    return address.municipality
+  }
+
+  const getBiblioNearCity = (limite) => {
+    fetch(`https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&q=bibliothèques+près+de+${chosenCity}&limit=${limite}`)
       .then(function (response) {
+        console.log(response);
         return response.json();
       })
       .then(function (myJson) {
         setDonnees(myJson)
-      });
+      })
+      .catch((err) => console.log(err));
   }
 
 
@@ -43,7 +81,7 @@ const GroupesTravail = (props) => {
             <p>Chercher dans un autre périmètre</p>
           </div>
           <div className="col-start-2 col-span-1 md:col-span-1 md:col-start-2">
-            <p>Rayon de recherche actuel</p>
+            <p>Paramètre de recherche actuel</p>
           </div>
         </div>
         <div className="grid grid-cols-1 gap-14 md:grid-cols-2">
@@ -56,11 +94,12 @@ const GroupesTravail = (props) => {
               <div className="flex justify-center">
                 <div
                   id="ButtonAddNewGroup"
-                  className="w-52 flex items-center justify-center shadow-xl px-8 py-3 font-bold rounded-full text-white md:py-3 md:px-3 md:mt-20 buttonAddNewGrWork"
+                  className="w-52 flex items-center justify-center shadow-xl px-8 py-3 font-bold rounded-full text-white md:py-3 md:px-3 md:mt-20 buttonAddNewGrWork cursor-pointer"
+                  onClick={() => getBiblioNearCity(limiteDonnees)}
                 >
                   <i className="fas fa-plus align-middle"></i>
-                  <span style={{ fontSize: '1rem' }} className="md:pl-2 align-middle" onClick={() => getBiblioNearCity()} >
-                    valider
+                  <span style={{ fontSize: '1rem' }} className="md:pl-2 align-middle" >
+                    VALIDER
           </span>
                 </div>
               </div>
@@ -70,17 +109,34 @@ const GroupesTravail = (props) => {
           <div
             className="col-start-2 col-span-1 md:col-span-1 md:col-start-2"
           >
+            <div className="grid grid-cols-1 md:grid-cols-5 md:grid-rows-2 md:mt-3 md:mb-3">
+              <div className="col-start-1 col-span-1 md:col-span-1 md:col-start-1 md:row-start-1 md:row-span-1 flex justify-end md:mr-4">
+                <RiArrowUpCircleFill className="text-4xl text-blue-400 items-center cursor-pointer" onClick={() => settingUpLimiteDonnees()}/>
+              </div>
+              <div className="col-start-1 col-span-1 md:col-span-1 md:col-start-1 md:row-start-2 md:row-span-1 flex justify-end md:mr-4">
+                <RiArrowDownCircleFill className="text-4xl text-blue-400 cursor-pointer" onClick={() => settingDownLimiteDonnees()}/>
+              </div>
+              <div className="col-start-1 col-span-1 md:col-span-4 md:col-start-2 md:row-start-1 md:row-span-2 align-middle flex items-center">
+                <p className="text-3xl font-bold text-blue-400 flex items-center">{limiteDonnees} <span className="text-base font-semibold md:ml-3 ourMainFontColor">bibliothèques les plus proches</span></p>
+              </div>
+            </div>
             <div className="h-full">
+
               <MapContainer center={[48.84172, 2.26824]} zoom={13} scrollWheelZoom={false} className="h-full rounded-lg">
                 <TileLayer
                   attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <Marker position={[48.84172, 2.26824]}>
-                  <Popup>
-                    A pretty CSS3 popup. Easily customizable.
-                </Popup>
-                </Marker>
+                {donnees.map((d) =>
+                  <Marker position={[d.lat, d.lon]}>
+                    <Popup>
+                      <h1 className="font-bold text-base">{d.address.amenity}</h1>
+                      <h2 className="italic">{d.address.house_number} {d.address.road}, {cityToString(d.address)}</h2>
+                    </Popup>
+                  </Marker>
+                )}
+
+
               </MapContainer>
             </div>
           </div>
@@ -88,7 +144,7 @@ const GroupesTravail = (props) => {
       </div>
 
       <button
-        onClick={() => getBiblioNearCity()}>test fetch</button>
+        onClick={() => getBiblioNearCity(limiteDonnees)}>test fetch</button>
       <div>
         {donnees.map((d) => <div key={d.place_id}>{d.address.amenity}</div>)}
       </div>
