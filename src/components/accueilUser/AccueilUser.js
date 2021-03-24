@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { ReactComponent as FavCoursIcon } from '../../svg/024-file.svg'
 import { ReactComponent as FavFichesIcon } from '../../svg/025-file-1.svg'
@@ -7,6 +7,7 @@ import FavFiches from './FavFiches'
 import FavCours from './FavCours'
 
 import { useGlobalContext } from '../../util/context'
+import API from '../../util/api'
 
 import Gui from '../gui/Gui'
 
@@ -14,13 +15,21 @@ const AccueilUser = () => {
   const { user } = useGlobalContext()
   const [isFavCours, setIsFavCours] = useState(false)
   const [isFavFiches, setIsFavFiches] = useState(false)
+  const [favPosts, setFavPosts] = useState([])
+
+  useEffect(() => {
+    console.log(user)
+    API.get('http://localhost:5000/pjs4-iut-ts/europe-west1/api/favposts', {
+      user: user,
+    }).then((res) => setFavPosts(res.data))
+  })
 
   return (
     <Gui>
       {isFavCours ? (
-        <FavCours />
+        <FavCours posts={favPosts} />
       ) : isFavFiches ? (
-        <FavFiches />
+        <FavFiches posts={favPosts} />
       ) : (
         <div>
           <h1 className="ourYellow font-bold text-2xl">

@@ -1,11 +1,12 @@
 import React from 'react'
 
-const FavCours = () => {
-    return (
-        <div>
-            favcours
-        </div>
-    )
+import AllFichesCours from "../fichesCours/AllFichesCours"
+
+const FavCours = (props) => {
+  //TODO : Get all fav cours
+  const favPosts = props.favPosts
+
+  return <div><AllFichesCours posts={favPosts} type="cours"/></div>
 }
 
 export default FavCours
