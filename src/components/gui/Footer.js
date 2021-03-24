@@ -2,6 +2,9 @@ import React from 'react'
 
 import { Link } from 'react-router-dom'
 
+import logo from '../../pictures/logo-big.png'
+
+//TODO : add logo
 const Footer = () => {
   return (
     <div
