@@ -19,7 +19,7 @@ const AccueilUser = () => {
 
   useEffect(() => {
     console.log(user)
-    API.get('http://localhost:5000/pjs4-iut-ts/europe-west1/api/favposts', {
+    API.get('/favposts', {
       user: user,
     }).then((res) => setFavPosts(res.data))
   })
