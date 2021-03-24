@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Gui from '../gui/Gui'
 import { Helmet } from 'react-helmet'
 import ButtonGrTravail from './ButtonGrTravail'
@@ -6,9 +6,10 @@ import { RiArrowUpCircleFill } from 'react-icons/ri';
 import { RiArrowDownCircleFill } from 'react-icons/ri';
 import {BsSearch} from 'react-icons/bs';
 
+
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 
-
+import API from '../../util/api'
 import imgBarreRecherche from '../../svg/GroupesTravailVector1.svg'
 import imgQuestionsReponsesDefault from '../../pictures/ajaccio.jpg'
 import PresentationButton from '../PresentationButton'
@@ -19,6 +20,9 @@ const GroupesTravail = (props) => {
   const [donnees, setDonnees] = useState([])
   const [chosenCity, setChosenCity] = useState('')
   const [limiteDonnees, setlimiteDonnees] = useState(5)
+
+
+  
 
   const settingUpLimiteDonnees = () => {
     if (limiteDonnees < 50) {
@@ -62,9 +66,32 @@ const GroupesTravail = (props) => {
       })
       .then(function (myJson) {
         setDonnees(myJson)
+        console.log(donnees);
       })
       .catch((err) => console.log(err));
   }
+
+  useEffect(() => {
+    donnees.forEach(element => 
+      API({
+        method : "get",
+        url: "/library/groups",
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+        },
+        params: {
+          library: "Bibliothèque Georges Pompidou"
+        }
+      })
+        .then((res) => {
+          console.log(res.data)
+        })
+        .catch((err) => {
+          console.log('Une erreur est survenu, merci de réessayer.')
+          console.log(err.response)
+        })
+  )
+  }, [donnees])
 
 
   return (
@@ -132,8 +159,8 @@ const GroupesTravail = (props) => {
                   attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                {donnees.map((d) =>
-                  <Marker position={[d.lat, d.lon]}>
+                {donnees.map((d, i) =>
+                  <Marker key={i} position={[d.lat, d.lon]}>
                     <Popup>
                       <h1 className="font-bold text-base">{d.address.amenity}</h1>
                       <h2 className="italic">{d.address.house_number} {d.address.road}, {cityToString(d.address)}</h2>
@@ -162,8 +189,8 @@ const GroupesTravail = (props) => {
       <div>
         <div className="grid grid-cols-1 w-6/12 md:m-auto md:mt-16 md:pb-4 greyBox">
           <div className="col-start-1 col-span-1">
-            {donnees.map((d) =>
-              <ButtonGrTravail dataUneBibliotheque={d}></ButtonGrTravail>
+            {donnees.map((d, i) =>
+              <ButtonGrTravail key={i} dataUneBibliotheque={d}></ButtonGrTravail>
             )}
           </div>
         </div>
