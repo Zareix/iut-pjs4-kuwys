@@ -18,7 +18,7 @@ const Register = () => {
   const [logged, setLogged] = useState(false)
   const [loading, setLoading] = useState(false)
   
-  if (isLogin) return <Redirect to='/home'/>
+  if (isLogin) return <Redirect to='/'/>
   const handleSubmit = (e) => {
     e.preventDefault()
     setLoading(true)
