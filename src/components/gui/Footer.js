@@ -1,10 +1,13 @@
-import React from "react"
+import React from 'react'
 
-import { Link } from "react-router-dom"
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
-    <div style={{backgroundColor: "#4F4F4F"}} className="flex items-center h-52 text-gray-100 text-xs">
+    <div
+      style={{ backgroundColor: '#4F4F4F' }}
+      className="flex items-center h-52 text-gray-100 text-xs"
+    >
       <div className="grid grid-cols-3 ml-8">
         <div>
           <p className="font-bold center pb-8 text-gray-50">Utilisation</p>
@@ -15,12 +18,14 @@ const Footer = () => {
             <Link to="/register">S'enregistrer</Link>
           </p>
         </div>
-        <div>
+        <div className="grid gap-3">
           <p className="font-bold center pb-8">Nous Contacter</p>
-          <p className="my-2">Point presse</p>
-          <p>Facebook</p>
-          <p>Instagram</p>
-          <p>Twitter</p>
+          <div className="grid gap-3">
+            <p>Point presse</p>
+            <p>Facebook</p>
+            <p>Instagram</p>
+            <p>Twitter</p>
+          </div>
         </div>
         <div>
           <p className="font-bold center pb-8">Mentions Légales</p>
@@ -28,9 +33,7 @@ const Footer = () => {
           <p></p>
         </div>
       </div>
-      <div>
-          
-      </div>
+      <div></div>
     </div>
   )
 }
