@@ -6,11 +6,10 @@ const TopBar = () => {
   const { logout } = useGlobalContext()
   return (
     <div
-      style={{ backgroundColor: '#F7B91C' }}
-      className="h-12 p-3 text-white grid grid-cols-2 fixed w-full z-50"
+      className="h-12 p-3 text-white grid grid-cols-2 fixed w-full ourYellowBg z-50"
     >
       <Link to="/">[KUWYS LOGO]</Link>
-      <div className="text-right" onClick={logout}>Déconnexion</div>
+      <div className="text-right cursor-pointer" onClick={logout}>Déconnexion</div>
     </div>
   )
 }
