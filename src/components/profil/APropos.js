@@ -8,18 +8,19 @@ import { toast } from 'react-toastify'
 const APropos = () => {
   const { user } = useGlobalContext()
 
-  const [firstName, setFirstName] = useState('prenom')
-  const [name, setName] = useState('nom')
-  const [email, setEmail] = useState('email')
-  const [birthday, setBirthday] = useState('JJ/MM/AAAA')
+  const [firstName, setFirstName] = useState('------')
+  const [name, setName] = useState('------')
+  const [email, setEmail] = useState('------')
+  const [birthday, setBirthday] = useState('------')
 
-  const [ecoles, setEcoles] = useState('ecoles')
-  const [studyLevel, setStudyLevel] = useState("niveau d'études")
-  const [formations, setFormations] = useState('formations')
+  const [ecoles, setEcoles] = useState('------')
+  const [studyLevel, setStudyLevel] = useState('------')
+  const [formations, setFormations] = useState('------')
 
   useEffect(() => {
     setFirstName(user.firstName)
     setName(user.name)
+    setEmail(user.email)
     setBirthday(user.birthday)
   }, [user])
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import { useGlobalContext } from '../../util/context'
 import API from '../../util/api'
@@ -14,8 +14,8 @@ const Parametres = () => {
 
   const updatePassword = () => {
     API({
-      method : "post",
-      url: "/userUpdatePassword",
+      method: 'post',
+      url: '/userUpdatePassword',
       headers: {
         Authorization: `Bearer ${window.localStorage.getItem('token')}`,
       },
@@ -23,8 +23,8 @@ const Parametres = () => {
         user: user,
         oldPassword: oldPassword,
         newPassword: newPassword,
-        newPasswordConfirm: newPasswordConfirm
-      }
+        newPasswordConfirm: newPasswordConfirm,
+      },
     })
       .then((res) => {
         toast('Mot de passe mis à jour !', {
