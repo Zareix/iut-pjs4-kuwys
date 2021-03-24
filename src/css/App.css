@@ -1,14 +1,16 @@
 :root {
   --our-yellow: #f7b91c;
-  --our-main-font-color: #585858;
+  --our-main-font-color: #5B5B5B;
 }
 
 .App {
   text-align: center;
 }
+
 .dropdown:hover .dropdown-menu {
   display: block;
 }
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -72,6 +74,7 @@
   transition: all 0.2s ease-in-out;
   box-shadow: #f1d792 0px 0px 40px;
 }
+
 .presentationButton:hover {
   transform: scale(1.1);
   box-shadow: #f0c756 0px 0px 40px;

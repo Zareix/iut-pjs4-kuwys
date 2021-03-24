@@ -30,7 +30,7 @@ const Gui = (props) => {
             <p>Groupes de travail</p>
           </div>
         </div>
-        <div className="col-start-2 col-span-6 mt-12">{props.children}</div>
+        <div className="col-start-2 col-span-6 mt-12 p-12 min-h-screen">{props.children}</div>
         <div className="col-start-2 col-span-6">
           <Footer />
         </div>

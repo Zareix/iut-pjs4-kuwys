@@ -3,11 +3,11 @@ import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css'
 
 import './css/App.css'
 import Login from './components/authentification/Login.js'
-import Home from './components/Home.js'
+import AccueilUser from './components/accueilUser/AccueilUser.js'
 import Accueil from './components/Accueil.js'
 import Register from './components/authentification/Register.js'
 import Page404 from './components/Page404'
@@ -33,11 +33,14 @@ function App() {
           <Route exact path="/register">
             <Register />
           </Route>
-          <PrivateRoute exact path="/home">
-            <Home />
+          <PrivateRoute exact path="/accueil">
+            <AccueilUser />
           </PrivateRoute>
-          <PrivateRoute exact path="/fiche/:postId" component={Fiche}>
-          </PrivateRoute>
+          <PrivateRoute
+            exact
+            path="/fiche/:postId"
+            component={Fiche}
+          ></PrivateRoute>
           <PrivateRoute exact path="/profil">
             <Profil />
           </PrivateRoute>
@@ -52,7 +55,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
-      <ToastContainer/>
+      <ToastContainer />
     </AppProvider>
   )
 }

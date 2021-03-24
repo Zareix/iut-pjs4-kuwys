@@ -14,7 +14,7 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState({})
   const [redirect, setRedirect] = useState(false)
-  if (isLogin) return <Redirect to="/home" />
+  if (isLogin) return <Redirect to="/" />
 
   const handleSubmit = (e) => {
     e.preventDefault()
