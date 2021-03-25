@@ -26,9 +26,11 @@ const FichesCours = () => {
     <Gui>
       <SearchBar tags={Tags}></SearchBar>
       <p className="md:mt-2 md:mb-2 text-3xl font-bold ourYellow">LES FICHES</p>
+      <div className="w-full overflow-x-auto">
       {posts && (
         <AllFichesCours type='fiche' posts={posts}/>
       )}
+      </div>
       <p className="md:mt-2 md:mb-2 text-3xl font-bold ourYellow">LES COURS</p>
       {posts && (
         <AllFichesCours type='cours' posts={posts}/>

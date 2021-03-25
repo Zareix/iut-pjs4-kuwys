@@ -8,7 +8,7 @@ const AllFichesCours = (props) => {
 
   switch (type) {
     case 'fiche':
-      return <div className="flex gap-4">{posts.map(
+      return <div className="flex gap-4 flex-nowrap">{posts.map(
         (post) =>
           post.postType === 'fiche' && (
             <ItemFiche post={post} key={post.postId}></ItemFiche>

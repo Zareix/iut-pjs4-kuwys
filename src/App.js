@@ -18,6 +18,7 @@ import FichesCours from './components/fichesCours/FichesCours'
 import Fiche from './components/fichesCours/Fiche'
 import GroupesTravail from './components/groupesTravail/GroupesTravail'
 import { AppProvider } from './util/context'
+import Cours from './components/fichesCours/Cours'
 
 function App() {
   return (
@@ -40,6 +41,11 @@ function App() {
             exact
             path="/fiche/:postId"
             component={Fiche}
+          ></PrivateRoute>
+           <PrivateRoute
+            exact
+            path="/cours/:postId"
+            component={Cours}
           ></PrivateRoute>
           <PrivateRoute exact path="/profil">
             <Profil />
