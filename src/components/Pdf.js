@@ -18,9 +18,8 @@ const Pdf = (props) => {
     setNumPages(numPages)
   }
 
-  // J'ai un peu casser le front mais c'est plus clair comme ca plutot qu'avec ReactDom
   return (
-    <>
+    <div>
       <Document
         file={pdfUrl}
         options={{ workerSrc: pdfjs.GlobalWorkerOptions.workerSrc }}
@@ -57,7 +56,7 @@ const Pdf = (props) => {
           </p>
         )}
       </div>
-    </>
+    </div>
   )
 }
 

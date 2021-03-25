@@ -1,14 +1,17 @@
 import React, { useState, useContext, useEffect, createContext } from 'react'
 import API from './api'
+import LoadingPage from '../components/loadingPage/LoadingPage'
 import jwt_decode from 'jwt-decode'
 
 const AppContext = createContext()
 
 const AppProvider = ({ children }) => {
   const [user, setUser] = useState({})
-  const [isLogin, setIsLogin] = useState(true)
+  const [isLogin, setIsLogin] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const login = (token) => {
+    setLoading(true)
     setIsLogin(true)
     window.localStorage.setItem('token', token)
     const config = {
@@ -20,6 +23,7 @@ const AppProvider = ({ children }) => {
       .then((res) => {
         console.log(res.data)
         setUser({ ...res.data })
+        setLoading(false)
       })
       .catch((err) => {
         console.log(err.response.data)
@@ -47,8 +51,9 @@ const AppProvider = ({ children }) => {
     }
   }, [])
 
+  if (loading) return <LoadingPage />
   return (
-    <AppContext.Provider value={{ user, isLogin, login, logout }}>
+    <AppContext.Provider value={{ user, isLogin, login, logout, loading }}>
       {children}
     </AppContext.Provider>
   )

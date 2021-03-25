@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { ReactComponent as FavCoursIcon } from '../../svg/024-file.svg'
 import { ReactComponent as FavFichesIcon } from '../../svg/025-file-1.svg'
@@ -7,20 +7,47 @@ import FavFiches from './FavFiches'
 import FavCours from './FavCours'
 
 import { useGlobalContext } from '../../util/context'
+import API from '../../util/api'
 
 import Gui from '../gui/Gui'
+import { toast } from 'react-toastify'
 
 const AccueilUser = () => {
   const { user } = useGlobalContext()
   const [isFavCours, setIsFavCours] = useState(false)
   const [isFavFiches, setIsFavFiches] = useState(false)
+  const [favPosts, setFavPosts] = useState([])
+
+  useEffect(() => {
+    API.get('/favposts?username=' + user.username).then((res) =>
+      setFavPosts(res.data)
+    )
+  }, [])
+
+  const handleOnClickCours = () => {
+    if (favPosts.length === 0)
+      toast.error('Aucuns cours favoris.', {
+        position: 'bottom-right',
+        autoClose: 2000,
+      })
+    else setIsFavCours(true)
+  }
+
+  const handleOnClickFiche = () => {
+    if (favPosts.length === 0)
+      toast.error('Aucunes fiches favorites.', {
+        position: 'bottom-right',
+        autoClose: 2000,
+      })
+    else setIsFavFiches(true)
+  }
 
   return (
     <Gui>
       {isFavCours ? (
-        <FavCours />
+        <FavCours posts={favPosts} />
       ) : isFavFiches ? (
-        <FavFiches />
+        <FavFiches posts={favPosts} />
       ) : (
         <div>
           <h1 className="ourYellow font-bold text-2xl">
@@ -31,14 +58,14 @@ const AccueilUser = () => {
             <div className="flex p-4 pl-0">
               <div
                 className="w-1/3 border rounded-xl m-2 p-4 shadow grid justify-center justify-items-center cursor-pointer"
-                onClick={() => setIsFavCours(true)}
+                onClick={handleOnClickCours}
               >
                 <FavCoursIcon className="h-8 mb-2" />
                 <p>Cours favoris</p>
               </div>
               <div
                 className="w-1/3 border rounded-xl m-2 p-4 shadow grid justify-center justify-items-center cursor-pointer"
-                onClick={() => setIsFavFiches(true)}
+                onClick={handleOnClickFiche}
               >
                 <FavFichesIcon className="h-8 mb-2" />
                 <p>Fiches favorites</p>
