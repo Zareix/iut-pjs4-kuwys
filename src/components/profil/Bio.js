@@ -14,7 +14,7 @@ const Bio = () => {
 
   useEffect(() => {
     setBio(user.bio)
-  }, [])
+  }, [user])
 
   const updateBio = () => {
     API.post('/userUpdateBio', {

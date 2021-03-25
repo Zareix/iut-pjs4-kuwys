@@ -22,7 +22,7 @@ const APropos = () => {
     setName(user.name)
     setEmail(user.email)
     setBirthday(user.birthday)
-  }, [])
+  }, [user])
 
   const updateUserInfo = () => {
     API.post('/userUpdate', {
