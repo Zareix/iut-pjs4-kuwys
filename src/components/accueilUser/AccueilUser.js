@@ -4,7 +4,6 @@ import { ReactComponent as FavCoursIcon } from '../../svg/024-file.svg'
 import { ReactComponent as FavFichesIcon } from '../../svg/025-file-1.svg'
 
 import FavFiches from './FavFiches'
-import FavCours from './FavCours'
 
 import { useGlobalContext } from '../../util/context'
 import API from '../../util/api'
@@ -42,12 +41,17 @@ const AccueilUser = () => {
     else setIsFavFiches(true)
   }
 
+  const retour = () => {
+    setIsFavCours(false)
+    setIsFavFiches(false)
+  }
+
   return (
     <Gui>
       {isFavCours ? (
-        <FavCours posts={favPosts} />
+        <FavFiches title="Cours favoris" posts={favPosts} retour={retour} type="cours"/>
       ) : isFavFiches ? (
-        <FavFiches posts={favPosts} />
+        <FavFiches title="Fiches favorites" posts={favPosts} retour={retour} type="fiche"/>
       ) : (
         <div>
           <h1 className="ourYellow font-bold text-2xl">
