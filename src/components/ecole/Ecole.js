@@ -29,8 +29,6 @@ const Ecole = () => {
                         </div>
 
                         <p>URL : <a href="#">url</a></p>
-
-
                     </div>
                 </fieldset>
                 <div className="w-1/3 greyBox m-6">

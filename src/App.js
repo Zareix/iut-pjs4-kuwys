@@ -19,11 +19,8 @@ import Ecole from "./components/ecole/Ecole"
 
 import PrivateRoute from './components/PrivateRoute'
 import { AppProvider } from './util/context'
-<<<<<<< HEAD
 import Cours from './components/fichesCours/Cours'
-=======
 import NouveauGroupe from './components/groupesTravail/NouveauGroupe'
->>>>>>> master
 
 function App() {
   return (
@@ -50,7 +47,7 @@ function App() {
             path="/fiche/:postId"
             component={Fiche}
           ></PrivateRoute>
-           <PrivateRoute
+          <PrivateRoute
             exact
             path="/cours/:postId"
             component={Cours}
