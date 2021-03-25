@@ -26,7 +26,7 @@ const AccueilUser = () => {
 
   const handleOnClickCours = () => {
     if (favPosts.length === 0)
-      toast.error('Aucuns cours favorits.', {
+      toast.error('Aucuns cours favoris.', {
         position: 'bottom-right',
         autoClose: 2000,
       })
