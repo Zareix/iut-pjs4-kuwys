@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import {useGlobalContext} from '../../util/context'
+import { useGlobalContext } from '../../util/context'
 import TopBar from './TopBar'
 import Footer from './Footer'
 
@@ -16,7 +16,7 @@ const Gui = (props) => {
           style={{ backgroundColor: '#ECECEC' }}
         >
           <div className="grid justify-items-center my-10 text-sm">
-            <img src={user.imageUrl} className="w-16 mb-2" alt="profil pp"/>
+            <img src={user.imageUrl} className="w-16 mb-2" alt="profil pp" />
             <p>{user.username}</p>
             {/* TODO A modif avec nom prenom mais pas dispo pour le moment */}
           </div>
@@ -24,13 +24,13 @@ const Gui = (props) => {
           <div className="grid gap-4 ml-4 text-xs">
             <Link to="/">Accueil</Link>
             <Link to="/profil">Profil</Link>
-            <p>Espace Ecole</p>
+            <Link to="/ecole">Espace Ecole</Link>
             <Link to="/fichescours">Fiches & Cours</Link>
             <p>Forum Q&R</p>
             <Link to="/groupestravail">Groupes de travail</Link>
           </div>
         </div>
-        <div className="col-start-2 col-span-6 mt-12 p-12 min-h-screen z-0">{props.children}</div>
+        <div className="col-start-2 col-span-6 mt-12 px-10 pt-3 min-h-screen z-10">{props.children}</div>
         <div className="col-start-2 col-span-6">
           <Footer />
         </div>
