@@ -4,29 +4,28 @@ import ItemFiche from './ItemFiche'
 import ItemCours from './ItemCours'
 
 const AllFichesCours = (props) => {
-  const type = props.type
-  const posts = props.posts
+  const { type, posts } = props
 
   switch (type) {
     case 'fiche':
-      return posts.map(
+      return <div className="flex gap-4">{posts.map(
         (post) =>
-          post.postType == 'fiche' && (
+          post.postType === 'fiche' && (
             <ItemFiche post={post} key={post.postId}></ItemFiche>
           )
-      )
+      )}
+      </div>
     case 'cours':
-      return posts.map(
+      return <div className="flex gap-4"> {posts.map(
         (post) =>
-          post.postType == 'cours' && (
-            <ItemFiche post={post} key={post.postId}></ItemFiche>
+          post.postType === 'cours' && (
+            <ItemCours post={post} key={post.postId}></ItemCours>
           )
-      )
+      )}
+      </div>
     default:
       return <div></div>
   }
-
-  return <div className="grid grid-flow-col grid-cols-5 gap-4">}</div>
 }
 
 export default AllFichesCours
