@@ -26,8 +26,8 @@ const Login = () => {
         setRedirect(true)
       })
       .catch((err) => {
-        console.log(err.response.data)
-        setErrors({ ...err.response.data })
+        console.log(err)
+        setErrors({ ...err })
       })
   }
   if (redirect) return <Redirect to={from} />

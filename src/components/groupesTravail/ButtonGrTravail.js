@@ -1,9 +1,13 @@
-import React, { useState } from "react"
+import React, { useEffect } from "react"
+import { useGlobalContext } from '../../util/context'
 
 import epingleFlatIcon from "../../svg/epingle.svg"
 import userFlatIcon from "../../svg/utilisateur.svg"
 
 const ButtonGrTravail = (props) => {
+  const { user } = useGlobalContext()
+
+  var participants = props.dataUneBibliotheque.users.length + 1
 
   const firebaseHorodatageToString = (timestamp) => {
     let date = new Date(timestamp * 1000);
@@ -39,17 +43,18 @@ const ButtonGrTravail = (props) => {
     }
   }
 
-  const monthToString = (month) => {
-  }
+  useEffect(() => {
+    if (user.username == props.dataUneBibliotheque.admin) {
+      document.getElementById('adminDiv').style.display = 'block';
+    }
 
-
-
+  }, [])
 
   return (
     <a
       href="#"
       style={{}}
-      className="w-11/12 bg-white grow grButton px-8 py-3 text-black md:py-4 md:text-xs md:px-6 md:mt-4 md:m-auto
+      className="w-11/12 bg-white grow grButton popUpEffect px-8 py-3 text-black md:py-4 md:text-xs md:px-6 md:mt-4 md:m-auto
       grid grid-cols-6 grid-rows-2"
     >
       <div style={{ color: "#585858" }} className="col-start-1 col-span-3 row-start-1 row-span-1 text-sm font-bold">{firebaseHorodatageToString(props.dataUneBibliotheque.horaire.seconds)}
@@ -58,13 +63,13 @@ const ButtonGrTravail = (props) => {
         <img src={epingleFlatIcon} style={{ width: '1.4rem' }} className="md:mt-0.5" />
         <p className="mt-0.5 ml-1 font-semibold">{props.dataUneBibliotheque.lieu}</p>
       </div>
-      <div style={{ color: "#585858" }} className="col-start-4 col-span-2 row-start-1 row-span-1 text-sm font-semibold">Jusqu'à : <b>{props.dataUneBibliotheque.capaciteMax}</b> participants</div>
+      <div style={{ color: "#585858" }} className="col-start-4 col-span-2 row-start-1 row-span-1 text-sm font-semibold">Jusqu'à : <b>{beautifyingDate(props.dataUneBibliotheque.capaciteMax)}</b> participants</div>
       <div style={{ color: "#585858" }} className="col-start-6 col-span-1 row-start-1 row-span-1 text-sm flex justify-end md:mr-3">
         <img src={userFlatIcon} style={{ width: '1.4rem' }} className="md:mt-0.5" />
-        <p className="mt-0.5 ml-1 font-bold">{props.dataUneBibliotheque.users.length}</p>
+        <p className="mt-0.5 ml-1 font-bold">{beautifyingDate(participants)}</p>
       </div>
       <div style={{ color: "#585858" }} className="col-start-6 col-span-1 row-start-2 row-span-1 text-sm flex justify-end">
-        <p style={{ backgroundColor: "#5FCAD6", color: "white", borderRadius: '12px' }} className="md:px-2 mt-0.5 ml-1 font-semibold">ADMIN</p>
+        <p id="adminDiv" style={{ backgroundColor: "#5FCAD6", color: "white", borderRadius: '12px' }} className="md:px-2 mt-0.5 ml-1 font-semibold hidden">ADMIN</p>
       </div>
     </a>
   )
