@@ -37,6 +37,7 @@ const GroupesTravail = (props) => {
   const settingDownLimiteDonnees = () => {
     if (limiteDonnees > 1) {
       var l = limiteDonnees - 1
+      console.log(l);
       getBiblioNearCity(l);
       setlimiteDonnees(l);
     }
@@ -73,6 +74,7 @@ const GroupesTravail = (props) => {
 
     let tableauBiblioNearCityWithWorkingGroup = []
     for (let i = 0; i < biblioNearCity.length; i++) {
+      console.log(i);
       let element = biblioNearCity[i]
       const res = await API({
         method: "get",
