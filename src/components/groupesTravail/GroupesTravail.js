@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet'
 import ButtonGrTravail from './ButtonGrTravail'
 import { RiArrowUpCircleFill } from 'react-icons/ri';
 import { RiArrowDownCircleFill } from 'react-icons/ri';
-import {BsSearch} from 'react-icons/bs';
+import { BsSearch } from 'react-icons/bs';
 
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
@@ -18,11 +18,12 @@ import { Link } from 'react-router-dom'
 
 const GroupesTravail = (props) => {
   const [donnees, setDonnees] = useState([])
+  const [biblioNearCity, setBiblioNearCity] = useState([])
   const [chosenCity, setChosenCity] = useState('')
   const [limiteDonnees, setlimiteDonnees] = useState(5)
 
 
-  
+
 
   const settingUpLimiteDonnees = () => {
     if (limiteDonnees < 50) {
@@ -36,7 +37,6 @@ const GroupesTravail = (props) => {
   const settingDownLimiteDonnees = () => {
     if (limiteDonnees > 1) {
       var l = limiteDonnees - 1
-      console.log(l);
       getBiblioNearCity(l);
       setlimiteDonnees(l);
     }
@@ -61,37 +61,46 @@ const GroupesTravail = (props) => {
   const getBiblioNearCity = (limite) => {
     fetch(`https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&q=bibliothèques+près+de+${chosenCity}&limit=${limite}`)
       .then(function (response) {
-        console.log(response);
         return response.json();
       })
       .then(function (myJson) {
-        setDonnees(myJson)
-        console.log(donnees);
+        setBiblioNearCity(myJson)
       })
       .catch((err) => console.log(err));
   }
 
-  useEffect(() => {
-    donnees.forEach(element => 
-      API({
-        method : "get",
+  const requestAPI = async () => {
+
+    let tableauBiblioNearCityWithWorkingGroup = []
+    for (let i = 0; i < biblioNearCity.length; i++) {
+      let element = biblioNearCity[i]
+      const res = await API({
+        method: "get",
         url: "/library/groups",
         headers: {
           Authorization: `Bearer ${window.localStorage.getItem('token')}`,
         },
         params: {
-          library: "Bibliothèque Georges Pompidou"
+          library: element.address.amenity
         }
       })
-        .then((res) => {
-          console.log(res.data)
-        })
         .catch((err) => {
           console.log('Une erreur est survenu, merci de réessayer.')
           console.log(err.response)
         })
-  )
-  }, [donnees])
+      if (res.data.length != 0) {
+        tableauBiblioNearCityWithWorkingGroup.push(res.data)
+      }
+    }
+    return tableauBiblioNearCityWithWorkingGroup
+  }
+
+
+  useEffect(() => {
+    requestAPI().then((res) => setDonnees(res))
+  }, [biblioNearCity])
+
+
 
 
   return (
@@ -104,8 +113,8 @@ const GroupesTravail = (props) => {
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
       </Helmet>
       <div id="LocationHeader">
-        <div className="grid grid-cols-1 gap-14 md:grid-cols-2 md:mt-8 ourMainFontColor font-bold">
-          <div className="col-start-1 col-span-1 md:col-span-1 md:col-start-1 md:ml-20">
+        <div className="grid grid-cols-1 gap-14 md:grid-cols-2 ourMainFontColor font-bold">
+          <div className="col-start-1 col-span-1 md:col-span-1 md:col-start-1 ">
             <p>Chercher dans un périmètre</p>
           </div>
           <div className="col-start-2 col-span-1 md:col-span-1 md:col-start-2">
@@ -113,14 +122,14 @@ const GroupesTravail = (props) => {
           </div>
         </div>
         <div className="grid grid-cols-1 gap-14 md:grid-cols-2">
-          <div className="col-start-1 col-span-1 md:col-span-1 md:col-start-1 md:ml-20">
+          <div className="col-start-1 col-span-1 md:col-span-1 md:col-start-1">
             <div className="relative">
               <img className="m-auto" src={imgBarreRecherche} />
             </div>
             <div className="relative w-full text-center -top-2/4">
               <div className="flex justify-center">
-                <div style={{borderColor:"#f7b91c"}} className="w-3/6 rounded-full bg-white border-solid border md:py-3 md:px-3 text-center flex justify-center">
-                  <BsSearch className="text-2xl"/>
+                <div style={{ borderColor: "#f7b91c" }} className="w-3/6 rounded-full bg-white border-solid border md:py-3 md:px-3 text-center flex justify-center">
+                  <BsSearch className="text-2xl" />
                   <input className="md:ml-3" name="firstName" placeholder="Adresse / Lieu / Ville" onChange={e => setChosenCity(e.target.value)} />
                 </div>
               </div>
@@ -139,7 +148,7 @@ const GroupesTravail = (props) => {
 
           </div>
           <div
-            className="col-start-2 col-span-1 md:col-span-1 md:col-start-2 md:mr-20"
+            className="col-start-2 col-span-1 md:col-span-1 md:col-start"
           >
             <div className="grid grid-cols-1 md:grid-cols-5 md:grid-rows-2 md:mt-3 md:mb-3">
               <div className="col-start-1 col-span-1 md:col-span-1 md:col-start-1 md:row-start-1 md:row-span-1 flex justify-end md:mr-4">
@@ -159,11 +168,11 @@ const GroupesTravail = (props) => {
                   attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                {donnees.map((d, i) =>
-                  <Marker key={i} position={[d.lat, d.lon]}>
+                {biblioNearCity.map((b, i) =>
+                  <Marker key={i} position={[b.lat, b.lon]}>
                     <Popup>
-                      <h1 className="font-bold text-base">{d.address.amenity}</h1>
-                      <h2 className="italic">{d.address.house_number} {d.address.road}, {cityToString(d.address)}</h2>
+                      <h1 className="font-bold text-base">{b.address.amenity}</h1>
+                      <h2 className="italic">{b.address.house_number} {b.address.road}, {cityToString(b.address)}</h2>
                     </Popup>
                   </Marker>
                 )}
@@ -175,22 +184,24 @@ const GroupesTravail = (props) => {
 
       {/* BOUTON ADD NEW GROUP*/}
       <div className="flex justify-center">
+      <Link to="/groupestravail/nouveaugroupe">
         <div
           id="ButtonAddNewGroup"
-          className="w-52 flex items-center cursor-pointer justify-center shadow-xl px-8 py-3 font-bold rounded-full text-white md:py-3 md:px-3 buttonAddNewGrWork"
+          className="w-52 flex items-center cursor-pointer justify-center shadow-xl px-8 py-3 font-bold rounded-full text-white md:py-3 md:px-3 buttonAddNewGrWork popUpEffect"
         >
           <i className="fas fa-plus align-middle"></i>
           <span style={{ fontSize: '1rem' }} className="md:pl-2 align-middle">
             NOUVEAU GROUPE
           </span>
         </div>
+        </Link>
       </div>
 
       <div>
         <div className="grid grid-cols-1 w-6/12 md:m-auto md:mt-16 md:pb-4 greyBox">
           <div className="col-start-1 col-span-1">
-            {donnees.map((d, i) =>
-              <ButtonGrTravail key={i} dataUneBibliotheque={d}></ButtonGrTravail>
+            {donnees.length != 0 && donnees.map((d) =>
+              <ButtonGrTravail dataUneBibliotheque={d[0]}></ButtonGrTravail>
             )}
           </div>
         </div>

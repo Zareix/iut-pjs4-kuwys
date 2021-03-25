@@ -14,7 +14,7 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState({})
   const [redirect, setRedirect] = useState(false)
-  if (isLogin) return <Redirect to="/" />
+  if (isLogin) return <Redirect to={from} />
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -26,8 +26,8 @@ const Login = () => {
         setRedirect(true)
       })
       .catch((err) => {
-        console.log(err.response.data)
-        setErrors({ ...err.response.data })
+        console.log(err)
+        setErrors({ ...err })
       })
   }
   if (redirect) return <Redirect to={from} />
