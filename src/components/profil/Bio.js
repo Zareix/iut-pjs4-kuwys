@@ -41,19 +41,19 @@ const Bio = () => {
   }
 
   return (
-    <div className="grid grid-cols-3 border w-11/12 h-50 shadow-lg p-4">
+    <div className="grid md:grid-cols-3 border h-50 shadow-lg p-4">
       <div className="grid justify-center content-start col-span-1">
-        <img src={pp} alt="profil pp"></img>
+        <img src={pp} className="h-36" alt="profil pp"></img>
         <button className="border bg-yellow-300 text-white font-bold text-xs h-6 mt-4 px-2 rounded-full">
           Modifier la photo
         </button>
       </div>
-      <div className="py-4 col-span-2">
+      <div className="py-4 md:col-span-2">
         <h1 className="font-bold text-xl">{user.username}</h1>
         <h2 className="mt-2 mb-1">Mini-Biographie</h2>
         <textarea
           style={{ resize: 'none' }}
-          className="border w-4/5 h-20 shadow-inner"
+          className="border w-full md:w-4/5 h-20 shadow-inner"
           onChange={(e) => setBio(e.target.value)}
           value={bio}
         ></textarea>

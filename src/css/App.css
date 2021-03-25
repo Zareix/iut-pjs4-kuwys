@@ -1,6 +1,6 @@
 :root {
   --our-yellow: #f7b91c;
-  --our-main-font-color: #5B5B5B;
+  --our-main-font-color: #5b5b5b;
 }
 
 .App {
@@ -114,7 +114,6 @@
   border-radius: 12px;
 }
 
-
 /* NOUVEAU GROUPE DE TRAVAIL */
 
 .newGroupResearchDiv {
@@ -141,6 +140,16 @@ input {
   width: 30ch;
 }
 
-.smallerInput {
-  width : 20ch
+.mobileNavBar {
+  transition: height ease-out 750ms;
+}
+
+.bgGrey {
+  background-color: #ececec;
+}
+
+@media (max-width: 768px) {
+  input {
+    width: 90%;
+  }
 }
