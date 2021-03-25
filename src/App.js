@@ -16,11 +16,11 @@ import FichesCours from './components/fichesCours/FichesCours'
 import Fiche from './components/fichesCours/Fiche'
 import GroupesTravail from './components/groupesTravail/GroupesTravail'
 import Ecole from "./components/ecole/Ecole"
+import Cours from './components/fichesCours/Cours'
+import NouveauGroupe from './components/groupesTravail/NouveauGroupe'
 
 import PrivateRoute from './components/PrivateRoute'
 import { AppProvider } from './util/context'
-import Cours from './components/fichesCours/Cours'
-import NouveauGroupe from './components/groupesTravail/NouveauGroupe'
 
 function App() {
   return (
