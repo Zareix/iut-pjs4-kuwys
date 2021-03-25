@@ -10,6 +10,7 @@ import { useGlobalContext } from '../../util/context'
 import API from '../../util/api'
 
 import Gui from '../gui/Gui'
+import { toast } from 'react-toastify'
 
 const AccueilUser = () => {
   const { user } = useGlobalContext()
@@ -18,11 +19,19 @@ const AccueilUser = () => {
   const [favPosts, setFavPosts] = useState([])
 
   useEffect(() => {
-    console.log(user)
-    API.get('/favposts', {
-      user: user,
-    }).then((res) => setFavPosts(res.data))
-  })
+    API.get('/favposts?username=' + user.username).then((res) =>
+      setFavPosts(res.data)
+    )
+  }, [])
+
+  const handleOnClik = (setter) => {
+    if (favPosts.length === 0)
+      toast.error('Aucun(e)s fiches/cours favorit(e)s.', {
+        position: 'bottom-right',
+        autoClose: 1000,
+      })
+    else setter(true)
+  }
 
   return (
     <Gui>
@@ -40,14 +49,14 @@ const AccueilUser = () => {
             <div className="flex p-4 pl-0">
               <div
                 className="w-1/3 border rounded-xl m-2 p-4 shadow grid justify-center justify-items-center cursor-pointer"
-                onClick={() => setIsFavCours(true)}
+                onClick={() => handleOnClik(setIsFavCours)}
               >
                 <FavCoursIcon className="h-8 mb-2" />
                 <p>Cours favoris</p>
               </div>
               <div
                 className="w-1/3 border rounded-xl m-2 p-4 shadow grid justify-center justify-items-center cursor-pointer"
-                onClick={() => setIsFavFiches(true)}
+                onClick={() => handleOnClik(setIsFavFiches)}
               >
                 <FavFichesIcon className="h-8 mb-2" />
                 <p>Fiches favorites</p>
