@@ -114,6 +114,15 @@
   border-radius: 12px;
 }
 
+
+/* NOUVEAU GROUPE DE TRAVAIL */
+
+.newGroupResearchDiv {
+  background-color: white;
+  box-shadow: 1px 4px 10px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+}
+
 /* COLORS */
 
 .ourYellow {

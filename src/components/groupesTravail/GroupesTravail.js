@@ -136,7 +136,7 @@ const GroupesTravail = (props) => {
               <div className="flex justify-center">
                 <div
                   id="ButtonAddNewGroup"
-                  className="w-52 flex items-center justify-center shadow-xl px-8 py-3 font-bold rounded-full text-white md:py-3 md:px-3 md:mt-20 buttonAddNewGrWork cursor-pointer"
+                  className="w-52 flex items-center justify-center shadow-xl px-8 py-3 font-bold rounded-full text-white md:py-3 md:px-3 md:mt-20 buttonAddNewGrWork cursor-pointer popUpEffect"
                   onClick={() => getBiblioNearCity(limiteDonnees)}
                 >
                   <span className="md:pl-2 align-middle text-base" >
@@ -152,10 +152,10 @@ const GroupesTravail = (props) => {
           >
             <div className="grid grid-cols-1 md:grid-cols-5 md:grid-rows-2 md:mt-3 md:mb-3">
               <div className="col-start-1 col-span-1 md:col-span-1 md:col-start-1 md:row-start-1 md:row-span-1 flex justify-end md:mr-4">
-                <RiArrowUpCircleFill className="text-4xl text-blue-400 hover:text-blue-500 cursor-pointer" onClick={() => settingUpLimiteDonnees()} />
+                <RiArrowUpCircleFill className="text-4xl text-blue-400 hover:text-blue-500 cursor-pointer popUpEffect" onClick={() => settingUpLimiteDonnees()} />
               </div>
               <div className="col-start-1 col-span-1 md:col-span-1 md:col-start-1 md:row-start-2 md:row-span-1 flex justify-end md:mr-4">
-                <RiArrowDownCircleFill className="text-4xl text-blue-400 hover:text-blue-500 cursor-pointer" onClick={() => settingDownLimiteDonnees()} />
+                <RiArrowDownCircleFill className="text-4xl text-blue-400 hover:text-blue-500 cursor-pointer popUpEffect" onClick={() => settingDownLimiteDonnees()} />
               </div>
               <div className="col-start-1 col-span-1 md:col-span-4 md:col-start-2 md:row-start-1 md:row-span-2 align-middle flex items-center">
                 <p className="text-3xl font-bold text-blue-400 flex items-center">{limiteDonnees} <span className="text-base font-semibold md:ml-3 ourMainFontColor">bibliothèques les plus proches</span></p>
