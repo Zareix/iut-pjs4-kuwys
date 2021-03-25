@@ -10,7 +10,7 @@ const TopBar = () => {
       className="h-12 p-3 text-white grid grid-cols-2 fixed w-full z-50"
     >
       <Link to="/">[KUWYS LOGO]</Link>
-      <div className="text-right" onClick={logout}>Déconnexion</div>
+      <div className="text-right cursor-pointer mr-3" onClick={logout}>Déconnexion</div>
     </div>
   )
 }
