@@ -26,7 +26,7 @@ const AppProvider = ({ children }) => {
         setLoading(false)
       })
       .catch((err) => {
-        console.log(err.response.data)
+        console.log(err)
       })
   }
 

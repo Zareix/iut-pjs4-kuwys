@@ -18,6 +18,7 @@ import FichesCours from './components/fichesCours/FichesCours'
 import Fiche from './components/fichesCours/Fiche'
 import GroupesTravail from './components/groupesTravail/GroupesTravail'
 import { AppProvider } from './util/context'
+import NouveauGroupe from './components/groupesTravail/NouveauGroupe'
 
 function App() {
   return (
@@ -49,6 +50,9 @@ function App() {
           </PrivateRoute>
           <PrivateRoute exact path="/groupestravail">
             <GroupesTravail />
+          </PrivateRoute>
+          <PrivateRoute exact path="/groupestravail/nouveaugroupe">
+            <NouveauGroupe />
           </PrivateRoute>
           <Route>
             <Page404 />

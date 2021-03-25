@@ -184,15 +184,17 @@ const GroupesTravail = (props) => {
 
       {/* BOUTON ADD NEW GROUP*/}
       <div className="flex justify-center">
+      <Link to="/groupestravail/nouveaugroupe">
         <div
           id="ButtonAddNewGroup"
-          className="w-52 flex items-center cursor-pointer justify-center shadow-xl px-8 py-3 font-bold rounded-full text-white md:py-3 md:px-3 buttonAddNewGrWork"
+          className="w-52 flex items-center cursor-pointer justify-center shadow-xl px-8 py-3 font-bold rounded-full text-white md:py-3 md:px-3 buttonAddNewGrWork popUpEffect"
         >
           <i className="fas fa-plus align-middle"></i>
           <span style={{ fontSize: '1rem' }} className="md:pl-2 align-middle">
             NOUVEAU GROUPE
           </span>
         </div>
+        </Link>
       </div>
 
       <div>
