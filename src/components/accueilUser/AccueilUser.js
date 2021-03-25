@@ -24,13 +24,22 @@ const AccueilUser = () => {
     )
   }, [])
 
-  const handleOnClik = (setter) => {
+  const handleOnClickCours = () => {
     if (favPosts.length === 0)
-      toast.error('Aucun(e)s fiches/cours favorit(e)s.', {
+      toast.error('Aucuns cours favorits.', {
         position: 'bottom-right',
-        autoClose: 1000,
+        autoClose: 2000,
       })
-    else setter(true)
+    else setIsFavCours(true)
+  }
+
+  const handleOnClickFiche = () => {
+    if (favPosts.length === 0)
+      toast.error('Aucunes fiches favorites.', {
+        position: 'bottom-right',
+        autoClose: 2000,
+      })
+    else setIsFavFiches(true)
   }
 
   return (
@@ -49,14 +58,14 @@ const AccueilUser = () => {
             <div className="flex p-4 pl-0">
               <div
                 className="w-1/3 border rounded-xl m-2 p-4 shadow grid justify-center justify-items-center cursor-pointer"
-                onClick={() => handleOnClik(setIsFavCours)}
+                onClick={handleOnClickCours}
               >
                 <FavCoursIcon className="h-8 mb-2" />
                 <p>Cours favoris</p>
               </div>
               <div
                 className="w-1/3 border rounded-xl m-2 p-4 shadow grid justify-center justify-items-center cursor-pointer"
-                onClick={() => handleOnClik(setIsFavFiches)}
+                onClick={handleOnClickFiche}
               >
                 <FavFichesIcon className="h-8 mb-2" />
                 <p>Fiches favorites</p>
