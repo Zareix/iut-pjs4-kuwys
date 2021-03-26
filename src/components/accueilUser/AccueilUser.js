@@ -77,16 +77,16 @@ const AccueilUser = () => {
             </div>
             <div>
               <h2>Mes groupes de travail</h2>
-              <div className="greyBox m-6">grp</div>
+              <div className="greyBox m-6 ml-0">grp</div>
             </div>
 
             <div>
               <h2>Dernières fiches consultées</h2>
-              <div className="greyBox m-6">fiche</div>
+              <div className="greyBox m-6 ml-0">fiche</div>
             </div>
             <div>
               <h2>Derniers cours consultés</h2>
-              <div className="greyBox m-6">cours</div>
+              <div className="greyBox m-6 ml-0">cours</div>
             </div>
           </div>
         </div>
