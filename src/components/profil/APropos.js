@@ -52,11 +52,11 @@ const APropos = () => {
   }
 
   return (
-    <div className="grid border w-11/12 h-50 shadow-lg p-4 gap-3 text-lg">
+    <div className="grid border h-50 shadow-lg p-4 gap-3 text-lg">
       <h1 className="font-bold text-2xl ml-2">A propos</h1>
-      <div className="grid gap-4 mx-7">
-        <div className="flex gap-10">
-          <label>
+      <div className="grid gap-4 md:mx-7">
+        <div className="grid md:flex gap-2 md:gap-10">
+          <label className="grid md:block">
             Prénom :
             <input
               value={firstName}
@@ -64,7 +64,7 @@ const APropos = () => {
               className="border ml-2 rounded-lg px-2 align-middle"
             ></input>
           </label>
-          <label>
+          <label className="grid md:block">
             Nom :
             <input
               value={name}
@@ -73,7 +73,7 @@ const APropos = () => {
             ></input>
           </label>
         </div>
-        <label>
+        <label className="grid md:block">
           Adresse e-mail :
           <input
             value={email}
@@ -82,7 +82,7 @@ const APropos = () => {
             className="border ml-2 rounded-lg px-2 align-middle"
           ></input>
         </label>
-        <label>
+        <label className="grid md:block">
           Date de naissance :
           <input
             value={birthday}
@@ -92,30 +92,30 @@ const APropos = () => {
         </label>
         <fieldset className="border px-4 pb-3 pt-2 bg-gray-50">
           <legend className="ml-4 font-semibold px-2">Mes études</legend>
-          <div className="flex gap-10 mb-4">
-            <label>
+          <div className="grid md:flex gap-2 md:gap-10">
+            <label className="grid md:block">
               Ecoles :
               <input
                 value={ecoles}
                 onChange={(e) => setEcoles(e.target.value)}
-                className="border ml-2 rounded-lg px-2 align-middle"
+                className="border ml-2 rounded-lg px-2 align-middle largerInputOnMobile"
               ></input>
             </label>
-            <label>
+            <label className="grid md:block">
               Niveau d'études :
               <input
                 value={studyLevel}
                 onChange={(e) => setStudyLevel(e.target.value)}
-                className="border ml-2 rounded-lg px-2 align-middle"
+                className="border ml-2 rounded-lg px-2 align-middle largerInputOnMobile"
               ></input>
             </label>
           </div>
-          <label>
+          <label className="grid md:block mt-2 md:mt-4">
             Formations :
             <input
               value={formations}
               onChange={(e) => setFormations(e.target.value)}
-              className="border ml-2 rounded-lg px-2 align-middle"
+              className="border ml-2 rounded-lg px-2 align-middle largerInputOnMobile"
             ></input>
           </label>
         </fieldset>

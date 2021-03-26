@@ -28,6 +28,7 @@ const Pdf = (props) => {
         loading="Chargement du PDF..."
       >
         <Page
+          margin = {10}
           pageNumber={pageNumber}
           width={width}
           renderMode={type}

@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom'
 const ItemCours = (props) => {
   const { post } = props
 
-  return <div className="cours">
+  return <div className="popUpEffect"><Link to={{
+    pathname: `/cours/${post.postId}`
+  }}><div className="cours">
     <figure className="bg-gray-100 rounded-xl p-8">
       <div className="pt-6 space-y-4">
         <blockquote>
@@ -17,7 +19,7 @@ const ItemCours = (props) => {
         </figcaption>
       </div>
     </figure>
-  </div>
+  </div></Link></div>
 }
 
 export default ItemCours

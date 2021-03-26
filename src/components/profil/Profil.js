@@ -8,10 +8,13 @@ import APropos from './APropos'
 const Profil = () => {
   return (
     <Gui>
-      <div className="grid gap-8">
-        <Bio />
-        <APropos />
-        <Parametres />
+      <div className="w-full flex justify-center">
+        <div className="grid gap-8 md:w-9/12">
+          <Bio />
+          <APropos />
+          <Parametres />
+        </div>
+
       </div>
     </Gui>
   )

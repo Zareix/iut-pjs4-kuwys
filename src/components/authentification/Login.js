@@ -8,7 +8,7 @@ const Login = () => {
   const { login, isLogin } = useGlobalContext()
 
   const location = useLocation()
-  const { from } = location.state || { from: { pathname: '/home' } }
+  const { from } = location.state || { from: { pathname: '/' } }
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
