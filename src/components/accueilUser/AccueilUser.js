@@ -23,22 +23,25 @@ const AccueilUser = () => {
     )
   }, [user])
 
+  const checkHasFicheCours = (type, msg, setter) => {
+    for (var p in favPosts) {
+      if (favPosts[p].postType === type) {
+        setter(true)
+        return
+      }
+    }
+    toast.error(msg, {
+      position: 'bottom-right',
+      autoClose: 2000,
+    })
+  }
+
   const handleOnClickCours = () => {
-    if (favPosts.length === 0)
-      toast.error('Aucuns cours favoris.', {
-        position: 'bottom-right',
-        autoClose: 2000,
-      })
-    else setIsFavCours(true)
+    checkHasFicheCours("cours", "Aucuns cours favoris.", setIsFavCours)
   }
 
   const handleOnClickFiche = () => {
-    if (favPosts.length === 0)
-      toast.error('Aucunes fiches favorites.', {
-        position: 'bottom-right',
-        autoClose: 2000,
-      })
-    else setIsFavFiches(true)
+
   }
 
   const retour = () => {
@@ -49,9 +52,9 @@ const AccueilUser = () => {
   return (
     <Gui>
       {isFavCours ? (
-        <FavFiches title="Cours favoris" posts={favPosts} retour={retour} type="cours"/>
+        <FavFiches title="Cours favoris" posts={favPosts} retour={retour} type="cours" />
       ) : isFavFiches ? (
-        <FavFiches title="Fiches favorites" posts={favPosts} retour={retour} type="fiche"/>
+        <FavFiches title="Fiches favorites" posts={favPosts} retour={retour} type="fiche" />
       ) : (
         <div>
           <h1 className="ourYellow font-bold text-2xl">
@@ -62,14 +65,16 @@ const AccueilUser = () => {
             <div className="flex justify-center md:p-4 pl-0 text-center">
               <div
                 className="w-1/2 md:w-1/3 border rounded-xl m-2 p-4 shadow grid gap-2 justify-center justify-items-center cursor-pointer"
-                onClick={handleOnClickCours}
+                onClick={() =>
+                  checkHasFicheCours("cours", "Aucuns cours favoris.", setIsFavCours)}
               >
                 <FavCoursIcon className="h-10" />
                 <p>Cours favoris</p>
               </div>
               <div
                 className="w-1/2 md:w-1/3 border rounded-xl m-2 p-4 shadow grid gap-2 justify-center justify-items-center cursor-pointer"
-                onClick={handleOnClickFiche}
+                onClick={() =>
+                  checkHasFicheCours("fiche", "Aucunes fiches favorites.", setIsFavFiches)}
               >
                 <FavFichesIcon className="h-10" />
                 <p>Fiches favorites</p>
