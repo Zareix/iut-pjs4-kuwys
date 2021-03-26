@@ -12,15 +12,14 @@ const Pdf = (props) => {
   const [pageNumber, setPageNumber] = useState(1)
 
   const { type, width, firstPage, pdfUrl, titre } = props
-  console.log(titre);
+  //console.log(titre);
 
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages)
   }
 
-  // J'ai un peu casser le front mais c'est plus clair comme ca plutot qu'avec ReactDom
   return (
-    <>
+    <div>
       <Document
         file={pdfUrl}
         options={{ workerSrc: pdfjs.GlobalWorkerOptions.workerSrc }}
@@ -29,6 +28,7 @@ const Pdf = (props) => {
         loading="Chargement du PDF..."
       >
         <Page
+          margin = {10}
           pageNumber={pageNumber}
           width={width}
           renderMode={type}
@@ -57,7 +57,7 @@ const Pdf = (props) => {
           </p>
         )}
       </div>
-    </>
+    </div>
   )
 }
 

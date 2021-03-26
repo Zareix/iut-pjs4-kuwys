@@ -1,5 +1,14 @@
+:root {
+  --our-yellow: #f7b91c;
+  --our-main-font-color: #5b5b5b;
+}
+
 .App {
   text-align: center;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
 }
 
 .App-header {
@@ -49,7 +58,7 @@
 }
 
 .mainButton {
-  background-color: #f7b91c;
+  background-color: var(--our-yellow);
   font-size: x-large;
 }
 
@@ -65,6 +74,7 @@
   transition: all 0.2s ease-in-out;
   box-shadow: #f1d792 0px 0px 40px;
 }
+
 .presentationButton:hover {
   transform: scale(1.1);
   box-shadow: #f0c756 0px 0px 40px;
@@ -86,11 +96,15 @@
 }
 
 .grButton {
-  transition: all 0.2s ease-in-out;
   border-radius: 10px;
   box-shadow: 1px 4px 7px 1px rgba(0, 0, 0, 0.25);
 }
-.grButton:hover {
+
+.popUpEffect {
+  transition: all 0.2s ease-in-out;
+}
+
+.popUpEffect:hover {
   transform: scale(1.03);
 }
 
@@ -100,12 +114,42 @@
   border-radius: 12px;
 }
 
+/* NOUVEAU GROUPE DE TRAVAIL */
+
+.newGroupResearchDiv {
+  background-color: white;
+  box-shadow: 1px 4px 10px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+}
+
 /* COLORS */
 
 .ourYellow {
-  color: #f7b91c;
+  color: var(--our-yellow);
+}
+
+.ourYellowBg {
+  background-color: var(--our-yellow);
 }
 
 .ourMainFontColor {
-  color: #585858;
+  color: var(--our-main-font-color);
+}
+
+input {
+  width: 25ch;
+}
+
+.mobileNavBar {
+  transition: height ease-out 750ms;
+}
+
+.bgGrey {
+  background-color: #ececec;
+}
+
+@media (max-width: 768px) {
+  input {
+    width: 90%;
+  }
 }

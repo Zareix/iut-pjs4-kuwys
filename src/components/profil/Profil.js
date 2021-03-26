@@ -1,20 +1,20 @@
 import React from 'react'
 
 import Gui from '../gui/Gui'
-
 import Parametres from './Parametres'
 import Bio from './Bio'
 import APropos from './APropos'
 
-// TODO : gérer les inputs et appliquer les modifs à la DB
-// TODO : afficher les infos de l'user
 const Profil = () => {
   return (
     <Gui>
-      <div className="p-10 grid gap-8">
-        <Bio />
-        <APropos />
-        <Parametres />
+      <div className="w-full flex justify-center">
+        <div className="grid gap-8 w-full md:w-9/12">
+          <Bio />
+          <APropos />
+          <Parametres />
+        </div>
+
       </div>
     </Gui>
   )

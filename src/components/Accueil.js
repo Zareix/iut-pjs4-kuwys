@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 
-import {useGlobalContext} from '../util/context'
+import { useGlobalContext } from '../util/context'
 import imgHeader from '../pictures/Graduation.jpg'
 import imgQuestionsReponsesDefault from '../pictures/ajaccio.jpg'
 import PresentationButton from './PresentationButton'
@@ -14,17 +14,11 @@ const Accueil = () => {
   const [presentationImageUrl, setPresentationImageUrl] = useState(imgHeader)
   var tailleDivImage = null
 
-  // if (isLogin) return <Redirect to="/home" />
+  if (isLogin) return <Redirect to="/accueil" />
 
   const switchImage = (newPresentationImage) => {
     setPresentationImageUrl(newPresentationImage)
     console.log('Daccodacc')
-  }
-
-  const onLoadFunction = () => {
-    tailleDivImage = document.getElementById('divPresentationImage')
-      .clientHeight
-    console.log(tailleDivImage)
   }
 
   return (

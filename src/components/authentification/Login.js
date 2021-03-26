@@ -8,13 +8,13 @@ const Login = () => {
   const { login, isLogin } = useGlobalContext()
 
   const location = useLocation()
-  const { from } = location.state || { from: { pathname: '/home' } }
+  const { from } = location.state || { from: { pathname: '/' } }
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState({})
   const [redirect, setRedirect] = useState(false)
-  if (isLogin) return <Redirect to="/home" />
+  if (isLogin) return <Redirect to={from} />
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -26,24 +26,18 @@ const Login = () => {
         setRedirect(true)
       })
       .catch((err) => {
-        console.log(err.response.data)
-        setErrors({ ...err.response.data })
+        console.log(err)
+        setErrors({ ...err })
       })
   }
   if (redirect) return <Redirect to={from} />
 
   return (
     <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-      }}
+      className="flex justify-center items-center h-screen w-screen"
     >
       <div
         className="w-full max-w-xs"
-        style={{ transform: 'translate(-10%, -10%)' }}
       >
         <form
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
@@ -54,7 +48,7 @@ const Login = () => {
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="username"
             >
-              Username
+              E-mail
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -75,7 +69,7 @@ const Login = () => {
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="password"
             >
-              Password
+              Mot de passe
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
@@ -94,12 +88,12 @@ const Login = () => {
               <p className="text-red-500 text-xs italic">{errors.general}</p>
             )}
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-center">
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
-              Sign In
+              Se connecter
             </button>
           </div>
         </form>

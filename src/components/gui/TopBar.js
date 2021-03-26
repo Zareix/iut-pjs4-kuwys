@@ -1,16 +1,17 @@
 import React from 'react'
-import { useGlobalContext } from '../../util/context'
+
 import { Link } from 'react-router-dom'
+
+import { useGlobalContext } from '../../util/context'
 
 const TopBar = () => {
   const { logout } = useGlobalContext()
   return (
     <div
-      style={{ backgroundColor: '#F7B91C' }}
-      className="h-12 p-3 text-white grid grid-cols-2 fixed w-full"
+      className="h-12 p-3 text-white ourYellowBg grid grid-cols-2 fixed w-full z-50 content-center"
     >
-      <Link to="/">[KUWYS LOGO]</Link>
-      <div className="text-right" onClick={logout}>Déconnexion</div>
+      <Link to="/" className="text-lg font-semibold pl-4">KUWYS</Link>
+      <div className="text-right cursor-pointer mr-3" onClick={logout}>Déconnexion</div>
     </div>
   )
 }
