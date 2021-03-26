@@ -56,15 +56,14 @@ const Bio = () => {
   }
 
   const updatePP = () => {
-    API({
-      method: 'post',
-      url: '/user/image',
+    const endpoint = '/user/image'
+    const config = {
       headers: {
+        'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${window.localStorage.getItem('token')}`,
-        'content-type': "multipart/form-data",
-        formD,
-      },
-    })
+      }
+    }
+    API.post(endpoint, formD, config)
   }
 
   return (
