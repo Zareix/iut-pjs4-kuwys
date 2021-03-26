@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Gui from '../gui/Gui'
 import API from '../../util/api'
@@ -13,7 +13,46 @@ import { ReactComponent as IconSvg } from '../../svg/046-network-3.svg'
 
 const NouveauGroupe = (props) => {
 
-    let redMarkerIcon = new L.Icon({
+    const [biblioNearCity, setBiblioNearCity] = useState([])
+    const [chosenCity, setChosenCity] = useState('')
+    const [limiteDonnees, setlimiteDonnees] = useState(5)
+
+    let oldSelectedMarker
+    let selectedMarker
+
+    const settingUpLimiteDonnees = () => {
+        if (limiteDonnees < 50) {
+            var l = limiteDonnees + 1
+            getBiblioNearCity(l);
+            setlimiteDonnees(l);
+        }
+    }
+
+    const cityToString = (address) => {
+        if (address.hamlet)
+            return address.hamlet
+
+        if (address.village)
+            return address.village
+
+        if (address.town)
+            return address.town
+
+        if (address.city)
+            return address.city
+
+        return address.municipality
+    }
+
+    const settingDownLimiteDonnees = () => {
+        if (limiteDonnees > 1) {
+            var l = limiteDonnees - 1
+            getBiblioNearCity(l);
+            setlimiteDonnees(l);
+        }
+    }
+
+    const redMarkerIcon = new L.Icon({
         iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
         shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
         iconSize: [25, 41],
@@ -21,6 +60,39 @@ const NouveauGroupe = (props) => {
         popupAnchor: [1, -34],
         shadowSize: [41, 41]
     })
+
+    const greenMarkerIcon = new L.Icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    })
+
+    const clickAndSelectMarker = (justClickedMarker) => {
+        if (selectedMarker != justClickedMarker) {
+            if (selectedMarker != null)
+                selectedMarker.sourceTarget.setIcon(greenMarkerIcon)
+            selectedMarker = justClickedMarker
+            selectedMarker.sourceTarget.setIcon(redMarkerIcon)
+        }
+    }
+
+    const getBiblioNearCity = (limite) => {
+        fetch(`https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&q=bibliothèques+près+de+${chosenCity}&limit=${limite}`)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (myJson) {
+                for (let i = 0; i < myJson.length; i++) {
+                    console.log(myJson[i]);
+                    myJson[i].iconColor = "green"
+                }
+                setBiblioNearCity(myJson)
+            })
+            .catch((err) => console.log(err));
+    }
 
     return (
         <HelmetProvider>
@@ -48,9 +120,9 @@ const NouveauGroupe = (props) => {
                     <div class="col-start-2 col-span-3 row-start-1 row-span-1">
                         <div class="newGroupResearchDiv text-center px-10 py-20">
                             <div className="flex justify-center">
-                                <div style={{ borderColor: "#f7b91c" }} className="w-3/6 rounded-full bg-white border-solid border md:py-3 md:px-3 text-center flex justify-center">
+                                <div style={{ borderColor: "#f7b91c" }} className="w-4/5 rounded-full bg-white border-solid border md:py-3 md:px-3 text-center flex justify-center">
                                     <BsSearch className="text-2xl" />
-                                    <input className="md:ml-3" name="firstName" placeholder="Adresse / Lieu / Ville" />
+                                    <input className="md:ml-3" name="firstName" placeholder="Adresse / Lieu / Ville" onChange={e => setChosenCity(e.target.value)} />
                                 </div>
                             </div>
                             <div className="flex justify-center">
@@ -70,7 +142,7 @@ const NouveauGroupe = (props) => {
                                 <div
                                     id="ButtonAddNewGroup"
                                     className="w-52 flex items-center justify-center shadow-xl px-8 py-3 font-bold rounded-full text-white m-autp md:py-3 md:px-3 md:mt-7 buttonAddNewGrWork cursor-pointer popUpEffect"
-                                >
+                                    onClick={() => getBiblioNearCity(limiteDonnees)}>
                                     <span className="md:pl-2 align-middle text-base" >
                                         VALIDER
                             </span>
@@ -85,7 +157,12 @@ const NouveauGroupe = (props) => {
                                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                 />
-                                <Marker icon={redMarkerIcon} position={[48.84172, 2.26824]}></Marker>
+                                {biblioNearCity.map((b, i) => <Marker key={b.place_id} position={[b.lat, b.lon]} icon={greenMarkerIcon} eventHandlers={{ click: (e) => { clickAndSelectMarker(e, b) } }}>
+                                    <Popup>
+                                        <h1 className="font-bold text-base">{b.address.amenity}</h1>
+                                        <h2 className="italic">{b.address.house_number} {b.address.road}, {cityToString(b.address)}</h2>
+                                    </Popup>
+                                </Marker>)}
                             </MapContainer>
                         </div>
                     </div>
