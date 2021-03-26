@@ -78,7 +78,7 @@ const Parametres = () => {
           </label>
         </div>
 
-        <div className="grid justify-end">
+        <div className="grid justify-end mt-4">
           <button
             className="border bg-yellow-300 text-white font-bold text-xs w-20 h-6 px-1 rounded-full"
             onClick={updatePassword}

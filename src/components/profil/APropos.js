@@ -17,13 +17,6 @@ const APropos = () => {
   const [studyLevel, setStudyLevel] = useState('------')
   const [formations, setFormations] = useState('------')
 
-  useEffect(() => {
-    setFirstName(user.firstName)
-    setName(user.name)
-    setEmail(user.email)
-    setBirthday(user.birthday)
-  }, [user])
-
   const updateUserInfo = () => {
     API.post('/userUpdate', {
       user: user,
@@ -59,7 +52,7 @@ const APropos = () => {
           <label className="grid md:block">
             Prénom :
             <input
-              value={firstName}
+              value={user.firstName}
               onChange={(e) => setFirstName(e.target.value)}
               className="border ml-2 rounded-lg px-2 align-middle"
             ></input>
@@ -67,7 +60,7 @@ const APropos = () => {
           <label className="grid md:block">
             Nom :
             <input
-              value={name}
+              value={user.name}
               onChange={(e) => setName(e.target.value)}
               className="border ml-2 rounded-lg px-2 align-middle"
             ></input>
@@ -76,16 +69,16 @@ const APropos = () => {
         <label className="grid md:block">
           Adresse e-mail :
           <input
-            value={email}
+            value={user.email}
             onChange={(e) => setEmail(e.target.value)}
             disabled
-            className="border ml-2 rounded-lg px-2 align-middle"
+            className="border ml-2 rounded-lg px-2 align-middle cursor-not-allowed"
           ></input>
         </label>
         <label className="grid md:block">
           Date de naissance :
           <input
-            value={birthday}
+            value={user.birthday}
             onChange={(e) => setBirthday(e.target.value)}
             className="border ml-2 rounded-lg px-2 align-middle"
           ></input>
@@ -104,7 +97,7 @@ const APropos = () => {
             <label className="grid md:block">
               Niveau d'études :
               <input
-                value={studyLevel}
+                value={user.studyLevel}
                 onChange={(e) => setStudyLevel(e.target.value)}
                 className="border ml-2 rounded-lg px-2 align-middle largerInputOnMobile"
               ></input>

@@ -4,7 +4,7 @@ import { AiOutlineLoading } from 'react-icons/ai'
 
 const LoadingPage = () => {
   return (
-    <div className="w-1/5 m-auto h-screen grid items-center justify-center">
+    <div className=" m-auto h-screen grid items-center justify-center cursor-wait">
       <AiOutlineLoading className="animate-spin" size={40} />
     </div>
   )

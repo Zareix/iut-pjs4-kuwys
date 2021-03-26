@@ -12,10 +12,6 @@ const Bio = () => {
 
   const [bio, setBio] = useState()
 
-  useEffect(() => {
-    setBio(user.bio)
-  }, [user])
-
   const updateBio = () => {
     API.post('/userUpdateBio', {
       user: user,
@@ -55,7 +51,7 @@ const Bio = () => {
           style={{ resize: 'none' }}
           className="border w-full md:w-4/5 h-20 shadow-inner"
           onChange={(e) => setBio(e.target.value)}
-          value={bio}
+          value={user.bio}
         ></textarea>
         <div className="grid justify-end w-4/5 mt-1">
           <button

@@ -14,7 +14,7 @@ const NavigationPanel = (props) => {
                 {/* TODO A modif avec nom prenom mais pas dispo pour le moment */}
             </div>
             <div className="grid grid-cols-2">{/* icons */}</div>
-            <div className="grid gap-4 ml-4 text-xs">
+            <div className="grid gap-4 ml-4 text-sm">
                 <Link to="/">Accueil</Link>
                 <Link to="/profil">Profil</Link>
                 <Link to="/ecole">Espace Ecole</Link>

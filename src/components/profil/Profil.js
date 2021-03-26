@@ -9,7 +9,7 @@ const Profil = () => {
   return (
     <Gui>
       <div className="w-full flex justify-center">
-        <div className="grid gap-8 md:w-9/12">
+        <div className="grid gap-8 w-full md:w-9/12">
           <Bio />
           <APropos />
           <Parametres />
