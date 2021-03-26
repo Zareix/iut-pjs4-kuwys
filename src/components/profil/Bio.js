@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 
 import { toast } from 'react-toastify'
 
@@ -11,6 +11,25 @@ const Bio = () => {
   const { user } = useGlobalContext()
 
   const [bio, setBio] = useState()
+  const [selectedPP, setSelectedPP] = useState(null)
+  const [selectedPPUrl, setSelectedPPUrl] = useState()
+
+  const hiddenFileInput = useRef(null)
+
+  let formD
+
+  const handleInputClickPp = (event) => {
+    hiddenFileInput.current.click()
+  }
+
+  const handleChange = (event) => {
+    const fileUploaded = event.target.files[0]
+    console.log(fileUploaded)
+    const f = new FormData()
+    f.append('image', fileUploaded, fileUploaded.name)
+    formD = f
+    setSelectedPP(fileUploaded)
+  }
 
   const updateBio = () => {
     API.post('/userUpdateBio', {
@@ -36,13 +55,48 @@ const Bio = () => {
       })
   }
 
+  const updatePP = () => {
+    const endpoint = '/user/image'
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+      }
+    }
+    API.post(endpoint, formD, config)
+  }
+
   return (
     <div className="grid md:grid-cols-3 border h-50 shadow-lg p-4">
-      <div className="grid justify-center content-start col-span-1">
-        <img src={pp} className="h-36" alt="profil pp"></img>
-        <button className="border bg-yellow-300 text-white font-bold text-xs h-6 mt-4 px-2 rounded-full">
-          Modifier la photo
-        </button>
+      <div className="grid justify-center justify-items-center content-start col-span-1 mx-2">
+        <img
+          src={selectedPP !== null ? selectedPPUrl : user.imageUrl}
+          className="h-36 object-contain"
+          alt="profil pp"
+        ></img>
+        <div className="w-full grid justify-center">
+          <div className="border ourMainFontColor text-xs mt-3 mx-4 py-1 px-2">
+            <button onClick={handleInputClickPp} className="w-full font-bold">
+              {selectedPP !== null
+                ? selectedPP.name
+                : 'Choisir sa photo de profil'}
+            </button>
+            <input
+              type="file"
+              ref={hiddenFileInput}
+              onChange={handleChange}
+              className="hidden"
+            />
+          </div>
+          {selectedPP !== null && (
+            <button
+              onClick={updatePP}
+              className="border bg-yellow-300 text-white text-xs mt-1 mx-4 py-1 px-2 rounded-full"
+            >
+              Changer de photo de profil
+            </button>
+          )}
+        </div>
       </div>
       <div className="py-4 md:col-span-2">
         <h1 className="font-bold text-xl">{user.username}</h1>
