@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-
+import Ecole from "./components/ecole/Ecole"
+import PrivateRoute from './components/PrivateRoute'
 import './css/App.css'
 import Login from './components/authentification/Login.js'
 import AccueilUser from './components/accueilUser/AccueilUser.js'
@@ -15,12 +16,9 @@ import Profil from './components/profil/Profil'
 import FichesCours from './components/fichesCours/FichesCours'
 import Fiche from './components/fichesCours/Fiche'
 import GroupesTravail from './components/groupesTravail/GroupesTravail'
-import Ecole from "./components/ecole/Ecole"
+import { AppProvider } from './util/context'
 import Cours from './components/fichesCours/Cours'
 import NouveauGroupe from './components/groupesTravail/NouveauGroupe'
-
-import PrivateRoute from './components/PrivateRoute'
-import { AppProvider } from './util/context'
 
 function App() {
   return (
