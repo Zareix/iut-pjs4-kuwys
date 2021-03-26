@@ -1,42 +1,23 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
 
-import {useGlobalContext} from '../../util/context'
-import TopBar from './TopBar'
-import Footer from './Footer'
+import GuiMobile from "./GuiMobile"
+import GuiWideScreen from "./GuiWideScreen"
 
 const Gui = (props) => {
-  const { user } = useGlobalContext()
-  return (
-    <div>
-      <TopBar />
-      <div style={{ minHeight: '100vh' }} className="grid grid-cols-6 z-50">
-        <div
-          className="col-span-1 w-1/6 fixed top-12 h-full p-10 z-50"
-          style={{ backgroundColor: '#ECECEC' }}
-        >
-          <div className="grid justify-items-center my-10 text-sm">
-            <img src={user.imageUrl} className="w-16 mb-5" alt="profil pp"/>
-            <p>{user.username}</p>
-            {/* TODO A modif avec nom prenom mais pas dispo pour le moment */}
-          </div>
-          <div className="grid grid-cols-2">{/* icons */}</div>
-          <div className="grid gap-4 ml-4 text-base">
-            <Link to="/">Accueil</Link>
-            <Link to="/profil">Profil</Link>
-            <p>Espace Ecole</p>
-            <Link to="/fichescours">Fiches & Cours</Link>
-            <p>Forum Q&R</p>
-            <Link to="/groupestravail">Groupes de travail</Link>
-          </div>
-        </div>
-        <div className="col-start-2 col-span-6 mt-12 p-12 min-h-screen z-0">{props.children}</div>
-        <div className="col-start-2 col-span-6">
-          <Footer />
-        </div>
-      </div>
-    </div>
-  )
+  const [isMobile, setIsMobile] = useState(false)
+
+  const checkIsMobile = (e) => {
+    console.log(e);
+    window.innerWidth <= 768 ? setIsMobile(true) : setIsMobile(false)
+  }
+
+  useEffect(() => {
+    console.log(window.innerWidth);
+    checkIsMobile()
+    window.addEventListener("resize", checkIsMobile)
+  })
+
+  return isMobile ? <GuiMobile>{props.children}</GuiMobile> : <GuiWideScreen>{props.children}</GuiWideScreen>
 }
 
 export default Gui
