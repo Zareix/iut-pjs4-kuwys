@@ -16,6 +16,7 @@ const NouveauGroupe = (props) => {
     const [biblioNearCity, setBiblioNearCity] = useState([])
     const [chosenCity, setChosenCity] = useState('')
     const [limiteDonnees, setlimiteDonnees] = useState(5)
+    const [selectedBibliotheque, setSelectedBibliotheque] = useState(null)
 
     let oldSelectedMarker
     let selectedMarker
@@ -70,12 +71,13 @@ const NouveauGroupe = (props) => {
         shadowSize: [41, 41]
     })
 
-    const clickAndSelectMarker = (justClickedMarker) => {
-        if (selectedMarker != justClickedMarker) {
+    const clickAndSelectMarker = (justClickedMarker, b) => {
+        if (selectedMarker !== justClickedMarker) {
             if (selectedMarker != null)
                 selectedMarker.sourceTarget.setIcon(greenMarkerIcon)
             selectedMarker = justClickedMarker
             selectedMarker.sourceTarget.setIcon(redMarkerIcon)
+            setSelectedBibliotheque(b)
         }
     }
 
@@ -112,13 +114,9 @@ const NouveauGroupe = (props) => {
                         <p>Paramètre de recherche actuel</p>
                     </div>
                 </div>
-                <div class="grid grid-cols-7 grid-rows-1 gap-10">
-
-                    <div class="col-start-1 col-span-1 row-start-1 row-span-1">
-                        <IconSvg />
-                    </div>
-                    <div class="col-start-2 col-span-3 row-start-1 row-span-1">
-                        <div class="newGroupResearchDiv text-center px-10 py-20">
+                <div className="grid grid-cols-2 grid-rows-1 gap-10">
+                    <div className="col-start-1 col-span-1 row-start-1 row-span-1">
+                        <div className="newGroupResearchDiv text-center px-10 py-20">
                             <div className="flex justify-center">
                                 <div style={{ borderColor: "#f7b91c" }} className="w-4/5 rounded-full bg-white border-solid border md:py-3 md:px-3 text-center flex justify-center">
                                     <BsSearch className="text-2xl" />
@@ -150,8 +148,8 @@ const NouveauGroupe = (props) => {
                             </div>
                         </div>
                     </div>
-                    <div class="col-start-5 col-span-3 row-start-1 row-span-1">
-                        <div class="h-5/6">
+                    <div className="col-start-2 col-span-1 row-start-1 row-span-1">
+                        <div className="h-5/6">
                             <MapContainer center={[48.84172, 2.26824]} zoom={13} scrollWheelZoom={true} className="h-full rounded-lg">
                                 <TileLayer
                                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -164,6 +162,36 @@ const NouveauGroupe = (props) => {
                                     </Popup>
                                 </Marker>)}
                             </MapContainer>
+                        </div>
+                    </div>
+                </div>
+                <div className="newGroupResearchDiv mt-7 p-10">
+                    <div className="grid grid-cols-2 grid-rows-2">
+                        <div className="col-start-1 col-span-1 row-start-1 row-span-1">
+                            <label for="idBibliotheque" className="font-bold">Bibliothèque sélectionnée</label>
+                        </div>
+                        <div className="col-start-1 col-span-1 row-start-2 row-span-1">
+                            <input className="border border-gray-300 rounded w-9/12 py-1 px-3" disabled id="idBibliotheque" name="bibliotheque" value={selectedBibliotheque !== null ? selectedBibliotheque.address.amenity : "ok"} />
+                        </div>
+                        <div className="col-start-2 col-span-1 row-start-1 row-span-1">
+                            <label for="idBibliotheque" className="font-bold">Capacité maximale du groupe</label>
+                        </div>
+                        <div className="col-start-2 col-span-1 row-start-2 row-span-1">
+                            <input className="border border-gray-300 rounded w-9/12 py-1 px-3" id="idBibliotheque" name="bibliotheque" placeholder="Entrer un nombre de personnes" />
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-2 grid-rows-2">
+                        <div className="col-start-1 col-span-1 row-start-1 row-span-1">
+                            <label for="idBibliotheque" className="font-bold">Bibliothèque sélectionnée</label>
+                        </div>
+                        <div className="col-start-1 col-span-1 row-start-2 row-span-1">
+                            <input className="border border-gray-300 rounded w-9/12 py-1 px-3" disabled id="idBibliotheque" name="bibliotheque" value={selectedBibliotheque !== null ? selectedBibliotheque.address.amenity : "ok"} />
+                        </div>
+                        <div className="col-start-2 col-span-1 row-start-1 row-span-1">
+                            <label for="idBibliotheque" className="font-bold">Capacité maximale du groupe</label>
+                        </div>
+                        <div className="col-start-2 col-span-1 row-start-2 row-span-1">
+                            <input className="border border-gray-300 rounded w-9/12 py-1 px-3" id="idBibliotheque" name="bibliotheque" placeholder="Entrer un nombre de personnes" />
                         </div>
                     </div>
                 </div>
