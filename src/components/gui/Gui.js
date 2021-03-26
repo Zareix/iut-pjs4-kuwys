@@ -16,12 +16,12 @@ const Gui = (props) => {
           style={{ backgroundColor: '#ECECEC' }}
         >
           <div className="grid justify-items-center my-10 text-sm">
-            <img src={user.imageUrl} className="w-16 mb-2" alt="profil pp"/>
+            <img src={user.imageUrl} className="w-16 mb-5" alt="profil pp"/>
             <p>{user.username}</p>
             {/* TODO A modif avec nom prenom mais pas dispo pour le moment */}
           </div>
           <div className="grid grid-cols-2">{/* icons */}</div>
-          <div className="grid gap-4 ml-4 text-xs">
+          <div className="grid gap-4 ml-4 text-base">
             <Link to="/">Accueil</Link>
             <Link to="/profil">Profil</Link>
             <p>Espace Ecole</p>
