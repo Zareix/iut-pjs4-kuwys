@@ -19,11 +19,13 @@ import GroupesTravail from './components/groupesTravail/GroupesTravail'
 import { AppProvider } from './util/context'
 import Cours from './components/fichesCours/Cours'
 import NouveauGroupe from './components/groupesTravail/NouveauGroupe'
+import ScrollToTop from "./components/tools/ScrollToTop"
 
 function App() {
   return (
     <AppProvider>
       <Router>
+        <ScrollToTop/>
         <Switch>
           <Route exact path="/">
             <Accueil />

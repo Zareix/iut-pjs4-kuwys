@@ -12,7 +12,7 @@ const GuiWideScreen = (props) => {
             <div style={{ minHeight: '100vh' }}>
                 <div className="grid grid-cols-6 z-50">
                     <div
-                        className="col-span-1 w-1/6 fixed top-12 h-full p-10 z-50 bgGrey"
+                        className="col-span-1 w-1/6 fixed top-12 h-full p-8 z-50 bgGrey"
                     >
                         <NavigationPanel />
                     </div>
