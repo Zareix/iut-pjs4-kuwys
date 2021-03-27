@@ -146,7 +146,7 @@ const NouveauGroupe = (props) => {
 
     return (
         <HelmetProvider>
-            <Gui active="groupestravail">
+            <Gui>
                 <Helmet>
                     <script
                         src="https://kit.fontawesome.com/6290d5c636.js"

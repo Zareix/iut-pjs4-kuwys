@@ -14,6 +14,7 @@ import imgBarreRecherche from '../../svg/GroupesTravailVector1.svg'
 import imgQuestionsReponsesDefault from '../../pictures/ajaccio.jpg'
 import PresentationButton from '../PresentationButton'
 import { Link } from 'react-router-dom'
+import JoinGroup from './JoinGroup';
 
 
 const GroupesTravail = (props) => {
@@ -21,8 +22,6 @@ const GroupesTravail = (props) => {
   const [biblioNearCity, setBiblioNearCity] = useState([])
   const [chosenCity, setChosenCity] = useState('')
   const [limiteDonnees, setlimiteDonnees] = useState(5)
-
-
 
 
   const settingUpLimiteDonnees = () => {
@@ -104,7 +103,7 @@ const GroupesTravail = (props) => {
 
 
   return (
-    <Gui active="groupestravail">
+    <Gui>
       <Helmet>
         <script
           src="https://kit.fontawesome.com/6290d5c636.js"
@@ -184,16 +183,16 @@ const GroupesTravail = (props) => {
 
       {/* BOUTON ADD NEW GROUP*/}
       <div className="flex justify-center">
-      <Link to="/groupestravail/nouveaugroupe">
-        <div
-          id="ButtonAddNewGroup"
-          className="w-52 flex items-center cursor-pointer justify-center shadow-xl px-8 py-3 font-bold rounded-full text-white md:py-3 md:px-3 buttonAddNewGrWork popUpEffect"
-        >
-          <i className="fas fa-plus align-middle"></i>
-          <span style={{ fontSize: '1rem' }} className="md:pl-2 align-middle">
-            NOUVEAU GROUPE
+        <Link to="/groupestravail/nouveaugroupe">
+          <div
+            id="ButtonAddNewGroup"
+            className="w-52 flex items-center cursor-pointer justify-center shadow-xl px-8 py-3 font-bold rounded-full text-white md:py-3 md:px-3 buttonAddNewGrWork popUpEffect"
+          >
+            <i className="fas fa-plus align-middle"></i>
+            <span style={{ fontSize: '1rem' }} className="md:pl-2 align-middle">
+              NOUVEAU GROUPE
           </span>
-        </div>
+          </div>
         </Link>
       </div>
 
@@ -201,7 +200,9 @@ const GroupesTravail = (props) => {
         <div className="grid grid-cols-1 w-6/12 md:m-auto md:mt-16 md:pb-4 greyBox">
           <div className="col-start-1 col-span-1">
             {donnees.length != 0 && donnees.map((d) =>
-              <ButtonGrTravail dataUneBibliotheque={d[0]}></ButtonGrTravail>
+              <div>
+                <ButtonGrTravail dataUneBibliotheque={d[0]}></ButtonGrTravail>
+              </div>
             )}
           </div>
         </div>
