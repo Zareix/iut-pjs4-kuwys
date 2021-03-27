@@ -10,6 +10,7 @@ const ButtonGrTravail = (props) => {
   var participants = props.dataUneBibliotheque.users.length + 1
 
   const firebaseHorodatageToString = (timestamp) => {
+    console.log(timestamp)
     let date = new Date(timestamp * 1000);
     let dateString = dayToString(date.getDay()) + " " + beautifyingDate(date.getDate()) + "/" + beautifyingDate(date.getMonth()) + " - " + beautifyingDate(date.getHours()) + "h" + beautifyingDate(date.getMinutes())
     return dateString
@@ -57,7 +58,7 @@ const ButtonGrTravail = (props) => {
       className="w-11/12 bg-white grow grButton popUpEffect px-8 py-3 text-black md:py-4 md:text-xs md:px-6 md:mt-4 md:m-auto
       grid grid-cols-6 grid-rows-2"
     >
-      <div style={{ color: "#585858" }} className="col-start-1 col-span-3 row-start-1 row-span-1 text-sm font-bold">{firebaseHorodatageToString(props.dataUneBibliotheque.horaire.seconds)}
+      <div style={{ color: "#585858" }} className="col-start-1 col-span-3 row-start-1 row-span-1 text-sm font-bold">{firebaseHorodatageToString(props.dataUneBibliotheque.horaire._seconds)}
       </div>
       <div style={{ color: "#585858" }} className="col-start-1 col-span-5 row-start-2 row-span-1 text-sm flex">
         <img src={epingleFlatIcon} style={{ width: '1.4rem' }} className="md:mt-0.5" />

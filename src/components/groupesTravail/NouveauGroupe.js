@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import DatePicker from 'react-date-picker';
+import TimePicker from 'react-time-picker';
+import { Link } from 'react-router-dom'
 
 import Gui from '../gui/Gui'
 import API from '../../util/api'
@@ -10,15 +13,19 @@ import { RiArrowDownCircleFill } from 'react-icons/ri';
 import { BsSearch } from 'react-icons/bs';
 
 import { ReactComponent as IconSvg } from '../../svg/046-network-3.svg'
+import { useGlobalContext } from '../../util/context';
 
 const NouveauGroupe = (props) => {
+    const { user } = useGlobalContext()
 
     const [biblioNearCity, setBiblioNearCity] = useState([])
     const [chosenCity, setChosenCity] = useState('')
     const [limiteDonnees, setlimiteDonnees] = useState(5)
+    const [capaciteMaxEntered, setCapaciteMaxEntered] = useState("5")
     const [selectedBibliotheque, setSelectedBibliotheque] = useState(null)
+    const [dateGroup, setDateGroup] = useState()
+    const [heureGroup, setHeureGroup] = useState()
 
-    let oldSelectedMarker
     let selectedMarker
 
     const settingUpLimiteDonnees = () => {
@@ -96,9 +103,50 @@ const NouveauGroupe = (props) => {
             .catch((err) => console.log(err));
     }
 
+    const getTodayDate = () => {
+        let today = new Date()
+        today.setDate(today.getDate() + 1)
+        return today
+    }
+
+    const addNewGroupToDatabase = () => {
+        let timestamp = dateGroup
+        let heure = heureGroup.substring(0, 2)
+        let minutes = heureGroup.substring(5, 3)
+        let subHeure = parseInt(heure.substring(0, 1))
+        let subMinutes = parseInt(minutes.substring(0, 1))
+        if (subHeure == 0) {
+            heure = heure.substring(2, 1)
+        }
+        if (subMinutes == 0) {
+            minutes = minutes.substring(2, 1)
+        }
+        timestamp.setHours(heure)
+        timestamp.setMinutes(minutes)
+
+        console.log(timestamp.getTime());
+
+        const token = window.localStorage.getItem('token')
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }
+
+        API.post("/library/addGroup",
+            {
+                admin: user.username,
+                capaciteMax: capaciteMaxEntered,
+                horaire: timestamp.getTime(),
+                lieu: selectedBibliotheque.address.amenity
+            }, config
+        )
+
+    }
+
     return (
         <HelmetProvider>
-            <Gui>
+            <Gui active="groupestravail">
                 <Helmet>
                     <script
                         src="https://kit.fontawesome.com/6290d5c636.js"
@@ -126,23 +174,22 @@ const NouveauGroupe = (props) => {
                             <div className="flex justify-center">
                                 <div className="grid grid-cols-1 md:grid-rows-2 md:mt-6">
                                     <div className="col-start-1 col-span-1 md:col-span-1 md:col-start-1 md:row-start-1 md:row-span-1 flex justify-end md:mr-4">
-                                        <RiArrowUpCircleFill className="text-4xl text-blue-400 hover:text-blue-500 cursor-pointer popUpEffect" />
+                                        <RiArrowUpCircleFill className="text-4xl text-blue-400 hover:text-blue-500 cursor-pointer popUpEffect" onClick={() => settingUpLimiteDonnees()} />
                                     </div>
                                     <div className="col-start-1 col-span-1 md:col-span-1 md:col-start-1 md:row-start-2 md:row-span-1 flex justify-end md:mr-4">
-                                        <RiArrowDownCircleFill className="text-4xl text-blue-400 hover:text-blue-500 cursor-pointer popUpEffect" />
+                                        <RiArrowDownCircleFill className="text-4xl text-blue-400 hover:text-blue-500 cursor-pointer popUpEffect" onClick={() => settingDownLimiteDonnees()} />
                                     </div>
                                     <div className="col-start-1 col-span-1 md:col-span-5 md:col-start-2 md:row-start-1 md:row-span-2 align-middle flex items-center">
-                                        <p className="text-3xl font-bold text-blue-400 flex items-center">4 <span className="text-base font-semibold md:ml-3 ourMainFontColor">bibliothèques les plus proches</span></p>
+                                        <p className="text-3xl font-bold text-blue-400 flex items-center">{limiteDonnees} <span className="text-base font-semibold md:ml-3 ourMainFontColor">bibliothèques les plus proches</span></p>
                                     </div>
                                 </div>
                             </div>
                             <div className="flex justify-center">
                                 <div
-                                    id="ButtonAddNewGroup"
                                     className="w-52 flex items-center justify-center shadow-xl px-8 py-3 font-bold rounded-full text-white m-autp md:py-3 md:px-3 md:mt-7 buttonAddNewGrWork cursor-pointer popUpEffect"
                                     onClick={() => getBiblioNearCity(limiteDonnees)}>
                                     <span className="md:pl-2 align-middle text-base" >
-                                        VALIDER
+                                        RECHERCHER
                             </span>
                                 </div>
                             </div>
@@ -150,7 +197,7 @@ const NouveauGroupe = (props) => {
                     </div>
                     <div className="col-start-2 col-span-1 row-start-1 row-span-1">
                         <div className="h-5/6">
-                            <MapContainer center={[48.84172, 2.26824]} zoom={13} scrollWheelZoom={true} className="h-full rounded-lg">
+                            <MapContainer center={[48.84172, 2.26824]} zoom={13} scrollWheelZoom={true} className="z-30 h-full rounded-lg">
                                 <TileLayer
                                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -171,27 +218,52 @@ const NouveauGroupe = (props) => {
                             <label for="idBibliotheque" className="font-bold">Bibliothèque sélectionnée</label>
                         </div>
                         <div className="col-start-1 col-span-1 row-start-2 row-span-1">
-                            <input className="border border-gray-300 rounded w-9/12 py-1 px-3" disabled id="idBibliotheque" name="bibliotheque" value={selectedBibliotheque !== null ? selectedBibliotheque.address.amenity : "ok"} />
+                            <input className="border border-gray-300 rounded w-9/12 py-1 px-3" disabled id="idBibliotheque" name="bibliotheque" value={selectedBibliotheque !== null ? selectedBibliotheque.address.amenity : null} placeholder="Cliquez sur une bibliothèque" />
                         </div>
                         <div className="col-start-2 col-span-1 row-start-1 row-span-1">
                             <label for="idBibliotheque" className="font-bold">Capacité maximale du groupe</label>
                         </div>
                         <div className="col-start-2 col-span-1 row-start-2 row-span-1">
-                            <input className="border border-gray-300 rounded w-9/12 py-1 px-3" id="idBibliotheque" name="bibliotheque" placeholder="Entrer un nombre de personnes" />
+                            <input className="border border-gray-300 rounded w-9/12 py-1 px-3" id="idBibliotheque" name="bibliotheque" placeholder="Entrer un nombre de personnes" value={capaciteMaxEntered} onChange={(e) => { setCapaciteMaxEntered(e.target.value) }} />
                         </div>
                     </div>
-                    <div className="grid grid-cols-2 grid-rows-2">
+
+                    <div className="grid grid-cols-2 grid-rows-2 mt-7">
                         <div className="col-start-1 col-span-1 row-start-1 row-span-1">
-                            <label for="idBibliotheque" className="font-bold">Bibliothèque sélectionnée</label>
+                            <p className="font-bold">Jour de regroupement</p>
                         </div>
                         <div className="col-start-1 col-span-1 row-start-2 row-span-1">
-                            <input className="border border-gray-300 rounded w-9/12 py-1 px-3" disabled id="idBibliotheque" name="bibliotheque" value={selectedBibliotheque !== null ? selectedBibliotheque.address.amenity : "ok"} />
+                            <DatePicker onChange={setDateGroup} value={dateGroup} className="z-40" minDate={getTodayDate()} />
                         </div>
                         <div className="col-start-2 col-span-1 row-start-1 row-span-1">
-                            <label for="idBibliotheque" className="font-bold">Capacité maximale du groupe</label>
+                            <p className="font-bold">Heure de regroupement</p>
                         </div>
                         <div className="col-start-2 col-span-1 row-start-2 row-span-1">
-                            <input className="border border-gray-300 rounded w-9/12 py-1 px-3" id="idBibliotheque" name="bibliotheque" placeholder="Entrer un nombre de personnes" />
+                            <TimePicker locale="fr-fr" onChange={setHeureGroup} value={heureGroup} className="z-40" />
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-3 grid-rows-1 mt-24 mx-64">
+                        <div className="col-start-1 col-span-1 row-start-1 row-span-1">
+                            <Link to="/groupestravail">
+                                <div
+                                    className="w-52 flex items-center justify-center shadow-xl px-8 py-3 font-bold rounded-full text-white m-autp md:py-3 md:px-3 buttonCancelNewGrWork cursor-pointer popUpEffect"
+                                    onClick={() => getBiblioNearCity(limiteDonnees)}>
+                                    <span className="md:pl-2 align-middle text-base" >
+                                        ANNULER
+                                </span>
+                                </div>
+                            </Link>
+                        </div>
+                        <div className="col-start-2 col-span-1 row-start-1 row-span-1">
+                        </div>
+                        <div className="col-start-3 col-span-1 row-start-1 row-span-1">
+                            <div
+                                className="w-52 flex items-center justify-center shadow-xl px-8 py-3 font-bold rounded-full text-white m-autp md:py-3 md:px-3 buttonAddNewGrWork cursor-pointer popUpEffect"
+                                onClick={() => addNewGroupToDatabase()}>
+                                <span className="md:pl-2 align-middle text-base" >
+                                    VALIDER
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
