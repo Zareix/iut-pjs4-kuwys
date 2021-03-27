@@ -16,15 +16,18 @@ const AccueilUser = () => {
   const [isFavCours, setIsFavCours] = useState(false)
   const [isFavFiches, setIsFavFiches] = useState(false)
   const [favPosts, setFavPosts] = useState([])
+  const [userGroups, setUserGroups] = useState()
 
   useEffect(() => {
-    const token = window.localStorage.getItem('token')
     const config = {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
       },
     }
-    API.get('/favposts?username=' + user.username, config).then((res) =>
+    API.get('/user/' + user.username + '/groups', config).then((res) =>
+      setUserGroups(res.data)
+    )
+    API.get('/user/' + user.username + '/favposts', config).then((res) =>
       setFavPosts(res.data)
     )
   }, [user])
