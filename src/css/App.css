@@ -145,6 +145,10 @@ input {
   width: 25ch;
 }
 
+.smallerInput {
+  width: 20ch;
+}
+
 .mobileNavBar {
   transition: height ease-out 750ms;
 }
@@ -156,5 +160,8 @@ input {
 @media (max-width: 768px) {
   input {
     width: 90%;
+  }
+  .smallerInput {
+    width: 80%;
   }
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import { useGlobalContext } from '../../util/context'
 import API from '../../util/api'
@@ -8,22 +8,26 @@ import { toast } from 'react-toastify'
 const APropos = () => {
   const { user } = useGlobalContext()
 
-  const [firstName, setFirstName] = useState('------')
-  const [name, setName] = useState('------')
-  const [email, setEmail] = useState('------')
-  const [birthday, setBirthday] = useState('------')
+  const [firstName, setFirstName] = useState()
+  const [name, setName] = useState()
+  const [birthday, setBirthday] = useState()
 
-  const [ecoles, setEcoles] = useState('------')
-  const [studyLevel, setStudyLevel] = useState('------')
+  const [studyLevel, setStudyLevel] = useState()
   const [formations, setFormations] = useState('------')
 
   const updateUserInfo = () => {
+    const token = window.localStorage.getItem('token')
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
     API.post('/userUpdate', {
       user: user,
       firstName: firstName,
       name: name,
       birthday: birthday,
-    })
+    }, config)
       .then((res) => {
         toast('Informations mises à jour !', {
           className: 'ourYellowBg',
@@ -32,10 +36,9 @@ const APropos = () => {
           position: 'bottom-right',
           autoClose: 3000,
         })
-        console.log(res.data)
       })
       .catch((err) => {
-        toast.error('Une erreur est survenu, merci de réessayer.', {
+        toast.error('Une erreur est survenue, merci de réessayer.', {
           position: 'bottom-right',
           autoClose: 3000,
         })
@@ -52,7 +55,8 @@ const APropos = () => {
           <label className="grid md:block">
             Prénom :
             <input
-              value={user.firstName}
+              defaultValue={user.firstName}
+              value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               className="border ml-2 rounded-lg px-2 align-middle"
             ></input>
@@ -60,7 +64,8 @@ const APropos = () => {
           <label className="grid md:block">
             Nom :
             <input
-              value={user.name}
+              defaultValue={user.name}
+              value={name}
               onChange={(e) => setName(e.target.value)}
               className="border ml-2 rounded-lg px-2 align-middle"
             ></input>
@@ -70,7 +75,7 @@ const APropos = () => {
           Adresse e-mail :
           <input
             value={user.email}
-            onChange={(e) => setEmail(e.target.value)}
+            readOnly
             disabled
             className="border ml-2 rounded-lg px-2 align-middle cursor-not-allowed"
           ></input>
@@ -78,7 +83,8 @@ const APropos = () => {
         <label className="grid md:block">
           Date de naissance :
           <input
-            value={user.birthday}
+            defaultValue={user.birthday}
+            value={birthday}
             onChange={(e) => setBirthday(e.target.value)}
             className="border ml-2 rounded-lg px-2 align-middle"
           ></input>
@@ -87,17 +93,18 @@ const APropos = () => {
           <legend className="ml-4 font-semibold px-2">Mes études</legend>
           <div className="grid md:flex gap-2 md:gap-10">
             <label className="grid md:block">
-              Ecoles :
+              Ecole :
               <input
-                value={ecoles}
-                onChange={(e) => setEcoles(e.target.value)}
+                value={user.institute.libelle}
+                readOnly
                 className="border ml-2 rounded-lg px-2 align-middle largerInputOnMobile"
               ></input>
             </label>
             <label className="grid md:block">
               Niveau d'études :
               <input
-                value={user.studyLevel}
+                defaultValue={user.studyLevel}
+                value={studyLevel}
                 onChange={(e) => setStudyLevel(e.target.value)}
                 className="border ml-2 rounded-lg px-2 align-middle largerInputOnMobile"
               ></input>

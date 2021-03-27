@@ -13,6 +13,12 @@ const Parametres = () => {
   const [newPasswordConfirm, setNewPasswordConfirm] = useState('')
 
   const updatePassword = () => {
+    const token = window.localStorage.getItem('token')
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
     API({
       method: 'post',
       url: '/userUpdatePassword',
@@ -25,7 +31,7 @@ const Parametres = () => {
         newPassword: newPassword,
         newPasswordConfirm: newPasswordConfirm,
       },
-    })
+    }, config)
       .then((res) => {
         toast('Mot de passe mis à jour !', {
           className: 'ourYellowBg',
@@ -34,10 +40,9 @@ const Parametres = () => {
           position: 'bottom-right',
           autoClose: 3000,
         })
-        console.log(res.data)
       })
       .catch((err) => {
-        toast.error('Une erreur est survenu, merci de réessayer.', {
+        toast.error('Une erreur est survenue, merci de réessayer.', {
           position: 'bottom-right',
           autoClose: 3000,
         })

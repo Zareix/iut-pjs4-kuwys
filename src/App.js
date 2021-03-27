@@ -17,12 +17,14 @@ import Profil from './components/profil/Profil'
 import FichesCours from './components/fichesCours/FichesCours'
 import GroupesTravail from './components/groupesTravail/GroupesTravail'
 import { AppProvider } from './util/context'
+import ScrollToTop from "./components/tools/ScrollToTop"
 import Post from './components/fichesCours/Post'
 
 function App() {
   return (
     <AppProvider>
       <Router>
+        <ScrollToTop/>
         <Switch>
           <Route exact path="/">
             <Accueil />
