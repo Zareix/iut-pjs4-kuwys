@@ -1,5 +1,6 @@
 :root {
   --our-yellow: #f7b91c;
+  --our-yellowDark: #b9912a;
   --our-main-font-color: #5b5b5b;
 }
 
@@ -127,10 +128,14 @@
 .ourYellow {
   color: var(--our-yellow);
 }
+.ourYellowDark {
+  color: var(--our-yellowDark);
+}
 
 .ourYellowBg {
   background-color: var(--our-yellow);
 }
+
 
 .ourMainFontColor {
   color: var(--our-main-font-color);

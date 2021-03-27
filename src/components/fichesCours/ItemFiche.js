@@ -10,11 +10,11 @@ const ItemFiche = (props) => {
     <div className="popUpEffect" >
       <Link
         to={{
-          pathname: `/fiche/${post.postId}`,
+          pathname: `/fiche/${post.id}`,
         }}
       >
         <div className="fiches w-64">
-          <figure className="grid justify-items-center bg-purple-100 border-2 rounded-xl p-8">
+          <figure className="grid justify-items-center bg-yellow-100 border-2 rounded-xl p-8">
             <Pdf
               titre={post.title}
               pdfUrl={

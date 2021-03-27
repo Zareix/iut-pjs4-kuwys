@@ -31,10 +31,11 @@ const Bio = () => {
     setSelectedPP(fileUploaded)
   }
 
-  const updateBio = () => {
+  const updateBio = (data) => {
     API.post('/userUpdateBio', {
       user: user,
       bio: bio,
+      data: data,
     })
       .then((res) => {
         toast('Biographie mise à jour !', {

@@ -8,7 +8,7 @@ const ButtonGrTravail = (props) => {
   const { user } = useGlobalContext()
 
   var participants = props.dataUneBibliotheque.users.length + 1
-
+//TODO - to component, used in Fiche
   const firebaseHorodatageToString = (timestamp) => {
     let date = new Date(timestamp * 1000);
     let dateString = dayToString(date.getDay()) + " " + beautifyingDate(date.getDate()) + "/" + beautifyingDate(date.getMonth()) + " - " + beautifyingDate(date.getHours()) + "h" + beautifyingDate(date.getMinutes())

@@ -4,6 +4,8 @@ import { Document, Page, pdfjs } from 'react-pdf/dist/esm/entry.webpack'
 import PropTypes from 'prop-types'
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
 import API from '../util/api'
+import {RiArrowRightCircleLine} from 'react-icons/ri'
+import {RiArrowLeftCircleLine} from 'react-icons/ri'
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
 
@@ -26,6 +28,7 @@ const Pdf = (props) => {
         onLoadSuccess={onDocumentLoadSuccess}
         onLoadError={console.error}
         loading="Chargement du PDF..."
+        className="grid justify-center"
       >
         <Page
           margin = {10}
@@ -35,24 +38,24 @@ const Pdf = (props) => {
           loading="Chargement du PDF..."
         />
       </Document>
-      <div className="grid grid-cols-1 justify-items-center w-1/3 bg-gray-100 p-2 rounded-2xl">
-        <div id={props.pdfUrl}></div>
+      <div className="w-full grid justify-center justify-items-center ">
         {!firstPage && (
-          <p>
-            <span
+          <p className="flex px-2 py-2 bg-gray-100 rounded-2xl " >
+            <span className="cursor-pointer"
               onClick={() =>
                 setPageNumber(pageNumber === 1 ? numPages : pageNumber - 1)
               }
             >
-              {'<- '}
+              <RiArrowLeftCircleLine className="text-2xl mr-2  ourYellow hover:ourYellowDark cursor-pointer popUpEffect" />
             </span>
-            Page {pageNumber}/{numPages}
-            <span
+            <p className="ourMainFontColor font-bold">{pageNumber} / {numPages}</p>
+            
+            <span className="cursor-pointer"
               onClick={() =>
                 setPageNumber(pageNumber === numPages ? 1 : pageNumber + 1)
               }
             >
-              {' ->'}
+              <RiArrowRightCircleLine className="text-2xl ml-2 ourYellow hover:ourYellowDark cursor-pointer popUpEffect" />
             </span>
           </p>
         )}

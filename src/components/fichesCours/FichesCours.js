@@ -26,7 +26,7 @@ const FichesCours = () => {
     <Gui>
       <SearchBar tags={Tags}></SearchBar>
       <p className="md:mt-2 md:mb-2 text-3xl font-bold ourYellow">LES FICHES</p>
-      <div className="w-full overflow-x-auto">
+      <div className="w-full overflow-x-auto overflow-y-hidden">
       {posts && (
         <AllFichesCours type='fiche' posts={posts}/>
       )}

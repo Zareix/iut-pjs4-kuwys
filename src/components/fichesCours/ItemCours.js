@@ -6,9 +6,9 @@ const ItemCours = (props) => {
   const { post } = props
 
   return <div className="popUpEffect"><Link to={{
-    pathname: `/cours/${post.postId}`
+    pathname: `/cours/${post.id}`
   }}><div className="cours">
-    <figure className="bg-gray-100 rounded-xl p-8">
+    <figure className="grid justify-items-center bg-yellow-100 border-2 rounded-xl p-8">
       <div className="pt-6 space-y-4">
         <blockquote>
           <Link to="/"><p className="text-lg font-semibold">{post.title}</p></Link>
