@@ -1,10 +1,11 @@
 import React from 'react'
 
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { useGlobalContext } from '../../util/context'
 
 const NavigationPanel = (props) => {
   const { user } = useGlobalContext()
+  const {active} = props
 
   return (
     <div className="grid justify-items-center  text-base md:text-sm">
@@ -15,12 +16,12 @@ const NavigationPanel = (props) => {
       </Link>
       <div className="grid grid-cols-2">{/* icons */}</div>
       <div className="grid gap-4 w-2/3 md:w-full">
-        <Link to="/accueil">Accueil</Link>
-        <Link to="/profil">Profil</Link>
-        <Link to="/ecole">Espace Ecole</Link>
-        <Link to="/fichescours">Fiches & Cours</Link>
+        <NavLink to="/accueil" activeClassName="font-semibold">Accueil</NavLink>
+        <NavLink to="/profil" activeClassName="font-semibold">Profil</NavLink>
+        <NavLink to="/ecole" activeClassName="font-semibold">Espace Ecole</NavLink>
+        <NavLink to="/fichescours" activeClassName="font-semibold">Fiches & Cours</NavLink>
         <p>Forum Q&R</p>
-        <Link to="/groupestravail">Groupes de travail</Link>
+        <NavLink to="/groupestravail" activeClassName="font-semibold">Groupes de travail</NavLink>
       </div>
     </div>
   )
