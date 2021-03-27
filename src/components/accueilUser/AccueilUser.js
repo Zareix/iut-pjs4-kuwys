@@ -18,7 +18,13 @@ const AccueilUser = () => {
   const [favPosts, setFavPosts] = useState([])
 
   useEffect(() => {
-    API.get('/favposts?username=' + user.username).then((res) =>
+    const token = window.localStorage.getItem('token')
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+    API.get('/favposts?username=' + user.username, config).then((res) =>
       setFavPosts(res.data)
     )
   }, [user])
@@ -32,16 +38,8 @@ const AccueilUser = () => {
     }
     toast.error(msg, {
       position: 'bottom-right',
-      autoClose: 2000,
+      autoClose: 2500,
     })
-  }
-
-  const handleOnClickCours = () => {
-    checkHasFicheCours("cours", "Aucuns cours favoris.", setIsFavCours)
-  }
-
-  const handleOnClickFiche = () => {
-
   }
 
   const retour = () => {
@@ -52,9 +50,19 @@ const AccueilUser = () => {
   return (
     <Gui>
       {isFavCours ? (
-        <FavFiches title="Cours favoris" posts={favPosts} retour={retour} type="cours" />
+        <FavFiches
+          title="Cours favoris"
+          posts={favPosts}
+          retour={retour}
+          type="cours"
+        />
       ) : isFavFiches ? (
-        <FavFiches title="Fiches favorites" posts={favPosts} retour={retour} type="fiche" />
+        <FavFiches
+          title="Fiches favorites"
+          posts={favPosts}
+          retour={retour}
+          type="fiche"
+        />
       ) : (
         <div>
           <h1 className="ourYellow font-bold text-2xl">
@@ -66,7 +74,12 @@ const AccueilUser = () => {
               <div
                 className="w-1/2 md:w-1/3 border rounded-xl m-2 p-4 shadow grid gap-2 justify-center justify-items-center cursor-pointer"
                 onClick={() =>
-                  checkHasFicheCours("cours", "Aucuns cours favoris.", setIsFavCours)}
+                  checkHasFicheCours(
+                    'cours',
+                    'Aucuns cours favoris.',
+                    setIsFavCours
+                  )
+                }
               >
                 <FavCoursIcon className="h-10" />
                 <p>Cours favoris</p>
@@ -74,7 +87,12 @@ const AccueilUser = () => {
               <div
                 className="w-1/2 md:w-1/3 border rounded-xl m-2 p-4 shadow grid gap-2 justify-center justify-items-center cursor-pointer"
                 onClick={() =>
-                  checkHasFicheCours("fiche", "Aucunes fiches favorites.", setIsFavFiches)}
+                  checkHasFicheCours(
+                    'fiche',
+                    'Aucunes fiches favorites.',
+                    setIsFavFiches
+                  )
+                }
               >
                 <FavFichesIcon className="h-10" />
                 <p>Fiches favorites</p>
