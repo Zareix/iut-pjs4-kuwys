@@ -24,9 +24,10 @@ const AccueilUser = () => {
         Authorization: `Bearer ${window.localStorage.getItem('token')}`,
       },
     }
-    API.get('/user/' + user.username + '/groups', config).then((res) =>
+    API.get('/user/' + user.username + '/groups', config).then((res) => {
+      console.log(res.data);
       setUserGroups(res.data)
-    )
+    })
     API.get('/user/' + user.username + '/favposts', config).then((res) =>
       setFavPosts(res.data)
     )
