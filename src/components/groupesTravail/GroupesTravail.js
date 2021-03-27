@@ -104,7 +104,7 @@ const GroupesTravail = (props) => {
 
 
   return (
-    <Gui>
+    <Gui active="groupestravail">
       <Helmet>
         <script
           src="https://kit.fontawesome.com/6290d5c636.js"
