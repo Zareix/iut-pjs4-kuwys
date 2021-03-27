@@ -5,8 +5,6 @@ import { toast } from 'react-toastify'
 import API from '../../util/api'
 import { useGlobalContext } from '../../util/context'
 
-import pp from '../../svg/PPAnonymous.svg'
-
 const Bio = () => {
   const { user } = useGlobalContext()
 

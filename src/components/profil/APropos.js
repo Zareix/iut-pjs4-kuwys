@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import { useGlobalContext } from '../../util/context'
 import API from '../../util/api'
@@ -10,7 +10,6 @@ const APropos = () => {
 
   const [firstName, setFirstName] = useState()
   const [name, setName] = useState()
-  const [email, setEmail] = useState()
   const [birthday, setBirthday] = useState()
 
   const [studyLevel, setStudyLevel] = useState()
