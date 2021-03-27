@@ -28,7 +28,8 @@ const Register = () => {
       password,
       confirmPassword,
       prenom,
-      nom
+      nom,
+      institute : "gXTmLhOdR3veCAuePOCq" // TODO choose institute
     }
     API.post('/register', user)
       .then((res) => {

@@ -32,10 +32,16 @@ const Bio = () => {
   }
 
   const updateBio = () => {
+    const token = window.localStorage.getItem('token')
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
     API.post('/userUpdateBio', {
       user: user,
       bio: bio,
-    })
+    }, config)
       .then((res) => {
         toast('Biographie mise à jour !', {
           className: 'ourYellowBg',
@@ -46,7 +52,7 @@ const Bio = () => {
         })
       })
       .catch((err) => {
-        toast.error('Une erreur est survenu, merci de réessayer.', {
+        toast.error('Une erreur est survenue, merci de réessayer.', {
           position: 'bottom-right',
           autoClose: 3000,
         })
@@ -105,7 +111,8 @@ const Bio = () => {
           style={{ resize: 'none' }}
           className="border w-full md:w-4/5 h-20 shadow-inner"
           onChange={(e) => setBio(e.target.value)}
-          value={user.bio}
+          defaultValue={user.bio}
+          value={bio}
         ></textarea>
         <div className="grid justify-end w-4/5 mt-1">
           <button
