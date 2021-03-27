@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Ecole from "./components/ecole/Ecole"
+import NouveauGroupe from './components/groupesTravail/NouveauGroupe'
 import PrivateRoute from './components/PrivateRoute'
 import './css/App.css'
 import Login from './components/authentification/Login.js'
@@ -14,16 +15,16 @@ import Register from './components/authentification/Register.js'
 import Page404 from './components/Page404'
 import Profil from './components/profil/Profil'
 import FichesCours from './components/fichesCours/FichesCours'
-import Fiche from './components/fichesCours/Fiche'
 import GroupesTravail from './components/groupesTravail/GroupesTravail'
 import { AppProvider } from './util/context'
-import Cours from './components/fichesCours/Cours'
-import NouveauGroupe from './components/groupesTravail/NouveauGroupe'
+import ScrollToTop from "./components/tools/ScrollToTop"
+import Post from './components/fichesCours/Post'
 
 function App() {
   return (
     <AppProvider>
       <Router>
+        <ScrollToTop/>
         <Switch>
           <Route exact path="/">
             <Accueil />
@@ -43,12 +44,12 @@ function App() {
           <PrivateRoute
             exact
             path="/fiche/:postId"
-            component={Fiche}
+            component={Post}
           ></PrivateRoute>
           <PrivateRoute
             exact
             path="/cours/:postId"
-            component={Cours}
+            component={Post}
           ></PrivateRoute>
           <PrivateRoute exact path="/profil">
             <Profil />

@@ -12,7 +12,6 @@ const Accueil = () => {
   console.log(isLogin, user);
 
   const [presentationImageUrl, setPresentationImageUrl] = useState(imgHeader)
-  var tailleDivImage = null
 
   if (isLogin) return <Redirect to="/accueil" />
 
