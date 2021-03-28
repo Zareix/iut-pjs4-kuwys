@@ -12,7 +12,7 @@ import { useGlobalContext } from '../../util/context';
 const JoinGroup = (props) => {
     const { open, onClose, group, dateMiseEnForme } = props
 
-    const placesDisponibles = group.capaciteMax - (group.users.length + 1)
+    const placesDisponibles = group.capaciteMax - (group.usersInGroup.length + 1)
 
     const { user } = useGlobalContext()
 
@@ -55,7 +55,7 @@ const JoinGroup = (props) => {
                             {dateMiseEnForme}
                         </div>
                         <div className="cols-start-1 col-span-1 row-start-2 row-span-1 mt-3">
-                            {group.users.length + 1} / {group.capaciteMax} participants
+                            {group.usersInGroup.length + 1} / {group.capaciteMax} participants
                         </div>
                         <div className="cols-start-2 col-span-1 row-start-2 row-span-1 mt-3 flex justify-end">
                             <p>Il reste <span className="font-bold">{placesDisponibles}</span> places disponibles.</p>

@@ -14,7 +14,7 @@ const ButtonGrTravail = (props) => {
     setIsDialogOpen(false)
   }
 
-  var participants = props.dataUneBibliotheque.users.length + 1
+  var participants = props.dataUneBibliotheque.usersInGroup.length + 1
   //TODO - to component, used in Fiche
   const firebaseHorodatageToString = (timestamp) => {
     console.log(timestamp)
@@ -55,7 +55,7 @@ const ButtonGrTravail = (props) => {
     if (user.username == props.dataUneBibliotheque.admin) {
       document.getElementById('adminDiv').style.display = 'block';
     }
-    props.dataUneBibliotheque.users.forEach(element => {
+    props.dataUneBibliotheque.usersInGroup.forEach(element => {
       if (user.username == element) {
         console.log(props.dataUneBibliotheque.lieu)
         console.log(element);

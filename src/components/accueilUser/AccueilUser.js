@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from 'react'
 
+import { toast } from 'react-toastify'
+
 import { ReactComponent as FavCoursIcon } from '../../svg/024-file.svg'
 import { ReactComponent as FavFichesIcon } from '../../svg/025-file-1.svg'
 
-import FavFiches from './FavFiches'
-
 import { useGlobalContext } from '../../util/context'
-import API from '../../util/api'
 
+import FavFiches from './FavFiches'
+import API from '../../util/api'
 import Gui from '../gui/Gui'
-import { toast } from 'react-toastify'
+import ButtonGrTravail from '../groupesTravail/ButtonGrTravail'
 
 const AccueilUser = () => {
   const { user } = useGlobalContext()
   const [isFavCours, setIsFavCours] = useState(false)
   const [isFavFiches, setIsFavFiches] = useState(false)
   const [favPosts, setFavPosts] = useState([])
-  const [userGroups, setUserGroups] = useState()
+  const [userGroups, setUserGroups] = useState([])
 
   useEffect(() => {
     const config = {
@@ -25,7 +26,7 @@ const AccueilUser = () => {
       },
     }
     API.get('/user/' + user.username + '/groups', config).then((res) => {
-      console.log(res.data);
+      console.log(res.data)
       setUserGroups(res.data)
     })
     API.get('/user/' + user.username + '/favposts', config).then((res) =>
@@ -104,7 +105,11 @@ const AccueilUser = () => {
             </div>
             <div>
               <h2>Mes groupes de travail</h2>
-              <div className="greyBox m-6 ml-0">grp</div>
+              <div className="greyBox m-6 ml-0">
+                {userGroups.map((g) => (
+                  <ButtonGrTravail dataUneBibliotheque={g}/>
+                ))}
+              </div>
             </div>
 
             <div>
