@@ -9,6 +9,7 @@ const ButtonGrTravail = (props) => {
   const { user } = useGlobalContext()
 
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [isUserInGroup, setIsUserInGroup] = useState(false)
 
   const handleClose = () => {
     setIsDialogOpen(false)
@@ -52,17 +53,12 @@ const ButtonGrTravail = (props) => {
   }
 
   useEffect(() => {
-    if (user.username == props.dataUneBibliotheque.admin) {
-      document.getElementById('adminDiv').style.display = 'block';
-    }
-    props.dataUneBibliotheque.usersInGroup.forEach(element => {
-      if (user.username == element) {
-        console.log(props.dataUneBibliotheque.lieu)
-        console.log(element);
-        document.getElementById('inscritDiv').style.display = 'block';
+    props.dataUneBibliotheque.usersInGroup.forEach(u => {
+      if (user.username == u) {
+        setIsUserInGroup(true)
+        return
       }
     });
-    
   }, [])
 
   return (
@@ -85,12 +81,12 @@ const ButtonGrTravail = (props) => {
           <p className="mt-0.5 ml-1 font-bold">{beautifyingDate(participants)}</p>
         </div>
         <div style={{ color: "#585858" }} className="col-start-6 col-span-1 row-start-2 row-span-1 text-sm flex justify-end">
-          <p id="adminDiv" style={{ backgroundColor: "#5FCAD6", color: "white", borderRadius: '12px' }} className="md:px-2 mt-0.5 ml-1 font-semibold hidden">ADMIN</p>
-          <p id="inscritDiv" style={{ backgroundColor: "#bf6e6f", color: "white", borderRadius: '12px' }} className="md:px-2 mt-0.5 ml-1 font-semibold hidden">INSCRIT</p>
-        </div>
+          {props.dataUneBibliotheque.admin === user.username && <p id="adminDiv" style={{ backgroundColor: "#5FCAD6", color: "white", borderRadius: '12px' }} className="md:px-2 mt-0.5 ml-1 font-semibold">ADMIN</p>}
+          {isUserInGroup && <p id="inscritDiv" style={{ backgroundColor: "#bf6e6f", color: "white", borderRadius: '12px' }} className="md:px-2 mt-0.5 ml-1 font-semibold">INSCRIT</p>}
+          </div>
 
       </a>
-      <JoinGroup open={isDialogOpen} onClose={handleClose} group={props.dataUneBibliotheque} dateMiseEnForme ={firebaseHorodatageToString(props.dataUneBibliotheque.horaire._seconds)}/>
+      <JoinGroup open={isDialogOpen} onClose={handleClose} group={props.dataUneBibliotheque} dateMiseEnForme={firebaseHorodatageToString(props.dataUneBibliotheque.horaire._seconds)} />
     </div>
 
   )
