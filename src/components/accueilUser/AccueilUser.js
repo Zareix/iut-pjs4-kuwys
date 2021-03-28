@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 
 import { toast } from 'react-toastify'
+import PerfectScrollbar from 'react-perfect-scrollbar'
+import 'react-perfect-scrollbar/dist/css/styles.css';
 
 import { ReactComponent as FavCoursIcon } from '../../svg/024-file.svg'
 import { ReactComponent as FavFichesIcon } from '../../svg/025-file-1.svg'
@@ -75,9 +77,9 @@ const AccueilUser = () => {
             <span className="ourMainFontColor">{user.firstName} !</span>
           </h1>
           <div className="grid md:grid-cols-2 gap-y-6 md:gap-y-10 mt-4 font-semibold ourMainFontColor">
-            <div className="flex justify-center md:p-4 pl-0 text-center">
+            <div className="flex justify-center items-start gap-8 md:py-4 text-center">
               <div
-                className="w-1/2 md:w-1/3 border rounded-xl m-2 p-4 shadow grid gap-2 justify-center justify-items-center cursor-pointer"
+                className="w-1/3 border rounded-xl p-4 shadow grid gap-2 justify-items-center cursor-pointer"
                 onClick={() =>
                   checkHasFicheCours(
                     'cours',
@@ -90,7 +92,7 @@ const AccueilUser = () => {
                 <p>Cours favoris</p>
               </div>
               <div
-                className="w-1/2 md:w-1/3 border rounded-xl m-2 p-4 shadow grid gap-2 justify-center justify-items-center cursor-pointer"
+                className="w-1/3 border rounded-xl p-4 shadow grid gap-2 justify-items-center cursor-pointer"
                 onClick={() =>
                   checkHasFicheCours(
                     'fiche',
@@ -105,20 +107,22 @@ const AccueilUser = () => {
             </div>
             <div>
               <h2>Mes groupes de travail</h2>
-              <div className="greyBox m-6 ml-0">
-                {userGroups.map((g) => (
-                  <ButtonGrTravail dataUneBibliotheque={g}/>
-                ))}
+              <div className="greyBox mr-4 mt-2 ml-0 h-48">
+                <PerfectScrollbar>
+                    {userGroups.map((g) => (
+                      <ButtonGrTravail dataUneBibliotheque={g} />
+                    ))}
+                </PerfectScrollbar>
               </div>
             </div>
 
             <div>
               <h2>Dernières fiches consultées</h2>
-              <div className="greyBox m-6 ml-0">fiche</div>
+              <div className="greyBox mr-4 mt-2 ml-0">fiche</div>
             </div>
             <div>
               <h2>Derniers cours consultés</h2>
-              <div className="greyBox m-6 ml-0">cours</div>
+              <div className="greyBox mr-4 mt-2 ml-0">cours</div>
             </div>
           </div>
         </div>

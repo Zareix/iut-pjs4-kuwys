@@ -2,15 +2,14 @@ import React, { useState } from 'react'
 
 import { Link } from 'react-router-dom'
 import { AiOutlineMenu } from 'react-icons/ai'
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 
 import NavigationPanel from './NavigationPanel'
 
-import { useGlobalContext } from '../../util/context.js'
+
 
 const TopBarMobile = (props) => {
   const [isNavVisible, setIsNavVisible] = useState(false)
-
-  const { logout } = useGlobalContext()
 
   return (
     <div className="fixed w-screen z-50">
@@ -25,20 +24,16 @@ const TopBarMobile = (props) => {
           />
         </div>
       </div>
-      <div
-        className="top-14 mobileNavBar overflow-hidden bgGrey"
-        style={{ height: isNavVisible ? '100vh' : '0' }}
+      <SwipeableDrawer
+        open={isNavVisible}
+        anchor="right"
+        onClose={() => setIsNavVisible(false)}
+        onOpen={() => setIsNavVisible(true)}
       >
-        <NavigationPanel />
-        <div className="text-center text-sm cursor-pointer mt-20">
-          <button
-            className="border bg-yellow-300 text-white font-bold px-2 py-1 rounded-full"
-            onClick={logout}
-          >
-            Deconnexion
-          </button>
+        <div className="w-screen">
+          <NavigationPanel deconnexion/>
         </div>
-      </div>
+      </SwipeableDrawer>
     </div>
   )
 }

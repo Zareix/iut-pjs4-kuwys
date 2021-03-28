@@ -66,7 +66,7 @@ const ButtonGrTravail = (props) => {
       <a
         onClick={() => setIsDialogOpen(true)}
         style={{}}
-        className="w-11/12 bg-white grow grButton popUpEffect px-8 py-3 text-black md:py-4 md:text-xs md:px-6 md:mt-4 md:m-auto
+        className="w-11/12 bg-white grow grButton popUpEffect px-8 py-3 text-black md:py-4 md:text-xs md:px-6 my-2 m-auto
       grid grid-cols-6 grid-rows-2"
       >
         <div style={{ color: "#585858" }} className="col-start-1 col-span-3 row-start-1 row-span-1 text-sm font-bold">{firebaseHorodatageToString(props.dataUneBibliotheque.horaire._seconds)}

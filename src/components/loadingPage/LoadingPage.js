@@ -1,11 +1,11 @@
 import React from 'react'
 
-import { AiOutlineLoading } from 'react-icons/ai'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const LoadingPage = () => {
   return (
     <div className=" m-auto h-screen grid items-center justify-center cursor-wait">
-      <AiOutlineLoading className="animate-spin" size={40} />
+      <CircularProgress />
     </div>
   )
 }
