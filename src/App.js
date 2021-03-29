@@ -19,6 +19,7 @@ import GroupesTravail from './components/groupesTravail/GroupesTravail'
 import { AppProvider } from './util/context'
 import ScrollToTop from "./components/tools/ScrollToTop"
 import Post from './components/fichesCours/Post'
+import Notifications from './components/gui/Notifications'
 
 function App() {
   return (
@@ -62,6 +63,9 @@ function App() {
           </PrivateRoute>
           <PrivateRoute exact path="/groupestravail/nouveaugroupe">
             <NouveauGroupe />
+          </PrivateRoute>
+          <PrivateRoute exact path="/notifications">
+            <Notifications />
           </PrivateRoute>
           <Route>
             <Page404 />
