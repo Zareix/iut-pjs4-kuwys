@@ -67,22 +67,22 @@ const ButtonGrTravail = (props) => {
         onClick={() => setIsDialogOpen(true)}
         style={{}}
         className="w-11/12 bg-white grow grButton popUpEffect px-8 py-3 text-black md:py-4 md:text-xs md:px-6 my-2 m-auto
-      grid grid-cols-6 grid-rows-2"
+      grid grid-cols-6 grid-rows-3 md:grid-rows-2"
       >
-        <div style={{ color: "#585858" }} className="col-start-1 col-span-3 row-start-1 row-span-1 text-sm font-bold">{firebaseHorodatageToString(props.dataUneBibliotheque.horaire._seconds)}
+        <div style={{ color: "#585858" }} className="col-start-1 col-span-5 row-start-1 row-span-1 md:col-start-1 md:col-span-3 md:row-start-1 md:row-span-1 text-sm font-bold">{firebaseHorodatageToString(props.dataUneBibliotheque.horaire._seconds)}
         </div>
-        <div style={{ color: "#585858" }} className="col-start-1 col-span-5 row-start-2 row-span-1 text-sm flex">
+        <div style={{ color: "#585858" }} className="col-start-1 col-span-6 row-start-3 row-span-1 md:col-start-1 md:col-span-5 md:row-start-2 md:row-span-1 text-sm flex">
           <img src={epingleFlatIcon} style={{ width: '1.4rem' }} className="md:mt-0.5" />
           <p className="mt-0.5 ml-1 font-semibold">{props.dataUneBibliotheque.lieu}</p>
         </div>
-        <div style={{ color: "#585858" }} className="col-start-4 col-span-2 row-start-1 row-span-1 text-sm font-semibold">Jusqu'à : <b>{beautifyingDate(props.dataUneBibliotheque.capaciteMax)}</b> participants</div>
+        <div style={{ color: "#585858" }} className="col-start-1 col-span-6 row-start-2 row-span-1 md:col-start-4 md:col-span-2 md:row-start-1 md:row-span-1 text-sm font-semibold">Jusqu'à : <b>{beautifyingDate(props.dataUneBibliotheque.capaciteMax)}</b> participants</div>
         <div style={{ color: "#585858" }} className="col-start-6 col-span-1 row-start-1 row-span-1 text-sm flex justify-end md:mr-3">
           <img src={userFlatIcon} style={{ width: '1.4rem' }} className="md:mt-0.5" />
           <p className="mt-0.5 ml-1 font-bold">{beautifyingDate(participants)}</p>
         </div>
         <div style={{ color: "#585858" }} className="col-start-6 col-span-1 row-start-2 row-span-1 text-sm flex justify-end">
-          {props.dataUneBibliotheque.admin === user.username && <p id="adminDiv" style={{ backgroundColor: "#5FCAD6", color: "white", borderRadius: '12px' }} className="md:px-2 mt-0.5 ml-1 font-semibold">ADMIN</p>}
-          {isUserInGroup && <p id="inscritDiv" style={{ backgroundColor: "#bf6e6f", color: "white", borderRadius: '12px' }} className="md:px-2 mt-0.5 ml-1 font-semibold">INSCRIT</p>}
+          {props.dataUneBibliotheque.admin === user.username && <p id="adminDiv" style={{ backgroundColor: "#5FCAD6", color: "white", borderRadius: '12px' }} className="px-2 mt-0.5 ml-1 font-semibold">ADMIN</p>}
+          {isUserInGroup && <p id="inscritDiv" style={{ backgroundColor: "#bf6e6f", color: "white", borderRadius: '12px' }} className="px-2 mt-0.5 ml-1 font-semibold">INSCRIT</p>}
           </div>
 
       </a>

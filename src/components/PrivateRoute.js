@@ -14,7 +14,7 @@ const PrivateRoute = ({ children, ...rest }) => {
         Authorization: `Bearer ${window.localStorage.getItem('token')}`,
       },
     }
-    API.get('/user/' + user.username + '/notifications', config).then((res) => {
+    API.get('/user/notifications', config).then((res) => {
       user.notifications = res.data
     })
   })

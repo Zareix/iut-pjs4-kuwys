@@ -2,8 +2,9 @@ import React from 'react'
 
 import ItemFiche from './ItemFiche'
 import ItemCours from './ItemCours'
+import ItemPostForum from '../forum/ItemPostForum'
 
-const AllFichesCours = (props) => {
+const AllPost = (props) => {
   const { type, posts } = props
 
   switch (type) {
@@ -16,16 +17,24 @@ const AllFichesCours = (props) => {
       )}
       </div>
     case 'cours':
-      return <div className="flex gap-4 flex-nowrap"> {posts.map(
+      return <div className="flex gap-4 flex-nowrap p-4"> {posts.map(
         (post) =>
           post.postType === 'cours' && (
             <ItemCours post={post} key={post.id}></ItemCours>
           )
       )}
       </div>
+      case 'forum':
+        return <div className="grid gap-4 flex-nowrap p-4"> {posts.map(
+          (post) =>
+            post.postType === 'cours' && (
+              <ItemPostForum post={post} key={post.id}></ItemPostForum>
+            )
+        )}
+        </div>
     default:
       return <div></div>
   }
 }
 
-export default AllFichesCours
+export default AllPost

@@ -19,8 +19,11 @@ import GroupesTravail from './components/groupesTravail/GroupesTravail'
 import { AppProvider } from './util/context'
 import ScrollToTop from './components/tools/ScrollToTop'
 import Post from './components/fichesCours/Post'
+import Forum from './components/forum/Forum'
 import MesInformations from './components/profil/MesInformations'
 import Notifications from './components/gui/Notifications'
+import PostForum from './components/forum/PostForum'
+
 
 function App() {
   return (
@@ -55,14 +58,23 @@ function App() {
           ></PrivateRoute>
           <PrivateRoute
             exact
-            path="/profil/user/:username"
-            component={Profil}
+            path="/forum/:postId"
+            component={PostForum}
           ></PrivateRoute>
+          <PrivateRoute exact path="/profil">
+            <Profil />
+          </PrivateRoute>
+          ></PrivateRoute>
+            component={Profil}
+            path="/profil/user/:username"
           <PrivateRoute exact path="/profil/mesinformations">
             <MesInformations />
           </PrivateRoute>
           <PrivateRoute exact path="/fichesCours">
             <FichesCours />
+          </PrivateRoute>
+          <PrivateRoute exact path="/forum">
+            <Forum />
           </PrivateRoute>
           <PrivateRoute exact path="/groupestravail">
             <GroupesTravail />

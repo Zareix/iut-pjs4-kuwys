@@ -185,7 +185,7 @@ const GroupesTravail = (props) => {
             className="w-52 flex items-center cursor-pointer justify-center shadow-xl px-2 py-2 font-bold rounded-full text-white md:py-3 md:px-3 buttonAddNewGrWork popUpEffect"
           >
             <i className="fas fa-plus align-middle"></i>
-            <span style={{ fontSize: '1rem' }} className="md:pl-2 align-middle">
+            <span style={{ fontSize: '1rem' }} className="ml-1 md:pl-2 align-middle">
               NOUVEAU GROUPE
           </span>
           </div>
@@ -193,7 +193,7 @@ const GroupesTravail = (props) => {
       </div>
 
       <div>
-        <div className="grid grid-cols-1 w-6/12 md:m-auto md:mt-16 md:pb-4 greyBox">
+        <div className="grid grid-cols-1 md:w-6/12 md:m-auto mt-7 md:mt-16 md:pb-4 greyBox">
           <div className="col-start-1 col-span-1">
             {donnees.length != 0 && donnees.map((d) =>
               <div>
