@@ -10,7 +10,7 @@ const Footer = () => {
       style={{ backgroundColor: '#4F4F4F' }}
       className="flex flex-wrap items-center justify-center text-gray-100 text-xs px-2 md:pl-5 py-10 mt-10"
     >
-      <img src={logo} className="w-1/3 md:w-1/4 mb-6" alt="logo kuwys footer"/>
+      <img src={logo} className="w-1/3 md:w-1/4 mb-6" alt="logo kuwys footer" />
       <div className="grid grid-cols-3 md:ml-8">
         <div>
           <p className="font-bold center mb-5 text-gray-50">Utilisation</p>

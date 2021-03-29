@@ -1,14 +1,11 @@
-import React,{useState,useEffect} from 'react'
-import API from '../../util/api'
+import React from 'react'
 // TODO
 const Comments = (props) => {
-  const {comments} = props
+  const { comments } = props
 
   //TODO - To component, used in ButtonGrTravail
   const firebaseHorodatageToString = (timestamp) => {
-    //console.log('Time', timestamp)
     let date = new Date(timestamp * 1000)
-    //console.log(date);
     let dateString =
       dayToString(date.getDay()) +
       ' ' +
@@ -19,12 +16,11 @@ const Comments = (props) => {
       beautifyingDate(date.getHours()) +
       'h' +
       beautifyingDate(date.getMinutes())
-    
+
     return dateString
   }
 
   const beautifyingDate = (number) => {
-    //console.log(number);
     if (number < 10) {
       let beautifiedDate = '0' + number
       return beautifiedDate
@@ -48,27 +44,31 @@ const Comments = (props) => {
         return 'Vendredi'
       case 6:
         return 'Samedi'
+      default:
+        return 'Néant'
     }
   }
-  
-  return <div className="w-full">
-      {
-      comments.map(c => {
-          return <div key={c.id} className="rounded-xl my-3 border w-auto p-2">
-              <div className="flex">
-              <img src={c.userImage} className="h-10 m-2" alt="profil pp"></img>
+
+  return (
+    <div className="w-full">
+      {comments.map((comment) => {
+        return (
+          <div key={comment.id} className="rounded-xl my-3 border w-auto p-2">
+            <div className="flex">
+              <img src={comment.userImage} className="h-10 m-2" alt="profil pp"></img>
               <div className="grid">
-              <h1 className="font-bold text-md">{c.username}</h1>
-              <p className="my-1">{firebaseHorodatageToString(c.createdAt._seconds)}</p>
+                <h1 className="font-bold text-md">{comment.username}</h1>
+                <p className="my-1">
+                  {firebaseHorodatageToString(comment.createdAt._seconds)}
+                </p>
               </div>
-              </div>
-              
-              <p className=" m-4 flex text-justify">{c.body}</p>
             </div>
+            <p className=" m-4 flex text-justify">{comment.body}</p>
+          </div>
+        )
       })}
-      </div>
+    </div>
+  )
 }
 
 export default Comments
-
-

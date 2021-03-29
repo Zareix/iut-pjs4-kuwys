@@ -8,11 +8,9 @@ import PresentationButton from './PresentationButton'
 import '../css/App.css'
 
 const Accueil = () => {
-  const { isLogin, user } = useGlobalContext()
-  console.log(isLogin, user);
+  const { isLogin } = useGlobalContext()
 
   const [presentationImageUrl, setPresentationImageUrl] = useState(imgHeader)
-
   if (isLogin) return <Redirect to="/accueil" />
 
   const switchImage = (newPresentationImage) => {

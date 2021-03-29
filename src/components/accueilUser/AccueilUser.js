@@ -38,27 +38,15 @@ const AccueilUser = () => {
   }
 
   useEffect(() => {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
-      },
-    }
-    API.get('/user/groups', config).then((res) =>
-      setUserGroups(res.data)
-    )
-    API.get('/user/favposts', config).then((res) =>
-      setFavPosts(res.data)
-    )
-    API.get('/user/' + user.username, config).then((res) =>
+    API.get('/user/groups').then((res) => setUserGroups(res.data))
+    API.get('/user/favposts').then((res) => setFavPosts(res.data))
+    API.get('/user/' + user.username).then((res) =>
       setUserPosts(res.data.posts)
     )
-    API.get('/user/lastSeenPosts', config).then((res) =>
-      setLastSeenPost(res.data)
-    )
+    API.get('/user/lastSeenPosts').then((res) => setLastSeenPost(res.data))
   }, [user])
 
   const checkHasFicheCoursFav = (type, msg, setter) => {
-    console.log(favPosts)
     for (var p in favPosts) {
       if (favPosts[p].postType === type) {
         setter(true)
@@ -132,11 +120,7 @@ const AccueilUser = () => {
               <div
                 className="w-1/3 border rounded-xl p-4 shadow grid gap-2 justify-items-center cursor-pointer"
                 onClick={() =>
-                  checkHasFicheCours(
-                    'cours',
-                    'Aucun cours posté.',
-                    setIsCours
-                  )
+                  checkHasFicheCours('cours', 'Aucun cours posté.', setIsCours)
                 }
               >
                 <FavCoursIcon className="h-10" />
@@ -209,10 +193,7 @@ const AccueilUser = () => {
               ) : (
                 <div className="greyBox mr-4 mt-2 ml-0">
                   <PerfectScrollbar options={scrollBarXConfig}>
-                    <AllPost
-                      type="fiche"
-                      posts={lastSeenPost}
-                    ></AllPost>
+                    <AllPost type="fiche" posts={lastSeenPost}></AllPost>
                   </PerfectScrollbar>
                 </div>
               )}
@@ -227,10 +208,7 @@ const AccueilUser = () => {
               ) : (
                 <div className="greyBox mr-4 mt-2 ml-0">
                   <PerfectScrollbar options={scrollBarXConfig}>
-                    <AllPost
-                      type="cours"
-                      posts={lastSeenPost}
-                    ></AllPost>
+                    <AllPost type="cours" posts={lastSeenPost}></AllPost>
                   </PerfectScrollbar>
                 </div>
               )}

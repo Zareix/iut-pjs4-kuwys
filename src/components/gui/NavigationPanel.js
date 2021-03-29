@@ -24,24 +24,25 @@ const NavigationPanel = (props) => {
   const [invisibleValue, setInvisibleValue] = useState(true)
 
   useEffect(() => {
-    if (user.notifications !== undefined) {
+    if (user.notifications) {
       user.notifications.forEach((n) => {
         if (n.seen === false) {
           console.log(n.seen)
           setInvisibleValue(false)
           console.log(invisibleValue)
         }
-      }
-        , [])
+      }, [])
     }
   })
-
 
   const { deconnexion } = props
 
   return (
     <div className="grid justify-items-center  text-base md:text-sm">
-      <Link to={"/profil/user/" + user.username} className="grid justify-items-center my-10">
+      <Link
+        to={'/profil/user/' + user.username}
+        className="grid justify-items-center my-10"
+      >
         <Avatar
           alt="user pp avatar"
           src={user.imageUrl}
@@ -49,13 +50,19 @@ const NavigationPanel = (props) => {
         />
         <p>{user.username}</p>
       </Link>
-      <div className="grid grid-cols-2 gap-10">{/* icons */}
+      <div className="grid grid-cols-2 gap-10">
+        {/* icons */}
         <Avatar
           alt="notifications logo"
           src={dmNNotification}
           className={classes.large}
         />
-        <Badge color="secondary" overlap="circle" badgeContent=" " invisible={invisibleValue}>
+        <Badge
+          color="secondary"
+          overlap="circle"
+          badgeContent=" "
+          invisible={invisibleValue}
+        >
           <NavLink to="/notifications">
             <Avatar
               alt="notifications logo"
@@ -64,13 +71,15 @@ const NavigationPanel = (props) => {
             />
           </NavLink>
         </Badge>
-
       </div>
       <div className="grid gap-4 w-2/3 md:w-full md:mt-8">
         <NavLink to="/accueil" activeClassName="font-semibold">
           Accueil
         </NavLink>
-        <NavLink to={"/profil/user/" + user.username} activeClassName="font-semibold">
+        <NavLink
+          to={'/profil/user/' + user.username}
+          activeClassName="font-semibold"
+        >
           Profil
         </NavLink>
         <NavLink to="/ecole" activeClassName="font-semibold">

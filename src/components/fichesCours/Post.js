@@ -30,17 +30,10 @@ const Post = (props) => {
       setSize((window.innerWidth * 5) / 6)
     })
 
-    const config = {
-      headers: {
-        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
-      },
-    }
-    API.get('/post/' + postId, config)
+    API.get('/post/' + postId)
       .then((res) => {
         setPost(res.data)
         setVotes(res.data.votes)
-        console.log(res.data)
-        console.log('OUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII');
         setLoading(false)
       })
       .catch((err) => {
@@ -51,9 +44,7 @@ const Post = (props) => {
 
   //TODO - To component, used in ButtonGrTravail
   const firebaseHorodatageToString = (timestamp) => {
-    //console.log('Time', timestamp)
     let date = new Date(timestamp * 1000)
-    //console.log(date);
     let dateString =
       dayToString(date.getDay()) +
       ' ' +
@@ -93,19 +84,12 @@ const Post = (props) => {
         return 'Vendredi'
       case 6:
         return 'Samedi'
+      default:
+        return 'Néant'
     }
   }
   const addComm = () => {
-    API({
-      method: 'post',
-      url: `/post/${postId}/comment`,
-      headers: {
-        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
-      },
-      data: {
-        body: comm,
-      },
-    })
+    API.post(`/post/${postId}/comment`, { body: comm })
       .then((res) => {
         toast('Commentaire ajouté !', {
           className: 'ourYellowBg',
@@ -114,7 +98,7 @@ const Post = (props) => {
           position: 'bottom-right',
           autoClose: 3000,
         })
-        setComm("")
+        setComm('')
         console.log(res.data)
       })
       .catch((err) => {
@@ -126,13 +110,7 @@ const Post = (props) => {
       })
   }
   const addVote = () => {
-    API({
-      method: 'post',
-      url: `/post/${postId}/vote`,
-      headers: {
-        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
-      },
-    })
+    API.post(`/post/${postId}/vote`)
       .then((res) => {
         toast('Post recommandé !', {
           className: 'ourYellowBg',
@@ -151,13 +129,7 @@ const Post = (props) => {
       })
   }
   const removeVote = () => {
-    API({
-      method: 'post',
-      url: `/post/${postId}/unVote`,
-      headers: {
-        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
-      },
-    })
+    API.post(`/post/${postId}/unVote`)
       .then((res) => {
         toast("Post n'est plus recommandé !", {
           className: 'ourYellowBg',
@@ -176,13 +148,7 @@ const Post = (props) => {
       })
   }
   const removeFav = () => {
-    API({
-      method: 'post',
-      url: `/post/${postId}/unlike`,
-      headers: {
-        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
-      },
-    })
+    API.post(`/post/${postId}/unlike`)
       .then((res) => {
         toast('Post retiré des favoris !', {
           className: 'ourYellowBg',
@@ -200,13 +166,7 @@ const Post = (props) => {
       })
   }
   const addFav = () => {
-    API({
-      method: 'post',
-      url: `/post/${postId}/like`,
-      headers: {
-        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
-      },
-    })
+    API.post(`/post/${postId}/like`)
       .then((res) => {
         toast('Post ajouté en Favoris!', {
           className: 'ourYellowBg',
@@ -223,7 +183,12 @@ const Post = (props) => {
         console.log(err)
       })
   }
-  if (loading) return <Gui><LoadingPage></LoadingPage></Gui>
+  if (loading)
+    return (
+      <Gui>
+        <LoadingPage></LoadingPage>
+      </Gui>
+    )
   return (
     <Gui>
       {post && post.postType === 'fiche' && (
@@ -270,7 +235,9 @@ const Post = (props) => {
                     className="h-16 m-2"
                     alt="user pp"
                   />
-                  <h1 className="font-bold self-center text-xl">{post.author}</h1>
+                  <h1 className="font-bold self-center text-xl">
+                    {post.author}
+                  </h1>
                 </div>
                 <TagsPost tags={post.tags}></TagsPost>
                 <div className="flex mt-5 gap-4">

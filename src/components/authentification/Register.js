@@ -5,7 +5,6 @@ import { useGlobalContext } from '../../util/context'
 
 const Register = () => {
   const { login, isLogin } = useGlobalContext()
-  
 
   const [email, setEmail] = useState('')
   const [username, setUsername] = useState('')
@@ -17,8 +16,8 @@ const Register = () => {
   const [errors, setErrors] = useState({})
   const [logged, setLogged] = useState(false)
   const [loading, setLoading] = useState(false)
-  
-  if (isLogin) return <Redirect to='/'/>
+
+  if (isLogin) return <Redirect to="/" />
   const handleSubmit = (e) => {
     e.preventDefault()
     setLoading(true)
@@ -27,9 +26,9 @@ const Register = () => {
       email,
       password,
       confirmPassword,
-      name : nom,
-      firstName : prenom,
-      institute : "gXTmLhOdR3veCAuePOCq" // TODO choose institute
+      name: nom,
+      firstName: prenom,
+      institute: 'gXTmLhOdR3veCAuePOCq', // TODO choose institute
     }
     API.post('/register', user)
       .then((res) => {
@@ -40,7 +39,7 @@ const Register = () => {
         setLogged(true)
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err)
         console.log(err.response.data)
         setErrors({ ...err.response.data })
         setLoading(false)

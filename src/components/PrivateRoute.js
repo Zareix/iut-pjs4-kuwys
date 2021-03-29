@@ -9,12 +9,7 @@ const PrivateRoute = ({ children, ...rest }) => {
   const { user, isLogin } = useGlobalContext()
 
   useEffect(() => {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
-      },
-    }
-    API.get('/user/notifications', config).then((res) => {
+    API.get('/user/notifications').then((res) => {
       user.notifications = res.data
     })
   })

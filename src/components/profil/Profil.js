@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import { Redirect, useParams } from 'react-router'
-import PerfectScrollbar from "react-perfect-scrollbar"
+import PerfectScrollbar from 'react-perfect-scrollbar'
 
 import API from '../../util/api'
 import { useGlobalContext } from '../../util/context'
@@ -24,12 +24,7 @@ const Profil = (props) => {
       setIsCurrentUser(true)
       setSelectedUser(user)
     }
-    API.get('user/' + username, {
-      headers: {
-        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
-      },
-    })
-      .then((res) => setSelectedUser(res.data))
+    API.get('user/' + username).then((res) => setSelectedUser(res.data))
   }, [])
 
   if (redirect) return <Redirect to="/profil/mesinformations"></Redirect>
@@ -85,14 +80,18 @@ const Profil = (props) => {
                   Les fiches et cours proposés par{' '}
                   <span className="ourYellow">{selectedUser.username}</span>
                 </h2>
-                {selectedUser.posts && <div>
-                  <PerfectScrollbar options={{
-                    wheelPropagation: false,
-                    suppressScrollX: true,
-                  }}>
-                    <AllPost type="fiche-cours" posts={selectedUser.posts} />
-                  </PerfectScrollbar>
-                </div>}
+                {selectedUser.posts && (
+                  <div>
+                    <PerfectScrollbar
+                      options={{
+                        wheelPropagation: false,
+                        suppressScrollX: true,
+                      }}
+                    >
+                      <AllPost type="fiche-cours" posts={selectedUser.posts} />
+                    </PerfectScrollbar>
+                  </div>
+                )}
               </div>
             </div>
           </div>

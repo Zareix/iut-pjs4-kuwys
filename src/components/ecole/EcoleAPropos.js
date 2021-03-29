@@ -2,7 +2,7 @@ import React from 'react'
 
 const EcoleAPropos = (props) => {
   const { institute } = props
-  
+
   return (
     <div>
       <h1 className="text-2xl ourYellow font-bold">{institute.libelle}</h1>
@@ -19,7 +19,7 @@ const EcoleAPropos = (props) => {
                   className="border ml-2 rounded-lg px-2 align-middle"
                   value={institute.adresse}
                   readOnly
-                ></input>
+                />
               </label>
             </div>
 
@@ -31,7 +31,7 @@ const EcoleAPropos = (props) => {
                   className="border ml-2 rounded-lg px-2 align-middle smallerInput"
                   value={institute.ville}
                   readOnly
-                ></input>
+                />
               </label>
 
               <label>
@@ -41,7 +41,7 @@ const EcoleAPropos = (props) => {
                   className="border ml-2 rounded-lg px-2 align-middle smallerInput"
                   value={institute.region}
                   readOnly
-                ></input>
+                />
               </label>
             </div>
 
@@ -54,7 +54,7 @@ const EcoleAPropos = (props) => {
                   className="border ml-2 w-full rounded-lg px-2 align-middle"
                   value={institute.description}
                   readOnly
-                ></textarea>
+                />
               </label>
             </div>
 
@@ -67,7 +67,7 @@ const EcoleAPropos = (props) => {
           </div>
         </fieldset>
         <div className="greyBox m-6 p-4 flex justify-center items-center">
-          <img src={institute.logo} />
+          <img src={institute.logo} alt="institute logo"/>
         </div>
       </div>
     </div>

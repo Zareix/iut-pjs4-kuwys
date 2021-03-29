@@ -5,7 +5,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import Avatar from '@material-ui/core/Avatar'
 
 import API from '../../util/api'
-import { useGlobalContext } from '../../util/context'
 
 const useStyles = makeStyles((theme) => ({
   large: {
@@ -15,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Bio = (props) => {
-  const { user } = useGlobalContext()
   const selectedUser = props.user
   const classes = useStyles()
 
@@ -27,7 +25,7 @@ const Bio = (props) => {
 
   let formD
 
-  const handleInputClickPp = (event) => {
+  const handleInputClickPp = (e) => {
     hiddenFileInput.current.click()
   }
 
@@ -41,20 +39,10 @@ const Bio = (props) => {
   }
 
   const updateBio = () => {
-    const token = window.localStorage.getItem('token')
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-    API.post(
-      '/userUpdateBio',
-      {
-        user: selectedUser,
-        bio: bio,
-      },
-      config
-    )
+    API.post('/userUpdateBio', {
+      user: selectedUser,
+      bio: bio,
+    })
       .then(() => {
         toast('Biographie mise à jour !', {
           className: 'ourYellowBg',
@@ -70,19 +58,12 @@ const Bio = (props) => {
           autoClose: 3000,
         })
         console.log(err)
-        console.log(err.response.data)
       })
   }
 
   const updatePP = () => {
     const endpoint = '/user/image'
-    const config = {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
-      },
-    }
-    API.post(endpoint, formD, config)
+    API.post(endpoint, formD)
   }
 
   return (

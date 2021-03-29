@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Gui from '../gui/Gui'
 import API from '../../util/api'
-import Pdf from '../Pdf'
 import TagsPost from '../tools/TagsPost'
 import Comments from '../tools/Comments'
 import Avatar from '@material-ui/core/Avatar'
@@ -30,17 +29,10 @@ const PostForum = (props) => {
       setSize((window.innerWidth * 5) / 6)
     })
 
-    const config = {
-      headers: {
-        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
-      },
-    }
-    API.get('/post/' + postId, config)
+    API.get('/post/' + postId)
       .then((res) => {
         setPost(res.data)
         setVotes(res.data.votes)
-        console.log(res.data)
-        console.log('OUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII');
         setLoading(false)
       })
       .catch((err) => {
@@ -51,9 +43,7 @@ const PostForum = (props) => {
 
   //TODO - To component, used in ButtonGrTravail
   const firebaseHorodatageToString = (timestamp) => {
-    //console.log('Time', timestamp)
     let date = new Date(timestamp * 1000)
-    //console.log(date);
     let dateString =
       dayToString(date.getDay()) +
       ' ' +
@@ -93,19 +83,12 @@ const PostForum = (props) => {
         return 'Vendredi'
       case 6:
         return 'Samedi'
+      default:
+        return 'Néant'
     }
   }
   const addComm = () => {
-    API({
-      method: 'post',
-      url: `/post/${postId}/comment`,
-      headers: {
-        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
-      },
-      data: {
-        body: comm,
-      },
-    })
+    API.post(`/post/${postId}/comment`, { body: comm })
       .then((res) => {
         toast('Commentaire ajouté !', {
           className: 'ourYellowBg',
@@ -114,7 +97,7 @@ const PostForum = (props) => {
           position: 'bottom-right',
           autoClose: 3000,
         })
-        setComm("")
+        setComm('')
         console.log(res.data)
       })
       .catch((err) => {
@@ -126,13 +109,7 @@ const PostForum = (props) => {
       })
   }
   const addVote = () => {
-    API({
-      method: 'post',
-      url: `/post/${postId}/vote`,
-      headers: {
-        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
-      },
-    })
+    API.post(`/post/${postId}/vote`)
       .then((res) => {
         toast('Post recommandé !', {
           className: 'ourYellowBg',
@@ -144,20 +121,13 @@ const PostForum = (props) => {
         setVotes(votes + 1)
         let isVote = true
         setPost({ ...post, isVote })
-        //console.log(res.data)
       })
       .catch((err) => {
         console.log(err)
       })
   }
   const removeVote = () => {
-    API({
-      method: 'post',
-      url: `/post/${postId}/unVote`,
-      headers: {
-        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
-      },
-    })
+    API.post(`/post/${postId}/unVote`)
       .then((res) => {
         toast("Post n'est plus recommandé !", {
           className: 'ourYellowBg',
@@ -176,13 +146,7 @@ const PostForum = (props) => {
       })
   }
   const removeFav = () => {
-    API({
-      method: 'post',
-      url: `/post/${postId}/unlike`,
-      headers: {
-        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
-      },
-    })
+    API.post(`/post/${postId}/unlike`)
       .then((res) => {
         toast('Post retiré des favoris !', {
           className: 'ourYellowBg',
@@ -200,13 +164,7 @@ const PostForum = (props) => {
       })
   }
   const addFav = () => {
-    API({
-      method: 'post',
-      url: `/post/${postId}/like`,
-      headers: {
-        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
-      },
-    })
+    API.post(`/post/${postId}/like`)
       .then((res) => {
         toast('Post ajouté en Favoris!', {
           className: 'ourYellowBg',
@@ -223,12 +181,18 @@ const PostForum = (props) => {
         console.log(err)
       })
   }
-  if (loading) return <Gui><LoadingPage></LoadingPage></Gui>
+  if (loading)
+    return (
+      <Gui>
+        <LoadingPage></LoadingPage>
+      </Gui>
+    )
   return (
     <Gui>
-      
-      {post &&(
-        <p className="md:mt-2 md:mb-2 text-3xl font-bold ourYellow">POST FORUM</p>
+      {post && (
+        <p className="md:mt-2 md:mb-2 text-3xl font-bold ourYellow">
+          POST FORUM
+        </p>
       )}
 
       <div className="w-full flex justify-center">
@@ -236,9 +200,8 @@ const PostForum = (props) => {
           <div className="md:grid-cols-1 border shadow-lg p-4 justify-center">
             {post && (
               <div className="grid p-4">
-                
                 <div className="flex border w-auto shadow-lg p-2">
-                {post && post.isFav ? (
+                  {post && post.isFav ? (
                     <AiFillStar
                       className="ourYellow text-2xl text-blue-400 hover:yellowDark cursor-pointer popUpEffect"
                       onClick={() => removeFav()}
@@ -254,7 +217,9 @@ const PostForum = (props) => {
                     className="h-16 m-2"
                     alt="user pp"
                   />
-                  <h1 className="font-bold self-center text-xl">{post.author}</h1>
+                  <h1 className="font-bold self-center text-xl">
+                    {post.author}
+                  </h1>
                 </div>
                 <TagsPost tags={post.tags}></TagsPost>
                 <div className="flex mt-5 gap-4">

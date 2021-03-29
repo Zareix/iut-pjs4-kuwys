@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
-import GuiMobile from "./GuiMobile"
-import GuiWideScreen from "./GuiWideScreen"
+import GuiMobile from './GuiMobile'
+import GuiWideScreen from './GuiWideScreen'
 
 const Gui = (props) => {
   const [isMobile, setIsMobile] = useState(false)
@@ -12,10 +12,14 @@ const Gui = (props) => {
 
   useEffect(() => {
     checkIsMobile()
-    window.addEventListener("resize", checkIsMobile)
+    window.addEventListener('resize', checkIsMobile)
   })
 
-  return isMobile ? <GuiMobile>{props.children}</GuiMobile> : <GuiWideScreen>{props.children}</GuiWideScreen>
+  return isMobile ? (
+    <GuiMobile>{props.children}</GuiMobile>
+  ) : (
+    <GuiWideScreen>{props.children}</GuiWideScreen>
+  )
 }
 
 export default Gui

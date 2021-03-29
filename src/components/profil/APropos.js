@@ -16,18 +16,12 @@ const APropos = () => {
   const [formations, setFormations] = useState('------')
 
   const updateUserInfo = () => {
-    const token = window.localStorage.getItem('token')
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
     API.post('/userUpdate', {
       user: user,
       firstName: firstName,
       name: name,
       birthday: birthday,
-    }, config)
+    })
       .then((res) => {
         toast('Informations mises à jour !', {
           className: 'ourYellowBg',

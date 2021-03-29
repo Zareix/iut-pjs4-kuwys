@@ -1,9 +1,7 @@
-import React, { useState, useContext, useEffect } from 'react'
-import ReactDOM from 'react-dom'
+import React, { useState } from 'react'
 import { Document, Page, pdfjs } from 'react-pdf/dist/esm/entry.webpack'
 import PropTypes from 'prop-types'
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
-import API from '../util/api'
 import {RiArrowRightCircleLine} from 'react-icons/ri'
 import {RiArrowLeftCircleLine} from 'react-icons/ri'
 
@@ -13,8 +11,7 @@ const Pdf = (props) => {
   const [numPages, setNumPages] = useState(null)
   const [pageNumber, setPageNumber] = useState(1)
 
-  const { type, width, firstPage, pdfUrl, titre } = props
-  //console.log(titre);
+  const { type, width, firstPage, pdfUrl } = props
 
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages)

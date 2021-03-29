@@ -13,25 +13,12 @@ const Parametres = () => {
   const [newPasswordConfirm, setNewPasswordConfirm] = useState('')
 
   const updatePassword = () => {
-    const token = window.localStorage.getItem('token')
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-    API({
-      method: 'post',
-      url: '/userUpdatePassword',
-      headers: {
-        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
-      },
-      data: {
-        user: user,
-        oldPassword: oldPassword,
-        newPassword: newPassword,
-        newPasswordConfirm: newPasswordConfirm,
-      },
-    }, config)
+    API.post('/userUpdatePassword', {
+      user: user,
+      oldPassword: oldPassword,
+      newPassword: newPassword,
+      newPasswordConfirm: newPasswordConfirm,
+    })
       .then((res) => {
         toast('Mot de passe mis à jour !', {
           className: 'ourYellowBg',
@@ -59,7 +46,7 @@ const Parametres = () => {
         <div className="grid gap-3">
           <label className="grid md:block">
             Ancien mot de passe :
-          <input
+            <input
               className="border ml-2 rounded-lg px-2 align-middle"
               value={oldPassword}
               onChange={(e) => setOldPassword(e.target.value)}
@@ -67,7 +54,7 @@ const Parametres = () => {
           </label>
           <label className="grid md:block">
             Nouveau mot de passe :
-          <input
+            <input
               className="border ml-2 rounded-lg px-2 align-middle"
               alue={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
@@ -75,7 +62,7 @@ const Parametres = () => {
           </label>
           <label className="grid md:block">
             Confirmer mot de passe :
-          <input
+            <input
               className="border ml-2 rounded-lg px-2 align-middle"
               alue={newPasswordConfirm}
               onChange={(e) => setNewPasswordConfirm(e.target.value)}
