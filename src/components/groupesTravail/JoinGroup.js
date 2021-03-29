@@ -47,17 +47,17 @@ const JoinGroup = (props) => {
             <DialogTitle id="alert-dialog-title">{"Voulez-vous réserver votre place dans ce groupe de travail ?"}</DialogTitle>
             <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                    <div className="grid grid-cols-2 grid-rows-2">
-                        <div className="cols-start-1 col-span-1 row-start-1 row-span-1">
+                    <div className="grid grid-cols-1 grid-rows-4 md:grid-cols-2 md:grid-rows-2">
+                        <div className="col-start-1 col-span-1 row-start-1 row-span-1 md:col-start-1 md:col-span-1 md:row-start-1 md:row-span-1">
                             <p className="font-bold">{group.lieu}</p>
                         </div>
-                        <div className="cols-start-2 col-span-1 row-start-1 row-span-1 flex justify-end">
+                        <div className="col-start-1 col-span-1 row-start-2 row-span-1 md:col-start-2 md:col-span-1 md:row-start-1 md:row-span-1 flex md:justify-end">
                             {dateMiseEnForme}
                         </div>
-                        <div className="cols-start-1 col-span-1 row-start-2 row-span-1 mt-3">
+                        <div className="col-start-1 col-span-1 row-start-3 row-span-1 md:col-start-1 md:col-span-1 md:row-start-2 md:row-span-1 mt-3">
                             {group.usersInGroup.length + 1} / {group.capaciteMax} participants
                         </div>
-                        <div className="cols-start-2 col-span-1 row-start-2 row-span-1 mt-3 flex justify-end">
+                        <div className="col-start-1 col-span-1 row-start-4 row-span-1 md:col-start-2 md:col-span-1 md:row-start-2 md:row-span-1 mt-3 flex md:justify-end">
                             <p>Il reste <span className="font-bold">{placesDisponibles}</span> places disponibles.</p>
                         </div>
                     </div>
