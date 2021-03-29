@@ -127,7 +127,7 @@ const AccueilUser = () => {
             Bienvenue{' '}
             <span className="ourMainFontColor">{user.firstName} !</span>
           </h1>
-          <div className="grid md:grid-cols-2 gap-y-6 md:gap-y-10 mt-4 font-semibold ourMainFontColor">
+          <div className="grid w-screen md:w-auto md:grid-cols-2 gap-y-6 md:gap-y-10 mt-4 font-semibold ourMainFontColor">
             <div className="flex flex-wrap justify-center justify-items-center items-start gap-8 md:py-4 text-center">
               <div
                 className="w-1/3 border rounded-xl p-4 shadow grid gap-2 justify-items-center cursor-pointer"
