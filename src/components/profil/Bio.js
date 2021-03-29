@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const Bio = () => {
+const Bio = (props) => {
   const { user } = useGlobalContext()
   const classes = useStyles()
 
@@ -92,48 +92,61 @@ const Bio = () => {
           src={selectedPP !== null ? selectedPPUrl : user.imageUrl}
           className={classes.large}
         />
-        <div className="w-full grid justify-center">
-          <div className="border ourMainFontColor text-xs mt-3 mx-4 py-1 px-2">
-            <button onClick={handleInputClickPp} className="w-full font-bold">
-              {selectedPP !== null
-                ? selectedPP.name
-                : 'Choisir sa photo de profil'}
-            </button>
-            <input
-              type="file"
-              ref={hiddenFileInput}
-              onChange={handleChange}
-              className="hidden"
-            />
+        {!props.readonly && (
+          <div className="w-full grid justify-center">
+            <div className="border ourMainFontColor text-xs mt-3 mx-4 py-1 px-2">
+              <button onClick={handleInputClickPp} className="w-full font-bold">
+                {selectedPP !== null
+                  ? selectedPP.name
+                  : 'Choisir sa photo de profil'}
+              </button>
+              <input
+                type="file"
+                ref={hiddenFileInput}
+                onChange={handleChange}
+                className="hidden"
+              />
+            </div>
+            {selectedPP !== null && (
+              <button
+                onClick={updatePP}
+                className="border bg-yellow-300 text-white text-xs mt-1 mx-4 py-1 px-2 rounded-full"
+              >
+                Changer de photo de profil
+              </button>
+            )}
           </div>
-          {selectedPP !== null && (
-            <button
-              onClick={updatePP}
-              className="border bg-yellow-300 text-white text-xs mt-1 mx-4 py-1 px-2 rounded-full"
-            >
-              Changer de photo de profil
-            </button>
-          )}
-        </div>
+        )}
       </div>
       <div className="py-4 md:col-span-2">
-        <h1 className="font-bold text-xl">{user.username}</h1>
+        <h1 className="font-bold text-xl ourYellow">{user.username}</h1>
         <h2 className="mt-2 mb-1">Mini-Biographie</h2>
-        <textarea
-          style={{ resize: 'none' }}
-          className="border w-full md:w-4/5 h-20 shadow-inner"
-          onChange={(e) => setBio(e.target.value)}
-          defaultValue={user.bio}
-          value={bio}
-        ></textarea>
-        <div className="grid justify-end w-4/5 mt-1">
-          <button
-            className="border bg-yellow-300 text-white font-bold text-xs h-6 px-2 rounded-full"
-            onClick={updateBio}
-          >
-            Modifier la biographie
-          </button>
-        </div>
+        {!props.readonly ? (
+          <textarea
+            style={{ resize: 'none' }}
+            className="border w-full md:w-4/5 h-20 shadow-inner"
+            onChange={(e) => setBio(e.target.value)}
+            defaultValue={user.bio}
+            value={bio}
+          ></textarea>
+        ) : (
+          <textarea
+            style={{ resize: 'none' }}
+            className="border w-full md:w-4/5 h-20 shadow-inner"
+            defaultValue={user.bio}
+            readOnly
+          ></textarea>
+        )}
+        {!props.readonly && (
+          <div className="grid justify-end w-4/5 mt-1">
+            <button
+              className="border bg-yellow-300 text-white font-bold text-xs h-6 px-2 rounded-full"
+              onClick={updateBio}
+            >
+              Modifier la biographie
+            </button>
+          </div>
+        )}
       </div>
     </div>
   )
