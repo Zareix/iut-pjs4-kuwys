@@ -53,7 +53,7 @@ const Profil = (props) => {
           </div>
           <div className="w-full flex justify-center mt-3">
             <div className="grid gap-8 w-full md:w-9/12">
-              <Bio readonly />
+              <Bio readonly user={selectedUser}/>
               <div className="newGroupResearchDiv h-50 p-4">
                 <h2 className="font-semibold text-lg ourMainFontColor">
                   En savoir plus sur{' '}
