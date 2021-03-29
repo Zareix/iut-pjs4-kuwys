@@ -145,7 +145,7 @@ const GroupesTravail = (props) => {
             className="col-start-1 col-span-1 row-start-1 row-span-1 mt-64 md:mt-0 md:col-span-1 md:col-start-2"
           >
             <p className="ourMainFontColor font-bold">Paramètre de recherche actuel</p>
-            <div className="grid grid-cols-1 md:grid-cols-5 md:grid-rows-2 md:mt-3 md:mb-3">
+            <div className="grid grid-cols-5 grid-rows-2 md:grid-cols-5 md:grid-rows-2 md:mt-3 md:mb-3">
               <div className="col-start-1 col-span-1 md:col-span-1 md:col-start-1 md:row-start-1 md:row-span-1 flex justify-end md:mr-4">
                 <RiArrowUpCircleFill className="text-4xl text-blue-400 hover:text-blue-500 cursor-pointer popUpEffect" onClick={() => settingUpLimiteDonnees()} />
               </div>

@@ -27,8 +27,8 @@ const Register = () => {
       email,
       password,
       confirmPassword,
-      prenom,
-      nom,
+      name : nom,
+      firstName : prenom,
       institute : "gXTmLhOdR3veCAuePOCq" // TODO choose institute
     }
     API.post('/register', user)
