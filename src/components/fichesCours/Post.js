@@ -22,7 +22,13 @@ const Post = (props) => {
     window.addEventListener('resize', () => {
       setSize((window.innerWidth * 5) / 6)
     })
-    API.get('/post/' + postId)
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+      },
+    }
+    API.get('/post/' + postId, config)
       .then((res) => {
         setPost(res.data)
         setVotes(res.data.votes)
