@@ -43,14 +43,14 @@ const AccueilUser = () => {
         Authorization: `Bearer ${window.localStorage.getItem('token')}`,
       },
     }
-    API.get('/user/' + user.username + '/groups', config).then((res) =>
+    API.get('/user/groups', config).then((res) =>
       setUserGroups(res.data)
     )
-    API.get('/user/' + user.username + '/favposts', config).then((res) =>
+    API.get('/user/favposts', config).then((res) =>
       setFavPosts(res.data)
     )
     API.get('/user/' + user.username, config).then((res) =>
-      setUserPosts(res.data)
+      setUserPosts(res.data.posts)
     )
     API.get('/user/lastSeenPosts', config).then((res) =>
       setLastSeenPost(res.data)
@@ -72,7 +72,6 @@ const AccueilUser = () => {
   }
 
   const checkHasFicheCours = (type, msg, setter) => {
-    console.log(userPosts)
     for (var p in userPosts) {
       if (userPosts[p].postType === type) {
         setter(true)
@@ -88,6 +87,8 @@ const AccueilUser = () => {
   const retour = () => {
     setIsFavCours(false)
     setIsFavFiches(false)
+    setIsCours(false)
+    setIsFiches(false)
   }
 
   return (
@@ -109,14 +110,14 @@ const AccueilUser = () => {
       ) : isFiches ? (
         <FavFiches
           title="Vos fiches"
-          posts={favPosts}
+          posts={userPosts}
           retour={retour}
           type="fiche"
         />
       ) : isCours ? (
         <FavFiches
           title="Vos cours"
-          posts={favPosts}
+          posts={userPosts}
           retour={retour}
           type="cours"
         />
@@ -133,7 +134,7 @@ const AccueilUser = () => {
                 onClick={() =>
                   checkHasFicheCours(
                     'cours',
-                    'Aucuns cours postés.',
+                    'Aucun cours posté.',
                     setIsCours
                   )
                 }
@@ -146,7 +147,7 @@ const AccueilUser = () => {
                 onClick={() =>
                   checkHasFicheCours(
                     'fiche',
-                    'Aucunes fiches postées.',
+                    'Aucune fiche postée.',
                     setIsFiches
                   )
                 }
@@ -159,7 +160,7 @@ const AccueilUser = () => {
                 onClick={() =>
                   checkHasFicheCoursFav(
                     'cours',
-                    'Aucuns cours favoris.',
+                    'Aucun cours favori.',
                     setIsFavCours
                   )
                 }
@@ -172,7 +173,7 @@ const AccueilUser = () => {
                 onClick={() =>
                   checkHasFicheCoursFav(
                     'fiche',
-                    'Aucunes fiches favorites.',
+                    'Aucune fiche favorite.',
                     setIsFavFiches
                   )
                 }
@@ -188,7 +189,7 @@ const AccueilUser = () => {
                   Vous n'avez aucun groupe de travail
                 </p>
               ) : (
-                <div className="greyBox mr-4 mt-2 ml-0 h-52">
+                <div className="greyBox mr-4 mt-2 ml-0 h-64">
                   <PerfectScrollbar options={scrollBarYConfig}>
                     {userGroups.map((g) => (
                       <ButtonGrTravail dataUneBibliotheque={g} />
@@ -206,7 +207,7 @@ const AccueilUser = () => {
                   <Link to="/fichescours">Découvrez les ici !</Link>
                 </p>
               ) : (
-                <div className="greyBox mr-4 mt-2 ml-0 h-52">
+                <div className="greyBox mr-4 mt-2 ml-0">
                   <PerfectScrollbar options={scrollBarXConfig}>
                     <AllPost
                       type="fiche"
@@ -224,7 +225,7 @@ const AccueilUser = () => {
                   <Link to="/fichescours">Découvrez les ici !</Link>
                 </p>
               ) : (
-                <div className="greyBox mr-4 mt-2 ml-0 h-52">
+                <div className="greyBox mr-4 mt-2 ml-0">
                   <PerfectScrollbar options={scrollBarXConfig}>
                     <AllPost
                       type="cours"
