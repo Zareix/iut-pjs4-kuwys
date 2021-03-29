@@ -114,30 +114,23 @@ const GroupesTravail = (props) => {
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
       </Helmet>
       <div id="LocationHeader">
-        <div className="grid grid-cols-1 gap-14 md:grid-cols-2 ourMainFontColor font-bold">
-          <div className="col-start-1 col-span-1 md:col-span-1 md:col-start-1 ">
-            <p>Chercher dans un périmètre</p>
-          </div>
-          <div className="col-start-2 col-span-1 md:col-span-1 md:col-start-2">
-            <p>Paramètre de recherche actuel</p>
-          </div>
-        </div>
-        <div className="grid grid-cols-1 gap-14 md:grid-cols-2">
-          <div className="col-start-1 col-span-1 md:col-span-1 md:col-start-1">
+        <div className="grid grid-cols-1 grid-rows-1 gap-14 md:grid-cols-2">
+          <div className="col-start-1 col-span-1 row-start-1 row-span-1 md:col-span-1 md:col-start-1">
+          <p className="ourMainFontColor font-bold">Chercher dans un périmètre</p>
             <div className="relative">
               <img className="m-auto" src={imgBarreRecherche} />
             </div>
             <div className="relative w-full text-center -top-2/4">
               <div className="flex justify-center">
-                <div style={{ borderColor: "#f7b91c" }} className="w-3/6 rounded-full bg-white border-solid border md:py-3 md:px-3 text-center flex justify-center">
+                <div style={{ borderColor: "#f7b91c" }} className="w-11/12 md:w-3/6 rounded-full bg-white border-solid border py-3 px-3 md:py-3 md:px-3 text-center flex justify-center">
                   <BsSearch className="text-2xl" />
-                  <input className="md:ml-3" name="firstName" placeholder="Adresse / Lieu / Ville" onChange={e => setChosenCity(e.target.value)} />
+                  <input className="ml-3 md:ml-3" name="firstName" placeholder="Adresse / Lieu / Ville" onChange={e => setChosenCity(e.target.value)} />
                 </div>
               </div>
               <div className="flex justify-center">
                 <div
                   id="ButtonAddNewGroup"
-                  className="w-52 flex items-center justify-center shadow-xl px-8 py-3 font-bold rounded-full text-white md:py-3 md:px-3 md:mt-20 buttonAddNewGrWork cursor-pointer popUpEffect"
+                  className="md:w-52 flex items-center justify-center shadow-xl px-5 py-2 mt-10 font-bold rounded-full text-white md:py-3 md:px-3 md:mt-20 buttonAddNewGrWork cursor-pointer popUpEffect"
                   onClick={() => getBiblioNearCity(limiteDonnees)}
                 >
                   <span className="md:pl-2 align-middle text-base" >
@@ -149,8 +142,9 @@ const GroupesTravail = (props) => {
 
           </div>
           <div
-            className="col-start-2 col-span-1 md:col-span-1 md:col-start"
+            className="col-start-1 col-span-1 row-start-1 row-span-1 mt-64 md:mt-0 md:col-span-1 md:col-start-2"
           >
+            <p className="ourMainFontColor font-bold">Paramètre de recherche actuel</p>
             <div className="grid grid-cols-1 md:grid-cols-5 md:grid-rows-2 md:mt-3 md:mb-3">
               <div className="col-start-1 col-span-1 md:col-span-1 md:col-start-1 md:row-start-1 md:row-span-1 flex justify-end md:mr-4">
                 <RiArrowUpCircleFill className="text-4xl text-blue-400 hover:text-blue-500 cursor-pointer popUpEffect" onClick={() => settingUpLimiteDonnees()} />

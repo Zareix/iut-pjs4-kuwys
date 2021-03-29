@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import DatePicker from 'react-date-picker';
 import TimePicker from 'react-time-picker';
 import { Link } from 'react-router-dom'
@@ -23,8 +23,11 @@ const NouveauGroupe = (props) => {
     const [limiteDonnees, setlimiteDonnees] = useState(5)
     const [capaciteMaxEntered, setCapaciteMaxEntered] = useState("5")
     const [selectedBibliotheque, setSelectedBibliotheque] = useState(null)
+    const [isCapaciteMaxEnteredInt, setIsCapaciteMaxEnteredInt] = useState(true)
+    const [isCapaciteMaxEnteredLessThirty, setIsCapaciteMaxEnteredLessThirty] = useState(true)
     const [dateGroup, setDateGroup] = useState()
     const [heureGroup, setHeureGroup] = useState()
+    const [canValidateNewGroup, setCanValidateNewGroup] = useState(true)
 
     let selectedMarker
 
@@ -110,39 +113,63 @@ const NouveauGroupe = (props) => {
     }
 
     const addNewGroupToDatabase = () => {
-        let timestamp = dateGroup
-        let heure = heureGroup.substring(0, 2)
-        let minutes = heureGroup.substring(5, 3)
-        let subHeure = parseInt(heure.substring(0, 1))
-        let subMinutes = parseInt(minutes.substring(0, 1))
-        if (subHeure == 0) {
-            heure = heure.substring(2, 1)
-        }
-        if (subMinutes == 0) {
-            minutes = minutes.substring(2, 1)
-        }
-        timestamp.setHours(heure)
-        timestamp.setMinutes(minutes)
+        if (isCapaciteMaxEnteredInt && isCapaciteMaxEnteredLessThirty && heureGroup !== undefined && dateGroup !== undefined && selectedBibliotheque !== null) {
+            setCanValidateNewGroup(true)
+            let timestamp = dateGroup
+            let heure = heureGroup.substring(0, 2)
+            let minutes = heureGroup.substring(5, 3)
+            let subHeure = parseInt(heure.substring(0, 1))
+            let subMinutes = parseInt(minutes.substring(0, 1))
+            if (subHeure == 0) {
+                heure = heure.substring(2, 1)
+            }
+            if (subMinutes == 0) {
+                minutes = minutes.substring(2, 1)
+            }
+            timestamp.setHours(heure)
+            timestamp.setMinutes(minutes)
 
-        console.log(timestamp.getTime());
+            console.log(timestamp.getTime());
 
-        const token = window.localStorage.getItem('token')
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
+            const token = window.localStorage.getItem('token')
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+
+            API.post("/library/addGroup",
+                {
+                    admin: user.username,
+                    capaciteMax: capaciteMaxEntered,
+                    horaire: timestamp.getTime(),
+                    lieu: selectedBibliotheque.address.amenity
+                }, config
+            )
+        } else {
+            setCanValidateNewGroup(false)
         }
-
-        API.post("/library/addGroup",
-            {
-                admin: user.username,
-                capaciteMax: capaciteMaxEntered,
-                horaire: timestamp.getTime(),
-                lieu: selectedBibliotheque.address.amenity
-            }, config
-        )
 
     }
+
+
+    useEffect(() => {
+        if (isNaN(capaciteMaxEntered)) {
+            setIsCapaciteMaxEnteredInt(false)
+            setIsCapaciteMaxEnteredLessThirty(true)
+            setCanValidateNewGroup(true)
+        }
+        else {
+            setCanValidateNewGroup(true)
+            setIsCapaciteMaxEnteredInt(true)
+            if (parseInt(capaciteMaxEntered) < 31)
+                setIsCapaciteMaxEnteredLessThirty(true)
+            else
+                setIsCapaciteMaxEnteredLessThirty(false)
+        }
+
+    }, [capaciteMaxEntered])
+
 
     return (
         <HelmetProvider>
@@ -154,11 +181,11 @@ const NouveauGroupe = (props) => {
                     ></script>
                     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
                 </Helmet>
-                <div className="grid grid-cols-1 gap-10 md:grid-cols-7 ourMainFontColor font-bold mb-4">
-                    <div className="col-start-1 col-span-1 md:col-span-3 md:col-start-2 ">
+                <div className="grid grid-cols-1 gap-10 md:grid-cols-2 ourMainFontColor font-bold mb-4">
+                    <div className="col-start-1 col-span-1 md:col-span-1 md:col-start-1 ">
                         <p>Chercher dans un périmètre</p>
                     </div>
-                    <div className="col-start-2 col-span-1 md:col-start-5 md:col-span-3">
+                    <div className="col-start-2 col-span-1 md:col-start-2 md:col-span-1">
                         <p>Paramètre de recherche actuel</p>
                     </div>
                 </div>
@@ -225,6 +252,8 @@ const NouveauGroupe = (props) => {
                         </div>
                         <div className="col-start-2 col-span-1 row-start-2 row-span-1">
                             <input className="border border-gray-300 rounded w-9/12 py-1 px-3" id="idBibliotheque" name="bibliotheque" placeholder="Entrer un nombre de personnes" value={capaciteMaxEntered} onChange={(e) => { setCapaciteMaxEntered(e.target.value) }} />
+                            {!isCapaciteMaxEnteredInt && <p className="text-sm text-red-800 ">La capacité maximale doit être un nombre.</p>}
+                            {!isCapaciteMaxEnteredLessThirty && <p className="text-sm text-red-800 ">La capacité maximale doit être inférieure ou égale à 30.</p>}
                         </div>
                     </div>
 
@@ -264,8 +293,11 @@ const NouveauGroupe = (props) => {
                                     VALIDER
                                 </span>
                             </div>
+                            
                         </div>
                     </div>
+                    {!canValidateNewGroup && <p className="text-sm text-red-800 mt-5 text-center font-semibold">Renseignements incorrects. Veuillez vérifier les données entrées.</p>}
+                            
                 </div>
 
             </Gui>
