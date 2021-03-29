@@ -8,13 +8,12 @@ const ItemFiche = (props) => {
 
   return (
     <div className="popUpEffect" >
-      <Link
+      
+        <div className="fiches w-64">
+          <figure className="grid justify-items-center bg-yellow-100 border-2 rounded-xl p-8"><Link
         to={{
           pathname: `/fiche/${post.id}`,
-        }}
-      >
-        <div className="fiches w-64">
-          <figure className="grid justify-items-center bg-yellow-100 border-2 rounded-xl p-8">
+        }}>
             <Pdf
               titre={post.title}
               pdfUrl={
@@ -28,17 +27,13 @@ const ItemFiche = (props) => {
             />
 
             <div className="pt-6 space-y-4">
-              <blockquote>
                 <p className="text-lg font-semibold">{post.title}</p>
-              </blockquote>
-              <figcaption className="font-medium">
-                <div className="text-cyan-600"></div>
-                <div></div>
-              </figcaption>
             </div>
+            </Link>
+            <Link to={{
+            }}><p className="text-lg">{post.author}</p></Link>
           </figure>
         </div>
-      </Link>
     </div>
   )
 }

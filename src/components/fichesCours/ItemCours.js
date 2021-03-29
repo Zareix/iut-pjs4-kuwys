@@ -5,21 +5,20 @@ import { Link } from 'react-router-dom'
 const ItemCours = (props) => {
   const { post } = props
 
-  return <div className="popUpEffect"><Link to={{
-    pathname: `/cours/${post.id}`
-  }}><div className="cours">
+  return <div className="popUpEffect"><div className="cours">
     <figure className="grid justify-items-center bg-yellow-100 border-2 rounded-xl p-8">
-      <div className="pt-6 space-y-4">
-        <blockquote>
-          <Link to="/"><p className="text-lg font-semibold">{post.title}</p></Link>
-        </blockquote>
-        <figcaption className="font-medium">
-          <div className="text-cyan-600"></div>
-          <div></div>
-        </figcaption>
+    <Link to={{
+    pathname: `/cours/${post.id}`
+    }}>
+      <div className="space-y-4">
+          <p className="text-lg font-semibold">{post.title}</p>
+          
       </div>
+    </Link>
+    <Link to={{
+    }}><p className="text-lg">{post.author}</p></Link>
     </figure>
-  </div></Link></div>
+  </div></div>
 }
 
 export default ItemCours

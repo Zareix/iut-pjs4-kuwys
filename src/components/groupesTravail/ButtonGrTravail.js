@@ -18,7 +18,7 @@ const ButtonGrTravail = (props) => {
   var participants = props.dataUneBibliotheque.usersInGroup.length + 1
   //TODO - to component, used in Fiche
   const firebaseHorodatageToString = (timestamp) => {
-    console.log(timestamp)
+    //console.log(timestamp)
     let date = new Date(timestamp * 1000);
     let dateString = dayToString(date.getDay()) + " " + beautifyingDate(date.getDate()) + "/" + beautifyingDate(date.getMonth()) + " - " + beautifyingDate(date.getHours()) + "h" + beautifyingDate(date.getMinutes())
     return dateString
