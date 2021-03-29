@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 
 import { toast } from 'react-toastify'
+import PerfectScrollbar from 'react-perfect-scrollbar'
+import 'react-perfect-scrollbar/dist/css/styles.css'
 
 import { ReactComponent as FavCoursIcon } from '../../svg/024-file.svg'
 import { ReactComponent as FavFichesIcon } from '../../svg/025-file-1.svg'
@@ -11,6 +13,7 @@ import FavFiches from './FavFiches'
 import API from '../../util/api'
 import Gui from '../gui/Gui'
 import ButtonGrTravail from '../groupesTravail/ButtonGrTravail'
+import { Link } from 'react-router-dom'
 
 const AccueilUser = () => {
   const { user } = useGlobalContext()
@@ -18,6 +21,17 @@ const AccueilUser = () => {
   const [isFavFiches, setIsFavFiches] = useState(false)
   const [favPosts, setFavPosts] = useState([])
   const [userGroups, setUserGroups] = useState([])
+  const [userPosts, setUserPosts] = useState([])
+
+  const scrollBarXConfig = {
+    wheelPropagation: false,
+    suppressScrollY : true
+  }
+
+  const scrollBarYConfig = {
+    wheelPropagation: false,
+    suppressScrollX : true
+  }
 
   useEffect(() => {
     const config = {
@@ -75,9 +89,9 @@ const AccueilUser = () => {
             <span className="ourMainFontColor">{user.firstName} !</span>
           </h1>
           <div className="grid md:grid-cols-2 gap-y-6 md:gap-y-10 mt-4 font-semibold ourMainFontColor">
-            <div className="flex justify-center md:p-4 pl-0 text-center">
+            <div className="flex justify-center items-start gap-8 md:py-4 text-center">
               <div
-                className="w-1/2 md:w-1/3 border rounded-xl m-2 p-4 shadow grid gap-2 justify-center justify-items-center cursor-pointer"
+                className="w-1/3 border rounded-xl p-4 shadow grid gap-2 justify-items-center cursor-pointer"
                 onClick={() =>
                   checkHasFicheCours(
                     'cours',
@@ -90,7 +104,7 @@ const AccueilUser = () => {
                 <p>Cours favoris</p>
               </div>
               <div
-                className="w-1/2 md:w-1/3 border rounded-xl m-2 p-4 shadow grid gap-2 justify-center justify-items-center cursor-pointer"
+                className="w-1/3 border rounded-xl p-4 shadow grid gap-2 justify-items-center cursor-pointer"
                 onClick={() =>
                   checkHasFicheCours(
                     'fiche',
@@ -105,20 +119,54 @@ const AccueilUser = () => {
             </div>
             <div>
               <h2>Mes groupes de travail</h2>
-              <div className="greyBox m-6 ml-0">
-                {userGroups.map((g) => (
-                  <ButtonGrTravail dataUneBibliotheque={g}/>
-                ))}
-              </div>
+              {userGroups.length === 0 ? (
+                <p className="ml-2 font-normal">
+                  Vous n'avez aucun groupe de travail
+                </p>
+              ) : (
+                <div className="greyBox mr-4 mt-2 ml-0 h-52">
+                  <PerfectScrollbar options={scrollBarYConfig}>
+                    {userGroups.map((g) => (
+                      <ButtonGrTravail dataUneBibliotheque={g} />
+                    ))}
+                  </PerfectScrollbar>
+                </div>
+              )}
             </div>
 
             <div>
-              <h2>Dernières fiches consultées</h2>
-              <div className="greyBox m-6 ml-0">fiche</div>
+              <h2>Vos fiches</h2>
+              {userPosts.length === 0 ? (
+                <p className="ml-2 font-normal">
+                  Vous n'avez aucune fiche.{' '}
+                  <Link to="/fichescours">Postez votre première fiche !</Link>
+                </p>
+              ) : (
+                <div className="greyBox mr-4 mt-2 ml-0 h-52">
+                  <PerfectScrollbar options={scrollBarXConfig}>
+                    {userPosts.map((p) => (
+                      <p>todo</p>
+                    ))}
+                  </PerfectScrollbar>
+                </div>
+              )}
             </div>
             <div>
-              <h2>Derniers cours consultés</h2>
-              <div className="greyBox m-6 ml-0">cours</div>
+              <h2>Vos cours</h2>
+              {userPosts.length === 0 ? (
+                <p className="ml-2 font-normal">
+                  Vous n'avez aucun cours.{' '}
+                  <Link to="/fichescours">Postez votre premier cours !</Link>
+                </p>
+              ) : (
+                <div className="greyBox mr-4 mt-2 ml-0 h-52">
+                  <PerfectScrollbar options={scrollBarXConfig}>
+                    {userPosts.map((p) => (
+                      <p>todo</p>
+                    ))}
+                  </PerfectScrollbar>
+                </div>
+              )}
             </div>
           </div>
         </div>

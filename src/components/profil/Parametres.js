@@ -52,7 +52,7 @@ const Parametres = () => {
   }
 
   return (
-    <div className="grid border h-50 shadow-lg p-4 gap-3 text-lg">
+    <div className="grid h-50 p-4 gap-3 text-lg newGroupResearchDiv">
       <h1 className="font-bold text-2xl ml-2">Paramètres</h1>
       <fieldset className="border px-4 pb-3 pt-2 md:mx-7 bg-gray-50">
         <legend className="ml-4 font-semibold px-2">Mot de passe</legend>

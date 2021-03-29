@@ -1,12 +1,22 @@
 import React, { useState, useRef } from 'react'
 
 import { toast } from 'react-toastify'
+import { makeStyles } from '@material-ui/core/styles'
+import Avatar from '@material-ui/core/Avatar'
 
 import API from '../../util/api'
 import { useGlobalContext } from '../../util/context'
 
+const useStyles = makeStyles((theme) => ({
+  large: {
+    width: theme.spacing(12),
+    height: theme.spacing(12),
+  },
+}))
+
 const Bio = () => {
   const { user } = useGlobalContext()
+  const classes = useStyles()
 
   const [bio, setBio] = useState()
   const [selectedPP, setSelectedPP] = useState(null)
@@ -36,10 +46,14 @@ const Bio = () => {
         Authorization: `Bearer ${token}`,
       },
     }
-    API.post('/userUpdateBio', {
-      user: user,
-      bio: bio,
-    }, config)
+    API.post(
+      '/userUpdateBio',
+      {
+        user: user,
+        bio: bio,
+      },
+      config
+    )
       .then((res) => {
         toast('Biographie mise à jour !', {
           className: 'ourYellowBg',
@@ -65,19 +79,19 @@ const Bio = () => {
       headers: {
         'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${window.localStorage.getItem('token')}`,
-      }
+      },
     }
     API.post(endpoint, formD, config)
   }
 
   return (
-    <div className="grid md:grid-cols-3 border h-50 shadow-lg p-4">
-      <div className="grid justify-center justify-items-center content-start col-span-1 mx-2">
-        <img
+    <div className="grid md:grid-cols-3 h-50 p-4 newGroupResearchDiv">
+      <div className="grid justify-items-center content-center col-span-1 mx-2">
+        <Avatar
+          alt="user pp avatar"
           src={selectedPP !== null ? selectedPPUrl : user.imageUrl}
-          className="h-36 object-contain"
-          alt="profil pp"
-        ></img>
+          className={classes.large}
+        />
         <div className="w-full grid justify-center">
           <div className="border ourMainFontColor text-xs mt-3 mx-4 py-1 px-2">
             <button onClick={handleInputClickPp} className="w-full font-bold">

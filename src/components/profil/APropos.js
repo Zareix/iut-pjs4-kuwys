@@ -48,7 +48,7 @@ const APropos = () => {
   }
 
   return (
-    <div className="grid border h-50 shadow-lg p-4 gap-3 text-lg">
+    <div className="grid h-50 newGroupResearchDiv p-4 gap-3 text-lg">
       <h1 className="font-bold text-2xl ml-2">A propos</h1>
       <div className="grid gap-4 md:mx-7">
         <div className="grid md:flex gap-2 md:gap-10">
