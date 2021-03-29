@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { Link, NavLink } from 'react-router-dom'
 import { useGlobalContext } from '../../util/context'
 import { makeStyles } from '@material-ui/core/styles'
 import Avatar from '@material-ui/core/Avatar'
+import Badge from '@material-ui/core/Badge'
 
 import iconNotification from '../../svg/iconNotifications.svg'
 import dmNNotification from '../../svg/iconDm.svg'
@@ -20,6 +21,22 @@ const NavigationPanel = (props) => {
   const { user, logout } = useGlobalContext()
   const classes = useStyles()
 
+  const [invisibleValue, setInvisibleValue] = useState(true)
+
+  useEffect(() => {
+    if (user.notifications !== undefined) {
+      user.notifications.forEach((n) => {
+        if (n.seen === false) {
+          console.log(n.seen)
+          setInvisibleValue(false)
+          console.log(invisibleValue)
+        }
+      }
+        , [])
+    }
+  })
+
+
   const { deconnexion } = props
 
   return (
@@ -33,19 +50,21 @@ const NavigationPanel = (props) => {
         <p>{user.username}</p>
       </Link>
       <div className="grid grid-cols-2 gap-10">{/* icons */}
-      <Avatar
+        <Avatar
           alt="notifications logo"
           src={dmNNotification}
           className={classes.large}
         />
-        <NavLink to="/notifications">
-        <Avatar
-          alt="notifications logo"
-          src={iconNotification}
-          className={classes.large}
-        />
-        </NavLink>
-        
+        <Badge color="secondary" overlap="circle" badgeContent=" " invisible={invisibleValue}>
+          <NavLink to="/notifications">
+            <Avatar
+              alt="notifications logo"
+              src={iconNotification}
+              className={classes.large}
+            />
+          </NavLink>
+        </Badge>
+
       </div>
       <div className="grid gap-4 w-2/3 md:w-full md:mt-8">
         <NavLink to="/accueil" activeClassName="font-semibold">

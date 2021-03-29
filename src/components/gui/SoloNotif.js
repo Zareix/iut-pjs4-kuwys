@@ -12,7 +12,7 @@ const SoloNotif = (props) => {
             <div className="col-start-1 col-span-1">
                 IMG
             </div>
-            <div className="col-start-2 col-span-6 font-semibold">
+            <div className="col-start-2 col-span-6 md:font-bold ourMainFontColor">
                 {props.dataNotif.desc}
             </div>
             
