@@ -4,20 +4,27 @@ import API from '../../util/api'
 import Pdf from '../Pdf'
 import TagsPost from '../tools/TagsPost'
 import Comments from '../tools/Comments'
+import Avatar from '@material-ui/core/Avatar'
 
-import { RiArrowUpCircleFill,RiArrowDownCircleFill } from 'react-icons/ri';
+import {
+  AiOutlineLike,
+  AiFillLike,
+  AiOutlineStar,
+  AiFillStar,
+} from 'react-icons/ai'
 import { toast } from 'react-toastify'
+import LoadingPage from '../loadingPage/LoadingPage'
 
 const Post = (props) => {
   const [post, setPost] = useState()
   const [size, setSize] = useState(false)
   const [comm, setComm] = useState()
-  const [votes,setVotes] = useState(0)
+  const [votes, setVotes] = useState(0)
+  const [loading, setLoading] = useState(false)
   let postId = props.match.params.postId
-  let clDiv = ""
 
   useEffect(() => {
-    
+    setLoading(true)
     setSize((window.innerWidth * 4) / 6)
     window.addEventListener('resize', () => {
       setSize((window.innerWidth * 5) / 6)
@@ -33,13 +40,15 @@ const Post = (props) => {
         setPost(res.data)
         setVotes(res.data.votes)
         console.log(res.data)
+        console.log('OUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII');
+        setLoading(false)
       })
       .catch((err) => {
+        setLoading(false)
         console.log(err)
       })
   }, [])
-  if (post && post.postType ==='fiche') clDiv="grid md:grid-cols-2 gap-3 w-full"
-  else if (post && post.postType ==='cours')clDiv="grid gap-3 w-full"
+
   //TODO - To component, used in ButtonGrTravail
   const firebaseHorodatageToString = (timestamp) => {
     //console.log('Time', timestamp)
@@ -55,7 +64,7 @@ const Post = (props) => {
       beautifyingDate(date.getHours()) +
       'h' +
       beautifyingDate(date.getMinutes())
-    
+
     return dateString
   }
 
@@ -87,7 +96,6 @@ const Post = (props) => {
     }
   }
   const addComm = () => {
-
     API({
       method: 'post',
       url: `/post/${postId}/comment`,
@@ -99,8 +107,6 @@ const Post = (props) => {
       },
     })
       .then((res) => {
-        
-        
         toast('Commentaire ajouté !', {
           className: 'ourYellowBg',
           style: { color: 'white' },
@@ -108,6 +114,7 @@ const Post = (props) => {
           position: 'bottom-right',
           autoClose: 3000,
         })
+        setComm("")
         console.log(res.data)
       })
       .catch((err) => {
@@ -127,7 +134,16 @@ const Post = (props) => {
       },
     })
       .then((res) => {
-        setVotes(votes+1)
+        toast('Post recommandé !', {
+          className: 'ourYellowBg',
+          style: { color: 'white' },
+          progressStyle: { background: 'white' },
+          position: 'bottom-right',
+          autoClose: 3000,
+        })
+        setVotes(votes + 1)
+        let isVote = true
+        setPost({ ...post, isVote })
         //console.log(res.data)
       })
       .catch((err) => {
@@ -143,22 +159,82 @@ const Post = (props) => {
       },
     })
       .then((res) => {
-        setVotes(votes-1)
-        //console.log(res.data)
+        toast("Post n'est plus recommandé !", {
+          className: 'ourYellowBg',
+          style: { color: 'white' },
+          progressStyle: { background: 'white' },
+          position: 'bottom-right',
+          autoClose: 3000,
+        })
+        setVotes(votes - 1)
+        let isVote = false
+        setPost({ ...post, isVote })
+        console.log(res.data)
       })
       .catch((err) => {
         console.log(err)
       })
   }
+  const removeFav = () => {
+    API({
+      method: 'post',
+      url: `/post/${postId}/unlike`,
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+      },
+    })
+      .then((res) => {
+        toast('Post retiré des favoris !', {
+          className: 'ourYellowBg',
+          style: { color: 'white' },
+          progressStyle: { background: 'white' },
+          position: 'bottom-right',
+          autoClose: 3000,
+        })
+        let isFav = false
+        setPost({ ...post, isFav })
+        console.log(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+  const addFav = () => {
+    API({
+      method: 'post',
+      url: `/post/${postId}/like`,
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+      },
+    })
+      .then((res) => {
+        toast('Post ajouté en Favoris!', {
+          className: 'ourYellowBg',
+          style: { color: 'white' },
+          progressStyle: { background: 'white' },
+          position: 'bottom-right',
+          autoClose: 3000,
+        })
+        let isFav = true
+        setPost({ ...post, isFav })
+        console.log(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+  if (loading) return <Gui><LoadingPage></LoadingPage></Gui>
   return (
     <Gui>
-
-      {post && post.postType === 'fiche' && (<p className="md:mt-2 md:mb-2 text-3xl font-bold ourYellow">FICHE</p>)}
-      {post && post.postType === 'cours' && (<p className="md:mt-2 md:mb-2 text-3xl font-bold ourYellow">COURS</p>)}
+      {post && post.postType === 'fiche' && (
+        <p className="md:mt-2 md:mb-2 text-3xl font-bold ourYellow">FICHE</p>
+      )}
+      {post && post.postType === 'cours' && (
+        <p className="md:mt-2 md:mb-2 text-3xl font-bold ourYellow">COURS</p>
+      )}
 
       <div className="w-full flex justify-center">
-        <div className={clDiv}>
-        {post && post.postType === 'fiche' && (
+        <div className="grid md:grid-cols-2 gap-3 w-full">
           <div className="flex border h-50 shadow-lg p-4 justify-center">
             {post && (
               <Pdf
@@ -170,44 +246,69 @@ const Post = (props) => {
                 }
                 type="canvas"
                 firstPage={false}
-                width={(window.innerWidth <= 768)?  size:(size / 2)}
+                width={window.innerWidth <= 768 ? size : size / 2}
               />
             )}
-          </div>)}
+            {post && post.isFav ? (
+              <AiFillStar
+                className="ourYellow text-2xl text-blue-400 hover:yellowDark cursor-pointer popUpEffect"
+                onClick={() => removeFav()}
+              />
+            ) : (
+              <AiOutlineStar
+                className="ourYellow text-2xl text-blue-400 hover:yellowDark cursor-pointer popUpEffect"
+                onClick={() => addFav()}
+              />
+            )}
+          </div>
           <div className="md:grid-cols-1 border shadow-lg p-4 justify-center">
             {post && (
               <div className="grid p-4">
                 <div className="flex border w-auto shadow-lg p-2">
-                  <img src={post.userImage} className="h-16 m-2" alt="profil pp"></img>
-                  <h1 className="font-bold text-xl">{post.author}</h1>
+                  <Avatar
+                    src={post.userImage}
+                    className="h-16 m-2"
+                    alt="user pp"
+                  />
+                  <h1 className="font-bold self-center text-xl">{post.author}</h1>
                 </div>
                 <TagsPost tags={post.tags}></TagsPost>
                 <div className="flex mt-5 gap-4">
                   <div className="justify-items-center">
-                    <RiArrowUpCircleFill className="text-2xl text-blue-400 hover:text-blue-500 cursor-pointer popUpEffect" onClick={() => addVote()} />
-                    <p className="font-semibold text-center ourMainFontColor">{votes}</p>
-                    <RiArrowDownCircleFill className="text-2xl text-blue-400 hover:text-blue-500 cursor-pointer popUpEffect" onClick={() => removeVote()} />
+                    {post && post.isVote ? (
+                      <AiFillLike
+                        className="text-2xl text-blue-400 hover:text-blue-500 cursor-pointer popUpEffect"
+                        onClick={() => removeVote()}
+                      />
+                    ) : (
+                      <AiOutlineLike
+                        className="text-2xl text-blue-400 hover:text-blue-500 cursor-pointer popUpEffect"
+                        onClick={() => addVote()}
+                      />
+                    )}
+                    <p className="font-semibold text-center ourMainFontColor">
+                      {votes}
+                    </p>
                   </div>
                   <div>
                     <h1 className="font-bold text-xl">{post.title}</h1>
                     <p>{firebaseHorodatageToString(post.createdAt)}</p>
                   </div>
-                  
                 </div>
                 <p className=" my-4 flex text-justify">{post.body}</p>
                 <div className="mt-2">
-                  
-                  
                   <div className="p-4 rounded-xl mt-5 border-2 border-gray h-52 overflow-y-auto">
-                    {post &&(<Comments comments={post.comments}></Comments>)}
-                    <h2 className="m-2 font-bold">Ajouter un commentaire</h2>
-                    <textarea
-                      style={{ resize: 'none' }}
-                      className="  border w-full h-20 shadow-inner"
-                      onChange={(e) => setComm(e.target.value)}
-                      placeholder="Ecivez de belles choses"
-                    ></textarea>
-                    <div className="grid justify-end w-full mt-1">
+                    {post && <Comments comments={post.comments}></Comments>}
+                  </div>
+                  <h2 className="m-2 font-bold">Ajouter un commentaire</h2>
+                  <textarea
+                    style={{ resize: 'none' }}
+                    className="  border w-full h-20 shadow-inner"
+                    value={comm}
+                    onChange={(e) => setComm(e.target.value)}
+                    placeholder="Ecivez de belles choses"
+                  />
+                  <div className="grid justify-end w-full mt-1">
                     <button
                       className="border bg-yellow-300 text-white font-bold text-xs h-6 px-2 rounded-full"
                       onClick={addComm}
@@ -215,8 +316,6 @@ const Post = (props) => {
                       Envoyer son commentaire
                     </button>
                   </div>
-                  </div>
-                  
                 </div>
               </div>
             )}

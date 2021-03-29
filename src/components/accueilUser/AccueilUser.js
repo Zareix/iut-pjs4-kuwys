@@ -103,7 +103,7 @@ const AccueilUser = () => {
                 <p>Cours favoris</p>
               </div>
               <div
-                className="w-1/3 border rounded-xl p-4 shadow grid gap-2 justify-items-center cursor-pointer"
+                className="w-1/3 border rounded-xl p-4 pl-0 shadow grid gap-2 justify-items-center cursor-pointer"
                 onClick={() =>
                   checkHasFicheCours(
                     'fiche',
@@ -119,7 +119,7 @@ const AccueilUser = () => {
             <div>
               <h2>Mes groupes de travail</h2>
               {userGroups.length === 0 ? (
-                <p className="ml-2 font-normal">
+                <p className="font-normal">
                   Vous n'avez aucun groupe de travail
                 </p>
               ) : (
@@ -136,7 +136,7 @@ const AccueilUser = () => {
             <div>
               <h2>Vos fiches</h2>
               {userPosts.length === 0 ? (
-                <p className="ml-2 font-normal">
+                <p className="font-normal">
                   Vous n'avez aucune fiche.{' '}
                   <Link to="/fichescours">Postez votre première fiche !</Link>
                 </p>
@@ -153,7 +153,7 @@ const AccueilUser = () => {
             <div>
               <h2>Vos cours</h2>
               {userPosts.length === 0 ? (
-                <p className="ml-2 font-normal">
+                <p className="font-normal">
                   Vous n'avez aucun cours.{' '}
                   <Link to="/fichescours">Postez votre premier cours !</Link>
                 </p>

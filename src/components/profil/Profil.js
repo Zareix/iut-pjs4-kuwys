@@ -37,11 +37,33 @@ const Profil = () => {
           <Bio readonly />
           <div className="newGroupResearchDiv h-50 p-4">
             <h2 className="font-semibold ourMainFontColor">
-              En savoir plus sur <span className="ourYellow">{user.username}</span>
+              En savoir plus sur{' '}
+              <span className="ourYellow">{user.username}</span>
             </h2>
-            <label>
-              <input></input>
-            </label>
+            <div className="grid gap-2 mt-3">
+              <label>
+                Actuellement étudiant en :
+                <input
+                  value={user.institute.libelle}
+                  readOnly
+                  className="border ml-2 rounded-lg px-2 align-middle largerInputOnMobile"
+                ></input>
+              </label>
+              <label className="grid md:block">
+                Niveau d'études :
+                <input
+                  defaultValue={user.studyLevel}
+                  readOnly
+                  className="border ml-2 rounded-lg px-2 align-middle largerInputOnMobile"
+                ></input>
+              </label>
+            </div>
+          </div>
+          <div className="newGroupResearchDiv h-50 p-4">
+            <h2 className="font-semibold ourMainFontColor">
+              Les fiches et cours proposés par {' '}
+              <span className="ourYellow">{user.username}</span>
+            </h2>
           </div>
         </div>
       </div>

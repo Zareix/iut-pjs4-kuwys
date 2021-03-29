@@ -54,12 +54,15 @@ const Comments = (props) => {
   return <div className="w-full">
       {
       comments.map(c => {
-          return <div key={c.id} className="rounded-xl border w-auto shadow-lg p-2">
+          return <div key={c.id} className="rounded-xl my-3 border w-auto p-2">
               <div className="flex">
               <img src={c.userImage} className="h-10 m-2" alt="profil pp"></img>
+              <div className="grid">
               <h1 className="font-bold text-md">{c.username}</h1>
+              <p className="my-1">{firebaseHorodatageToString(c.createdAt._seconds)}</p>
               </div>
-              <p className="mx-2">{firebaseHorodatageToString(c.createdAt._seconds)}</p>
+              </div>
+              
               <p className=" m-4 flex text-justify">{c.body}</p>
             </div>
       })}
