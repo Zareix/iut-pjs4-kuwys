@@ -24,14 +24,23 @@ const AllPost = (props) => {
           )
       )}
       </div>
-      case 'forum':
-        return <div className="grid gap-4 flex-nowrap p-4"> {posts.map(
-          (post) =>
-            post.postType === 'cours' && (
-              <ItemPostForum post={post} key={post.id}></ItemPostForum>
-            )
-        )}
-        </div>
+    case 'fiche-cours':
+      return <div className="flex gap-4 flex-nowrap p-4"> {posts.map(
+        (post) =>
+          post.postType === 'cours' ? (
+            <ItemCours post={post} key={post.id}></ItemCours>
+          ) : post.postType === 'fiche' && (
+            <ItemFiche post={post} key={post.id}></ItemFiche>)
+      )}
+      </div>
+    case 'forum':
+      return <div className="grid gap-4 flex-nowrap p-4"> {posts.map(
+        (post) =>
+          post.postType === 'cours' && (
+            <ItemPostForum post={post} key={post.id}></ItemPostForum>
+          )
+      )}
+      </div>
     default:
       return <div></div>
   }

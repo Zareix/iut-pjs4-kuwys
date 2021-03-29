@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Bio = (props) => {
   const { user } = useGlobalContext()
+  const selectedUser = props.user
   const classes = useStyles()
 
   const [bio, setBio] = useState()
@@ -49,12 +50,12 @@ const Bio = (props) => {
     API.post(
       '/userUpdateBio',
       {
-        user: user,
+        user: selectedUser,
         bio: bio,
       },
       config
     )
-      .then((res) => {
+      .then(() => {
         toast('Biographie mise à jour !', {
           className: 'ourYellowBg',
           style: { color: 'white' },
@@ -89,7 +90,7 @@ const Bio = (props) => {
       <div className="grid justify-items-center content-center col-span-1 mx-2">
         <Avatar
           alt="user pp avatar"
-          src={selectedPP !== null ? selectedPPUrl : user.imageUrl}
+          src={selectedPP !== null ? selectedPPUrl : selectedUser.imageUrl}
           className={classes.large}
         />
         {!props.readonly && (
@@ -119,21 +120,21 @@ const Bio = (props) => {
         )}
       </div>
       <div className="py-4 md:col-span-2">
-        <h1 className="font-bold text-xl ourYellow">{user.username}</h1>
+        <h1 className="font-bold text-xl ourYellow">{selectedUser.username}</h1>
         <h2 className="mt-2 mb-1">Mini-Biographie</h2>
         {!props.readonly ? (
           <textarea
             style={{ resize: 'none' }}
             className="border w-full md:w-4/5 h-20 shadow-inner"
             onChange={(e) => setBio(e.target.value)}
-            defaultValue={user.bio}
+            defaultValue={selectedUser.bio}
             value={bio}
           ></textarea>
         ) : (
           <textarea
             style={{ resize: 'none' }}
             className="border w-full md:w-4/5 h-20 shadow-inner"
-            defaultValue={user.bio}
+            defaultValue={selectedUser.bio}
             readOnly
           ></textarea>
         )}

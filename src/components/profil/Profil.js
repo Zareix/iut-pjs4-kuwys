@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 
 import { Redirect, useParams } from 'react-router'
-import API from '../../util/api'
+import PerfectScrollbar from "react-perfect-scrollbar"
 
+import API from '../../util/api'
 import { useGlobalContext } from '../../util/context'
 import Gui from '../gui/Gui'
 import LoadingPage from '../loadingPage/LoadingPage'
 import Bio from './Bio'
+import AllPost from '../fichesCours/AllPost'
 
 const Profil = (props) => {
   const { user } = useGlobalContext()
@@ -21,12 +23,12 @@ const Profil = (props) => {
     if (user.username === username) {
       setIsCurrentUser(true)
       setSelectedUser(user)
-    } else
-      API.get('user/' + username, {
-        headers: {
-          Authorization: `Bearer ${window.localStorage.getItem('token')}`,
-        },
-      })
+    }
+    API.get('user/' + username, {
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+      },
+    })
       .then((res) => setSelectedUser(res.data))
   }, [])
 
@@ -53,7 +55,7 @@ const Profil = (props) => {
           </div>
           <div className="w-full flex justify-center mt-3">
             <div className="grid gap-8 w-full md:w-9/12">
-              <Bio readonly user={selectedUser}/>
+              <Bio readonly user={selectedUser} />
               <div className="newGroupResearchDiv h-50 p-4">
                 <h2 className="font-semibold text-lg ourMainFontColor">
                   En savoir plus sur{' '}
@@ -83,6 +85,14 @@ const Profil = (props) => {
                   Les fiches et cours proposés par{' '}
                   <span className="ourYellow">{selectedUser.username}</span>
                 </h2>
+                {selectedUser.posts && <div>
+                  <PerfectScrollbar options={{
+                    wheelPropagation: false,
+                    suppressScrollX: true,
+                  }}>
+                    <AllPost type="fiche-cours" posts={selectedUser.posts} />
+                  </PerfectScrollbar>
+                </div>}
               </div>
             </div>
           </div>
