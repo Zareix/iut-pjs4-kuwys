@@ -24,7 +24,6 @@ import MesInformations from './components/profil/MesInformations'
 import Notifications from './components/gui/Notifications'
 import PostForum from './components/forum/PostForum'
 
-
 function App() {
   return (
     <AppProvider>
@@ -64,9 +63,10 @@ function App() {
           <PrivateRoute exact path="/profil">
             <Profil />
           </PrivateRoute>
-          ></PrivateRoute>
+          <PrivateRoute
             component={Profil}
             path="/profil/user/:username"
+          ></PrivateRoute>
           <PrivateRoute exact path="/profil/mesinformations">
             <MesInformations />
           </PrivateRoute>

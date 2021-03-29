@@ -14,7 +14,7 @@ import API from '../../util/api'
 import Gui from '../gui/Gui'
 import ButtonGrTravail from '../groupesTravail/ButtonGrTravail'
 import { Link } from 'react-router-dom'
-import AllFichesCours from '../fichesCours/AllFichesCours'
+import AllPost from '../fichesCours/AllPost'
 
 const AccueilUser = () => {
   const { user } = useGlobalContext()
@@ -208,10 +208,10 @@ const AccueilUser = () => {
               ) : (
                 <div className="greyBox mr-4 mt-2 ml-0 h-52">
                   <PerfectScrollbar options={scrollBarXConfig}>
-                    <AllFichesCours
+                    <AllPost
                       type="fiche"
                       posts={lastSeenPost}
-                    ></AllFichesCours>
+                    ></AllPost>
                   </PerfectScrollbar>
                 </div>
               )}
@@ -226,10 +226,10 @@ const AccueilUser = () => {
               ) : (
                 <div className="greyBox mr-4 mt-2 ml-0 h-52">
                   <PerfectScrollbar options={scrollBarXConfig}>
-                    <AllFichesCours
+                    <AllPost
                       type="cours"
                       posts={lastSeenPost}
-                    ></AllFichesCours>
+                    ></AllPost>
                   </PerfectScrollbar>
                 </div>
               )}
