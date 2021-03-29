@@ -8,10 +8,10 @@ const AppContext = createContext()
 const AppProvider = ({ children }) => {
   const [user, setUser] = useState({})
   const [isLogin, setIsLogin] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   const login = (token) => {
-    setLoading(true)
+    console.log('HELLLOOOO BOYYYYYYYYYYYY');
     setIsLogin(true)
     window.localStorage.setItem('FBToken', token)
     API.defaults.headers.common['Authorization'] = `Bearer ${token}`
@@ -23,6 +23,7 @@ const AppProvider = ({ children }) => {
       })
       .catch((err) => {
         console.log(err)
+        setLoading(false)
       })
   }
 
@@ -30,17 +31,17 @@ const AppProvider = ({ children }) => {
     setIsLogin(false)
     setUser({})
     window.localStorage.removeItem('FBToken')
+    setLoading(false)
   }
 
   useEffect(() => {
+    setLoading(true)
     const token = window.localStorage.getItem('FBToken')
-    console.log(token)
     if (token !== null) {
       if (jwt_decode(token).exp * 1000 < Date.now()) {
         console.log('Connection expired')
         logout()
       } else {
-        console.log(jwt_decode(token));
         console.log('User logged in')
         login(token)
       }
