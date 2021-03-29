@@ -14,14 +14,18 @@ import API from '../../util/api'
 import Gui from '../gui/Gui'
 import ButtonGrTravail from '../groupesTravail/ButtonGrTravail'
 import { Link } from 'react-router-dom'
+import AllFichesCours from '../fichesCours/AllFichesCours'
 
 const AccueilUser = () => {
   const { user } = useGlobalContext()
   const [isFavCours, setIsFavCours] = useState(false)
   const [isFavFiches, setIsFavFiches] = useState(false)
+  const [isFiches, setIsFiches] = useState(false)
+  const [isCours, setIsCours] = useState(false)
   const [favPosts, setFavPosts] = useState([])
   const [userGroups, setUserGroups] = useState([])
   const [userPosts, setUserPosts] = useState([])
+  const [lastSeenPost, setLastSeenPost] = useState([])
 
   const scrollBarXConfig = {
     wheelPropagation: false,
@@ -45,11 +49,32 @@ const AccueilUser = () => {
     API.get('/user/' + user.username + '/favposts', config).then((res) =>
       setFavPosts(res.data)
     )
+    API.get('/user/' + user.username, config).then((res) =>
+      setUserPosts(res.data)
+    )
+    API.get('/user/lastSeenPosts', config).then((res) =>
+      setLastSeenPost(res.data)
+    )
   }, [user])
 
-  const checkHasFicheCours = (type, msg, setter) => {
+  const checkHasFicheCoursFav = (type, msg, setter) => {
+    console.log(favPosts)
     for (var p in favPosts) {
       if (favPosts[p].postType === type) {
+        setter(true)
+        return
+      }
+    }
+    toast.error(msg, {
+      position: 'bottom-right',
+      autoClose: 2500,
+    })
+  }
+
+  const checkHasFicheCours = (type, msg, setter) => {
+    console.log(userPosts)
+    for (var p in userPosts) {
+      if (userPosts[p].postType === type) {
         setter(true)
         return
       }
@@ -81,6 +106,20 @@ const AccueilUser = () => {
           retour={retour}
           type="fiche"
         />
+      ) : isFiches ? (
+        <FavFiches
+          title="Vos fiches"
+          posts={favPosts}
+          retour={retour}
+          type="fiche"
+        />
+      ) : isCours ? (
+        <FavFiches
+          title="Vos cours"
+          posts={favPosts}
+          retour={retour}
+          type="cours"
+        />
       ) : (
         <div>
           <h1 className="ourYellow font-bold text-2xl">
@@ -88,11 +127,37 @@ const AccueilUser = () => {
             <span className="ourMainFontColor">{user.firstName} !</span>
           </h1>
           <div className="grid md:grid-cols-2 gap-y-6 md:gap-y-10 mt-4 font-semibold ourMainFontColor">
-            <div className="flex justify-center items-start gap-8 md:py-4 text-center">
+            <div className="flex flex-wrap justify-center justify-items-center items-start gap-8 md:py-4 text-center">
               <div
                 className="w-1/3 border rounded-xl p-4 shadow grid gap-2 justify-items-center cursor-pointer"
                 onClick={() =>
                   checkHasFicheCours(
+                    'cours',
+                    'Aucuns cours postés.',
+                    setIsCours
+                  )
+                }
+              >
+                <FavCoursIcon className="h-10" />
+                <p>Vos cours</p>
+              </div>
+              <div
+                className="w-1/3 border rounded-xl p-4 shadow grid gap-2 justify-items-center cursor-pointer"
+                onClick={() =>
+                  checkHasFicheCours(
+                    'fiche',
+                    'Aucunes fiches postées.',
+                    setIsFiches
+                  )
+                }
+              >
+                <FavFichesIcon className="h-10" />
+                <p>Vos fiches</p>
+              </div>
+              <div
+                className="w-1/3 border rounded-xl p-4 shadow grid gap-2 justify-items-center cursor-pointer"
+                onClick={() =>
+                  checkHasFicheCoursFav(
                     'cours',
                     'Aucuns cours favoris.',
                     setIsFavCours
@@ -100,12 +165,12 @@ const AccueilUser = () => {
                 }
               >
                 <FavCoursIcon className="h-10" />
-                <p>Cours favoris</p>
+                <p>Cours favorites</p>
               </div>
               <div
-                className="w-1/3 border rounded-xl p-4 pl-0 shadow grid gap-2 justify-items-center cursor-pointer"
+                className="w-1/3 border rounded-xl p-4 shadow grid gap-2 justify-items-center cursor-pointer"
                 onClick={() =>
-                  checkHasFicheCours(
+                  checkHasFicheCoursFav(
                     'fiche',
                     'Aucunes fiches favorites.',
                     setIsFavFiches
@@ -133,36 +198,38 @@ const AccueilUser = () => {
               )}
             </div>
 
-            <div>
-              <h2>Vos fiches</h2>
+            <div className="mr-4">
+              <h2>Vos dernières fiches consultées</h2>
               {userPosts.length === 0 ? (
                 <p className="font-normal">
-                  Vous n'avez aucune fiche.{' '}
-                  <Link to="/fichescours">Postez votre première fiche !</Link>
+                  Vous n'avez consulté aucune fiche.{' '}
+                  <Link to="/fichescours">Découvrez les ici !</Link>
                 </p>
               ) : (
                 <div className="greyBox mr-4 mt-2 ml-0 h-52">
                   <PerfectScrollbar options={scrollBarXConfig}>
-                    {userPosts.map((p) => (
-                      <p>todo</p>
-                    ))}
+                    <AllFichesCours
+                      type="fiche"
+                      posts={lastSeenPost}
+                    ></AllFichesCours>
                   </PerfectScrollbar>
                 </div>
               )}
             </div>
             <div>
-              <h2>Vos cours</h2>
+              <h2>Vos derniers cours consultés</h2>
               {userPosts.length === 0 ? (
                 <p className="font-normal">
-                  Vous n'avez aucun cours.{' '}
-                  <Link to="/fichescours">Postez votre premier cours !</Link>
+                  Vous n'avez consulté aucun cours.{' '}
+                  <Link to="/fichescours">Découvrez les ici !</Link>
                 </p>
               ) : (
                 <div className="greyBox mr-4 mt-2 ml-0 h-52">
                   <PerfectScrollbar options={scrollBarXConfig}>
-                    {userPosts.map((p) => (
-                      <p>todo</p>
-                    ))}
+                    <AllFichesCours
+                      type="cours"
+                      posts={lastSeenPost}
+                    ></AllFichesCours>
                   </PerfectScrollbar>
                 </div>
               )}

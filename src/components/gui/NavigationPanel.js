@@ -24,7 +24,7 @@ const NavigationPanel = (props) => {
 
   return (
     <div className="grid justify-items-center  text-base md:text-sm">
-      <Link to="/profil" className="grid justify-items-center my-10">
+      <Link to={"/profil/user/" + user.username} className="grid justify-items-center my-10">
         <Avatar
           alt="user pp avatar"
           src={user.imageUrl}
@@ -51,7 +51,7 @@ const NavigationPanel = (props) => {
         <NavLink to="/accueil" activeClassName="font-semibold">
           Accueil
         </NavLink>
-        <NavLink to="/profil" activeClassName="font-semibold">
+        <NavLink to={"/profil/user/" + user.username} activeClassName="font-semibold">
           Profil
         </NavLink>
         <NavLink to="/ecole" activeClassName="font-semibold">
