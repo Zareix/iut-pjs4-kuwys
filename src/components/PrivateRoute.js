@@ -16,7 +16,7 @@ const PrivateRoute = ({ children, ...rest }) => {
       .catch((err) => {
         console.log(err)
       })
-  }, [])
+  })
 
   return (
     <Route

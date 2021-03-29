@@ -26,14 +26,13 @@ const NavigationPanel = (props) => {
   useEffect(() => {
     if (user.notifications) {
       user.notifications.forEach((n) => {
-        if (n.seen === false) {
-          console.log(n.seen)
+        if (!n.seen) {
           setInvisibleValue(false)
-          console.log(invisibleValue)
         }
-      }, [])
+        
+      })
     }
-  })
+  }, [])
 
   const { deconnexion } = props
 
