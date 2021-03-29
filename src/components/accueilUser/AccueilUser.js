@@ -9,7 +9,7 @@ import { ReactComponent as FavFichesIcon } from '../../svg/025-file-1.svg'
 
 import { useGlobalContext } from '../../util/context'
 
-import FavFiches from './FavFiches'
+import AccueilFiches from './AccueilFiches'
 import API from '../../util/api'
 import Gui from '../gui/Gui'
 import ButtonGrTravail from '../groupesTravail/ButtonGrTravail'
@@ -94,28 +94,28 @@ const AccueilUser = () => {
   return (
     <Gui>
       {isFavCours ? (
-        <FavFiches
+        <AccueilFiches
           title="Cours favoris"
           posts={favPosts}
           retour={retour}
           type="cours"
         />
       ) : isFavFiches ? (
-        <FavFiches
+        <AccueilFiches
           title="Fiches favorites"
           posts={favPosts}
           retour={retour}
           type="fiche"
         />
       ) : isFiches ? (
-        <FavFiches
+        <AccueilFiches
           title="Vos fiches"
           posts={userPosts}
           retour={retour}
           type="fiche"
         />
       ) : isCours ? (
-        <FavFiches
+        <AccueilFiches
           title="Vos cours"
           posts={userPosts}
           retour={retour}
