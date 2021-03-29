@@ -60,7 +60,9 @@ const NavigationPanel = (props) => {
         <NavLink to="/fichescours" activeClassName="font-semibold">
           Fiches & Cours
         </NavLink>
-        <p>Forum Q&R</p>
+        <NavLink to="/forum" activeClassName="font-semibold">
+          Forum Q&R
+        </NavLink>
         <NavLink to="/groupestravail" activeClassName="font-semibold">
           Groupes de travail
         </NavLink>

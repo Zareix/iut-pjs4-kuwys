@@ -10,7 +10,7 @@ const ItemFiche = (props) => {
     <div className="popUpEffect" >
       
         <div className="fiches w-64">
-          <figure className="grid justify-items-center bg-yellow-100 border-2 rounded-xl p-8"><Link
+          <figure className="grid justify-items-center bg-yellow-100 border-2 rounded-xl h-70 p-8"><Link
         to={{
           pathname: `/fiche/${post.id}`,
         }}>
@@ -26,8 +26,8 @@ const ItemFiche = (props) => {
               width={100}
             />
 
-            <div className="pt-6 space-y-4">
-                <p className="text-lg font-semibold">{post.title}</p>
+            <div className="pt-6 ">
+                <p className="text-md overflow-ellipsis font-semibold">{post.title}</p>
             </div>
             </Link>
             <Link to={{
