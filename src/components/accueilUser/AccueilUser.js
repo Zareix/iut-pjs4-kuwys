@@ -25,12 +25,12 @@ const AccueilUser = () => {
 
   const scrollBarXConfig = {
     wheelPropagation: false,
-    suppressScrollY : true
+    suppressScrollY: true,
   }
 
   const scrollBarYConfig = {
     wheelPropagation: false,
-    suppressScrollX : true
+    suppressScrollX: true,
   }
 
   useEffect(() => {
@@ -39,10 +39,9 @@ const AccueilUser = () => {
         Authorization: `Bearer ${window.localStorage.getItem('token')}`,
       },
     }
-    API.get('/user/' + user.username + '/groups', config).then((res) => {
-      console.log(res.data)
+    API.get('/user/' + user.username + '/groups', config).then((res) =>
       setUserGroups(res.data)
-    })
+    )
     API.get('/user/' + user.username + '/favposts', config).then((res) =>
       setFavPosts(res.data)
     )

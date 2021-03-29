@@ -19,6 +19,7 @@ import GroupesTravail from './components/groupesTravail/GroupesTravail'
 import { AppProvider } from './util/context'
 import ScrollToTop from "./components/tools/ScrollToTop"
 import Post from './components/fichesCours/Post'
+import MesInformations from './components/profil/MesInformations'
 
 function App() {
   return (
@@ -53,6 +54,9 @@ function App() {
           ></PrivateRoute>
           <PrivateRoute exact path="/profil">
             <Profil />
+          </PrivateRoute>
+          <PrivateRoute exact path="/profil/mesinformations">
+            <MesInformations />
           </PrivateRoute>
           <PrivateRoute exact path="/fichesCours">
             <FichesCours />
