@@ -120,7 +120,7 @@ const GroupesTravail = (props) => {
             <div className="relative">
               <img className="m-auto" src={imgBarreRecherche} />
             </div>
-            <div className="relative w-full text-center -top-2/4">
+            <div className="relative w-full text-center -top-60 md:-top-2/4">
               <div className="flex justify-center">
                 <div style={{ borderColor: "#f7b91c" }} className="w-11/12 md:w-3/6 rounded-full bg-white border-solid border py-3 px-3 md:py-3 md:px-3 text-center flex justify-center">
                   <BsSearch className="text-2xl" />
@@ -145,18 +145,18 @@ const GroupesTravail = (props) => {
             className="col-start-1 col-span-1 row-start-1 row-span-1 mt-64 md:mt-0 md:col-span-1 md:col-start-2"
           >
             <p className="ourMainFontColor font-bold">Paramètre de recherche actuel</p>
-            <div className="grid grid-cols-5 grid-rows-2 md:grid-cols-5 md:grid-rows-2 md:mt-3 md:mb-3">
-              <div className="col-start-1 col-span-1 md:col-span-1 md:col-start-1 md:row-start-1 md:row-span-1 flex justify-end md:mr-4">
+            <div className="grid grid-cols-5 grid-rows-2 md:grid-cols-5 md:grid-rows-2 mt-3 md:mt-3 md:mb-3">
+              <div className="col-start-1 col-span-1 row-start-1 row-span-1 md:col-span-1 md:col-start-1 md:row-start-1 md:row-span-1 flex justify-end md:mr-4">
                 <RiArrowUpCircleFill className="text-4xl text-blue-400 hover:text-blue-500 cursor-pointer popUpEffect" onClick={() => settingUpLimiteDonnees()} />
               </div>
-              <div className="col-start-1 col-span-1 md:col-span-1 md:col-start-1 md:row-start-2 md:row-span-1 flex justify-end md:mr-4">
+              <div className="col-start-1 col-span-1 row-start-2 row-span-1 md:col-span-1 md:col-start-1 md:row-start-2 md:row-span-1 flex justify-end md:mr-4">
                 <RiArrowDownCircleFill className="text-4xl text-blue-400 hover:text-blue-500 cursor-pointer popUpEffect" onClick={() => settingDownLimiteDonnees()} />
               </div>
-              <div className="col-start-1 col-span-1 md:col-span-4 md:col-start-2 md:row-start-1 md:row-span-2 align-middle flex items-center">
-                <p className="text-3xl font-bold text-blue-400 flex items-center">{limiteDonnees} <span className="text-base font-semibold md:ml-3 ourMainFontColor">bibliothèques les plus proches</span></p>
+              <div className="col-start-2 col-span-4 row-start-1 row-span-2 md:col-span-4 md:col-start-2 md:row-start-1 md:row-span-2 align-middle flex items-center">
+                <p className="text-3xl ml-2 md:ml-0 font-bold text-blue-400 flex items-center">{limiteDonnees} <span className="text-base font-semibold ml-2 md:ml-3 ourMainFontColor">bibliothèques les plus proches</span></p>
               </div>
             </div>
-            <div className="h-2/3">
+            <div className="h-56 md:h-2/3 mt-5 md:mt-0">
 
               <MapContainer center={[48.84172, 2.26824]} zoom={13} scrollWheelZoom={true} className="h-full rounded-lg">
                 <TileLayer
@@ -178,11 +178,11 @@ const GroupesTravail = (props) => {
       </div>
 
       {/* BOUTON ADD NEW GROUP*/}
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-8 md:mt-0">
         <Link to="/groupestravail/nouveaugroupe">
           <div
             id="ButtonAddNewGroup"
-            className="w-52 flex items-center cursor-pointer justify-center shadow-xl px-8 py-3 font-bold rounded-full text-white md:py-3 md:px-3 buttonAddNewGrWork popUpEffect"
+            className="w-52 flex items-center cursor-pointer justify-center shadow-xl px-2 py-2 font-bold rounded-full text-white md:py-3 md:px-3 buttonAddNewGrWork popUpEffect"
           >
             <i className="fas fa-plus align-middle"></i>
             <span style={{ fontSize: '1rem' }} className="md:pl-2 align-middle">

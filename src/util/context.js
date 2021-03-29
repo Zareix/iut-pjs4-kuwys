@@ -22,7 +22,7 @@ const AppProvider = ({ children }) => {
     API.get('/user', config)
       .then((res) => {
         console.log(res.data)
-        setUser({ ...res.data })
+        setUser({ ...res.data})
         setLoading(false)
       })
       .catch((err) => {
