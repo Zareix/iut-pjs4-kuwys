@@ -123,15 +123,6 @@
   border-radius: 12px;
 }
 
-.buttonCancelNewGrWork {
-  background-color: #c36060;
-  font-size: x-large;
-}
-
-.buttonCancelNewGrWork:hover {
-  background-color: #c02727;
-}
-
 /* COLORS */
 
 .ourYellow {
