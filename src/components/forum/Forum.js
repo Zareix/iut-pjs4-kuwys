@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react'
 import Gui from '../gui/Gui'
 import API from '../../util/api'
 import SearchBar from '../tools/SearchBar'
-import AllPost from './AllPost'
+import AllPost from '../fichesCours/AllPost'
 
-const FichesCours = () => {
+const Forum = () => {
   const [posts, setPosts] = useState()
   const [Tags, setTags] = useState([])
 
@@ -13,7 +13,7 @@ const FichesCours = () => {
       setTags(res.data)
     })
 
-    API.get('/posts',{docTypes:["fiche","cours"]})
+    API.get('/posts',{docTypes:["forum"]})
       .then((res) => {
         setPosts(res.data)
       })
@@ -25,18 +25,14 @@ const FichesCours = () => {
   return (
     <Gui>
       <SearchBar tags={Tags}></SearchBar>
-      <p className="md:mt-2 md:mb-2 text-3xl font-bold ourYellow">LES FICHES</p>
+      <p className="md:mt-2 md:mb-2 text-3xl font-bold ourYellow">Forum</p>
       <div className="w-full overflow-x-auto overflow-y-hidden">
       {posts && (
-        <AllPost type='fiche' posts={posts}/>
+        <AllPost type='forum' posts={posts}/>
       )}
       </div>
-      <p className="md:mt-2 md:mb-2 text-3xl font-bold ourYellow">LES COURS</p>
-      {posts && (
-        <AllPost type='cours' posts={posts}/>
-      )}
     </Gui>
   )
 }
 
-export default FichesCours
+export default Forum

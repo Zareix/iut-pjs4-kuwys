@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import Ecole from "./components/ecole/Ecole"
+import Ecole from './components/ecole/Ecole'
 import NouveauGroupe from './components/groupesTravail/NouveauGroupe'
 import PrivateRoute from './components/PrivateRoute'
 import './css/App.css'
@@ -17,16 +17,19 @@ import Profil from './components/profil/Profil'
 import FichesCours from './components/fichesCours/FichesCours'
 import GroupesTravail from './components/groupesTravail/GroupesTravail'
 import { AppProvider } from './util/context'
-import ScrollToTop from "./components/tools/ScrollToTop"
+import ScrollToTop from './components/tools/ScrollToTop'
 import Post from './components/fichesCours/Post'
+import Forum from './components/forum/Forum'
 import MesInformations from './components/profil/MesInformations'
 import Notifications from './components/gui/Notifications'
+import PostForum from './components/forum/PostForum'
+
 
 function App() {
   return (
     <AppProvider>
       <Router>
-        <ScrollToTop/>
+        <ScrollToTop />
         <Switch>
           <Route exact path="/">
             <Accueil />
@@ -53,14 +56,25 @@ function App() {
             path="/cours/:postId"
             component={Post}
           ></PrivateRoute>
+          <PrivateRoute
+            exact
+            path="/forum/:postId"
+            component={PostForum}
+          ></PrivateRoute>
           <PrivateRoute exact path="/profil">
             <Profil />
           </PrivateRoute>
+          ></PrivateRoute>
+            component={Profil}
+            path="/profil/user/:username"
           <PrivateRoute exact path="/profil/mesinformations">
             <MesInformations />
           </PrivateRoute>
           <PrivateRoute exact path="/fichesCours">
             <FichesCours />
+          </PrivateRoute>
+          <PrivateRoute exact path="/forum">
+            <Forum />
           </PrivateRoute>
           <PrivateRoute exact path="/groupestravail">
             <GroupesTravail />

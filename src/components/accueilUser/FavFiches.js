@@ -1,6 +1,6 @@
 import React from 'react'
 
-import AllFichesCours from '../fichesCours/AllFichesCours'
+import AllPost from '../fichesCours/AllPost'
 
 const FavFiches = (props) => {
   const { posts: favPosts, retour, title, type } = props
@@ -11,7 +11,7 @@ const FavFiches = (props) => {
         </button>
     <h1 className="text-xl font-semibold my-5">{title}</h1>
     <div className="border-2 border-yellow-500 border-opacity-50 shadow-lg p-5">
-      <AllFichesCours posts={favPosts} type={type} />
+      <AllPost posts={favPosts} type={type} />
     </div>
   </div>
 }
