@@ -45,28 +45,13 @@ function App() {
           <PrivateRoute exact path="/ecole">
             <Ecole />
           </PrivateRoute>
-          <PrivateRoute
-            exact
-            path="/fiche/:postId"
-            component={Post}
-          ></PrivateRoute>
-          <PrivateRoute
-            exact
-            path="/cours/:postId"
-            component={Post}
-          ></PrivateRoute>
-          <PrivateRoute
-            exact
-            path="/forum/:postId"
-            component={PostForum}
-          ></PrivateRoute>
+          <PrivateRoute exact path="/fiche/:postId" component={Post} />
+          <PrivateRoute exact path="/cours/:postId" component={Post} />
+          <PrivateRoute exact path="/forum/:postId" component={PostForum} />
           <PrivateRoute exact path="/profil">
             <Profil />
           </PrivateRoute>
-          <PrivateRoute
-            component={Profil}
-            path="/profil/user/:username"
-          ></PrivateRoute>
+          <PrivateRoute path="/profil/user/:username" component={Profil} />
           <PrivateRoute exact path="/profil/mesinformations">
             <MesInformations />
           </PrivateRoute>

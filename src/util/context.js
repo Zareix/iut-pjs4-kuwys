@@ -11,7 +11,6 @@ const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(true)
 
   const login = (token) => {
-    console.log('HELLLOOOO BOYYYYYYYYYYYY');
     setIsLogin(true)
     window.localStorage.setItem('FBToken', token)
     API.defaults.headers.common['Authorization'] = `Bearer ${token}`
@@ -52,7 +51,7 @@ const AppProvider = ({ children }) => {
 
   if (loading) return <LoadingPage />
   return (
-    <AppContext.Provider value={{ user, isLogin, login, logout, loading }}>
+    <AppContext.Provider value={{ user, isLogin, login, logout, loading, setUser }}>
       {children}
     </AppContext.Provider>
   )

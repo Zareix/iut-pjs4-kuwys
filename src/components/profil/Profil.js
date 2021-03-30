@@ -19,7 +19,6 @@ const Profil = (props) => {
   let { username } = useParams()
 
   useEffect(() => {
-    console.log(username)
     if (user.username === username) {
       setIsCurrentUser(true)
       setSelectedUser(user)

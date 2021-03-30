@@ -1,22 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import API from '../util/api'
 
 import { useGlobalContext } from '../util/context'
 
 const PrivateRoute = ({ children, ...rest }) => {
-  const { user, isLogin } = useGlobalContext()
-
-  useEffect(() => {
-    console.log("JE PASSE ICI BOYYYYY");
-    API.get('/user/notifications')
-      .then((res) => {
-        user.notifications = res.data
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  })
+  const { isLogin } = useGlobalContext()
 
   return (
     <Route
