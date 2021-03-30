@@ -19,13 +19,17 @@ const Profil = (props) => {
   let { username } = useParams()
 
   useEffect(() => {
-    console.log(username)
     if (user.username === username) {
       setIsCurrentUser(true)
       setSelectedUser(user)
     }
     API.get('user/' + username).then((res) => setSelectedUser(res.data))
   }, [])
+
+  const containsType = (type) => {
+    console.log(selectedUser)
+    return selectedUser.posts.some((p) => p.postType === type)
+  }
 
   if (redirect) return <Redirect to="/profil/mesinformations"></Redirect>
 
@@ -75,12 +79,12 @@ const Profil = (props) => {
                   </label>
                 </div>
               </div>
-              <div className="newGroupResearchDiv h-50 p-4">
-                <h2 className="font-semibold text-lg ourMainFontColor">
-                  Les fiches et cours proposés par{' '}
-                  <span className="ourYellow">{selectedUser.username}</span>
-                </h2>
-                {selectedUser.posts && (
+              {selectedUser.posts &&
+                (containsType("cours") || containsType("fiche")) && <div className="newGroupResearchDiv h-50 p-4">
+                  <h2 className="font-semibold text-lg ourMainFontColor">
+                    Les fiches et cours proposés par{' '}
+                    <span className="ourYellow">{selectedUser.username}</span>
+                  </h2>
                   <div>
                     <PerfectScrollbar
                       options={{
@@ -91,13 +95,29 @@ const Profil = (props) => {
                       <AllPost type="fiche-cours" posts={selectedUser.posts} />
                     </PerfectScrollbar>
                   </div>
-                )}
-              </div>
+                </div>}
+              {selectedUser.posts && containsType("forum") && <div className="newGroupResearchDiv h-50 p-4">
+                <h2 className="font-semibold text-lg ourMainFontColor">
+                  Les questions posées par{' '}
+                  <span className="ourYellow">{selectedUser.username}</span>
+                </h2>
+                <div>
+                  <PerfectScrollbar
+                    options={{
+                      wheelPropagation: false,
+                      suppressScrollY: false,
+                    }}
+                  >
+                    <AllPost type="forum" posts={selectedUser.posts} />
+                  </PerfectScrollbar>
+                </div>
+              </div>}
             </div>
           </div>
         </div>
-      )}
-    </Gui>
+      )
+      }
+    </Gui >
   )
 }
 

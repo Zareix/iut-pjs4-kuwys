@@ -22,7 +22,6 @@ const Accueil = () => {
 
   const switchImage = (newPresentationImage) => {
     setPresentationImageUrl(newPresentationImage)
-    console.log('Daccodacc')
   }
 
   return (

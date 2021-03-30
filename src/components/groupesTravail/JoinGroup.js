@@ -8,16 +8,47 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import API from '../../util/api'
 import { useGlobalContext } from '../../util/context'
+import { toast } from 'react-toastify'
 
 const JoinGroup = (props) => {
-  const { open, onClose, group, dateMiseEnForme } = props
+  const { open, onClose, group, dateMiseEnForme, isUserInGroup } = props
 
   const placesDisponibles = group.capaciteMax - (group.usersInGroup.length + 1)
 
   const { user } = useGlobalContext()
 
+  const isAdmin = group.admin === user.username
+
   const handleClose = () => {
     onClose()
+  }
+
+  const handleSuppression = () => {
+    API.post("/library/suppressGroup", { groupId: group.id })
+      .then((res) => {
+        toast(res.message, {
+          className: 'ourYellowBg',
+          style: { color: 'white' },
+          progressStyle: { background: 'white' },
+          position: 'bottom-right',
+          autoClose: 3000,
+        })
+        onClose()
+      })
+  }
+
+  const handleDesincription = () => {
+    API.post("/library/removeUserGroup", { groupId: group.id })
+      .then((res) => {
+        toast(res.message, {
+          className: 'ourYellowBg',
+          style: { color: 'white' },
+          progressStyle: { background: 'white' },
+          position: 'bottom-right',
+          autoClose: 3000,
+        })
+        onClose()
+      })
   }
 
   const handleInscription = () => {
@@ -61,12 +92,18 @@ const JoinGroup = (props) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary">
+        <Button onClick={handleClose} color="primary" autoFocus>
           Annuler
         </Button>
-        <Button onClick={handleInscription} color="primary" autoFocus>
-          S'inscrire
-        </Button>
+        {isAdmin
+          ? <Button onClick={handleSuppression} style={{ color: "red" }} >Supprimer</Button>
+          : isUserInGroup
+            ? <Button onClick={handleDesincription} style={{ color: "red" }}>
+              Se désinscrire
+            </Button>
+            : <Button onClick={handleInscription} color="primary">
+              S'inscrire
+              </Button>}
       </DialogActions>
     </Dialog>
   )

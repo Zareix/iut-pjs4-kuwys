@@ -6,7 +6,7 @@ import ItemPostForum from '../forum/ItemPostForum'
 
 const AllPost = (props) => {
   const { type, posts } = props
-
+  console.log(posts);
   switch (type) {
     case 'fiche':
       return (
@@ -49,7 +49,7 @@ const AllPost = (props) => {
         <div className="grid gap-4 flex-nowrap p-4">
           {posts.map(
             (post) =>
-              post.postType === 'cours' && (
+              post.postType === 'forum' && (
                 <ItemPostForum post={post} key={post.id} />
               )
           )}
