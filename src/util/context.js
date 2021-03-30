@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect, createContext } from 'react'
 import API from './api'
 import LoadingPage from '../components/loadingPage/LoadingPage'
 import jwt_decode from 'jwt-decode'
+import unidaysPromoJson from '../scraping/promotionsUnidays.json'
 
 const AppContext = createContext()
 
@@ -9,6 +10,8 @@ const AppProvider = ({ children }) => {
   const [user, setUser] = useState({})
   const [isLogin, setIsLogin] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [unidaysPromo, setUnidaysPromo] = useState(unidaysPromoJson.promotionsUnidays)
+
 
   const login = (token) => {
     setIsLogin(true)
@@ -52,7 +55,7 @@ const AppProvider = ({ children }) => {
 
   if (loading) return <LoadingPage />
   return (
-    <AppContext.Provider value={{ user, isLogin, login, logout, loading, setUser }}>
+    <AppContext.Provider value={{ user, isLogin, login, logout, loading, setUser, unidaysPromo }}>
       {children}
     </AppContext.Provider>
   )
