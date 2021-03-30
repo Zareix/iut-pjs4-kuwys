@@ -24,10 +24,10 @@ const Footer = () => {
         <div>
           <p className="font-bold center mb-5">Nous Contacter</p>
           <div className="grid gap-3">
-            <p>Point presse</p>
-            <p>Facebook</p>
-            <p>Instagram</p>
-            <p>Twitter</p>
+            <a to="#">Point presse</a>
+            <a href="https://www.facebook.com">Facebook</a>
+            <a href="https://www.instagram.com">Instagram</a>
+            <a href="https://www.twitter.com">Twitter</a>
           </div>
         </div>
         <div>
