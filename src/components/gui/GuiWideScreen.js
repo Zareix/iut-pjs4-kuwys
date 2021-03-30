@@ -16,7 +16,7 @@ const GuiWideScreen = (props) => {
           <div className="col-span-1 w-1/6 fixed top-12 h-full p-8 z-50 bgGrey">
             <NavigationPanel />
           </div>
-          <div className="col-start-2 col-span-6 mt-12 px-8 pt-5 min-h-screen z-10">
+          <div className="col-start-2 col-span-6 mt-12 px-8 pt-5 pb-96 min-h-screen z-10">
             <Fade><div>{props.children}</div></Fade>
           </div>
           <div className="col-start-2 col-span-6">
