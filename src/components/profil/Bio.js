@@ -126,7 +126,7 @@ const Bio = (props) => {
         {!props.readonly && (
           <div className="grid justify-end w-4/5 mt-1">
             <button
-              className="border bg-yellow-300 text-white font-bold text-xs h-6 px-2 rounded-full"
+              className="border bg-yellow-300 text-white font-bold text-xs h-6 px-2 rounded-full popUpEffect"
               onClick={updateBio}
             >
               Modifier la biographie

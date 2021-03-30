@@ -116,7 +116,7 @@ const APropos = () => {
         <div className="grid justify-end">
           <button
             onClick={updateUserInfo}
-            className="border bg-yellow-300 text-white font-bold text-sm w-28 h-11 px-1 rounded-lg"
+            className="border bg-yellow-300 text-white font-bold text-sm w-28 h-11 px-1 rounded-lg popUpEffect"
           >
             Confirmer ces informations
           </button>

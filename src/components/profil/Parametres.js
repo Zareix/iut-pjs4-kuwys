@@ -72,7 +72,7 @@ const Parametres = () => {
 
         <div className="grid justify-end mt-4">
           <button
-            className="border bg-yellow-300 text-white font-bold text-xs w-20 h-6 px-1 rounded-full"
+            className="border bg-yellow-300 text-white font-bold text-xs w-20 h-6 px-1 rounded-full popUpEffect"
             onClick={updatePassword}
           >
             Confirmer

@@ -124,7 +124,7 @@ const AccueilUser = () => {
           <div className="grid md:w-auto md:grid-cols-2 gap-y-6 md:gap-y-10 mt-4 font-semibold ourMainFontColor">
             <div className="flex flex-wrap justify-center justify-items-center items-start gap-8 md:py-4 text-center">
               <div
-                className="w-1/3 border rounded-xl p-4 shadow grid gap-2 justify-items-center cursor-pointer"
+                className="w-1/3 border rounded-xl p-4 shadow grid gap-2 justify-items-center cursor-pointer popUpEffect"
                 onClick={() =>
                   checkHasFicheCours('cours', 'Aucun cours posté.', setIsCours)
                 }
@@ -133,7 +133,7 @@ const AccueilUser = () => {
                 <p>Vos cours</p>
               </div>
               <div
-                className="w-1/3 border rounded-xl p-4 shadow grid gap-2 justify-items-center cursor-pointer"
+                className="w-1/3 border rounded-xl p-4 shadow grid gap-2 justify-items-center cursor-pointer popUpEffect"
                 onClick={() =>
                   checkHasFicheCours(
                     'fiche',
@@ -146,7 +146,7 @@ const AccueilUser = () => {
                 <p>Vos fiches</p>
               </div>
               <div
-                className="w-1/3 border rounded-xl p-4 shadow grid gap-2 justify-items-center cursor-pointer"
+                className="w-1/3 border rounded-xl p-4 shadow grid gap-2 justify-items-center cursor-pointer popUpEffect"
                 onClick={() =>
                   checkHasFicheCoursFav(
                     'cours',
@@ -159,7 +159,7 @@ const AccueilUser = () => {
                 <p>Cours favorites</p>
               </div>
               <div
-                className="w-1/3 border rounded-xl p-4 shadow grid gap-2 justify-items-center cursor-pointer"
+                className="w-1/3 border rounded-xl p-4 shadow grid gap-2 justify-items-center cursor-pointer popUpEffect"
                 onClick={() =>
                   checkHasFicheCoursFav(
                     'fiche',
