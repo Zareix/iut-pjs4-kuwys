@@ -5,8 +5,10 @@ import AllPost from '../fichesCours/AllPost'
 const FavFiches = (props) => {
   const { posts, retour, title, type } = props
 
+
+
   return (
-    <div>
+    <div className="transition-opacity">
       <button
         className="border bg-yellow-300 text-white font-bold text-xs h-6 mt-4 px-2 rounded-full"
         onClick={retour}

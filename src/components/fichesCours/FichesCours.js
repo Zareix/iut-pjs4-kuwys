@@ -22,13 +22,6 @@ const FichesCours = () => {
 
   return (
     <Gui>
-      <SearchBar chipData={chipData} setChipData={setChipData} />
-      <p className="md:mt-2 md:mb-2 text-3xl font-bold ourYellow">LES FICHES</p>
-      <div className="w-full overflow-x-auto overflow-y-hidden">
-        {posts && <AllPost type="fiche" posts={posts} />}
-      </div>
-      <p className="md:mt-2 md:mb-2 text-3xl font-bold ourYellow">LES COURS</p>
-      {posts && <AllPost type="cours" posts={posts} />}
     </Gui>
   )
 }

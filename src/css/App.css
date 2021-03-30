@@ -164,6 +164,12 @@ input {
   background-color: #ececec;
 }
 
+.authBg {
+  background-image: url(../svg/inscription-bg.svg);
+  background-position: center;
+  background-size: cover;
+}
+
 
 @media (max-width: 768px) {
   input {

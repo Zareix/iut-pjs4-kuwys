@@ -80,44 +80,50 @@ const Profil = (props) => {
                 </div>
               </div>
               {selectedUser.posts &&
-                (containsType("cours") || containsType("fiche")) && <div className="newGroupResearchDiv h-50 p-4">
+                (containsType('cours') || containsType('fiche')) && (
+                  <div className="newGroupResearchDiv h-50 p-4">
+                    <h2 className="font-semibold text-lg ourMainFontColor">
+                      Les fiches et cours proposés par{' '}
+                      <span className="ourYellow">{selectedUser.username}</span>
+                    </h2>
+                    <div>
+                      <PerfectScrollbar
+                        options={{
+                          wheelPropagation: false,
+                          suppressScrollX: true,
+                        }}
+                      >
+                        <AllPost
+                          type="fiche-cours"
+                          posts={selectedUser.posts}
+                        />
+                      </PerfectScrollbar>
+                    </div>
+                  </div>
+                )}
+              {selectedUser.posts && containsType('forum') && (
+                <div className="newGroupResearchDiv h-50 p-4">
                   <h2 className="font-semibold text-lg ourMainFontColor">
-                    Les fiches et cours proposés par{' '}
+                    Les questions posées par{' '}
                     <span className="ourYellow">{selectedUser.username}</span>
                   </h2>
                   <div>
                     <PerfectScrollbar
                       options={{
                         wheelPropagation: false,
-                        suppressScrollX: true,
+                        suppressScrollY: false,
                       }}
                     >
-                      <AllPost type="fiche-cours" posts={selectedUser.posts} />
+                      <AllPost type="forum" posts={selectedUser.posts} />
                     </PerfectScrollbar>
                   </div>
-                </div>}
-              {selectedUser.posts && containsType("forum") && <div className="newGroupResearchDiv h-50 p-4">
-                <h2 className="font-semibold text-lg ourMainFontColor">
-                  Les questions posées par{' '}
-                  <span className="ourYellow">{selectedUser.username}</span>
-                </h2>
-                <div>
-                  <PerfectScrollbar
-                    options={{
-                      wheelPropagation: false,
-                      suppressScrollY: false,
-                    }}
-                  >
-                    <AllPost type="forum" posts={selectedUser.posts} />
-                  </PerfectScrollbar>
                 </div>
-              </div>}
+              )}
             </div>
           </div>
         </div>
-      )
-      }
-    </Gui >
+      )}
+    </Gui>
   )
 }
 

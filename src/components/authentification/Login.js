@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { Redirect, useLocation } from 'react-router-dom'
+import { Link, Redirect, useLocation } from 'react-router-dom'
+
+import kuwysBigLogo from '../../pictures/logo-big.png'
 
 import API from '../../util/api'
 import { useGlobalContext } from '../../util/context'
@@ -33,73 +35,77 @@ const Login = () => {
   if (redirect) return <Redirect to={from} />
 
   return (
-    <div
-      className="flex justify-center items-center h-screen w-screen"
-    >
-      <div
-        className="w-full max-w-xs"
-      >
-        <form
-          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-          onSubmit={handleSubmit}
-        >
+    <div className="grid justify-center items-center h-screen w-screen authBg">
+      <img
+        src={kuwysBigLogo}
+        className="w-48 absolute top-14"
+        style={{ left: '50%', marginLeft: '-6rem' }}
+      />
+      <div className="border-4 border-yellow-100 mx-3 p-8 md:p-10 bg-white">
+        <form className="newGroupResearchDiv p-8" onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block ourMainFontColor text-sm font-bold mb-2"
               htmlFor="username"
             >
               E-mail
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3"
+                id="email"
+                type="text"
+                placeholder="user@email.com"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value)
+                }}
+              />
             </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="email"
-              type="text"
-              placeholder="user@email.com"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value)
-              }}
-            />
             {errors.email && (
               <p className="text-red-500 text-xs italic">{errors.email}</p>
             )}
           </div>
-          <div className="mb-6">
+          <div className="mb-7">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block ourMainFontColor text-sm font-bold mb-2"
               htmlFor="password"
             >
               Mot de passe
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3"
+                id="password"
+                type="password"
+                placeholder="******************"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value)
+                }}
+              />
             </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="password"
-              type="password"
-              placeholder="******************"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value)
-              }}
-            />
+
             {errors.password && (
-              <p className="text-red-500 text-xs italic">{errors.password}</p>
+              <p className="ourRed text-xs italic">{errors.password}</p>
             )}
             {errors.general && (
-              <p className="text-red-500 text-xs italic">{errors.general}</p>
+              <p className="ourRed text-xs italic">{errors.general}</p>
             )}
           </div>
           <div className="flex items-center justify-center">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="border ourYellowBg text-white py-1 px-2 rounded-full"
               type="submit"
             >
               Se connecter
             </button>
           </div>
         </form>
-        <p className="text-center text-gray-500 text-xs">
-          &copy;2020 Acme Corp. All rights reserved.
-        </p>
+        <div className="newGroupResearchDiv mt-6 p-5 text-center">
+          <p>
+            Vous n'avez pas de compte ?{' '}
+            <Link to="/register" className="ourYellow">
+              Inscrivez-vous
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   )
