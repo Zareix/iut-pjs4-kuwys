@@ -64,7 +64,15 @@ const Bio = (props) => {
     const formD = new FormData()
     formD.append('image', selectedPP)
     const endpoint = '/user/image'
-    API.post(endpoint, formD)
+    API.post(endpoint, formD).then((res) => {
+      toast('Photo de profil mise à jour !', {
+        className: 'ourYellowBg',
+        style: { color: 'white' },
+        progressStyle: { background: 'white' },
+        position: 'bottom-right',
+        autoClose: 3000,
+      })
+    })
   }
 
   return (
@@ -77,7 +85,7 @@ const Bio = (props) => {
         />
         {!props.readonly && (
           <div className="w-full grid justify-center">
-            <div className="border ourMainFontColor text-xs mt-3 mx-4 py-1 px-2">
+            <div className="border ourMainFontColor text-xs mt-3 py-1 px-2">
               <button onClick={handleInputClickPp} className="w-full font-bold">
                 {selectedPP !== null
                   ? selectedPP.name
@@ -93,7 +101,7 @@ const Bio = (props) => {
             {selectedPP !== null && (
               <button
                 onClick={updatePP}
-                className="border bg-yellow-300 text-white text-xs mt-1 mx-4 py-1 px-2 rounded-full"
+                className="border ourYellowBg text-white text-xs mt-1 mx-4 py-1 px-2 rounded-full"
               >
                 Changer de photo de profil
               </button>
@@ -123,7 +131,7 @@ const Bio = (props) => {
         {!props.readonly && (
           <div className="grid justify-end w-4/5 mt-1">
             <button
-              className="border bg-yellow-300 text-white font-bold text-xs h-6 px-2 rounded-full popUpEffect"
+              className="border ourYellowBg text-white font-bold text-xs h-6 px-2 rounded-full popUpEffect"
               onClick={updateBio}
             >
               Modifier la biographie
