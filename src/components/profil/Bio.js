@@ -3,6 +3,7 @@ import React, { useState, useRef } from 'react'
 import { toast } from 'react-toastify'
 import { makeStyles } from '@material-ui/core/styles'
 import Avatar from '@material-ui/core/Avatar'
+import { useGlobalContext } from '../../util/context'
 
 import API from '../../util/api'
 
@@ -14,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Bio = (props) => {
+  const { setUser, user } = useGlobalContext()
   const selectedUser = props.user
   const classes = useStyles()
 
@@ -36,6 +38,7 @@ const Bio = (props) => {
     f.append('image', fileUploaded, fileUploaded.name)
     formD = f
     setSelectedPP(fileUploaded)
+    setSelectedPPUrl(URL.createObjectURL(fileUploaded))
   }
 
   const updateBio = () => {
@@ -51,6 +54,7 @@ const Bio = (props) => {
           position: 'bottom-right',
           autoClose: 3000,
         })
+        setUser({ ...user, bio })
       })
       .catch((err) => {
         toast.error('Une erreur est survenue, merci de réessayer.', {
