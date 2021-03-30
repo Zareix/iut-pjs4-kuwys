@@ -3,6 +3,7 @@
   --our-yellowDark: #b9912a;
   --our-main-font-color: #5b5b5b;
   --our-blue: #60a5fa;
+  --our-red: #e74c3c;
 }
 
 .App {
@@ -153,6 +154,12 @@
 
 .ourYellowBg {
   background-color: var(--our-yellow);
+}
+.ourRedBg{
+  background-color: var(--our-red);
+}
+.ourRed{
+  color: var(--our-red);
 }
 
 .ourMainFontColor {

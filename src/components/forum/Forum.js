@@ -6,25 +6,22 @@ import AllPost from '../fichesCours/AllPost'
 
 const Forum = () => {
   const [posts, setPosts] = useState()
-  const [Tags, setTags] = useState([])
+  const [chipData, setChipData] = useState([])
 
   useEffect(() => {
-    API.get('/tags').then((res) => {
-      setTags(res.data)
-    })
-
-    API.get('/posts', { docTypes: ['forum'] })
+    console.log(chipData.map((chip)=> {return chip.label}))
+    API.get('/posts', { tags:['a'] ,docTypes: ['forum'] })
       .then((res) => {
         setPosts(res.data)
       })
       .catch((err) => {
         console.log(err)
       })
-  }, [])
+  }, [chipData])
 
   return (
     <Gui>
-      <SearchBar tags={Tags} />
+      <SearchBar chipData={chipData} setChipData={setChipData} />
       <p className="md:mt-2 md:mb-2 text-3xl font-bold ourYellow">Forum</p>
       <div className="w-full overflow-x-auto overflow-y-hidden">
         {posts && <AllPost type="forum" posts={posts} />}
