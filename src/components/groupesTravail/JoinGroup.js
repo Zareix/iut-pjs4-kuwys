@@ -24,31 +24,29 @@ const JoinGroup = (props) => {
   }
 
   const handleSuppression = () => {
-    API.post("/library/suppressGroup", { groupId: group.id })
-      .then((res) => {
-        toast(res.message, {
-          className: 'ourYellowBg',
-          style: { color: 'white' },
-          progressStyle: { background: 'white' },
-          position: 'bottom-right',
-          autoClose: 3000,
-        })
-        onClose()
+    API.post('/library/suppressGroup', { groupId: group.id }).then((res) => {
+      toast('Groupe de travail supprimé', {
+        className: 'ourYellowBg',
+        style: { color: 'white' },
+        progressStyle: { background: 'white' },
+        position: 'bottom-right',
+        autoClose: 3000,
       })
+      onClose()
+    })
   }
 
   const handleDesincription = () => {
-    API.post("/library/removeUserGroup", { groupId: group.id })
-      .then((res) => {
-        toast(res.message, {
-          className: 'ourYellowBg',
-          style: { color: 'white' },
-          progressStyle: { background: 'white' },
-          position: 'bottom-right',
-          autoClose: 3000,
-        })
-        onClose()
+    API.post('/library/removeUserGroup', { groupId: group.id }).then((res) => {
+      toast('Vous venez de vous désinscrire de ce groupe de travail', {
+        className: 'ourYellowBg',
+        style: { color: 'white' },
+        progressStyle: { background: 'white' },
+        position: 'bottom-right',
+        autoClose: 3000,
       })
+      onClose()
+    })
   }
 
   const handleInscription = () => {
@@ -56,6 +54,13 @@ const JoinGroup = (props) => {
       username: user.username,
       groupId: group.id,
     }).then(() => {
+      toast('Vous venez de vous inscrire à ce groupe de travail', {
+        className: 'ourYellowBg',
+        style: { color: 'white' },
+        progressStyle: { background: 'white' },
+        position: 'bottom-right',
+        autoClose: 3000,
+      })
       onClose()
     })
   }
@@ -95,15 +100,19 @@ const JoinGroup = (props) => {
         <Button onClick={handleClose} color="primary" autoFocus>
           Annuler
         </Button>
-        {isAdmin
-          ? <Button onClick={handleSuppression} style={{ color: "red" }} >Supprimer</Button>
-          : isUserInGroup
-            ? <Button onClick={handleDesincription} style={{ color: "red" }}>
-              Se désinscrire
-            </Button>
-            : <Button onClick={handleInscription} color="primary">
-              S'inscrire
-              </Button>}
+        {isAdmin ? (
+          <Button onClick={handleSuppression} style={{ color: 'red' }}>
+            Supprimer
+          </Button>
+        ) : isUserInGroup ? (
+          <Button onClick={handleDesincription} style={{ color: 'red' }}>
+            Se désinscrire
+          </Button>
+        ) : (
+          <Button onClick={handleInscription} color="primary">
+            S'inscrire
+          </Button>
+        )}
       </DialogActions>
     </Dialog>
   )
