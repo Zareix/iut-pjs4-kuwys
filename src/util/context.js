@@ -19,6 +19,7 @@ const AppProvider = ({ children }) => {
         console.log(res.data)
         setUser({ ...res.data})
         setLoading(false)
+        // lancer fonction pour script python ici
       })
       .catch((err) => {
         console.log(err)

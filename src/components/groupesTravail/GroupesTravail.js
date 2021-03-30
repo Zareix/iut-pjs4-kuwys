@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+
 import Gui from '../gui/Gui'
 import { Helmet } from 'react-helmet'
 import ButtonGrTravail from './ButtonGrTravail'
@@ -12,11 +13,14 @@ import API from '../../util/api'
 import imgBarreRecherche from '../../svg/GroupesTravailVector1.svg'
 import { Link } from 'react-router-dom'
 
+
+
 const GroupesTravail = (props) => {
   const [donnees, setDonnees] = useState([])
   const [biblioNearCity, setBiblioNearCity] = useState([])
   const [chosenCity, setChosenCity] = useState('')
   const [limiteDonnees, setlimiteDonnees] = useState(5)
+
 
   const settingUpLimiteDonnees = () => {
     if (limiteDonnees < 50) {
@@ -213,7 +217,7 @@ const GroupesTravail = (props) => {
             {donnees.length !== 0 &&
               donnees.map((d) => (
                 <div>
-                  <ButtonGrTravail dataUneBibliotheque={d[0]}/>
+                  <ButtonGrTravail dataUneBibliotheque={d[0]} />
                 </div>
               ))}
           </div>
