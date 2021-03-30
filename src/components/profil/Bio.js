@@ -24,13 +24,16 @@ const Bio = (props) => {
   const [selectedPPUrl, setSelectedPPUrl] = useState()
 
   const hiddenFileInput = useRef(null)
+  const submitPPButton = useRef(null)
+
+  let fileUploaded = null
 
   const handleInputClickPp = (e) => {
     hiddenFileInput.current.click()
   }
 
   const handleChange = (event) => {
-    const fileUploaded = event.target.files[0]
+    fileUploaded = event.target.files[0]
     setSelectedPP(fileUploaded)
     setSelectedPPUrl(URL.createObjectURL(fileUploaded))
   }
@@ -59,20 +62,29 @@ const Bio = (props) => {
       })
   }
 
-  const updatePP = () => {
-    console.log(selectedPP)
-    const formD = new FormData()
-    formD.append('image', selectedPP)
-    const endpoint = '/user/image'
-    API.post(endpoint, formD).then((res) => {
-      toast('Photo de profil mise à jour !', {
-        className: 'ourYellowBg',
-        style: { color: 'white' },
-        progressStyle: { background: 'white' },
-        position: 'bottom-right',
-        autoClose: 3000,
+  const updatePP = (e) => {
+    e.target.disabled = true
+    console.log(e.target)
+    const formData = new FormData()
+    formData.append('image', selectedPP, selectedPP.name)
+    API.post('/user/image', formData)
+      .then((res) => {
+        console.log(res)
+        // setUser({ ...user, imageUrl: res.data.newImageUrl })
+        toast('Photo de profil mise à jour !', {
+            className: 'ourYellowBg',
+            style: { color: 'white' },
+            progressStyle: { background: 'white' },
+            position: 'bottom-right',
+            autoClose: 3000,
+        })
+        e.target.disabled = false
       })
-    })
+      .catch((err) => {
+        console.log(err)
+        e.target.disabled = false
+      })
+      
   }
 
   return (
@@ -119,14 +131,14 @@ const Bio = (props) => {
             onChange={(e) => setBio(e.target.value)}
             defaultValue={selectedUser.bio}
             value={bio}
-          ></textarea>
+          />
         ) : (
           <textarea
             style={{ resize: 'none' }}
             className="border w-full md:w-4/5 h-20 shadow-inner"
             defaultValue={selectedUser.bio}
             readOnly
-          ></textarea>
+          />
         )}
         {!props.readonly && (
           <div className="grid justify-end w-4/5 mt-1">

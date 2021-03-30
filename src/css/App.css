@@ -201,6 +201,9 @@ input {
   background-position: center;
   background-size: cover;
 }
+button {
+  outline: none;
+}
 
 .radio {
   width: 3ch;
