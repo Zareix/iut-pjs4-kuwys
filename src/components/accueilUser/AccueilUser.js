@@ -81,6 +81,10 @@ const AccueilUser = () => {
     setIsFiches(false)
   }
 
+  const hasSeen = (type) => {
+    return lastSeenPost.some((p) => p.postType === type)
+  }
+
   return (
     <Gui>
       {isFavCours ? (
@@ -187,14 +191,14 @@ const AccueilUser = () => {
 
             <div className="md:mr-4">
               <h2>Vos dernières fiches consultées</h2>
-              {lastSeenPost.length === 0 ? (
+              {!hasSeen('fiche') ? (
                 <p className="font-normal">
                   Vous n'avez consulté aucune fiche.{' '}
                   <Link to="/fichescours">Découvrez les ici !</Link>
                 </p>
               ) : (
                 <div className="greyBox mx-auto md:mr-4 mt-2 md:ml-0 allPosts">
-                  <PerfectScrollbar options={scrollBarXConfig} >
+                  <PerfectScrollbar options={scrollBarXConfig}>
                     <AllPost type="fiche" posts={lastSeenPost}></AllPost>
                   </PerfectScrollbar>
                 </div>
@@ -202,7 +206,7 @@ const AccueilUser = () => {
             </div>
             <div>
               <h2>Vos derniers cours consultés</h2>
-              {lastSeenPost.length === 0 ? (
+              {!hasSeen('cours') ? (
                 <p className="font-normal">
                   Vous n'avez consulté aucun cours.{' '}
                   <Link to="/fichescours">Découvrez les ici !</Link>
