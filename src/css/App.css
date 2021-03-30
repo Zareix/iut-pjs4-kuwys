@@ -60,6 +60,15 @@
   display: block;
 }
 
+.backgroundMainDiv {
+  background-image: url("../svg/backgroundAcceuil.svg");
+  background-size: cover;
+}
+
+.backgroundLinearGradientYellow {
+  background-image: linear-gradient(to right, #F4D482, #F2BB2E);
+}
+
 .mainButton {
   background-color: var(--our-yellow);
   font-size: x-large;
@@ -123,6 +132,15 @@
   background-color: white;
   box-shadow: 1px 4px 10px 4px rgba(0, 0, 0, 0.25);
   border-radius: 12px;
+}
+
+.buttonCancelNewGrWork {
+  background-color: #c36060;
+  font-size: x-large;
+}
+
+.buttonCancelNewGrWork:hover {
+  background-color: #c02727;
 }
 
 /* COLORS */
