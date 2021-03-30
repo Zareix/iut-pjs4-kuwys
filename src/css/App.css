@@ -1,8 +1,8 @@
 :root {
-  --our-yellow: #f7b91c;
+  --our-yellow: #F7B91C;
   --our-yellowDark: #b9912a;
   --our-main-font-color: #5b5b5b;
-  --our-blue: #60a5fa;
+  --our-blue: #74B1FB;
   --our-red: #e74c3c;
 }
 
@@ -155,11 +155,21 @@
 .ourYellowBg {
   background-color: var(--our-yellow);
 }
+
 .ourRedBg{
   background-color: var(--our-red);
 }
+
 .ourRed{
   color: var(--our-red);
+}
+
+.ourBlueBg{
+  background-color: var(--our-blue);
+}
+
+.ourBlue{
+  color: var(--our-blue);
 }
 
 .ourMainFontColor {
