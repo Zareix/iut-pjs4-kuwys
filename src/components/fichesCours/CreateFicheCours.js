@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 
 import { toast } from 'react-toastify'
-import { Redirect } from 'react-router-dom'
 
 import API from '../../util/api'
 import Gui from '../gui/Gui'
@@ -12,46 +11,77 @@ const CreateFicheCours = (props) => {
   const [description, setDescription] = useState('')
   const [tags, setTags] = useState('')
   const [error, setError] = useState('')
+  const [selectedFile, setSelectedFile] = useState(null)
+
+  const hiddenFileInput = useRef(null)
 
   const createNewPost = (e) => {
     e.preventDefault()
     setError('')
-    console.log(tags.split('/'))
 
-    if (title === '') {
+    if (title.trim() === '') {
       setError("Merci d'entrer un titre")
       return
     }
-    if (description === '') {
+    if (description.trim() === '') {
       setError("Merci d'entrer une description")
       return
     }
-    if (tags === '') {
+    if (tags.trim() === '') {
       setError("Merci d'entrer au moins un tag")
       return
     }
+    if (selectedFile === null) {
+      setError('Merci de donné un document')
+      return
+    }
 
+    let newPost = null
     API.post('/post', {
       title: title,
       tags: tags.split('/'),
       postType: type,
       body: description,
-    }).then((res) => {
-      toast(
-        'Votre ' + type + ' a bien été ajouté' + type === 'fiche' ? 'e' : '',
-        {
-          className: 'ourYellowBg',
-          style: { color: 'white' },
-          progressStyle: { background: 'white' },
-          position: 'bottom-right',
-          autoClose: 3000,
-        }
-      )
-      setTitle('')
-      setType('')
-      setDescription('')
-      setTags('')
     })
+      .then((res) => {
+        toast(
+          'Votre ' + type + ' a bien été ajouté' + type === 'fiche' ? 'e' : '',
+          {
+            className: 'ourYellowBg',
+            style: { color: 'white' },
+            progressStyle: { background: 'white' },
+            position: 'bottom-right',
+            autoClose: 3000,
+          }
+        )
+        newPost = res.data.newPost
+        const formData = new FormData()
+        formData.append('pdf-file', selectedFile, selectedFile.name)
+        return API.post(`/post/${newPost.id}/addDocument`, formData)
+      })
+      .then(() => {
+        setTitle('')
+        setType('')
+        setDescription('')
+        setTags('')
+      })
+      .catch((err) => {
+        console.log(err)
+        setTitle('')
+        setType('')
+        setDescription('')
+        setTags('')
+      })
+  }
+
+  const handleInputFile = (e) => {
+    e.preventDefault()
+    hiddenFileInput.current.click()
+  }
+
+  const handleInputFileChange = (e) => {
+    const fileUploaded = e.target.files[0]
+    setSelectedFile(fileUploaded)
   }
 
   return (
@@ -104,13 +134,27 @@ const CreateFicheCours = (props) => {
               />
             </label>
             <label>
-              Tags <span className="italic text-sm">(séparés par des "/")</span>{' '}
+              Tags <span className="italic text-sm">(séparés par des "/")</span>
               :<br></br>
               <input
                 className="border rounded-lg px-2 align-middle largerInput"
                 value={tags}
                 onChange={(e) => setTags(e.target.value)}
                 placeholder="base de données/sgbd/mld"
+              />
+            </label>
+            <label>
+              Ajouter un PDF :
+              <button onClick={handleInputFile} className="font-bold">
+                {selectedFile !== null
+                  ? selectedFile.name
+                  : 'Choisir un fichier'}
+              </button>
+              <input
+                type="file"
+                ref={hiddenFileInput}
+                onChange={handleInputFileChange}
+                className="hidden"
               />
             </label>
             <p className="ourRed text-center">{error}</p>

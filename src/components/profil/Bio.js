@@ -24,7 +24,6 @@ const Bio = (props) => {
   const [selectedPPUrl, setSelectedPPUrl] = useState()
 
   const hiddenFileInput = useRef(null)
-  const submitPPButton = useRef(null)
 
   let fileUploaded = null
 
@@ -70,13 +69,13 @@ const Bio = (props) => {
     API.post('/user/image', formData)
       .then((res) => {
         console.log(res)
-        // setUser({ ...user, imageUrl: res.data.newImageUrl })
+        setUser({ ...user, imageUrl: res.data.newImageUrl })
         toast('Photo de profil mise à jour !', {
-            className: 'ourYellowBg',
-            style: { color: 'white' },
-            progressStyle: { background: 'white' },
-            position: 'bottom-right',
-            autoClose: 3000,
+          className: 'ourYellowBg',
+          style: { color: 'white' },
+          progressStyle: { background: 'white' },
+          position: 'bottom-right',
+          autoClose: 3000,
         })
         e.target.disabled = false
       })
@@ -84,7 +83,6 @@ const Bio = (props) => {
         console.log(err)
         e.target.disabled = false
       })
-      
   }
 
   return (
