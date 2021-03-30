@@ -81,13 +81,13 @@ const ButtonGrTravail = (props) => {
           <img src={userFlatIcon} style={{ width: '1.4rem' }} className="md:mt-0.5" alt="user flat icon" />
           <p className="mt-0.5 ml-1 font-bold">{beautifyingDate(participants)}</p>
         </div>
-        <div style={{ color: "#585858" }} className="col-start-6 col-span-1 row-start-2 row-span-1 text-sm flex justify-end">
+        <div style={{ color: "#585858" }} className="col-start-6 col-span-1 row-start-2 row-span-1 text-sm flex items-center justify-end">
           {props.dataUneBibliotheque.admin === user.username && <p id="adminDiv" style={{ backgroundColor: "#5FCAD6", color: "white", borderRadius: '12px' }} className="px-2 mt-0.5 ml-1 font-semibold">ADMIN</p>}
           {isUserInGroup && <p id="inscritDiv" style={{ backgroundColor: "#bf6e6f", color: "white", borderRadius: '12px' }} className="px-2 mt-0.5 ml-1 font-semibold">INSCRIT</p>}
           </div>
 
       </a>
-      <JoinGroup open={isDialogOpen} onClose={handleClose} group={props.dataUneBibliotheque} dateMiseEnForme={firebaseHorodatageToString(props.dataUneBibliotheque.horaire._seconds)} />
+      <JoinGroup open={isDialogOpen} onClose={handleClose} group={props.dataUneBibliotheque} isUserInGroup={isUserInGroup} dateMiseEnForme={firebaseHorodatageToString(props.dataUneBibliotheque.horaire._seconds)} />
     </div>
 
   )
