@@ -14,7 +14,9 @@ const ItemCours = (props) => {
               <p className="text-lg font-semibold">{post.title}</p>
             </div>
           </Link>
-          <Link to={{}}>
+          <Link to={{
+              pathname:`/profil/user/${post.author}`,
+            }}>
             <p className="text-lg">{post.author}</p>
           </Link>
         </figure>

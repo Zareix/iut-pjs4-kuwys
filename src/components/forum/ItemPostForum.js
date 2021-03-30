@@ -14,7 +14,9 @@ const ItemCours = (props) => {
             <p className="text-lg font-semibold">{post.votes}</p>
             <AiFillLike className="mx-2 ourYellow text-2xl text-black-400 hover:yellowDark cursor-pointer popUpEffect" />
 
-            <Link to={{}}>
+            <Link to={{
+              pathname:`/profil/user/${post.author}`,
+            }}>
               <p className="text-lg mx-4">{post.author}</p>
             </Link>
             <Link
