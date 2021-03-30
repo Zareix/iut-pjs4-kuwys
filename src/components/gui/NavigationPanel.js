@@ -97,6 +97,9 @@ const NavigationPanel = (props) => {
         <NavLink to="/groupestravail" activeClassName="font-semibold">
           Groupes de travail
         </NavLink>
+        <NavLink to="/bonsplans" activeClassName="font-semibold">
+          Bons Plans
+        </NavLink>
         {deconnexion && (
           <div className="flex justify-center mt-4">
             <button
