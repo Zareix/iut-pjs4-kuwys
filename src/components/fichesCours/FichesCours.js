@@ -9,8 +9,6 @@ const FichesCours = () => {
   const [chipData, setChipData] = useState([])
 
   useEffect(() => {
-    
-
     API.get('/posts', { docTypes: ['fiche', 'cours'] })
       .then((res) => {
         setPosts(res.data)

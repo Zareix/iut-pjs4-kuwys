@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import API from '../../util/api'
-import { Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { useGlobalContext } from '../../util/context'
 
 const Register = () => {
@@ -48,146 +48,129 @@ const Register = () => {
   if (logged) return <Redirect to="/" />
 
   return (
-    <div className="bg-grey-lighter min-h-screen flex flex-col">
-      <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+    <div className="flex w-screen h-screen md:h-auto justify-center items-center authBg">
+      <div className="m-10">
+        <h1 className="text-2xl text-center ourMainFontColor font-bold mb-4">Bienvenue sur <span className="ourYellow">KUWYS</span> !</h1>
         <form
-          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+          className="shadow-md rounded newGroupResearchDiv p-10"
           onSubmit={handleSubmit}
         >
           <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="nom"
-            >
+            <label className="block ourMainFontColor text-sm font-bold mb-2">
               Nom
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 "
+                id="nom"
+                type="text"
+                placeholder="Nom"
+                value={nom}
+                onChange={(e) => {
+                  setNom(e.target.value)
+                }}
+              />
             </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="nom"
-              type="text"
-              placeholder="nom"
-              value={nom}
-              onChange={(e) => {
-                setNom(e.target.value)
-              }}
-            />
             {errors.nom && (
-              <p className="text-red-500 text-xs italic">{errors.nom}</p>
+              <p className="ourRed text-xs italic">{errors.nom}</p>
             )}
           </div>
           <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="prenom"
-            >
-              Prenom
+            <label className="block ourMainFontColor text-sm font-bold mb-2">
+              Prénom
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 "
+                id="prenom"
+                type="text"
+                placeholder="Prénom"
+                value={prenom}
+                onChange={(e) => {
+                  setPrenom(e.target.value)
+                }}
+              />
             </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="prenom"
-              type="text"
-              placeholder="prenom"
-              value={prenom}
-              onChange={(e) => {
-                setPrenom(e.target.value)
-              }}
-            />
             {errors.prenom && (
-              <p className="text-red-500 text-xs italic">{errors.prenom}</p>
+              <p className="ourRed text-xs italic">{errors.prenom}</p>
             )}
           </div>
           <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="username"
-            >
-              Username
+            <label className="block ourMainFontColor text-sm font-bold mb-2">
+              Pseudo
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 "
+                id="username"
+                type="text"
+                placeholder="Pseudo"
+                value={username}
+                onChange={(e) => {
+                  setUsername(e.target.value)
+                }}
+              />
             </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="username"
-              type="text"
-              placeholder="pseudo"
-              value={username}
-              onChange={(e) => {
-                setUsername(e.target.value)
-              }}
-            />
             {errors.username && (
-              <p className="text-red-500 text-xs italic">{errors.username}</p>
+              <p className="ourRed text-xs italic">{errors.username}</p>
             )}
           </div>
-          <div className="mb-6">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="email"
-            >
+          <div className="mb-4">
+            <label className="block ourMainFontColor text-sm font-bold mb-2">
               Email
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 "
+                id="email"
+                type="text"
+                placeholder="etudiant@email.com"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value)
+                }}
+              />
             </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="email"
-              type="text"
-              placeholder="user@email.com"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value)
-              }}
-            />
             {errors.email && (
-              <p className="text-red-500 text-xs italic">{errors.email}</p>
+              <p className="ourRed text-xs italic">{errors.email}</p>
             )}
           </div>
-          <div className="mb-8">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="password"
-            >
+          <div className="mb-4">
+            <label className="block ourMainFontColor text-sm font-bold mb-2">
               Password
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 "
+                id="password"
+                type="password"
+                placeholder="*************"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value)
+                }}
+              />
             </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="password"
-              type="password"
-              placeholder="*************"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value)
-              }}
-            />
             {errors.password && (
-              <p className="text-red-500 text-xs italic">{errors.password}</p>
+              <p className="ourRed text-xs italic">{errors.password}</p>
             )}
           </div>
-          <div className="mb-10">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="confirmpassword"
-            >
+          <div className="mb-7">
+            <label className="block ourMainFontColor text-sm font-bold mb-2">
               Confirm Password
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 ourMainFontColor mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                id="confirmpassword"
+                type="password"
+                placeholder="******************"
+                value={confirmPassword}
+                onChange={(e) => {
+                  setConfirmPassword(e.target.value)
+                }}
+              />
             </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="confirmpassword"
-              type="password"
-              placeholder="******************"
-              value={confirmPassword}
-              onChange={(e) => {
-                setConfirmPassword(e.target.value)
-              }}
-            />
             {errors.confirmPassword && (
-              <p className="text-red-500 text-xs italic">
+              <p className="ourRed text-xs italic">
                 {errors.confirmPassword}
               </p>
             )}
             {errors.general && (
-              <p className="text-red-500 text-xs italic">{errors.general}</p>
+              <p className="ourRed text-xs italic">{errors.general}</p>
             )}
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex justify-center">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="border ourYellowBg text-white py-1 px-2 rounded-full"
               type="submit"
               disabled={loading}
             >
@@ -196,14 +179,11 @@ const Register = () => {
           </div>
         </form>
 
-        <div className="text-grey-dark mt-6">
-          Already have an account?
-          <a
-            className="no-underline border-b border-blue text-blue"
-            href="/login "
-          >
-            Log in
-          </a>
+        <div className="newGroupResearchDiv mt-6 p-5 text-center">
+          Déjà un compte ?{' '}
+          <Link className="ourYellow" to="/login">
+            Connectez vous
+          </Link>
           .
         </div>
       </div>

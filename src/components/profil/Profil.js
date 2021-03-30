@@ -27,7 +27,6 @@ const Profil = (props) => {
   }, [])
 
   const containsType = (type) => {
-    console.log(selectedUser)
     return selectedUser.posts.some((p) => p.postType === type)
   }
 
