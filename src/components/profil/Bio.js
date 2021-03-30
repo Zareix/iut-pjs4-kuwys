@@ -25,18 +25,12 @@ const Bio = (props) => {
 
   const hiddenFileInput = useRef(null)
 
-  let formD
-
   const handleInputClickPp = (e) => {
     hiddenFileInput.current.click()
   }
 
   const handleChange = (event) => {
     const fileUploaded = event.target.files[0]
-    console.log(fileUploaded)
-    const f = new FormData()
-    f.append('image', fileUploaded, fileUploaded.name)
-    formD = f
     setSelectedPP(fileUploaded)
     setSelectedPPUrl(URL.createObjectURL(fileUploaded))
   }
@@ -66,6 +60,9 @@ const Bio = (props) => {
   }
 
   const updatePP = () => {
+    console.log(selectedPP)
+    const formD = new FormData()
+    formD.append('image', selectedPP)
     const endpoint = '/user/image'
     API.post(endpoint, formD)
   }
