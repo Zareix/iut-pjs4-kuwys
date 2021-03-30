@@ -9,7 +9,7 @@ const FavFiches = (props) => {
   const { posts, retour, title, type } = props
 
   return (
-    <Fade className="transition-opacity">
+    <Fade>
       <div>
         <button
           className="border bg-yellow-300 text-white font-bold text-xs h-6 mt-4 px-2 rounded-full"
