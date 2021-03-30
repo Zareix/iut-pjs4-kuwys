@@ -23,6 +23,8 @@ import Forum from './components/forum/Forum'
 import MesInformations from './components/profil/MesInformations'
 import Notifications from './components/gui/Notifications'
 import PostForum from './components/forum/PostForum'
+import CreateFicheCours from './components/fichesCours/CreateFicheCours'
+import BonsPlans from "./components/bonsPlans/BonsPlans"
 
 function App() {
   return (
@@ -45,6 +47,12 @@ function App() {
           <PrivateRoute exact path="/ecole">
             <Ecole />
           </PrivateRoute>
+          <PrivateRoute exact path="/fichesCours">
+            <FichesCours />
+          </PrivateRoute>
+          <PrivateRoute exact path="/fichesCours/create">
+            <CreateFicheCours />
+          </PrivateRoute>
           <PrivateRoute exact path="/fiche/:postId" component={Post} />
           <PrivateRoute exact path="/cours/:postId" component={Post} />
           <PrivateRoute exact path="/forum/:postId" component={PostForum} />
@@ -55,11 +63,11 @@ function App() {
           <PrivateRoute exact path="/profil/mesinformations">
             <MesInformations />
           </PrivateRoute>
-          <PrivateRoute exact path="/fichesCours">
-            <FichesCours />
-          </PrivateRoute>
           <PrivateRoute exact path="/forum">
             <Forum />
+          </PrivateRoute>
+          <PrivateRoute exact path="/bonsplans">
+            <BonsPlans/>
           </PrivateRoute>
           <PrivateRoute exact path="/groupestravail">
             <GroupesTravail />

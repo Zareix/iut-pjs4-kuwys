@@ -184,6 +184,10 @@ input {
   width: 20ch;
 }
 
+.largerInput{
+  width: 35ch;
+}
+
 .mobileNavBar {
   transition: height ease-out 750ms;
 }
@@ -198,13 +202,22 @@ input {
   background-size: cover;
 }
 
+.radio {
+  width: 3ch;
+  margin-left: 0.75rem;
+}
 
 @media (max-width: 768px) {
   input {
     width: 90%;
   }
+  
   .smallerInput {
     width: 80%;
+  }
+
+  .largerInput{
+    width: 90%;
   }
 
   .allPosts {
