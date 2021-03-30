@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import { toast } from 'react-toastify'
-import {Redirect} from "react-router-dom"
+import { Redirect } from 'react-router-dom'
 
 import API from '../../util/api'
 import Gui from '../gui/Gui'
@@ -47,10 +47,10 @@ const CreateFicheCours = (props) => {
           autoClose: 3000,
         }
       )
-      setTitle("")
-      setType("")
-      setDescription("")
-      setTags("")
+      setTitle('')
+      setType('')
+      setDescription('')
+      setTags('')
     })
   }
 
@@ -63,9 +63,9 @@ const CreateFicheCours = (props) => {
           </h1>
           <form className="grid gap-4 ml-5" onSubmit={createNewPost}>
             <label>
-              Titre :
+              Titre : <br></br>
               <input
-                className="border ml-2 rounded-lg px-2 align-middle"
+                className="border rounded-lg px-2 align-middle largerInput"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               ></input>
@@ -104,10 +104,10 @@ const CreateFicheCours = (props) => {
               />
             </label>
             <label>
-              Tags <span className="italic text-sm">(espacés par des "/")</span>{' '}
+              Tags <span className="italic text-sm">(séparés par des "/")</span>{' '}
               :<br></br>
               <input
-                className="border ml-2 rounded-lg px-2 align-middle largerInput"
+                className="border rounded-lg px-2 align-middle largerInput"
                 value={tags}
                 onChange={(e) => setTags(e.target.value)}
                 placeholder="base de données/sgbd/mld"
@@ -116,7 +116,7 @@ const CreateFicheCours = (props) => {
             <p className="ourRed text-center">{error}</p>
             <button
               type="submit"
-              className="border ourYellowBg text-white mx-auto mt-1 py-1 px-2 rounded-full"
+              className="border ourYellowBg text-white mx-auto mt-1 py-1 px-2 rounded-full transition transform hover:scale-110 duration-500 ease-in-out"
             >
               Poster
             </button>

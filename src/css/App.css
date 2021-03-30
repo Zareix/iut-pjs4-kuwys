@@ -1,8 +1,8 @@
 :root {
-  --our-yellow: #F7B91C;
+  --our-yellow: #f7b91c;
   --our-yellowDark: #b9912a;
   --our-main-font-color: #5b5b5b;
-  --our-blue: #74B1FB;
+  --our-blue: #74b1fb;
   --our-red: #e74c3c;
 }
 
@@ -61,12 +61,12 @@
 }
 
 .backgroundMainDiv {
-  background-image: url("../svg/backgroundAcceuil.svg");
+  background-image: url('../svg/backgroundAcceuil.svg');
   background-size: cover;
 }
 
 .backgroundLinearGradientYellow {
-  background-image: linear-gradient(to right, #F4D482, #F2BB2E);
+  background-image: linear-gradient(to right, #f4d482, #f2bb2e);
 }
 
 .mainButton {
@@ -156,19 +156,19 @@
   background-color: var(--our-yellow);
 }
 
-.ourRedBg{
+.ourRedBg {
   background-color: var(--our-red);
 }
 
-.ourRed{
+.ourRed {
   color: var(--our-red);
 }
 
-.ourBlueBg{
+.ourBlueBg {
   background-color: var(--our-blue);
 }
 
-.ourBlue{
+.ourBlue {
   color: var(--our-blue);
 }
 
@@ -184,7 +184,7 @@ input {
   width: 20ch;
 }
 
-.largerInput{
+.largerInput {
   width: 35ch;
 }
 
@@ -211,16 +211,16 @@ input {
   input {
     width: 90%;
   }
-  
+
   .smallerInput {
     width: 80%;
   }
 
-  .largerInput{
+  .largerInput {
     width: 90%;
   }
 
   .allPosts {
-    width: 85vw;
+    width: 80vw;
   }
 }

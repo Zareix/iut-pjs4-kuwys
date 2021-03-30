@@ -26,7 +26,7 @@ const FichesCours = () => {
         <div className="flex justify-center my-6">
           <Link
             to="/fichescours/create"
-            className="buttonAddNewGrWork"
+            className="buttonAddNewGrWork shadow-xl px-5 py-2 font-bold rounded-full text-white md:py-3 md:px-3 cursor-pointer popUpEffect"
           >
             Ajouter une fiche/un cours
           </Link>
