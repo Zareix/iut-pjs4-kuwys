@@ -137,7 +137,6 @@
   background-color: var(--our-yellow);
 }
 
-
 .ourMainFontColor {
   color: var(--our-main-font-color);
 }
@@ -158,11 +157,16 @@ input {
   background-color: #ececec;
 }
 
+
 @media (max-width: 768px) {
   input {
     width: 90%;
   }
   .smallerInput {
     width: 80%;
+  }
+
+  .allPosts {
+    width: 85vw;
   }
 }

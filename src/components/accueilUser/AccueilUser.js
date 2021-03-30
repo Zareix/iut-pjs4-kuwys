@@ -115,7 +115,7 @@ const AccueilUser = () => {
             Bienvenue{' '}
             <span className="ourMainFontColor">{user.firstName} !</span>
           </h1>
-          <div className="grid w-screen md:w-auto md:grid-cols-2 gap-y-6 md:gap-y-10 mt-4 font-semibold ourMainFontColor">
+          <div className="grid md:w-auto md:grid-cols-2 gap-y-6 md:gap-y-10 mt-4 font-semibold ourMainFontColor">
             <div className="flex flex-wrap justify-center justify-items-center items-start gap-8 md:py-4 text-center">
               <div
                 className="w-1/3 border rounded-xl p-4 shadow grid gap-2 justify-items-center cursor-pointer"
@@ -173,7 +173,7 @@ const AccueilUser = () => {
                   Vous n'avez aucun groupe de travail
                 </p>
               ) : (
-                <div className="greyBox mr-4 mt-2 ml-0 h-64">
+                <div className="greyBox mx-auto md:mr-4 mt-2 ml-0 h-64">
                   <PerfectScrollbar options={scrollBarYConfig}>
                     {userGroups.map((g) => (
                       <ButtonGrTravail dataUneBibliotheque={g} />
@@ -183,16 +183,16 @@ const AccueilUser = () => {
               )}
             </div>
 
-            <div className="mr-4">
+            <div className="md:mr-4">
               <h2>Vos dernières fiches consultées</h2>
-              {userPosts.length === 0 ? (
+              {lastSeenPost.length === 0 ? (
                 <p className="font-normal">
                   Vous n'avez consulté aucune fiche.{' '}
                   <Link to="/fichescours">Découvrez les ici !</Link>
                 </p>
               ) : (
-                <div className="greyBox mr-4 mt-2 ml-0">
-                  <PerfectScrollbar options={scrollBarXConfig}>
+                <div className="greyBox mx-auto md:mr-4 mt-2 md:ml-0 allPosts">
+                  <PerfectScrollbar options={scrollBarXConfig} >
                     <AllPost type="fiche" posts={lastSeenPost}></AllPost>
                   </PerfectScrollbar>
                 </div>
@@ -200,13 +200,13 @@ const AccueilUser = () => {
             </div>
             <div>
               <h2>Vos derniers cours consultés</h2>
-              {userPosts.length === 0 ? (
+              {lastSeenPost.length === 0 ? (
                 <p className="font-normal">
                   Vous n'avez consulté aucun cours.{' '}
                   <Link to="/fichescours">Découvrez les ici !</Link>
                 </p>
               ) : (
-                <div className="greyBox mr-4 mt-2 ml-0">
+                <div className="greyBox mx-auto md:mr-4 mt-2 md:ml-0 allPosts">
                   <PerfectScrollbar options={scrollBarXConfig}>
                     <AllPost type="cours" posts={lastSeenPost}></AllPost>
                   </PerfectScrollbar>
