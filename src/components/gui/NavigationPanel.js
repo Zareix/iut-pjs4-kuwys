@@ -8,6 +8,7 @@ import Badge from '@material-ui/core/Badge'
 
 import iconNotification from '../../svg/iconNotifications.svg'
 import dmNNotification from '../../svg/iconDm.svg'
+import API from '../../util/api'
 
 const useStyles = makeStyles((theme) => ({
   large: {
@@ -24,14 +25,18 @@ const NavigationPanel = (props) => {
   const [invisibleValue, setInvisibleValue] = useState(true)
 
   useEffect(() => {
-    if (user.notifications) {
-      user.notifications.forEach((n) => {
-        if (!n.seen) {
-          setInvisibleValue(false)
+    API.get('/user/notifications')
+      .then((res) => {
+        user.notifications = res.data
+        if (user.notifications) {
+          user.notifications.forEach((n) => {
+            if (!n.seen) setInvisibleValue(false)
+          })
         }
-        
       })
-    }
+      .catch((err) => {
+        console.log(err)
+      })
   }, [])
 
   const { deconnexion } = props

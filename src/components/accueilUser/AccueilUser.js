@@ -38,12 +38,14 @@ const AccueilUser = () => {
   }
 
   useEffect(() => {
+    let mounted = true
     API.get('/user/groups').then((res) => setUserGroups(res.data))
     API.get('/user/favposts').then((res) => setFavPosts(res.data))
-    API.get('/user/' + user.username).then((res) =>
-      setUserPosts(res.data.posts)
-    )
+    API.get('/user/' + user.username).then((res) => {
+      if (mounted) setUserPosts(res.data.posts)
+    })
     API.get('/user/lastSeenPosts').then((res) => setLastSeenPost(res.data))
+    return () => (mounted = false)
   }, [user])
 
   const checkHasFicheCoursFav = (type, msg, setter) => {
@@ -175,8 +177,8 @@ const AccueilUser = () => {
               ) : (
                 <div className="greyBox mx-auto md:mr-4 mt-2 ml-0 h-64">
                   <PerfectScrollbar options={scrollBarYConfig}>
-                    {userGroups.map((g) => (
-                      <ButtonGrTravail dataUneBibliotheque={g} />
+                    {userGroups.map((group, i) => (
+                      <ButtonGrTravail key={i} dataUneBibliotheque={group} />
                     ))}
                   </PerfectScrollbar>
                 </div>
