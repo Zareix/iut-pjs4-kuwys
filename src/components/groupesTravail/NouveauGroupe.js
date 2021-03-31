@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import DatePicker from 'react-date-picker'
 import TimePicker from 'react-time-picker'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import Gui from '../gui/Gui'
 import API from '../../util/api'
@@ -30,9 +31,9 @@ const NouveauGroupe = (props) => {
   const [dateGroup, setDateGroup] = useState()
   const [heureGroup, setHeureGroup] = useState()
   const [canValidateNewGroup, setCanValidateNewGroup] = useState(true)
+  const [redirect, setRedirect] = useState(false)
 
   let selectedMarker
-
 
   const settingUpLimiteDonnees = () => {
     if (limiteDonnees < 50) {
@@ -137,6 +138,17 @@ const NouveauGroupe = (props) => {
         capaciteMax: capaciteMaxEntered,
         horaire: timestamp.getTime(),
         lieu: selectedBibliotheque.address.amenity,
+      }).then(() => {
+        toast('Nouveau groupe de travail ajouté !', {
+          className: 'ourYellowBg',
+          style: { color: 'white' },
+          progressStyle: { background: 'white' },
+          position: 'bottom-right',
+          autoClose: 3000,
+        })
+        setTimeout(() => {
+          setRedirect(true)
+        }, 3000)
       })
     } else setCanValidateNewGroup(false)
   }
@@ -154,6 +166,8 @@ const NouveauGroupe = (props) => {
       else setIsCapaciteMaxEnteredLessThirty(false)
     }
   }, [capaciteMaxEntered])
+
+  if (redirect) return <Redirect to="/groupestravail" />
 
   return (
     <HelmetProvider>

@@ -140,7 +140,7 @@ const Accueil = () => {
           <p className="text-3xl font-bold ourYellow">
               Keeping Up With Your Studies !
           </p>
-          <img src={miniLogo} className="h-32 w-32 m-auto md:mt-8 md:mb-8"></img>
+          <img src={miniLogo} className="h-32 w-32 m-auto md:mt-8 md:mb-8" alt="mini logo kuwys"></img>
             
             <span className="md:mt-12 text-sm font-basic">
               La communauté étudiante solidaire vous ouvre les bras ! KUWYS est le
@@ -156,22 +156,22 @@ const Accueil = () => {
 
         <div className="backgroundLinearGradientYellow md:mx-40 rounded-lg grid grid-cols-2 grid-rows-5 md:p-20 gap-4">
           <div className="col-start-1 col-span-1 row-start-1 row-span-5 rounded-lg shadow-inner">
-            <img src={gradutedWoman} className="rounded-lg"></img>
+            <img src={gradutedWoman} className="rounded-lg" alt="graduate woman"></img>
           </div>
           <div className="col-start-2 col-span-1 row-start-1 row-span-1">
             <p className="text-center text-white text-2xl font-bold">Ils parlent de nous</p>
           </div>
           <div className="col-start-2 col-span-1 row-start-2 row-span-1">
-            <img src={logoLetudiant} className="rounded-lg w-auto max-h-24 m-auto"></img>
+            <img src={logoLetudiant} className="rounded-lg w-auto max-h-24 m-auto" alt="logo letudiant"></img>
           </div>
           <div className="col-start-2 col-span-1 row-start-3 row-span-1">
-            <img src={logoEducationNationale} className="rounded-lg w-auto max-h-24 m-auto"></img>
+            <img src={logoEducationNationale} className="rounded-lg w-auto max-h-24 m-auto" alt="logo education nationale"></img>
           </div>
           <div className="col-start-2 col-span-1 row-start-4 row-span-1">
-            <img src={logoLusineNouvelle} className="rounded-lg w-auto max-h-24 m-auto"></img>
+            <img src={logoLusineNouvelle} className="rounded-lg w-auto max-h-24 m-auto" alt="logo lusine nouvelle"></img>
           </div>
           <div className="col-start-2 col-span-1 row-start-5 row-span-1">
-            <img src={logoUnivParis} className="rounded-lg w-auto max-h-24 m-auto"></img>
+            <img src={logoUnivParis} className="rounded-lg w-auto max-h-24 m-auto" alt="logo univ paris"></img>
           </div>
         </div>
       </div>

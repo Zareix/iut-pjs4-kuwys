@@ -74,7 +74,7 @@ const JoinGroup = (props) => {
       aria-describedby="alert-dialog-description"
     >
       <DialogTitle id="alert-dialog-title">
-        {'Voulez-vous réserver votre place dans ce groupe de travail ?'}
+        {isAdmin ? "Votre groupe de travail" : isUserInGroup ? "Inscrit dans ce groupe de travail" : "Voulez-vous réserver votre place dans ce groupe de travail ?"}
       </DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
@@ -108,9 +108,14 @@ const JoinGroup = (props) => {
         ) : isUserInGroup ? (
           <div>
             <Link to={'/profil/user/' + group.admin}>
-              <Button style={{color : "var(--our-blue)"}}>Profil de l'admin</Button>
+              <Button style={{ color: 'var(--our-blue)' }}>
+                Profil de l'admin
+              </Button>
             </Link>
-            <Button onClick={handleDesincription} style={{ color: 'var(--our-red)' }}>
+            <Button
+              onClick={handleDesincription}
+              style={{ color: 'var(--our-red)' }}
+            >
               Se désinscrire
             </Button>
           </div>

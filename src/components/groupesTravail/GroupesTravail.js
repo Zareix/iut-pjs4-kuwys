@@ -13,14 +13,11 @@ import API from '../../util/api'
 import imgBarreRecherche from '../../svg/GroupesTravailVector1.svg'
 import { Link } from 'react-router-dom'
 
-
-
 const GroupesTravail = (props) => {
   const [donnees, setDonnees] = useState([])
   const [biblioNearCity, setBiblioNearCity] = useState([])
   const [chosenCity, setChosenCity] = useState('')
   const [limiteDonnees, setlimiteDonnees] = useState(5)
-
 
   const settingUpLimiteDonnees = () => {
     if (limiteDonnees < 50) {
@@ -102,11 +99,15 @@ const GroupesTravail = (props) => {
       <div id="LocationHeader">
         <div className="grid grid-cols-1 grid-rows-1 gap-14 md:grid-cols-2">
           <div className="col-start-1 col-span-1 row-start-1 row-span-1 md:col-span-1 md:col-start-1">
-            <p className="ourMainFontColor font-bold">
+            <p className="ourMainFontColor font-bold mb-4 md:mb-0">
               Chercher dans un périmètre
             </p>
             <div className="relative">
-              <img className="m-auto" src={imgBarreRecherche} alt="search bar icon" />
+              <img
+                className="m-auto"
+                src={imgBarreRecherche}
+                alt="search bar icon"
+              />
             </div>
             <div className="relative w-full text-center -top-60 md:-top-2/4">
               <div className="flex justify-center">
@@ -211,15 +212,20 @@ const GroupesTravail = (props) => {
       </div>
 
       <div>
-        <div className="grid grid-cols-1 md:w-6/12 md:m-auto mt-7 md:mt-16 md:pb-4 greyBox">
-          <div className="col-start-1 col-span-1">
-            {donnees.length !== 0 &&
-              donnees.map((d) => (
+        <div className="grid grid-cols-1 md:w-6/12 md:m-auto mt-7 md:mt-16 py-2 greyBox">
+          {donnees.length === 0 ? (
+            <p className="text-center font-semibold">
+              Aucun groupe de travail dans cette zone
+            </p>
+          ) : (
+            <div className="col-start-1 col-span-1">
+              {donnees.map((d) => (
                 <div>
                   <ButtonGrTravail dataUneBibliotheque={d[0]} />
                 </div>
               ))}
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </Gui>

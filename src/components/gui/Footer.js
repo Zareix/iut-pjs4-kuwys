@@ -8,10 +8,10 @@ const Footer = () => {
   return (
     <div
       style={{ backgroundColor: '#4F4F4F' }}
-      className="flex flex-wrap items-center justify-center text-gray-100 text-xs px-2 md:pl-5 py-10 mt-10"
+      className="grid grid-cols-1 md:grid-cols-3 justify-items-center items-center text-gray-100 text-xs px-2 md:pl-5 py-10 mt-80"
     >
-      <img src={logo} className="w-1/3 md:w-1/4 mb-6" alt="logo kuwys footer" />
-      <div className="grid grid-cols-3 md:ml-8">
+      <img src={logo} className="mb-6 w-2/3" alt="logo kuwys footer" />
+      <div className="grid grid-cols-3 md:col-span-2 justify-self-start md:ml-8">
         <div>
           <p className="font-bold center mb-5 text-gray-50">Utilisation</p>
           <p className="my-2">
@@ -24,7 +24,7 @@ const Footer = () => {
         <div>
           <p className="font-bold center mb-5">Nous Contacter</p>
           <div className="grid gap-3">
-            <a href="#">Point presse</a>
+            <p>Point presse</p>
             <a href="https://www.facebook.com">Facebook</a>
             <a href="https://www.instagram.com">Instagram</a>
             <a href="https://www.twitter.com">Twitter</a>
