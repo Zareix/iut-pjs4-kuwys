@@ -25,6 +25,7 @@ import Notifications from './components/gui/Notifications'
 import PostForum from './components/forum/PostForum'
 import CreateFicheCours from './components/fichesCours/CreateFicheCours'
 import BonsPlans from "./components/bonsPlans/BonsPlans"
+import CreateForum from './components/forum/CreateForum'
 
 function App() {
   return (
@@ -55,7 +56,7 @@ function App() {
           </PrivateRoute>
           <PrivateRoute exact path="/fiche/:postId" component={Post} />
           <PrivateRoute exact path="/cours/:postId" component={Post} />
-          <PrivateRoute exact path="/forum/:postId" component={PostForum} />
+          <PrivateRoute exact path="/forum/post/:postId" component={PostForum} />
           <PrivateRoute exact path="/profil">
             <Profil />
           </PrivateRoute>
@@ -65,6 +66,9 @@ function App() {
           </PrivateRoute>
           <PrivateRoute exact path="/forum">
             <Forum />
+          </PrivateRoute>
+          <PrivateRoute exact path="/forum/create">
+            <CreateForum />
           </PrivateRoute>
           <PrivateRoute exact path="/bonsplans">
             <BonsPlans/>
