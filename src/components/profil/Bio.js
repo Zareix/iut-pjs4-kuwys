@@ -131,12 +131,20 @@ const Bio = (props) => {
             value={bio}
           />
         ) : (
-          <textarea
-            style={{ resize: 'none' }}
-            className="border w-full md:w-4/5 h-20 shadow-inner"
-            defaultValue={selectedUser.bio}
-            readOnly
-          />
+          <div>
+            <textarea
+              style={{ resize: 'none' }}
+              className="border w-full md:w-4/5 h-20 shadow-inner"
+              defaultValue={selectedUser.bio}
+              readOnly
+            />
+            <br></br>
+            <a href={'mailto:' + selectedUser.email}>
+              <button className="border ourYellowBg text-white font-bold px-2 rounded-full popUpEffect">
+                Contacter
+              </button>
+            </a>
+          </div>
         )}
         {!props.readonly && (
           <div className="grid justify-end w-4/5 mt-1">

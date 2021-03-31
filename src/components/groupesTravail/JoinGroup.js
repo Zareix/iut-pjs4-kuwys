@@ -6,6 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
+import { Link } from 'react-router-dom'
 import API from '../../util/api'
 import { useGlobalContext } from '../../util/context'
 import { toast } from 'react-toastify'
@@ -105,9 +106,14 @@ const JoinGroup = (props) => {
             Supprimer
           </Button>
         ) : isUserInGroup ? (
-          <Button onClick={handleDesincription} style={{ color: 'red' }}>
-            Se désinscrire
-          </Button>
+          <div>
+            <Link to={'/profil/user/' + group.admin}>
+              <Button style={{color : "var(--our-blue)"}}>Profil de l'admin</Button>
+            </Link>
+            <Button onClick={handleDesincription} style={{ color: 'var(--our-red)' }}>
+              Se désinscrire
+            </Button>
+          </div>
         ) : (
           <Button onClick={handleInscription} color="primary">
             S'inscrire

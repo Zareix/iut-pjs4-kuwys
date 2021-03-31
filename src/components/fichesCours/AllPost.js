@@ -6,7 +6,6 @@ import ItemPostForum from '../forum/ItemPostForum'
 
 const AllPost = (props) => {
   const { type, posts } = props
-  console.log(posts);
   switch (type) {
     case 'fiche':
       return (

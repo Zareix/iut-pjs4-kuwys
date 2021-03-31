@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Fade from 'react-reveal/Fade'
+import Fade from '../tools/Fade'
 
 import Footer from './Footer'
 import NavigationPanel from './NavigationPanel'
@@ -17,7 +17,9 @@ const GuiWideScreen = (props) => {
             <NavigationPanel />
           </div>
           <div className="col-start-2 col-span-6 mt-12 px-8 pt-5 pb-96 min-h-screen z-10">
-            <Fade><div>{props.children}</div></Fade>
+            <Fade>
+              <div>{props.children}</div>
+            </Fade>
           </div>
           <div className="col-start-2 col-span-6">
             <Footer />
