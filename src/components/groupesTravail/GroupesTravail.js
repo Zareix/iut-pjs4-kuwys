@@ -74,9 +74,7 @@ const GroupesTravail = (props) => {
       }).catch((err) => {
         console.log('Une erreur est survenu, merci de réessayer.')
         console.log(err.response)
-      })
-      
-      
+      }) 
     }
     return tableauBiblioNearCityWithWorkingGroup
   }
