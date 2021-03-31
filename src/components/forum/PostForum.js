@@ -16,7 +16,6 @@ import LoadingPage from '../loadingPage/LoadingPage'
 
 const PostForum = (props) => {
   const [post, setPost] = useState()
-  const [size, setSize] = useState(false)
   const [comm, setComm] = useState()
   const [votes, setVotes] = useState(0)
   const [loading, setLoading] = useState(false)
@@ -24,11 +23,6 @@ const PostForum = (props) => {
 
   useEffect(() => {
     setLoading(true)
-    setSize((window.innerWidth * 4) / 6)
-    window.addEventListener('resize', () => {
-      setSize((window.innerWidth * 5) / 6)
-    })
-
     API.get('/post/' + postId)
       .then((res) => {
         setPost(res.data)

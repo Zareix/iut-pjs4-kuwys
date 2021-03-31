@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Chip from '@material-ui/core/Chip'
 import { BiTrash } from 'react-icons/bi'
 // TODO

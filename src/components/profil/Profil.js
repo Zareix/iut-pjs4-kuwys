@@ -24,7 +24,7 @@ const Profil = (props) => {
       setSelectedUser(user)
     }
     API.get('user/' + username).then((res) => setSelectedUser(res.data))
-  }, [])
+  }, [user, username])
 
   const containsType = (type) => {
     return selectedUser.posts.some((p) => p.postType === type)

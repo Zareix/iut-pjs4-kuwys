@@ -83,7 +83,6 @@ const GroupesTravail = (props) => {
 
   useEffect(() => {
     requestAPI().then((res) => {
-      console.log(res)
       setDonnees(res)
     })
   }, [biblioNearCity])

@@ -40,6 +40,7 @@ const Login = () => {
         src={kuwysBigLogo}
         className="w-48 absolute top-14"
         style={{ left: '50%', marginLeft: '-6rem' }}
+        alt="kuwys logo big"
       />
       <div className="border-4 border-yellow-100 mx-3 p-8 md:p-10 bg-white">
         <form className="newGroupResearchDiv p-8" onSubmit={handleSubmit}>

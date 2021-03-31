@@ -65,7 +65,7 @@ const ButtonGrTravail = (props) => {
 
   return (
     <div>
-      <a
+      <button
         onClick={() => setIsDialogOpen(true)}
         style={{}}
         className="w-11/12 bg-white grow grButton popUpEffect px-8 py-3 text-black md:py-4 md:text-xs md:px-6 my-2 m-auto grid grid-cols-6 grid-rows-3 md:grid-rows-2"
@@ -86,7 +86,7 @@ const ButtonGrTravail = (props) => {
           {isUserInGroup && <p id="inscritDiv" style={{ backgroundColor: "#bf6e6f", color: "white", borderRadius: '12px' }} className="px-2 mt-0.5 ml-1 font-semibold">INSCRIT</p>}
           </div>
 
-      </a>
+      </button>
       <JoinGroup open={isDialogOpen} onClose={handleClose} group={props.dataUneBibliotheque} isUserInGroup={isUserInGroup} dateMiseEnForme={firebaseHorodatageToString(props.dataUneBibliotheque.horaire._seconds)} />
     </div>
 

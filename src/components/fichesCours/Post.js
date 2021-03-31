@@ -112,13 +112,18 @@ const Post = (props) => {
   const addVote = () => {
     API.post(`/post/${postId}/vote`)
       .then((res) => {
-        toast('Post recommandé !', {
-          className: 'ourYellowBg',
-          style: { color: 'white' },
-          progressStyle: { background: 'white' },
-          position: 'bottom-right',
-          autoClose: 3000,
-        })
+        toast(
+          post.postType === 'fiche'
+            ? 'Fiche likée !'
+            : 'Cours liké !',
+          {
+            className: 'ourYellowBg',
+            style: { color: 'white' },
+            progressStyle: { background: 'white' },
+            position: 'bottom-right',
+            autoClose: 3000,
+          }
+        )
         setVotes(votes + 1)
         let isVote = true
         setPost({ ...post, isVote })
@@ -131,7 +136,7 @@ const Post = (props) => {
   const removeVote = () => {
     API.post(`/post/${postId}/unVote`)
       .then((res) => {
-        toast("Post n'est plus recommandé !", {
+        toast('Vous avez retiré votre like', {
           className: 'ourYellowBg',
           style: { color: 'white' },
           progressStyle: { background: 'white' },

@@ -1,10 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 const SoloNotif = (props) => {
-  useEffect(() => {
-    console.log(props.dataNotif)
-  }, [])
-
   return (
     <div
       className="gap-5w-11/12 bg-white grow grButton popUpEffect px-8 py-3 text-black md:py-4 md:text-xs md:px-6 my-2 m-auto

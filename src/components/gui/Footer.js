@@ -24,7 +24,7 @@ const Footer = () => {
         <div>
           <p className="font-bold center mb-5">Nous Contacter</p>
           <div className="grid gap-3">
-            <a to="#">Point presse</a>
+            <a href="#">Point presse</a>
             <a href="https://www.facebook.com">Facebook</a>
             <a href="https://www.instagram.com">Instagram</a>
             <a href="https://www.twitter.com">Twitter</a>
