@@ -12,6 +12,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [prenom, setPrenom] = useState('')
   const [nom, setNom] = useState('')
+  const [etablissement, setEtablissement] = useState('')
 
   const [errors, setErrors] = useState({})
   const [logged, setLogged] = useState(false)
@@ -48,7 +49,7 @@ const Register = () => {
   if (logged) return <Redirect to="/" />
 
   return (
-    <div className="flex w-screen h-screen md:h-auto justify-center items-center authBg">
+    <div className="flex w-screen justify-center items-center authBg">
       <div className="m-10">
         <h1 className="text-2xl text-center ourMainFontColor font-bold mb-4">Bienvenue sur <span className="ourYellow">KUWYS</span> !</h1>
         <form
@@ -102,6 +103,24 @@ const Register = () => {
                 value={username}
                 onChange={(e) => {
                   setUsername(e.target.value)
+                }}
+              />
+            </label>
+            {errors.username && (
+              <p className="ourRed text-xs italic">{errors.username}</p>
+            )}
+          </div>
+          <div className="mb-4">
+            <label className="block ourMainFontColor text-sm font-bold mb-2">
+              Etablissement
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 "
+                id="etablissement"
+                type="text"
+                placeholder="Etablissement"
+                value={etablissement}
+                onChange={(e) => {
+                  setEtablissement(e.target.value)
                 }}
               />
             </label>
