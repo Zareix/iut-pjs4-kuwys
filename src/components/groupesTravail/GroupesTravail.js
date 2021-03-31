@@ -61,19 +61,22 @@ const GroupesTravail = (props) => {
     let tableauBiblioNearCityWithWorkingGroup = []
     for (let i = 0; i < biblioNearCity.length; i++) {
       let element = biblioNearCity[i]
-      const res = await API({
+      API({
         method: 'get',
         url: '/library/groups',
         params: {
           library: element.address.amenity,
         },
+      }).then((res) => {
+        if (res.data.length !== 0) {
+          tableauBiblioNearCityWithWorkingGroup.push(res.data)
+        }
       }).catch((err) => {
         console.log('Une erreur est survenu, merci de réessayer.')
         console.log(err.response)
       })
-      if (res.data.length !== 0) {
-        tableauBiblioNearCityWithWorkingGroup.push(res.data)
-      }
+      
+      
     }
     return tableauBiblioNearCityWithWorkingGroup
   }

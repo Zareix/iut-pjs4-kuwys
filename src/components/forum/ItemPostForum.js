@@ -21,7 +21,7 @@ const ItemCours = (props) => {
             </Link>
             <Link
               to={{
-                pathname: `/forum/${post.id}`,
+                pathname: `/forum/post/${post.id}`,
               }}
             >
               <div className="space-y-4">
