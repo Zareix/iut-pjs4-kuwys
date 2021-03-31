@@ -15,10 +15,10 @@ import Footer from '../components/gui/Footer'
 import '../css/App.css'
 
 const Accueil = () => {
-  const { isLogin } = useGlobalContext()
+  const { isUserLoggedIn } = useGlobalContext()
 
   const [presentationImageUrl, setPresentationImageUrl] = useState(imgHeader)
-  if (isLogin) return <Redirect to="/accueil" />
+  if (isUserLoggedIn()) return <Redirect to="/accueil" />
 
   const switchImage = (newPresentationImage) => {
     setPresentationImageUrl(newPresentationImage)

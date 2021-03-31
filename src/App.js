@@ -24,7 +24,8 @@ import MesInformations from './components/profil/MesInformations'
 import Notifications from './components/gui/Notifications'
 import PostForum from './components/forum/PostForum'
 import CreateFicheCours from './components/fichesCours/CreateFicheCours'
-import BonsPlans from "./components/bonsPlans/BonsPlans"
+import BonsPlans from './components/bonsPlans/BonsPlans'
+import PublicRoute from './components/PublicRoute'
 
 function App() {
   return (
@@ -32,55 +33,25 @@ function App() {
       <Router>
         <ScrollToTop />
         <Switch>
-          <Route exact path="/">
-            <Accueil />
-          </Route>
-          <Route exact path="/login">
-            <Login />
-          </Route>
-          <Route exact path="/register">
-            <Register />
-          </Route>
-          <PrivateRoute exact path="/accueil">
-            <AccueilUser />
-          </PrivateRoute>
-          <PrivateRoute exact path="/ecole">
-            <Ecole />
-          </PrivateRoute>
-          <PrivateRoute exact path="/fichesCours">
-            <FichesCours />
-          </PrivateRoute>
-          <PrivateRoute exact path="/fichesCours/create">
-            <CreateFicheCours />
-          </PrivateRoute>
+          <PublicRoute exact path="/" component={Accueil} restricted={false} />
+          <PublicRoute exact path="/login" component={Login} restricted={true} />
+          <PublicRoute exact path="/register" component={Register} restricted={true} />
+          <PrivateRoute exact path="/accueil" component={AccueilUser} />
+          <PrivateRoute exact path="/ecole" component={Ecole} />
+          <PrivateRoute exact path="/fichesCours" component={FichesCours} />
+          <PrivateRoute exact path="/fichesCours/create" component={CreateFicheCours} />
           <PrivateRoute exact path="/fiche/:postId" component={Post} />
           <PrivateRoute exact path="/cours/:postId" component={Post} />
           <PrivateRoute exact path="/forum/:postId" component={PostForum} />
-          <PrivateRoute exact path="/profil">
-            <Profil />
-          </PrivateRoute>
-          <PrivateRoute path="/profil/user/:username" component={Profil} />
-          <PrivateRoute exact path="/profil/mesinformations">
-            <MesInformations />
-          </PrivateRoute>
-          <PrivateRoute exact path="/forum">
-            <Forum />
-          </PrivateRoute>
-          <PrivateRoute exact path="/bonsplans">
-            <BonsPlans/>
-          </PrivateRoute>
-          <PrivateRoute exact path="/groupestravail">
-            <GroupesTravail />
-          </PrivateRoute>
-          <PrivateRoute exact path="/groupestravail/nouveaugroupe">
-            <NouveauGroupe />
-          </PrivateRoute>
-          <PrivateRoute exact path="/notifications">
-            <Notifications />
-          </PrivateRoute>
-          <Route>
-            <Page404 />
-          </Route>
+          <PrivateRoute exact path="/profil" component={Profil} />
+          <PrivateRoute exact path="/profil/user/:username" component={Profil} />
+          <PrivateRoute exact path="/profil/mesinformations" component={MesInformations} />
+          <PrivateRoute exact path="/forum" component={Forum} />
+          <PrivateRoute exact path="/bonsplans" component={BonsPlans} />
+          <PrivateRoute exact path="/groupestravail" component={GroupesTravail} />
+          <PrivateRoute exact path="/groupestravail/nouveaugroupe" component={NouveauGroupe} />
+          <PrivateRoute exact path="/notifications" component={Notifications} />
+          <PublicRoute restricted={false} component={Page404} />
         </Switch>
       </Router>
       <ToastContainer />

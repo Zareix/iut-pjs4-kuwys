@@ -10,23 +10,29 @@ const AppProvider = ({ children }) => {
   const [user, setUser] = useState({})
   const [isLogin, setIsLogin] = useState(false)
   const [loading, setLoading] = useState(true)
-  const [unidaysPromo, setUnidaysPromo] = useState(unidaysPromoJson.promotionsUnidays)
+  const [unidaysPromo, setUnidaysPromo] = useState(
+    unidaysPromoJson.promotionsUnidays
+  )
 
+  const isUserLoggedIn = () => {
+    return isLogin
+  }
 
   const login = (token) => {
-    setIsLogin(true)
+    if (!loading) setLoading(true)
     window.localStorage.setItem('FBToken', token)
     API.defaults.headers.common['Authorization'] = `Bearer ${token}`
     API.get('/user')
       .then((res) => {
-        console.log(res.data)
-        setUser({ ...res.data})
+        setUser({ ...res.data })
+        setIsLogin(true)
         setLoading(false)
-        // lancer fonction pour script python ici
+        return
       })
       .catch((err) => {
         console.log(err)
         setLoading(false)
+        return
       })
   }
 
@@ -34,11 +40,10 @@ const AppProvider = ({ children }) => {
     setIsLogin(false)
     setUser({})
     window.localStorage.removeItem('FBToken')
-    setLoading(false)
+    if (loading) setLoading(false)
   }
 
   useEffect(() => {
-    setLoading(true)
     const token = window.localStorage.getItem('FBToken')
     if (token !== null) {
       if (jwt_decode(token).exp * 1000 < Date.now()) {
@@ -53,9 +58,22 @@ const AppProvider = ({ children }) => {
     }
   }, [])
 
-  if (loading) return <LoadingPage />
+  if (loading) {
+    return <LoadingPage />
+  }
+
   return (
-    <AppContext.Provider value={{ user, isLogin, login, logout, loading, setUser, unidaysPromo }}>
+    <AppContext.Provider
+      value={{
+        user,
+        isUserLoggedIn,
+        login,
+        logout,
+        loading,
+        setUser,
+        unidaysPromo,
+      }}
+    >
       {children}
     </AppContext.Provider>
   )

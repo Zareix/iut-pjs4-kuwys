@@ -13,7 +13,7 @@ const AllPost = (props) => {
           {posts.map(
             (post) =>
               post.postType === 'fiche' && (
-                <ItemFiche post={post} key={post.id}></ItemFiche>
+                <ItemFiche post={post} key={post.id} />
               )
           )}
         </div>

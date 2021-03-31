@@ -4,7 +4,7 @@ import { Link, Redirect } from 'react-router-dom'
 import { useGlobalContext } from '../../util/context'
 
 const Register = () => {
-  const { login, isLogin } = useGlobalContext()
+  const { login, isUserLoggedIn } = useGlobalContext()
 
   const [email, setEmail] = useState('')
   const [username, setUsername] = useState('')
@@ -17,7 +17,7 @@ const Register = () => {
   const [logged, setLogged] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  if (isLogin) return <Redirect to="/" />
+  if (isUserLoggedIn()) return <Redirect to="/" />
   const handleSubmit = (e) => {
     e.preventDefault()
     setLoading(true)

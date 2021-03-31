@@ -7,7 +7,7 @@ import API from '../../util/api'
 import { useGlobalContext } from '../../util/context'
 
 const Login = () => {
-  const { login, isLogin } = useGlobalContext()
+  const { login } = useGlobalContext()
 
   const location = useLocation()
   const { from } = location.state || { from: { pathname: '/' } }
@@ -16,22 +16,25 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState({})
   const [redirect, setRedirect] = useState(false)
-  if (isLogin) return <Redirect to={from} />
 
   const handleSubmit = (e) => {
     e.preventDefault()
     setErrors({})
+    e.target.disabled = true
+
     API.post('/login', { email, password })
       .then((res) => {
-        console.log(res.data)
         login(res.data.token)
+        e.target.disabled = false
         setRedirect(true)
       })
       .catch((err) => {
         console.log(err)
+        e.target.disabled = false
         setErrors({ ...err })
       })
   }
+  console.log(from)
   if (redirect) return <Redirect to={from} />
 
   return (

@@ -98,7 +98,7 @@ const CreateFicheCours = (props) => {
                 className="border rounded-lg px-2 align-middle largerInput"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-              ></input>
+              />
             </label>
             <div className="grid">
               <label>Type :</label>
