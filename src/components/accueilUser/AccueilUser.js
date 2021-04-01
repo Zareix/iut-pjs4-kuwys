@@ -7,6 +7,8 @@ import 'react-perfect-scrollbar/dist/css/styles.css'
 
 import { ReactComponent as FavCoursIcon } from '../../svg/024-file.svg'
 import { ReactComponent as FavFichesIcon } from '../../svg/025-file-1.svg'
+import LikeFicheIcon from '../../svg/ficheLike.png'
+import LikeCoursIcon from '../../svg/coursLike.png'
 
 import { useGlobalContext } from '../../util/context'
 
@@ -175,8 +177,8 @@ const AccueilUser = () => {
                       )
                     }
                   >
-                    <FavCoursIcon className="h-10" />
-                    <p>Cours favorites</p>
+                    <img src={LikeCoursIcon} className="h-10"></img>
+                    <p>Cours favoris</p>
                   </div>
                   <div
                     className="w-1/3 border rounded-xl p-4 shadow grid gap-2 justify-items-center cursor-pointer popUpEffect"
@@ -188,7 +190,7 @@ const AccueilUser = () => {
                       )
                     }
                   >
-                    <FavFichesIcon className="h-10" />
+                    <img src={LikeFicheIcon} className="h-10"></img>
                     <p>Fiches favorites</p>
                   </div>
                 </div>

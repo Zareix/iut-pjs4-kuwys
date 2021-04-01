@@ -7,7 +7,6 @@ import Avatar from '@material-ui/core/Avatar'
 import Badge from '@material-ui/core/Badge'
 
 import iconNotification from '../../svg/iconNotifications.svg'
-import dmNNotification from '../../svg/iconDm.svg'
 import API from '../../util/api'
 
 const useStyles = makeStyles((theme) => ({
@@ -54,12 +53,7 @@ const NavigationPanel = (props) => {
         />
         <p>{user.username}</p>
       </Link>
-      <div className="grid grid-cols-2 gap-10">
-        <Avatar
-          alt="notifications logo"
-          src={dmNNotification}
-          className={classes.large}
-        />
+      <div className="m-auto">
         <Badge
           color="secondary"
           overlap="circle"
