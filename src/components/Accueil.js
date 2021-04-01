@@ -8,8 +8,14 @@ import logoLetudiant from '../pictures/L_etudiant_magazine_logo.png'
 import logoEducationNationale from '../pictures/EducationNationale.png'
 import logoLusineNouvelle from '../pictures/lusinenouvelle.png'
 import logoUnivParis from '../pictures/UnivParis.png'
+import imgCours from '../pictures/cours.png'
+import imgGroupe from '../pictures/groupes.png'
 import gradutedWoman from '../pictures/GradutatedWoman.jpg'
 import imgQuestionsReponsesDefault from '../pictures/ajaccio.jpg'
+import imgFiche from '../pictures/fiche.png'
+import imgAccueil from '../pictures/accueil.png'
+import imgEspaceEcole from '../pictures/espaceecole.png'
+import imgForum from '../pictures/forum.png'
 import PresentationButton from './PresentationButton'
 import Footer from '../components/gui/Footer'
 import '../css/App.css'
@@ -77,11 +83,11 @@ const Accueil = () => {
 
               {/** BOUTONS AUTOUR DE L'IMAGE DE PRESENTATION */}
               <div
-                onMouseOver={() => switchImage(imgQuestionsReponsesDefault)}
+                onMouseOver={() => switchImage(imgAccueil)}
                 className="col-start-2 col-span-2 md:col-span-2 md:col-start-2 md:row-start-4"
               >
                 <PresentationButton
-                  text={'ESPACE QUESTIONS-REPONSES'}
+                  text={'ACCUEIL UTILISATEUR'}
                 ></PresentationButton>
               </div>
               <img
@@ -92,7 +98,7 @@ const Accueil = () => {
                 alt="presentation"
               />
               <div
-                onMouseOver={() => switchImage(imgQuestionsReponsesDefault)}
+                onMouseOver={() => switchImage(imgFiche)}
                 className="col-start-2 col-span-2 md:col-span-2 md:col-start-8 md:row-start-4"
               >
                 <PresentationButton
@@ -100,15 +106,15 @@ const Accueil = () => {
                 ></PresentationButton>
               </div>
               <div
-                onMouseOver={() => switchImage(imgHeader)}
+                onMouseOver={() => switchImage(imgForum)}
                 className="col-start-2 col-span-2 md:col-span-2 md:col-start-2 md:row-start-5"
               >
                 <PresentationButton
-                  text={'MESSAGES PRIVES AVEC TUTEUR'}
+                  text={'ESPACE QUESTIONS-REPONSES'}
                 ></PresentationButton>
               </div>
               <div
-                onMouseOver={() => switchImage(imgHeader)}
+                onMouseOver={() => switchImage(imgCours)}
                 className="col-start-2 col-span-2 md:col-span-2 md:col-start-8 md:row-start-5"
               >
                 <PresentationButton
@@ -116,13 +122,13 @@ const Accueil = () => {
                 ></PresentationButton>
               </div>
               <div
-                onMouseOver={() => switchImage(imgQuestionsReponsesDefault)}
+                onMouseOver={() => switchImage(imgEspaceEcole)}
                 className="col-start-2 col-span-2 md:col-span-2 md:col-start-2 md:row-start-6"
               >
                 <PresentationButton text={'ESPACE ECOLE'}></PresentationButton>
               </div>
               <div
-                onMouseOver={() => switchImage(imgHeader)}
+                onMouseOver={() => switchImage(imgGroupe)}
                 className="col-start-2 col-span-2 md:col-span-2 md:col-start-8 md:row-start-6"
               >
                 <PresentationButton

@@ -144,7 +144,7 @@ const CreateFicheCours = (props) => {
               />
             </label>
             <label>
-              Ajouter un PDF :
+              Ajouter un PDF : 
               <button onClick={handleInputFile} className="font-bold">
                 {selectedFile !== null
                   ? selectedFile.name
