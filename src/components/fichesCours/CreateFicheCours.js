@@ -45,7 +45,7 @@ const CreateFicheCours = (props) => {
     })
       .then((res) => {
         toast(
-          'Votre ' + type + ' a bien été ajouté' + type === 'fiche' ? 'e' : '',
+          "Fiche/cours ajouté !",
           {
             className: 'ourYellowBg',
             style: { color: 'white' },
