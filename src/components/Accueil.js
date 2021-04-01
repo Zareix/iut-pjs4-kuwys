@@ -68,17 +68,17 @@ const Accueil = () => {
               <div className="md:col-start-4 md:col-span-4 w-full flex items-center justify-center">
                 <span className="md:mt-12 text-5xl font-black ourYellow">
                   Etudiez solidaire
-              </span>
+                </span>
               </div>
               <div className="md:col-start-3 md:col-span-6 w-full items-center justify-center text-center">
                 <p className="text-base font-bold">
-                  KUWYS regroupe tous les outils partagés dont vous pourriez avoir
-                  besoin en un seul et même endroit.
-              </p>
+                  KUWYS regroupe tous les outils partagés dont vous pourriez
+                  avoir besoin en un seul et même endroit.
+                </p>
                 <span className="text-base">
                   Découvrez sans plus tarder le fonctionnement de la 1ère
                   plateforme d'entraide étudiante.
-              </span>
+                </span>
               </div>
 
               {/** BOUTONS AUTOUR DE L'IMAGE DE PRESENTATION */}
@@ -101,9 +101,7 @@ const Accueil = () => {
                 onMouseOver={() => switchImage(imgFiche)}
                 className="col-start-2 col-span-2 md:col-span-2 md:col-start-8 md:row-start-4"
               >
-                <PresentationButton
-                  text={'PARTAGE DE FICHES'}
-                ></PresentationButton>
+                <PresentationButton text={'PARTAGE DE FICHES'} />
               </div>
               <div
                 onMouseOver={() => switchImage(imgForum)}
@@ -117,15 +115,13 @@ const Accueil = () => {
                 onMouseOver={() => switchImage(imgCours)}
                 className="col-start-2 col-span-2 md:col-span-2 md:col-start-8 md:row-start-5"
               >
-                <PresentationButton
-                  text={'COURS PERSONNELS'}
-                ></PresentationButton>
+                <PresentationButton text={'COURS PERSONNELS'} />
               </div>
               <div
                 onMouseOver={() => switchImage(imgEspaceEcole)}
                 className="col-start-2 col-span-2 md:col-span-2 md:col-start-2 md:row-start-6"
               >
-                <PresentationButton text={'ESPACE ECOLE'}></PresentationButton>
+                <PresentationButton text={'ESPACE ECOLE'}/>
               </div>
               <div
                 onMouseOver={() => switchImage(imgGroupe)}
@@ -133,7 +129,7 @@ const Accueil = () => {
               >
                 <PresentationButton
                   text={'GROUPES DE TRAVAIL'}
-                ></PresentationButton>
+                />
               </div>
             </div>
           </div>
@@ -143,45 +139,71 @@ const Accueil = () => {
 
         <div className="grid gap-9 md:grid-cols-9 md:m-20">
           <div className="md:p-20 md:col-start-3 md:col-span-5 w-full items-center justify-center bg-white shadow-lg textPresentation rounded-lg text-center">
-          <p className="text-3xl font-bold ourYellow">
+            <p className="text-3xl font-bold ourYellow">
               Keeping Up With Your Studies !
-          </p>
-          <img src={miniLogo} className="h-32 w-32 m-auto md:mt-8 md:mb-8" alt="mini logo kuwys"></img>
-            
+            </p>
+            <img
+              src={miniLogo}
+              className="h-32 w-32 m-auto md:mt-8 md:mb-8"
+              alt="mini logo kuwys"
+            />
+
             <span className="md:mt-12 text-sm font-basic">
-              La communauté étudiante solidaire vous ouvre les bras ! KUWYS est le
-              companion idéale pour toutes vos années d’étude, et ce quelle que
-              soit votre formation. Communiquez et échanger avec plus de 20.000
-              autres étudiants sur vos difficultés, vos questionnements, ou tout
-              simplement pour trouver des fiches de révision. Vous pourriez même
-              devenir l’ange-gardien d’un autre étudiant en l’aidant à surmonter
-              ses difficultés !
-          </span>
+              La communauté étudiante solidaire vous ouvre les bras ! KUWYS est
+              le companion idéale pour toutes vos années d’étude, et ce quelle
+              que soit votre formation. Communiquez et échanger avec plus de
+              20.000 autres étudiants sur vos difficultés, vos questionnements,
+              ou tout simplement pour trouver des fiches de révision. Vous
+              pourriez même devenir l’ange-gardien d’un autre étudiant en
+              l’aidant à surmonter ses difficultés !
+            </span>
           </div>
         </div>
 
         <div className="backgroundLinearGradientYellow md:mx-40 rounded-lg grid grid-cols-2 grid-rows-5 md:p-20 gap-4">
           <div className="col-start-1 col-span-1 row-start-1 row-span-5 rounded-lg shadow-inner">
-            <img src={gradutedWoman} className="rounded-lg" alt="graduate woman"></img>
+            <img
+              src={gradutedWoman}
+              className="rounded-lg"
+              alt="graduate woman"
+            />
           </div>
           <div className="col-start-2 col-span-1 row-start-1 row-span-1">
-            <p className="text-center text-white text-2xl font-bold">Ils parlent de nous</p>
+            <p className="text-center text-white text-2xl font-bold">
+              Ils parlent de nous
+            </p>
           </div>
           <div className="col-start-2 col-span-1 row-start-2 row-span-1">
-            <img src={logoLetudiant} className="rounded-lg w-auto max-h-24 m-auto" alt="logo letudiant"></img>
+            <img
+              src={logoLetudiant}
+              className="rounded-lg w-auto max-h-24 m-auto"
+              alt="logo letudiant"
+            />
           </div>
           <div className="col-start-2 col-span-1 row-start-3 row-span-1">
-            <img src={logoEducationNationale} className="rounded-lg w-auto max-h-24 m-auto" alt="logo education nationale"></img>
+            <img
+              src={logoEducationNationale}
+              className="rounded-lg w-auto max-h-24 m-auto"
+              alt="logo education nationale"
+            />
           </div>
           <div className="col-start-2 col-span-1 row-start-4 row-span-1">
-            <img src={logoLusineNouvelle} className="rounded-lg w-auto max-h-24 m-auto" alt="logo lusine nouvelle"></img>
+            <img
+              src={logoLusineNouvelle}
+              className="rounded-lg w-auto max-h-24 m-auto"
+              alt="logo lusine nouvelle"
+            />
           </div>
           <div className="col-start-2 col-span-1 row-start-5 row-span-1">
-            <img src={logoUnivParis} className="rounded-lg w-auto max-h-24 m-auto" alt="logo univ paris"></img>
+            <img
+              src={logoUnivParis}
+              className="rounded-lg w-auto max-h-24 m-auto"
+              alt="logo univ paris"
+            />
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   )
 }

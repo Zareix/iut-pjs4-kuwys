@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router'
 import Gui from '../gui/Gui'
 import API from '../../util/api'
 import TagsPost from '../tools/TagsPost'
@@ -19,7 +20,7 @@ const PostForum = (props) => {
   const [comm, setComm] = useState()
   const [votes, setVotes] = useState(0)
   const [loading, setLoading] = useState(false)
-  let postId = props.match.params.postId
+  let { postId } = useParams()
 
   useEffect(() => {
     setLoading(true)

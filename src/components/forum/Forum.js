@@ -10,10 +10,26 @@ const Forum = () => {
   const [chipData, setChipData] = useState([])
 
   useEffect(() => {
-    console.log(chipData.map((chip)=> {return chip.label}))
-    API.get('/posts', { tags:['a'] ,docTypes: ['forum'] })
+    console.log(
+      chipData.map((chip) => {
+        return chip.label
+      })
+    )
+
+    API.get('/posts')
       .then((res) => {
-        setPosts(res.data)
+        const tags = chipData.map((chip) => {
+          return chip.label
+        })
+        if (tags.length === 0) setPosts(res.data)
+        else {
+          const sortedPost = []
+          res.data.forEach((post) => {
+            if (post.tags.some((r) => tags.indexOf(r) >= 0))
+              sortedPost.push(post)
+          })
+          setPosts(sortedPost)
+        }
       })
       .catch((err) => {
         console.log(err)
@@ -24,13 +40,13 @@ const Forum = () => {
     <Gui>
       <SearchBar chipData={chipData} setChipData={setChipData} />
       <div className="flex justify-center my-6">
-          <Link
-            to="/forum/create"
-            className="buttonAddNewGrWork shadow-xl px-5 py-2 font-bold rounded-full text-white md:py-3 md:px-3 cursor-pointer popUpEffect"
-          >
+        <Link
+          to="/forum/create"
+          className="buttonAddNewGrWork shadow-xl px-5 py-2 font-bold rounded-full text-white md:py-3 md:px-3 cursor-pointer popUpEffect"
+        >
           Ajouter un post
-          </Link>
-        </div>
+        </Link>
+      </div>
       <p className="md:mt-2 md:mb-2 text-3xl font-bold ourYellow">Forum</p>
       <div className="w-full overflow-x-auto overflow-y-hidden">
         {posts && <AllPost type="forum" posts={posts} />}
