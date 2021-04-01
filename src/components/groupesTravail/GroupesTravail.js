@@ -200,7 +200,7 @@ const GroupesTravail = (props) => {
             id="ButtonAddNewGroup"
             className="w-52 flex items-center cursor-pointer justify-center shadow-xl px-2 py-2 font-bold rounded-full text-white md:py-3 md:px-3 buttonAddNewGrWork popUpEffect"
           >
-            <i className="fas fa-plus align-middle"></i>
+            <i className="fas fa-plus align-middle"/>
             <span
               style={{ fontSize: '1rem' }}
               className="ml-1 md:pl-2 align-middle"

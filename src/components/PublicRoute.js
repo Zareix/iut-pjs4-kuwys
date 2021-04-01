@@ -5,7 +5,6 @@ import { useGlobalContext } from '../util/context'
 
 const PublicRoute = ({ component: Component, restricted, ...rest }) => {
   const { isUserLoggedIn } = useGlobalContext()
-  console.log(isUserLoggedIn() && restricted)
   return (
     <Route
       {...rest}

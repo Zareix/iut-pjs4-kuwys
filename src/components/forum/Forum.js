@@ -5,40 +5,53 @@ import SearchBar from '../tools/SearchBar'
 import AllPost from '../fichesCours/AllPost'
 import { Link } from 'react-router-dom'
 
+// TODO Bouton Refresh a droite de la search Bar pour refetch l'API
 const Forum = () => {
+  const [allPosts, setAllPosts] = useState([])
   const [posts, setPosts] = useState()
   const [chipData, setChipData] = useState([])
 
-  useEffect(() => {
-    console.log(
-      chipData.map((chip) => {
-        return chip.label
-      })
-    )
+  const fetchPosts = async () => {
+    const res = await API.get('/posts', { params: { docTypes: 'fiche;cours' } })
+    return res.data
+  }
 
-    API.get('/posts')
-      .then((res) => {
-        const tags = chipData.map((chip) => {
-          return chip.label
-        })
-        if (tags.length === 0) setPosts(res.data)
-        else {
-          const sortedPost = []
-          res.data.forEach((post) => {
-            if (post.tags.some((r) => tags.indexOf(r) >= 0))
-              sortedPost.push(post)
-          })
-          setPosts(sortedPost)
-        }
+  const filterPost = (postsData) => {
+    const tags = chipData.map((chip) => chip.label)
+    if (chipData.length > 0) {
+      const filteredPost = postsData.filter((post) =>
+        post.tags.some((tag) => tags.indexOf(tag) >= 0)
+      )
+      setPosts(filteredPost)
+    } else setPosts(postsData)
+  }
+
+  const updatePost = () => {
+    fetchPosts()
+      .then((postsData) => {
+        setAllPosts(postsData)
+        filterPost(postsData)
       })
       .catch((err) => {
         console.log(err)
       })
+  }
+
+  useEffect(() => {
+    filterPost(allPosts)
   }, [chipData])
+
+  useEffect(() => {
+    updatePost()
+  }, [])
 
   return (
     <Gui>
-      <SearchBar chipData={chipData} setChipData={setChipData} />
+      <SearchBar
+        chipData={chipData}
+        setChipData={setChipData}
+        updatePost={updatePost}
+      />
       <div className="flex justify-center my-6">
         <Link
           to="/forum/create"

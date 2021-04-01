@@ -28,7 +28,6 @@ const Pdf = (props) => {
         file={pdfUrl}
         options={{ workerSrc: pdfjs.GlobalWorkerOptions.workerSrc }}
         onLoadSuccess={onDocumentLoadSuccess}
-        onLoadError={console.error}
         loading="Chargement du PDF..."
         className="grid justify-center"
       >

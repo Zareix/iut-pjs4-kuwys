@@ -34,7 +34,6 @@ const Login = () => {
         setErrors({ ...err })
       })
   }
-  console.log(from)
   if (redirect) return <Redirect to={from} />
 
   return (

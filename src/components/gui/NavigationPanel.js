@@ -5,6 +5,13 @@ import { useGlobalContext } from '../../util/context'
 import { makeStyles } from '@material-ui/core/styles'
 import Avatar from '@material-ui/core/Avatar'
 import Badge from '@material-ui/core/Badge'
+import HomeRoundedIcon from '@material-ui/icons/HomeRounded'
+import PersonRoundedIcon from '@material-ui/icons/PersonRounded'
+import SchoolRoundedIcon from '@material-ui/icons/SchoolRounded'
+import DescriptionRoundedIcon from '@material-ui/icons/DescriptionRounded'
+import ForumRoundedIcon from '@material-ui/icons/ForumRounded'
+import LocalLibraryRoundedIcon from '@material-ui/icons/LocalLibraryRounded'
+import LoyaltyRoundedIcon from '@material-ui/icons/LoyaltyRounded'
 
 import iconNotification from '../../svg/iconNotifications.svg'
 import API from '../../util/api'
@@ -70,28 +77,60 @@ const NavigationPanel = (props) => {
         </Badge>
       </div>
       <div className="grid gap-4 w-2/3 md:w-full md:mt-8">
-        <NavLink to="/accueil" activeClassName="font-semibold">
+        <NavLink
+          to="/accueil"
+          activeClassName="font-semibold active-nav-link"
+          className="flex items-center nav-link"
+        >
+          <HomeRoundedIcon className="mr-3 ml-1" />
           Accueil
         </NavLink>
         <NavLink
           to={'/profil/user/' + user.username}
-          activeClassName="font-semibold"
+          activeClassName="font-semibold active-nav-link"
+          className="flex items-center nav-link"
         >
+          <PersonRoundedIcon className="mr-3 ml-1" />
           Profil
         </NavLink>
-        <NavLink to="/ecole" activeClassName="font-semibold">
+        <NavLink
+          to="/ecole"
+          activeClassName="font-semibold active-nav-link"
+          className="flex items-center nav-link"
+        >
+          <SchoolRoundedIcon className="mr-3 ml-1" />
           Espace Ecole
         </NavLink>
-        <NavLink to="/fichescours" activeClassName="font-semibold">
+        <NavLink
+          to="/fichescours"
+          activeClassName="font-semibold active-nav-link"
+          className="flex items-center nav-link"
+        >
+          <DescriptionRoundedIcon className="mr-3 ml-1" />
           Fiches & Cours
         </NavLink>
-        <NavLink to="/forum" activeClassName="font-semibold">
+        <NavLink
+          to="/forum"
+          activeClassName="font-semibold active-nav-link"
+          className="flex items-center nav-link"
+        >
+          <ForumRoundedIcon className="mr-3 ml-1" />
           Forum Q&R
         </NavLink>
-        <NavLink to="/groupestravail" activeClassName="font-semibold">
+        <NavLink
+          to="/groupestravail"
+          activeClassName="font-semibold active-nav-link"
+          className="flex items-center nav-link"
+        >
+          <LocalLibraryRoundedIcon className="mr-3 ml-1" />
           Groupes de travail
         </NavLink>
-        <NavLink to="/bonsplans" activeClassName="font-semibold">
+        <NavLink
+          to="/bonsplans"
+          activeClassName="font-semibold active-nav-link"
+          className="flex items-center nav-link"
+        >
+          <LoyaltyRoundedIcon className="mr-3 ml-1" />
           Bons Plans
         </NavLink>
         {deconnexion && (

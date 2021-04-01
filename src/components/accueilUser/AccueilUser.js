@@ -177,7 +177,7 @@ const AccueilUser = () => {
                       )
                     }
                   >
-                    <img src={LikeCoursIcon} className="h-10"></img>
+                    <img src={LikeCoursIcon} className="h-10" alt="like icon" />
                     <p>Cours favoris</p>
                   </div>
                   <div
@@ -190,7 +190,7 @@ const AccueilUser = () => {
                       )
                     }
                   >
-                    <img src={LikeFicheIcon} className="h-10"></img>
+                    <img src={LikeFicheIcon} className="h-10" alt="like icon" />
                     <p>Fiches favorites</p>
                   </div>
                 </div>

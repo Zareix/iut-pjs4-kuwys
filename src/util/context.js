@@ -10,9 +10,7 @@ const AppProvider = ({ children }) => {
   const [user, setUser] = useState({})
   const [isLogin, setIsLogin] = useState(false)
   const [loading, setLoading] = useState(true)
-  const [unidaysPromo, setUnidaysPromo] = useState(
-    unidaysPromoJson.promotionsUnidays
-  )
+  const unidaysPromo = unidaysPromoJson.promotionsUnidays
 
   const isUserLoggedIn = () => {
     return isLogin

@@ -4,7 +4,7 @@
   --our-main-font-color: #5b5b5b;
   --our-blue: #74b1fb;
   --our-red: #e74c3c;
-  --our-pink: #FFE092;
+  --our-pink: #ffe092;
   --our-green: #60c39f;
 }
 
@@ -157,7 +157,7 @@
   background-color: var(--our-blue);
 }
 
-.bgPink{
+.bgPink {
   background-color: var(--our-pink);
 }
 
@@ -174,7 +174,6 @@
 .borderPink {
   border-color: var(--our-pink);
 }
-
 
 /* COLORS */
 
@@ -234,6 +233,22 @@ input {
   background-position: center;
   background-size: cover;
 }
+
+.active-nav-link {
+  color: #4597fc;
+}
+
+.nav-link:hover {
+  background-color: #74b1fb22;
+  color: #4597fc;
+  font-weight: bold;
+}
+
+.nav-link {
+  padding: 5px;
+  border-radius: 18px;
+}
+
 button {
   outline: none !important;
 }
