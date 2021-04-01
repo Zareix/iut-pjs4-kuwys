@@ -8,19 +8,21 @@ import { toast } from 'react-toastify'
 const APropos = () => {
   const { user } = useGlobalContext()
 
-  const [firstName, setFirstName] = useState()
-  const [name, setName] = useState()
-  const [birthday, setBirthday] = useState()
+  const [firstName, setFirstName] = useState(null)
+  const [name, setName] = useState(null)
+  const [birthday, setBirthday] = useState(null)
 
-  const [studyLevel, setStudyLevel] = useState()
-  const [formations, setFormations] = useState('------')
+  const [studyLevel, setStudyLevel] = useState(null)
+  const [formations, setFormations] = useState(null)
 
   const updateUserInfo = () => {
     API.post('/userUpdate', {
       user: user,
-      firstName: firstName,
-      name: name,
-      birthday: birthday,
+      firstName: firstName ? firstName : user.firstName,
+      name: name ? name : user.name,
+      birthday: birthday ? birthday : user.birthday,
+      studyLevel: studyLevel ? studyLevel : user.studyLevel,
+      formations: formations ? formations : user.formations
     })
       .then((res) => {
         toast('Informations mises à jour !', {
@@ -107,6 +109,7 @@ const APropos = () => {
           <label className="grid md:block mt-2 md:mt-4">
             Formations :
             <input
+              defaultValue={user.formation ? user.formation : "------"}
               value={formations}
               onChange={(e) => setFormations(e.target.value)}
               className="border ml-2 rounded-lg px-2 align-middle largerInputOnMobile"

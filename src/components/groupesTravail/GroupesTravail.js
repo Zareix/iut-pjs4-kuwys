@@ -61,20 +61,19 @@ const GroupesTravail = (props) => {
     let tableauBiblioNearCityWithWorkingGroup = []
     for (let i = 0; i < biblioNearCity.length; i++) {
       let element = biblioNearCity[i]
-      API({
+      const res = await API({
         method: 'get',
         url: '/library/groups',
         params: {
           library: element.address.amenity,
         },
-      }).then((res) => {
-        if (res.data.length !== 0) {
-          tableauBiblioNearCityWithWorkingGroup.push(res.data)
-        }
       }).catch((err) => {
         console.log('Une erreur est survenu, merci de réessayer.')
         console.log(err.response)
-      }) 
+      })
+      if (res && res.data.length !== 0) {
+        tableauBiblioNearCityWithWorkingGroup.push(res.data)
+      }
     }
     return tableauBiblioNearCityWithWorkingGroup
   }
@@ -213,12 +212,8 @@ const GroupesTravail = (props) => {
       </div>
 
       <div>
-        <div className="grid grid-cols-1 md:w-6/12 md:m-auto mt-7 md:mt-16 py-2 greyBox">
-          {donnees.length === 0 ? (
-            <p className="text-center font-semibold">
-              Aucun groupe de travail dans cette zone
-            </p>
-          ) : (
+        {donnees.length !== 0 &&
+          <div className="grid grid-cols-1 md:w-6/12 md:m-auto mt-7 md:mt-16 py-2 greyBox">
             <div className="col-start-1 col-span-1">
               {donnees.map((d) => (
                 <div>
@@ -226,8 +221,8 @@ const GroupesTravail = (props) => {
                 </div>
               ))}
             </div>
-          )}
-        </div>
+          </div>
+        }
       </div>
     </Gui>
   )
