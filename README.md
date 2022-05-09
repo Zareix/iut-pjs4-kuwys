@@ -1,10 +1,12 @@
-# Tutorat Solidaire
+# KUWYS
 ## Projet Semestre 4
 
+IUT de Paris – Rives de Seine (Descartes)
+
 Author : 
-  - Abadi Amina
-  - Ben Belkacem Mohamed
-  - Gonçalves Catarino Raphaël
-  - Mathieu Pauline
-  - Moron Lola
-  - Pigeon Arthur
+  - Abadi
+  - Mohamed
+  - Raphaël
+  - Pauline
+  - Lola
+  - Arthur
